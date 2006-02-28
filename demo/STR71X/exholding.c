@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: exholding.c,v 1.2 2006/02/25 18:34:08 wolti Exp $
+ * File: $Id: exholding.c,v 1.3 2006/02/28 22:12:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -38,8 +38,8 @@
 #define REG_HOLDING_NREGS 130
 
 /* ----------------------- Static variables ---------------------------------*/
-static unsigned portSHORT usRegHoldingStart = REG_HOLDING_START;
-static unsigned portSHORT usRegHoldingBuf[REG_HOLDING_NREGS];
+static unsigned short usRegHoldingStart = REG_HOLDING_START;
+static unsigned short usRegHoldingBuf[REG_HOLDING_NREGS];
 
 /* ----------------------- Static functions ---------------------------------*/
 static void     vModbusTask( void *pvParameters );
@@ -61,24 +61,23 @@ static void
 vModbusTask( void *pvParameters )
 {
     int             i;
-    portTickType    xLastWakeTime;
 
     /* Select either ASCII or RTU Mode. */
-    eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    ( void )eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
 
     /* Initialize the holding register values before starting the
      * Modbus stack. */
     for( i = 0; i < REG_HOLDING_NREGS; i++ )
     {
-        usRegHoldingBuf[i] = i;
+        usRegHoldingBuf[i] = ( unsigned short )i;
     }
 
     /* Enable the Modbus Protocol Stack. */
-    eMBEnable(  );
+    ( void )eMBEnable(  );
     for( ;; )
     {
         /* Call the main polling loop of the Modbus protocol stack. */
-        eMBPool(  );
+        ( void )eMBPool(  );
     }
 }
 
@@ -96,15 +95,15 @@ eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegis
 
     if( ( usAddress >= REG_HOLDING_START ) && ( usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS ) )
     {
-        iRegIndex = usAddress - usRegHoldingStart;
+        iRegIndex = ( int )( usAddress - usRegHoldingStart );
         switch ( eMode )
         {
             /* Pass current register values to the protocol stack. */
         case MB_REG_READ:
             while( usNRegs > 0 )
             {
-                *pucRegBuffer++ = usRegHoldingBuf[iRegIndex] >> 8;
-                *pucRegBuffer++ = usRegHoldingBuf[iRegIndex] & 0xFF;
+                *pucRegBuffer++ = ( unsigned char )( usRegHoldingBuf[iRegIndex] >> 8 );
+                *pucRegBuffer++ = ( unsigned char )( usRegHoldingBuf[iRegIndex] & 0xFF );
                 iRegIndex++;
                 usNRegs--;
             }
@@ -146,5 +145,5 @@ void
 __assert( const char *pcFile, const char *pcLine, int iLineNumber )
 {
     portENTER_CRITICAL(  );
-    while( 1 );
+    for( ;; );
 }

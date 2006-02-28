@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.7 2006/02/28 00:17:50 wolti Exp $
+ * File: $Id: mb.c,v 1.8 2006/02/28 22:38:21 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -78,6 +78,12 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 #if MB_FUNC_WRITE_COIL_ENABLED > 0
     {MB_FUNC_WRITE_SINGLE_COIL, eMBFuncWriteCoil},
 #endif
+#if MB_FUNC_WRITE_MULTIPLE_COILS_ENABLED > 0
+    {MB_FUNC_WRITE_MULTIPLE_COILS, eMBFuncWriteMultipleCoils},
+#endif
+#if MB_FUNC_READ_DISCRETE_INPUTS_ENABLED > 0
+    {MB_FUNC_READ_DISCRETE_INPUTS, eMBFuncReadDiscreteInputs},
+#endif
 };
 
 /* ----------------------- Static functions ---------------------------------*/
@@ -128,7 +134,7 @@ eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParit
     eStatus = peMBFrameInitCur( ucSlaveAddress, ulBaudRate, eParity );
     if( eStatus == MB_ENOERR )
     {
-        if( xMBPortEventInit(  ) != TRUE )
+        if( !xMBPortEventInit(  ) )
         {
             eStatus = MB_EPORTERR;
         }
@@ -144,7 +150,7 @@ eMBEnable( void )
     if( peMBFrameStartCur != NULL )
     {
         /* Activate the protocol stack. */
-        peMBFrameStartCur(  );
+        ( void )peMBFrameStartCur(  );
     }
     else
     {
@@ -167,7 +173,7 @@ eMBPool(  )
 
     /* Check if there is a event available. If not return control to caller.
      * Otherwise we will handle the event. */
-    if( xMBPortEventGet( &eEvent ) == TRUE )
+    if( xMBPortEventGet( &eEvent ) )
     {
         switch ( eEvent )
         {

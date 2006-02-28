@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: excoils.c,v 1.3 2006/02/28 00:22:10 wolti Exp $
+ * File: $Id: excoils.c,v 1.4 2006/02/28 22:12:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -39,7 +39,7 @@
 #define REG_COILS_SIZE      16
 
 /* ----------------------- Static variables ---------------------------------*/
-static unsigned char ucRegCoilsBuf[REG_COILS_SIZE] = { 0, 0 };
+static unsigned char ucRegCoilsBuf[REG_COILS_SIZE / 8];
 
 /* ----------------------- Static functions ---------------------------------*/
 static void     vModbusTask( void *pvParameters );
@@ -60,17 +60,17 @@ main( void )
 static void
 vModbusTask( void *pvParameters )
 {
-    portTickType    xLastWakeTime;
-
     /* Select either ASCII or RTU Mode. */
-    eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    ( void )eMBInit( MB_RTU, ( unsigned char )0x0A, 38400, MB_PAR_EVEN );
 
     /* Enable the Modbus Protocol Stack. */
-    eMBEnable(  );
+    ( void )eMBEnable(  );
+
+    /* Enter main loop. */
     for( ;; )
     {
         /* Call the main polling loop of the Modbus protocol stack. */
-        eMBPool(  );
+        ( void )eMBPool(  );
     }
 }
 
@@ -78,20 +78,21 @@ eMBErrorCode
 eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
-    int             iNCoils = usNCoils;
+    int             iNCoils = ( int )usNCoils;
     unsigned short  usBitOffset;
 
     /* Check if we have registers mapped at this block. */
     if( ( usAddress >= REG_COILS_START ) && ( usAddress + usNCoils <= REG_COILS_START + REG_COILS_SIZE ) )
     {
-        usBitOffset = usAddress - REG_COILS_START;
+        usBitOffset = ( unsigned short )( usAddress - REG_COILS_START );
         switch ( eMode )
         {
             /* Read current values and pass to protocol stack. */
         case MB_REG_READ:
             while( iNCoils > 0 )
             {
-                *pucRegBuffer++ = xMBUtilGetBits( ucRegCoilsBuf, usBitOffset, 8 );
+                *pucRegBuffer++ =
+                    xMBUtilGetBits( ucRegCoilsBuf, usBitOffset, ( unsigned char )( iNCoils > 8 ? 8 : iNCoils ) );
                 iNCoils -= 8;
                 usBitOffset += 8;
             }
@@ -103,6 +104,7 @@ eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegist
             {
                 xMBUtilSetBits( ucRegCoilsBuf, usBitOffset, iNCoils % 8, *pucRegBuffer++ );
                 iNCoils -= 8;
+                usBitOffset += 8;
             }
             break;
         }
@@ -138,5 +140,5 @@ void
 __assert( const char *pcFile, const char *pcLine, int iLineNumber )
 {
     portENTER_CRITICAL(  );
-    while( 1 );
+    for( ;; );
 }

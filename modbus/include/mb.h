@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.6 2006/02/28 00:17:50 wolti Exp $
+ * File: $Id: mb.h,v 1.7 2006/02/28 22:41:37 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -238,7 +238,9 @@ eMBErrorCode    eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT 
 
 /*! \ingroup modbus_registers
  * \brief Callback function used if a <em>Coil Register</em> value is
- *   read or written by the protocol stack.
+ *   read or written by the protocol stack. If you are going to use
+ *   this function you might use the functions xMBUtilSetBits(  ) and
+ *   xMBUtilGetBits(  ) for working with bitfields.
  *
  * \param pucRegBuffer The bits are packed in bytes where the first coil
  *   starting at address <code>usAddress</code> is stored at the LSB of the
@@ -269,5 +271,31 @@ eMBErrorCode    eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT 
  */
 eMBErrorCode    eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode );
 
+/*! \ingroup modbus_registers
+ * \brief Callback function used if a <em>Input Discrete Register</em> value is
+ *   read by the protocol stack.
+ *
+ * If you are going to use his function you might use the functions
+ * xMBUtilSetBits(  ) and xMBUtilGetBits(  ) for working with bitfields.
+ *
+ * \param pucRegBuffer The bits are packed in bytes where the first coil
+ *   starting at address <code>usAddress</code> is stored at the LSB of the
+ *   first byte in the buffer <code>pucRegBuffer</code>.
+ * \param usAddress The starting address of the first register.
+ * \param usNDiscrete Number of discrete input registers requested. I.e. first
+ *   register is given by <code>usAddress</code> and last by
+ *   <code>usAddress + usNRegs</code>.
+ * \return The function must return one of the following error codes:
+ *   - eMBErrorCode::MB_ENOERR If no error occured. In this case a normal
+ *       Modbus response is sent.
+ *   - eMBErrorCode::MB_ENOREG If no register on this address is available.
+ *       In this case a <b>ILLEGAL DATA ADDRESS</b> is sent as a response.
+ *   - eMBErrorCode::MB_ETIMEDOUT If the requested register block is
+ *       currently not available and the application dependent response
+ *       timeout would be violated. In this case a <b>SLAVE DEVICE BUSY</b>
+ *       exception is sent as a response.
+ *   - eMBErrorCode::MB_EIO If an unrecoverable error occured. In this case
+ *       a <b>SLAVE DEVICE FAILURE</b> exception is sent as a response.
+ */
 eMBErrorCode    eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete );
 #endif

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.2 2006/02/25 19:03:34 wolti Exp $
+ * File: $Id: demo.c,v 1.4 2006/02/28 22:40:59 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
@@ -44,7 +44,7 @@ main( void )
 
     eStatus = eMBInit( MB_RTU, 0x0A, 9600, MB_PAR_EVEN );
 
-    eStatus = eMBSetSlaveID( ucSlaveID, 3, TRUE );
+    eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
     sei(  );
 
     /* Enable the Modbus Protocol Stack. */
@@ -52,13 +52,11 @@ main( void )
 
     for( ;; )
     {
-        eMBPool(  );
+        ( void )eMBPool(  );
 
         /* Here we simply count the number of poll cycles. */
         usRegInputBuf[0]++;
     }
-
-    return 0;
 }
 
 eMBErrorCode
@@ -69,11 +67,11 @@ eMBRegInputCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 
     if( ( usAddress >= REG_INPUT_START ) && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
     {
-        iRegIndex = usAddress - usRegInputStart;
+        iRegIndex = ( int )( usAddress - usRegInputStart );
         while( usNRegs > 0 )
         {
-            *pucRegBuffer++ = usRegInputBuf[iRegIndex] >> 8;
-            *pucRegBuffer++ = usRegInputBuf[iRegIndex] & 0xFF;
+            *pucRegBuffer++ = ( unsigned char )( usRegInputBuf[iRegIndex] >> 8 );
+            *pucRegBuffer++ = ( unsigned char )( usRegInputBuf[iRegIndex] & 0xFF );
             iRegIndex++;
             usNRegs--;
         }

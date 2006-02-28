@@ -7,8 +7,8 @@ PROJECT = demo
 MCU = atmega168
 TARGET = demo
 
-CC=/cygdrive/c/Program\ Files/WinAVR/bin/avr-gcc
-OBJCOPY=/cygdrive/c/Program\ Files/WinAVR/bin/avr-objcopy
+CC=/cygdrive/c/WinAVR/bin/avr-gcc
+OBJCOPY=/cygdrive/c/WinAVR/bin/avr-objcopy
 
 
 ## Options common to compile, link and assembly rules
@@ -53,6 +53,7 @@ MBOBJECTS = ../../modbus/mb.o \
 			../../modbus/functions/mbfuncholding.o \
 			../../modbus/functions/mbfuncinput.o \
 			../../modbus/functions/mbfuncother.o \
+			../../modbus/functions/mbfuncdisc.o \
 			../../modbus/functions/mbutils.o
 
 

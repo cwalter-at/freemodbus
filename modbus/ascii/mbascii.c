@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.c,v 1.5 2006/02/27 21:27:33 wolti Exp $
+ * File: $Id: mbascii.c,v 1.6 2006/02/28 22:37:31 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -70,11 +70,11 @@ typedef enum
 } eMBBytePos;
 
 /* ----------------------- Static functions ---------------------------------*/
-UCHAR           prvucMBCHAR2BIN( UCHAR ucCharacter );
+static UCHAR    prvucMBCHAR2BIN( UCHAR ucCharacter );
 
-UCHAR           prvucMBBIN2CHAR( UCHAR ucByte );
+static UCHAR    prvucMBBIN2CHAR( UCHAR ucByte );
 
-UCHAR           prvucMBLRC( UCHAR * pucFrame, USHORT usLen );
+static UCHAR    prvucMBLRC( UCHAR * pucFrame, USHORT usLen );
 
 /* ----------------------- Static variables ---------------------------------*/
 static volatile eMBSndState eSndState;

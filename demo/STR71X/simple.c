@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: simple.c,v 1.7 2006/02/28 00:22:10 wolti Exp $
+ * File: $Id: simple.c,v 1.8 2006/02/28 22:12:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -62,9 +62,7 @@ static void
 vInitTask( void *pvParameters )
 {
     const unsigned char ucSlaveIDAdditonal[] = { 0xAA, 0xBB, 0xCC };
-    portTickType    xLastWakeTime;
     eMBErrorCode    eStatus;
-    eMBEventType    eEvent;
 
     /* Select either ASCII or RTU Mode. */
     eStatus = eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
@@ -86,7 +84,7 @@ vInitTask( void *pvParameters )
          * dependent function xMBPortEventGet(  ). In the FreeRTOS port the
          * event layer is built with queues.
          */
-        eMBPool(  );
+        ( void )eMBPool(  );
 
         /* Here we simply count the number of poll cycles. */
         usRegInputBuf[0]++;
@@ -101,11 +99,11 @@ eMBRegInputCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 
     if( ( usAddress >= REG_INPUT_START ) && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
     {
-        iRegIndex = usAddress - usRegInputStart;
+        iRegIndex = ( int )( usAddress - usRegInputStart );
         while( usNRegs > 0 )
         {
-            *pucRegBuffer++ = usRegInputBuf[iRegIndex] >> 8;
-            *pucRegBuffer++ = usRegInputBuf[iRegIndex] & 0xFF;
+            *pucRegBuffer++ = ( unsigned char )( usRegInputBuf[iRegIndex] >> 8 );
+            *pucRegBuffer++ = ( unsigned char )( usRegInputBuf[iRegIndex] & 0xFF );
             iRegIndex++;
             usNRegs--;
         }
@@ -141,5 +139,5 @@ void
 __assert( const char *pcFile, const char *pcLine, int iLineNumber )
 {
     portENTER_CRITICAL(  );
-    while( 1 );
+    for( ;; );
 }

@@ -33,14 +33,24 @@
 #include "mbconfig.h"
 
 /* ----------------------- Defines ------------------------------------------*/
-#define MB_PDU_FUNC_READ_ADDR_OFF       ( MB_PDU_DATA_OFF )
-#define MB_PDU_FUNC_READ_COILCNT_OFF    ( MB_PDU_DATA_OFF + 2 )
-#define MB_PDU_FUNC_READ_SIZE           ( 4 )
-#define MB_PDU_FUNC_READ_COILCNT_MAX    ( 0x07D0 )
+#define MB_PDU_FUNC_READ_ADDR_OFF           ( MB_PDU_DATA_OFF )
+#define MB_PDU_FUNC_READ_COILCNT_OFF        ( MB_PDU_DATA_OFF + 2 )
+#define MB_PDU_FUNC_READ_SIZE               ( 4 )
+#define MB_PDU_FUNC_READ_COILCNT_MAX        ( 0x07D0 )
 
-#define MB_PDU_FUNC_WRITE_ADDR_OFF      ( MB_PDU_DATA_OFF )
-#define MB_PDU_FUNC_WRITE_VALUE_OFF     ( MB_PDU_DATA_OFF + 2 )
-#define MB_PDU_FUNC_WRITE_SIZE          ( 4 )
+#define MB_PDU_FUNC_WRITE_ADDR_OFF          ( MB_PDU_DATA_OFF )
+#define MB_PDU_FUNC_WRITE_VALUE_OFF         ( MB_PDU_DATA_OFF + 2 )
+#define MB_PDU_FUNC_WRITE_SIZE              ( 4 )
+
+#define MB_PDU_FUNC_WRITE_MUL_ADDR_OFF      ( MB_PDU_DATA_OFF )
+#define MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF   ( MB_PDU_DATA_OFF + 2 )
+#define MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF   ( MB_PDU_DATA_OFF + 4 )
+#define MB_PDU_FUNC_WRITE_MUL_VALUES_OFF    ( MB_PDU_DATA_OFF + 5 )
+#define MB_PDU_FUNC_WRITE_MUL_SIZE_MIN      ( 5 )
+#define MB_PDU_FUNC_WRITE_MUL_COILCNT_MAX   ( 0x07B0 )
+
+/* ----------------------- Static functions ---------------------------------*/
+eMBException    prveMBError2Exception( eMBErrorCode eErrorCode );
 
 /* ----------------------- Start implementation -----------------------------*/
 
@@ -51,10 +61,10 @@ eMBFuncReadCoils( UCHAR *pucFrame, USHORT *usLen )
 {
     USHORT          usRegAddress;
     USHORT          usCoilCount;
-    UCHAR           usNBytes;
+    UCHAR           ucNBytes;
     UCHAR          *pucFrameCur;
 
-    eMBException    eStatus = MB_ENOERR;
+    eMBException    eStatus = MB_EX_NONE;
     eMBErrorCode    eRegStatus;
 
     if( *usLen == ( MB_PDU_FUNC_READ_SIZE + MB_PDU_SIZE_MIN ) )
@@ -83,33 +93,28 @@ eMBFuncReadCoils( UCHAR *pucFrame, USHORT *usLen )
              * byte is only partially field with unused coils set to zero. */
             if( ( usCoilCount & 0x0007 ) != 0 )
             {
-                usNBytes = ( UCHAR ) ( usCoilCount / 8 ) + 1;
+                ucNBytes = ( UCHAR ) ( usCoilCount / 8 + 1 );
             }
             else
             {
-                usNBytes = ( UCHAR ) ( usCoilCount / 8 );
+                ucNBytes = ( UCHAR ) ( usCoilCount / 8 );
             }
-            *pucFrameCur++ = usNBytes;
+            *pucFrameCur++ = ucNBytes;
             *usLen += 1;
 
             eRegStatus = eMBRegCoilsCB( pucFrameCur, usRegAddress, usCoilCount, MB_REG_READ );
-            switch ( eRegStatus )
+
+            /* If an error occured convert it into a Modbus exception. */
+            if( eRegStatus != MB_ENOERR )
             {
-            case MB_ENOERR:
-                *usLen += usNBytes;
-                break;
-
-            case MB_ENOREG:
-                eStatus = MB_EX_ILLEGAL_DATA_ADDRESS;
-                break;
-
-            case MB_ETIMEDOUT:
-                eStatus = MB_EX_SLAVE_BUSY;
-                break;
-
-            default:
-                eStatus = MB_EX_SLAVE_DEVICE_FAILURE;
-                break;
+                eStatus = prveMBError2Exception( eRegStatus );
+            }
+            else
+            {
+                /* The response contains the function code, the starting address
+                 * and the quantity of registers. We reuse the old values in the
+                 * buffer because they are still valid. */
+                *usLen += ucNBytes;
             }
         }
         else
@@ -133,7 +138,7 @@ eMBFuncWriteCoil( UCHAR *pucFrame, USHORT *usLen )
     USHORT          usRegAddress;
     UCHAR           ucBuf[2];
 
-    eMBException    eStatus = MB_ENOERR;
+    eMBException    eStatus = MB_EX_NONE;
     eMBErrorCode    eRegStatus;
 
     if( *usLen == ( MB_PDU_FUNC_WRITE_SIZE + MB_PDU_SIZE_MIN ) )
@@ -147,7 +152,7 @@ eMBFuncWriteCoil( UCHAR *pucFrame, USHORT *usLen )
                  || ( pucFrame[MB_PDU_FUNC_WRITE_VALUE_OFF] == 0x00 ) ) )
         {
             ucBuf[1] = 0;
-            if( pucFrame[MB_PDU_FUNC_WRITE_VALUE_OFF] )
+            if( pucFrame[MB_PDU_FUNC_WRITE_VALUE_OFF] == 0xFF )
             {
                 ucBuf[0] = 1;
             }
@@ -155,23 +160,12 @@ eMBFuncWriteCoil( UCHAR *pucFrame, USHORT *usLen )
             {
                 ucBuf[0] = 0;
             }
-            eRegStatus = eMBRegCoilsCB( ( UCHAR * ) & ucBuf[0], usRegAddress, 1, MB_REG_WRITE );
-            switch ( eRegStatus )
+            eRegStatus = eMBRegCoilsCB( &ucBuf[0], usRegAddress, 1, MB_REG_WRITE );
+
+            /* If an error occured convert it into a Modbus exception. */
+            if( eRegStatus != MB_ENOERR )
             {
-            case MB_ENOERR:
-                break;
-
-            case MB_ENOREG:
-                eStatus = MB_EX_ILLEGAL_DATA_ADDRESS;
-                break;
-
-            case MB_ETIMEDOUT:
-                eStatus = MB_EX_SLAVE_BUSY;
-                break;
-
-            default:
-                eStatus = MB_EX_SLAVE_DEVICE_FAILURE;
-                break;
+                eStatus = prveMBError2Exception( eRegStatus );
             }
         }
         else
@@ -189,4 +183,73 @@ eMBFuncWriteCoil( UCHAR *pucFrame, USHORT *usLen )
 }
 
 #endif
+
+#if MB_FUNC_WRITE_MULTIPLE_COILS_ENABLED > 0
+eMBException
+eMBFuncWriteMultipleCoils( UCHAR *pucFrame, USHORT *usLen )
+{
+    USHORT          usRegAddress;
+    USHORT          usCoilCnt;
+    UCHAR           ucByteCount;
+    UCHAR           ucByteCountVerify;
+
+    eMBException    eStatus = MB_EX_NONE;
+    eMBErrorCode    eRegStatus;
+
+    if( *usLen > ( MB_PDU_FUNC_WRITE_SIZE + MB_PDU_SIZE_MIN ) )
+    {
+        usRegAddress = pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF] << 8;
+        usRegAddress |= pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF + 1];
+        usRegAddress++;
+
+        usCoilCnt = pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF] << 8;
+        usCoilCnt |= pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF + 1];
+
+        ucByteCount = pucFrame[MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF];
+
+        /* Compute the number of expected bytes in the request. */
+        if( ( usCoilCnt & 0x0007 ) != 0 )
+        {
+            ucByteCountVerify = ( UCHAR ) ( usCoilCnt / 8 + 1 );
+        }
+        else
+        {
+            ucByteCountVerify = ( UCHAR ) ( usCoilCnt / 8 );
+        }
+
+        if( ( usCoilCnt >= 1 ) && ( usCoilCnt <= MB_PDU_FUNC_WRITE_MUL_COILCNT_MAX )
+            && ( ucByteCountVerify == ucByteCount ) )
+        {
+            eRegStatus =
+                eMBRegCoilsCB( &pucFrame[MB_PDU_FUNC_WRITE_MUL_VALUES_OFF], usRegAddress, usCoilCnt, MB_REG_WRITE );
+
+            /* If an error occured convert it into a Modbus exception. */
+            if( eRegStatus != MB_ENOERR )
+            {
+                eStatus = prveMBError2Exception( eRegStatus );
+            }
+            else
+            {
+                /* The response contains the function code, the starting address
+                 * and the quantity of registers. We reuse the old values in the
+                 * buffer because they are still valid. */
+                *usLen = MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF;
+            }
+        }
+        else
+        {
+            eStatus = MB_EX_ILLEGAL_DATA_VALUE;
+        }
+    }
+    else
+    {
+        /* Can't be a valid write coil register request because the length
+         * is incorrect. */
+        eStatus = MB_EX_ILLEGAL_DATA_VALUE;
+    }
+    return eStatus;
+}
+
+#endif
+
 #endif

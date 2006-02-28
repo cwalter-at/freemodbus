@@ -24,8 +24,12 @@
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
 
+/* ----------------------- Modbus includes ----------------------------------*/
+#include "mb.h"
+#include "mbproto.h"
+
 /* ----------------------- Defines ------------------------------------------*/
-#define BITS_UCHAR      8
+#define BITS_UCHAR      8U
 
 /* ----------------------- Start implementation -----------------------------*/
 void
@@ -38,20 +42,20 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucVal
     USHORT          usValue = ucValue;
 
     assert( usNBits <= 8 );
-    assert( BITS_UCHAR == sizeof( UCHAR ) * 8 );
+    assert( ( size_t )BITS_UCHAR == sizeof( UCHAR ) * 8 );
 
     /* Calculate byte offset for first byte containing the bit values starting
      * at usBitOffset. */
-    usByteOffset = ( usBitOffset ) / BITS_UCHAR;
+    usByteOffset = ( USHORT ) ( ( usBitOffset ) / BITS_UCHAR );
 
     /* How many bits precede our bits to set. */
-    usNPreBits = usBitOffset - usByteOffset * BITS_UCHAR;
+    usNPreBits = ( USHORT ) ( usBitOffset - usByteOffset * BITS_UCHAR );
 
     /* Move bit field into position over bits to set */
     usValue <<= usNPreBits;
 
     /* Prepare a mask for setting the new bits. */
-    usMask = ( 1 << ( USHORT ) usNBits ) - 1;
+    usMask = ( USHORT ) ( ( 1 << ( USHORT ) usNBits ) - 1 );
     usMask <<= usBitOffset - usByteOffset * BITS_UCHAR;
 
     /* copy bits into temporary storage. */
@@ -62,7 +66,7 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucVal
     usWordBuf = ( usWordBuf & ( ~usMask ) ) | usValue;
 
     /* move bits back into storage */
-    ucByteBuf[usByteOffset] = usWordBuf & 0xFF;
+    ucByteBuf[usByteOffset] = ( UCHAR ) ( usWordBuf & 0xFF );
     ucByteBuf[usByteOffset + 1] = usWordBuf >> BITS_UCHAR;
 }
 
@@ -76,13 +80,13 @@ xMBUtilGetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits )
 
     /* Calculate byte offset for first byte containing the bit values starting
      * at usBitOffset. */
-    usByteOffset = ( usBitOffset ) / BITS_UCHAR;
+    usByteOffset = ( USHORT ) ( ( usBitOffset ) / BITS_UCHAR );
 
     /* How many bits precede our bits to set. */
-    usNPreBits = usBitOffset - usByteOffset * BITS_UCHAR;
+    usNPreBits = ( USHORT ) ( usBitOffset - usByteOffset * BITS_UCHAR );
 
     /* Prepare a mask for setting the new bits. */
-    usMask = ( 1 << ( USHORT ) usNBits ) - 1;
+    usMask = ( USHORT ) ( ( 1 << ( USHORT ) usNBits ) - 1 );
 
     /* copy bits into temporary storage. */
     usWordBuf = ucByteBuf[usByteOffset];
@@ -95,4 +99,31 @@ xMBUtilGetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits )
     usWordBuf &= usMask;
 
     return ( UCHAR ) usWordBuf;
+}
+
+eMBException
+prveMBError2Exception( eMBErrorCode eErrorCode )
+{
+    eMBException    eStatus;
+
+    switch ( eErrorCode )
+    {
+    case MB_ENOERR:
+        eStatus = MB_EX_NONE;
+        break;
+
+    case MB_ENOREG:
+        eStatus = MB_EX_ILLEGAL_DATA_ADDRESS;
+        break;
+
+    case MB_ETIMEDOUT:
+        eStatus = MB_EX_SLAVE_BUSY;
+        break;
+
+    default:
+        eStatus = MB_EX_SLAVE_DEVICE_FAILURE;
+        break;
+    }
+
+    return eStatus;
 }

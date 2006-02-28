@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.1 2006/02/25 18:39:48 wolti Exp $
+ * File: $Id: port.h,v 1.2 2006/02/28 22:36:28 wolti Exp $
  */
 
 #ifndef _PORT_H
@@ -24,12 +24,11 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <avr/signal.h>
 
 #define ENTER_CRITICAL_SECTION( )   cli()
 #define EXIT_CRITICAL_SECTION( )    sei()
 
-#define assert(x)
+#define assert( x )
 
 typedef char    BOOL;
 

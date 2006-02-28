@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.5 2006/02/25 18:38:03 wolti Exp $
+ * File: $Id: mbport.h,v 1.6 2006/02/28 22:41:37 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -51,7 +51,7 @@ BOOL            xMBPortEventInit( void );
 
 BOOL            xMBPortEventPost( eMBEventType eEvent );
 
-BOOL            xMBPortEventGet( eMBEventType * eEvent );
+BOOL            xMBPortEventGet(  /*@out@ */ eMBEventType * eEvent );
 
 /* ----------------------- Serial port functions ----------------------------*/
 
