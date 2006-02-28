@@ -16,19 +16,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: excoils.c,v 1.3 2006/02/28 00:22:10 wolti Exp $
+ * File: $Id: excoils.c,v 1.1 2006/02/28 00:22:42 wolti Exp $
  */
-
-/* ----------------------- System includes ----------------------------------*/
-#include "assert.h"
-
-/* ----------------------- Platform includes --------------------------------*/
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-
-/* ----------------------- STR71X includes ----------------------------------*/
-#include "eic.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -41,29 +30,13 @@
 /* ----------------------- Static variables ---------------------------------*/
 static unsigned char ucRegCoilsBuf[REG_COILS_SIZE] = { 0, 0 };
 
-/* ----------------------- Static functions ---------------------------------*/
-static void     vModbusTask( void *pvParameters );
-
 /* ----------------------- Start implementation -----------------------------*/
 int
 main( void )
 {
-    EIC_Init(  );
-    EIC_IRQConfig( ENABLE );
-
-    ( void )xTaskCreate( vModbusTask, NULL, configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
-
-    vTaskStartScheduler(  );
-    return 0;
-}
-
-static void
-vModbusTask( void *pvParameters )
-{
-    portTickType    xLastWakeTime;
 
     /* Select either ASCII or RTU Mode. */
-    eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    eMBInit( MB_RTU, 0x0A, 9600, MB_PAR_EVEN );
 
     /* Enable the Modbus Protocol Stack. */
     eMBEnable(  );
@@ -132,11 +105,4 @@ eMBErrorCode
 eMBRegDiscreteCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
 {
     return MB_ENOREG;
-}
-
-void
-__assert( const char *pcFile, const char *pcLine, int iLineNumber )
-{
-    portENTER_CRITICAL(  );
-    while( 1 );
 }

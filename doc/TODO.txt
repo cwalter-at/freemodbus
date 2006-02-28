@@ -1,0 +1,17 @@
+
+General issues:
+
+ - Parity checking should be used for the characters when received. This
+   is not strictly necessary because we use CRC or LRC but it is recommended
+   in the standard
+
+   Difficulty: easy
+   Priority:   low
+
+Function issues:
+
+ - If not initialized the Get Slave ID function must also return the
+   run indicator byte in the result and maybe a dummy slave id.
+
+   Difficulty: easy
+   Priority:   medium

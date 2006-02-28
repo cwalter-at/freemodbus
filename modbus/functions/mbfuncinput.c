@@ -37,7 +37,6 @@
 #define MB_PDU_FUNC_READ_REGCNT_MAX     ( 0x007D )
 
 /* ----------------------- Start implementation -----------------------------*/
-
 #if MB_FUNC_READ_INPUT_ENABLED > 0
 
 eMBException

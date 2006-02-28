@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: simple.c,v 1.6 2006/02/25 18:34:08 wolti Exp $
+ * File: $Id: simple.c,v 1.7 2006/02/28 00:22:10 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -34,12 +34,12 @@
 #include "mb.h"
 
 /* ----------------------- Defines ------------------------------------------*/
-#define REG_INPUT_START 1000
-#define REG_INPUT_NREGS 4
+#define REG_INPUT_START     1000
+#define REG_INPUT_NREGS     4
 
 /* ----------------------- Static variables ---------------------------------*/
-static unsigned portSHORT usRegInputStart = REG_INPUT_START;
-static unsigned portSHORT usRegInputBuf[REG_INPUT_NREGS];
+static unsigned short usRegInputStart = REG_INPUT_START;
+static unsigned short usRegInputBuf[REG_INPUT_NREGS];
 
 /* ----------------------- Static functions ---------------------------------*/
 static void     vInitTask( void *pvParameters );
@@ -61,9 +61,8 @@ main( void )
 static void
 vInitTask( void *pvParameters )
 {
-    const unsigned portCHAR ucSlaveID[] = { 0xAA, 0xBB, 0xCC };
+    const unsigned char ucSlaveIDAdditonal[] = { 0xAA, 0xBB, 0xCC };
     portTickType    xLastWakeTime;
-
     eMBErrorCode    eStatus;
     eMBEventType    eEvent;
 
@@ -74,7 +73,7 @@ vInitTask( void *pvParameters )
     //assert( eStatus == MB_ENOERR );
 
     /* Configure the slave id of the device. */
-    eStatus = eMBSetSlaveID( ucSlaveID, 3, pdTRUE );
+    eStatus = eMBSetSlaveID( 44, TRUE, ucSlaveIDAdditonal, 3 );
     assert( eStatus == MB_ENOERR );
 
     /* Enable the Modbus Protocol Stack. */

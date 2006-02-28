@@ -39,7 +39,7 @@
       <file file_name="freertos/portable/MemMang/heap_3.c" Name="heap_3.c" />
     </folder>
     <folder Name="Demo" >
-      <file file_name="simple2.c" Name="simple2.c" />
+      <file file_name="simple.c" Name="simple.c" />
     </folder>
     <folder Name="STR71X Library" >
       <file file_name="library/71x_lib.c" Name="71x_lib.c" />
@@ -68,6 +68,8 @@
         <file file_name="../../modbus/functions/mbfuncinput.c" Name="mbfuncinput.c" />
         <file file_name="../../modbus/functions/mbfuncother.c" Name="mbfuncother.c" />
         <file file_name="../../modbus/functions/mbfunccoils.c" Name="mbfunccoils.c" />
+        <file file_name="../../modbus/include/mbutils.h" Name="mbutils.h" />
+        <file file_name="../../modbus/functions/mbutils.c" Name="mbutils.c" />
       </folder>
       <folder Name="ASCII" >
         <file file_name="../../modbus/ascii/mbascii.h" Name="mbascii.h" />

@@ -1,3 +1,16 @@
+2006-02-28 (REL_0_3_1) Christian Walter <wolti@sil.at>
+
+ The new version 0.3.1 adds support for reading and writing the coil
+ registers and add some bug fixes.
+
+ Details:
+ - BUG: fixed bug with to small modbus requests being ignored.
+ - FEATURES: added support for write single coil function.
+ - FEATURES: added support for working with byte packed bit fields to
+   support coils and discrete inputs better.
+ - API: API for set slave id functions changed.
+
+
 2006-02-26 (REL_0_3) Christian Walter <wolti@sil.at>
 
  First public release which includes an ARM and AVR port.

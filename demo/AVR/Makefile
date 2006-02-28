@@ -39,7 +39,8 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0
 
 
 ## Objects that must be built in order to link
-OBJECTS = demo.o
+OBJECTS = excoils.o
+#OBJECTS = demo.o
 MBPORTOBJECTS = port/portserial.o \
 			port/portevent.o \
 			port/porttimer.o \
@@ -51,7 +52,8 @@ MBOBJECTS = ../../modbus/mb.o \
 			../../modbus/functions/mbfuncdiag.o \
 			../../modbus/functions/mbfuncholding.o \
 			../../modbus/functions/mbfuncinput.o \
-			../../modbus/functions/mbfuncother.o
+			../../modbus/functions/mbfuncother.o \
+			../../modbus/functions/mbutils.o
 
 
 ## Build

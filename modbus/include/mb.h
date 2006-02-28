@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.5 2006/02/25 18:38:03 wolti Exp $
+ * File: $Id: mb.h,v 1.6 2006/02/28 00:17:50 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -152,13 +152,17 @@ eMBErrorCode    eMBPool( void );
  * This function should be called when the Modbus function <em>Report Slave ID</em>
  * is enabled ( By defining MB_FUNC_OTHER_REP_SLAVEID_ENABLED in mbconfig.h ).
  *
- * \param pucSlaveID A string which is returned in the Slave ID bytes of the
- *   function response. E.g. "sensor 1".
- * \param usSlaveIDLen Length of the string pucSlaveID. E.g. 8.
+ * \param ucSlaveID Values is returned in the <em>Slave ID</em> byte of the
+ *   <em>Report Slave ID</em> response.
  * \param xIsRunning If TRUE the <em>Run Indicator Status</em> byte is set to 0xFF.
  *   otherwise the <em>Run Indicator Status</em> is 0x00.
+ * \param pucAdditional Values which should be returned in the <em>Additonal</em>
+ *   bytes of the <em> Report Slave ID</em> response.
+ * \param usAdditionalLen Length of the buffer <code>pucAdditonal</code>.
+ *
+ * \return
  */
-eMBErrorCode    eMBSetSlaveID( UCHAR const *pucSlaveID, USHORT usSlaveIDLen, BOOL xIsRunning );
+eMBErrorCode    eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning, UCHAR const *pucAdditional, USHORT usAdditionalLen );
 
 /* ----------------------- Callback -----------------------------------------*/
 

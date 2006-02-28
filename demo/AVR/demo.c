@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.1 2006/02/25 18:32:22 wolti Exp $
+ * File: $Id: demo.c,v 1.2 2006/02/25 19:03:34 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
@@ -44,9 +44,6 @@ main( void )
 
     eStatus = eMBInit( MB_RTU, 0x0A, 9600, MB_PAR_EVEN );
 
-    //UCSR0B |= _BV(TXEN0);
-    //xMBPortSerialPutByte( 'a' );
-    //for(;;);
     eStatus = eMBSetSlaveID( ucSlaveID, 3, TRUE );
     sei(  );
 

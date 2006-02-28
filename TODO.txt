@@ -1,2 +1,0 @@
-
- - parity checking should be used for the characters when received.

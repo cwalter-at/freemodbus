@@ -16,14 +16,14 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.3 2006/02/25 18:34:08 wolti Exp $
+ * File: $Id: portserial.c,v 1.4 2006/02/26 19:26:08 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
 #include "assert.h"
 
 /* ----------------------- FreeRTOS includes --------------------------------*/
-#include "freertos.h"
+#include "FreeRTOS.h"
 #include "task.h"
 
 /* ----------------------- STR71X includes ----------------------------------*/

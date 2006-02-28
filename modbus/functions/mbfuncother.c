@@ -39,15 +39,23 @@ static USHORT   usMBSlaveIDLen;
 /* ----------------------- Start implementation -----------------------------*/
 
 eMBErrorCode
-eMBSetSlaveID( const UCHAR *pucSlaveID, USHORT usSlaveIDLen, BOOL xIsRunning )
+eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning, UCHAR const *pucAdditional, USHORT usAdditionalLen )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
-    if( usSlaveIDLen + 1 < MB_FUNC_OTHER_REP_SLAVEID_BUF )
+    /* the first byte and second byte in the buffer is reserved for
+     * the parameter ucSlaveID and the running flag. The rest of
+     * the buffer is available for additional data. */
+    if( usAdditionalLen + 2 < MB_FUNC_OTHER_REP_SLAVEID_BUF )
     {
-        memcpy( &ucMBSlaveID[0], pucSlaveID, usSlaveIDLen );
-        ucMBSlaveID[usSlaveIDLen] = xIsRunning ? 0xFF : 0x00;
-        usMBSlaveIDLen = usSlaveIDLen + 1;
+        usMBSlaveIDLen = 0;
+        ucMBSlaveID[usMBSlaveIDLen++] = ucSlaveID;
+        ucMBSlaveID[usMBSlaveIDLen++] = xIsRunning ? 0xFF : 0x00;
+        if( usAdditionalLen > 0 )
+        {
+            memcpy( &ucMBSlaveID[usMBSlaveIDLen], pucAdditional, usAdditionalLen );
+            usMBSlaveIDLen += usAdditionalLen;
+        }
     }
     else
     {
@@ -59,7 +67,7 @@ eMBSetSlaveID( const UCHAR *pucSlaveID, USHORT usSlaveIDLen, BOOL xIsRunning )
 eMBException
 eMBFuncReportSlaveID( UCHAR *pucFrame, USHORT *usLen )
 {
-    memcpy( pucFrame + MB_PDU_DATA_OFF, &ucMBSlaveID[0], usMBSlaveIDLen );
+    memcpy( &pucFrame[MB_PDU_DATA_OFF], &ucMBSlaveID[0], usMBSlaveIDLen );
     *usLen = MB_PDU_DATA_OFF + usMBSlaveIDLen;
     return MB_EX_NONE;
 }

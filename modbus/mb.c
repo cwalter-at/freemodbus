@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.6 2006/02/25 18:38:03 wolti Exp $
+ * File: $Id: mb.c,v 1.7 2006/02/28 00:17:50 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -74,6 +74,9 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 #endif
 #if MB_FUNC_READ_COILS_ENABLED > 0
     {MB_FUNC_READ_COILS, eMBFuncReadCoils},
+#endif
+#if MB_FUNC_WRITE_COIL_ENABLED > 0
+    {MB_FUNC_WRITE_SINGLE_COIL, eMBFuncWriteCoil},
 #endif
 };
 
