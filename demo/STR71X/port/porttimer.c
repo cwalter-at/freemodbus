@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.4 2006/02/26 19:26:08 wolti Exp $
+ * File: $Id: porttimer.c,v 1.5 2006/05/01 11:16:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -52,32 +52,23 @@
 
 /* ----------------------- Static variables ---------------------------------*/
 static USHORT   usTimerDeltaOCRA;
-static USHORT   usTimerDeltaOCRB;
 
 /* ----------------------- Static functions ---------------------------------*/
 void            prvvMBTimerIRQHandler( void ) __attribute__( ( naked ) );
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
-xMBPortTimersInit( USHORT usTim1Timerout50us, USHORT usTim2Timerout50us )
+xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
     /* Calculate output compare value for timer1. */
     usTimerDeltaOCRA =
         ( ( configCPU_CLOCK_HZ / ( MB_TIMER_PRESCALER + 1 ) ) * usTim1Timerout50us ) / ( MB_TIMER_TICKS );
-
-    /* Calculate output compare value for timer2. */
-    usTimerDeltaOCRB =
-        ( ( configCPU_CLOCK_HZ / ( MB_TIMER_PRESCALER + 1 ) ) * usTim2Timerout50us ) / ( MB_TIMER_TICKS );
 
     TIM_Init( MB_TIMER_DEV );
     TIM_PrescalerConfig( MB_TIMER_DEV, MB_TIMER_PRESCALER );
     if( usTimerDeltaOCRA > 0 )
     {
         TIM_OCMPModeConfig( MB_TIMER_DEV, TIM_CHANNEL_A, usTimerDeltaOCRA, TIM_TIMING, TIM_LOW );
-    }
-    if( usTimerDeltaOCRB > 0 )
-    {
-        TIM_OCMPModeConfig( MB_TIMER_DEV, TIM_CHANNEL_B, usTimerDeltaOCRB, TIM_TIMING, TIM_LOW );
     }
 
     vMBPortTimersDisable(  );
@@ -96,13 +87,8 @@ prvvMBTimerIRQHandler( void )
 
     if( ( usTimerDeltaOCRA > 0 ) && ( TIM_FlagStatus( MB_TIMER_DEV, TIM_OCFA ) ) )
     {
-        xTaskSwitch |= pxMBPortCBTimer1Expired(  );
+        xTaskSwitch |= pxMBPortCBTimerExpired(  );
         TIM_FlagClear( MB_TIMER_DEV, TIM_OCFA );
-    }
-    if( ( usTimerDeltaOCRB > 0 ) && ( TIM_FlagStatus( MB_TIMER_DEV, TIM_OCFB ) ) )
-    {
-        xTaskSwitch |= pxMBPortCBTimer2Expired(  );
-        TIM_FlagClear( MB_TIMER_DEV, TIM_OCFB );
     }
 
     /* End the interrupt in the EIC. */
@@ -123,12 +109,7 @@ vMBPortTimersEnable(  )
         maskTimFlags |= TIM_OCFA;
         maskTimIT |= TIM_OCA_IT;
     }
-    if( usTimerDeltaOCRB > 0 )
-    {
-        MB_TIMER_DEV->OCBR = usTimerDeltaOCRB;
-        maskTimFlags |= TIM_OCFB;
-        maskTimIT |= TIM_OCB_IT;
-    }
+
     TIM_FlagClear( MB_TIMER_DEV, maskTimFlags );
     TIM_ITConfig( MB_TIMER_DEV, maskTimIT, ENABLE );
     TIM_CounterConfig( MB_TIMER_DEV, TIM_START );

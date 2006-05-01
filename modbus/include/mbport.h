@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.6 2006/02/28 22:41:37 wolti Exp $
+ * File: $Id: mbport.h,v 1.7 2006/05/01 11:18:08 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -64,7 +64,7 @@ inline BOOL     xMBPortSerialGetByte( CHAR * pucByte );
 inline BOOL     xMBPortSerialPutByte( CHAR ucByte );
 
 /* ----------------------- Timers functions ---------------------------------*/
-BOOL            xMBPortTimersInit( USHORT usTim1Timerout100us, USHORT usTim2Timerout100us );
+BOOL            xMBPortTimersInit( USHORT usTim1Timerout100us );
 
 inline void     vMBPortTimersEnable( void );
 
@@ -88,8 +88,6 @@ extern          BOOL( *pxMBFrameCBByteReceived ) ( void );
 
 extern          BOOL( *pxMBFrameCBTransmitterEmpty ) ( void );
 
-extern          BOOL( *pxMBPortCBTimer1Expired ) ( void );
-
-extern          BOOL( *pxMBPortCBTimer2Expired ) ( void );
+extern          BOOL( *pxMBPortCBTimerExpired ) ( void );
 
 #endif

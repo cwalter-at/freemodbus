@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.5 2006/02/27 21:27:21 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.6 2006/05/01 11:18:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -45,10 +45,8 @@
 typedef enum
 {
     STATE_RX_INIT,              /*!< Receiver is in initial state. */
-    STATE_RX_INIT_T15,          /*!< Receiver is in init and timer t1.5 expired. */
     STATE_RX_IDLE,              /*!< Receiver is in idle state. */
     STATE_RX_RCV,               /*!< Frame is beeing received. */
-    STATE_RX_RCV_T15,           /*!< Frame is beeing received and timer t1.5 expired. */
     STATE_RX_ERROR,             /*!< If the frame is invalid. */
 } eMBRcvState;
 
@@ -74,18 +72,15 @@ eMBErrorCode
 eMBRTUInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
-    USHORT          usTimerT15_50us;
     USHORT          usTimerT35_50us;
 
     ENTER_CRITICAL_SECTION(  );
 
     /* If baudrate > 19200 then we should use the fixed timer values
-     * t15 = 750us and t35 = 1750us. Otherwise t15 must be 1.5 times
-     * the character time and similary for t35.
+     * t35 = 1750us. Otherwise t35 must be 3.5 times the character time.
      */
     if( ulBaudRate > 19200 )
     {
-        usTimerT15_50us = 15;   /* 750us. */
         usTimerT35_50us = 35;   /* 1800us. */
     }
     else
@@ -95,13 +90,12 @@ eMBRTUInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
          * ChTimeValue = Ticks_per_1s / ( Baudrate / 11 )
          *             = 11 * Ticks_per_1s / Baudrate
          *             = 220000 / Baudrate
-         * The reload for t1.5 is 1.5 times this value and similary
+         * The reload for t3.5 is 1.5 times this value and similary
          * for t3.5.
          */
-        usTimerT15_50us = ( 3UL * 220000UL ) / ( 2UL * ulBaudRate );
         usTimerT35_50us = ( 7UL * 220000UL ) / ( 2UL * ulBaudRate );
     }
-    if( xMBPortTimersInit( usTimerT15_50us, usTimerT35_50us ) != TRUE )
+    if( xMBPortTimersInit( usTimerT35_50us ) != TRUE )
     {
         eStatus = MB_EPORTERR;
     }
@@ -225,10 +219,6 @@ xMBRTUReceiveFSM( void )
         vMBPortTimersEnable(  );
         break;
 
-        /* Timer t1.5 expired in initial state. */
-    case STATE_RX_INIT_T15:
-        break;
-
         /* In the error state we wait until all characters in the
          * damaged frame are transmitted.
          */
@@ -247,13 +237,6 @@ xMBRTUReceiveFSM( void )
 
         /* Enable t1.5 and t3.5 timers. */
         vMBPortTimersEnable(  );
-        break;
-
-        /* Timer t1.5 expired and we received a character. This is
-         * an error.
-         */
-    case STATE_RX_RCV_T15:
-        eRcvState = STATE_RX_ERROR;
         break;
 
         /* We are currently receiving a frame. Reset the timer after
@@ -317,26 +300,6 @@ xMBRTUTransmitFSM( void )
 }
 
 BOOL
-xMBRTUTimerT15Expired( void )
-{
-    switch ( eRcvState )
-    {
-    case STATE_RX_INIT:
-        eRcvState = STATE_RX_INIT_T15;
-        break;
-    case STATE_RX_RCV:
-        eRcvState = STATE_RX_RCV_T15;
-        break;
-    default:
-        assert( ( eRcvState == STATE_RX_INIT ) || ( eRcvState == STATE_RX_RCV ) );
-        break;
-    }
-
-    /* no context switch required. */
-    return FALSE;
-}
-
-BOOL
 xMBRTUTimerT35Expired( void )
 {
     BOOL            xNeedPoll = FALSE;
@@ -344,13 +307,13 @@ xMBRTUTimerT35Expired( void )
     switch ( eRcvState )
     {
         /* Timer t35 expired. Startup phase is finished. */
-    case STATE_RX_INIT_T15:
+    case STATE_RX_INIT:
         xNeedPoll = xMBPortEventPost( EV_READY );
         break;
 
         /* A frame was received and t35 expired. Notify the listener that
          * a new frame was received. */
-    case STATE_RX_RCV_T15:
+    case STATE_RX_RCV:
         xNeedPoll = xMBPortEventPost( EV_FRAME_RECEIVED );
         break;
 
@@ -360,8 +323,7 @@ xMBRTUTimerT35Expired( void )
 
         /* Function called in an illegal state. */
     default:
-        assert( ( eRcvState == STATE_RX_INIT_T15 ) || ( eRcvState == STATE_RX_RCV_T15 )
-                || ( eRcvState == STATE_RX_ERROR ) );
+        assert( ( eRcvState == STATE_RX_INIT ) || ( eRcvState == STATE_RX_RCV ) || ( eRcvState == STATE_RX_ERROR ) );
     }
 
     vMBPortTimersDisable(  );

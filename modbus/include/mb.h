@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.7 2006/02/28 22:41:37 wolti Exp $
+ * File: $Id: mb.h,v 1.8 2006/05/01 11:19:19 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -32,10 +32,10 @@
  * the basic functions and types required to use the Modbus protocol stack.
  * A typical application will want to call eMBInit() first. If the device
  * is ready to answer network requests it must then call eMBEnable() to activate
- * the protocol stack. In the main loop the functin eMBPool() must be called
+ * the protocol stack. In the main loop the functin eMBPoll() must be called
  * periodically. The time intervall between pooling depends on the configured
  * Modbus timeout. If an RTOS is available a seperate task should be created
- * and the task should always call the function eMBPool().
+ * and the task should always call the function eMBPoll().
  *
  * \code
  * // Initialize protocol stack in RTU mode for a slave with address 10 = 0x0A
@@ -45,7 +45,7 @@
  * for( ;; )
  * {
  *     // Call the main polling loop of the Modbus protocol stack.
- *     eMBPool(  );
+ *     eMBPoll(  );
  *     ...
  * }
  * \endcode
@@ -144,7 +144,7 @@ eMBErrorCode    eMBEnable( void );
  *
  * \return If no error occured the function returns eMBErrorCode::MB_ENOERR.
  */
-eMBErrorCode    eMBPool( void );
+eMBErrorCode    eMBPoll( void );
 
 /*! \ingroup modbus
  * \brief Configure the slave id of the device.

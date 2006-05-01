@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.1 2006/02/25 18:39:48 wolti Exp $
+ * File: $Id: porttimer.c,v 1.2 2006/05/01 11:34:21 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
@@ -42,13 +42,10 @@ static USHORT   usTimerOCRBDelta;
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
-xMBPortTimersInit( USHORT usTim1Timerout50us, USHORT usTim2Timerout50us )
+xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
     /* Calculate overflow counter an OCR values for Timer1. */
     usTimerOCRADelta = ( MB_TIMER_TICKS * usTim1Timerout50us ) / ( MB_50US_TICKS );
-
-    /* Calculate overflow counter an OCR values for Timer2. */
-    usTimerOCRBDelta = ( MB_TIMER_TICKS * usTim2Timerout50us ) / ( MB_50US_TICKS );
 
     TCCR1A = 0x00;
     TCCR1B = 0x00;
@@ -69,11 +66,6 @@ vMBPortTimersEnable(  )
         TIMSK1 |= _BV( OCIE1A );
         OCR1A = usTimerOCRADelta;
     }
-    if( usTimerOCRBDelta > 0 )
-    {
-        TIMSK1 |= _BV( OCIE1B );
-        OCR1B = usTimerOCRBDelta;
-    }
 
     TCCR1B |= _BV( CS12 ) | _BV( CS10 );
 }
@@ -84,17 +76,12 @@ vMBPortTimersDisable(  )
     /* Disable the timer. */
     TCCR1B &= ~( _BV( CS12 ) | _BV( CS10 ) );
     /* Disable the output compare interrupts for channel A/B. */
-    TIMSK1 &= ~( _BV( OCIE1B ) | _BV( OCIE1A ) );
+    TIMSK1 &= _BV( OCIE1A );
     /* Clear output compare flags for channel A/B. */
-    TIFR1 |= _BV( OCF1A ) | _BV( OCF1B );
+    TIFR1 |= _BV( OCF1A );
 }
 
 SIGNAL( SIG_OUTPUT_COMPARE1A )
 {
-    ( void )pxMBPortCBTimer1Expired(  );
-}
-
-SIGNAL( SIG_OUTPUT_COMPARE1B )
-{
-    ( void )pxMBPortCBTimer2Expired(  );
+    ( void )pxMBPortCBTimerExpired(  );
 }

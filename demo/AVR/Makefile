@@ -39,8 +39,8 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0
 
 
 ## Objects that must be built in order to link
-OBJECTS = excoils.o
-#OBJECTS = demo.o
+#OBJECTS = excoils.o
+OBJECTS = demo.o
 MBPORTOBJECTS = port/portserial.o \
 			port/portevent.o \
 			port/porttimer.o \

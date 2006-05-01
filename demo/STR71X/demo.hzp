@@ -70,6 +70,7 @@
         <file file_name="../../modbus/functions/mbfunccoils.c" Name="mbfunccoils.c" />
         <file file_name="../../modbus/include/mbutils.h" Name="mbutils.h" />
         <file file_name="../../modbus/functions/mbutils.c" Name="mbutils.c" />
+        <file file_name="../../modbus/functions/mbfuncdisc.c" Name="mbfuncdisc.c" />
       </folder>
       <folder Name="ASCII" >
         <file file_name="../../modbus/ascii/mbascii.h" Name="mbascii.h" />

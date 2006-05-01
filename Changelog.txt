@@ -1,3 +1,18 @@
+2006-05-01 (REL_0_4) Christian Walter <wolti@sil.at>
+
+ This version removes the t1.5 timers from the Modbus RTU implementation
+ because no one actually uses it and the CPU load is very high. T In
+ addition some documentation cleanups has been done and the ARM demo has
+ been updated.
+
+ Details:
+
+ - FEATURES: the t1.5 timeout has been removed. Therefore only one timer
+   is required.
+ - BUG: the ARM demo project missed some files in the project workspace
+   and did not compile cleanly
+
+
 2006-02-28 (REL_0_3_2) Christian Walter <wolti@sil.at>
 
  This version includes support for two new commands (write multiple

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: simple.c,v 1.8 2006/02/28 22:12:00 wolti Exp $
+ * File: $Id: simple.c,v 1.9 2006/05/01 11:14:00 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -84,7 +84,7 @@ vInitTask( void *pvParameters )
          * dependent function xMBPortEventGet(  ). In the FreeRTOS port the
          * event layer is built with queues.
          */
-        ( void )eMBPool(  );
+        ( void )eMBPoll(  );
 
         /* Here we simply count the number of poll cycles. */
         usRegInputBuf[0]++;

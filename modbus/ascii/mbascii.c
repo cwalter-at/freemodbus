@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.c,v 1.6 2006/02/28 22:37:31 wolti Exp $
+ * File: $Id: mbascii.c,v 1.7 2006/05/01 11:17:29 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -108,7 +108,7 @@ eMBASCIIInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
         eStatus = MB_EPORTERR;
     }
 
-    if( xMBPortTimersInit( MB_ASCII_TIMEOUT_SEC * 20000UL, 0 ) != TRUE )
+    if( xMBPortTimersInit( MB_ASCII_TIMEOUT_SEC * 20000UL ) != TRUE )
     {
         eStatus = MB_EPORTERR;
     }
