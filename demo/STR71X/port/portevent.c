@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library: A Modbus serial implementation for FreeRTOS
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portevent.c,v 1.5 2006/02/26 19:26:08 wolti Exp $
+ * File: $Id: portevent.c,v 1.6 2006/05/14 21:54:16 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/

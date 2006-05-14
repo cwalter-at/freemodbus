@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library: A Modbus serial implementation for FreeRTOS
+ * FreeModbus Library: ATMega168 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbcrc.c,v 1.1 2006/02/25 18:39:48 wolti Exp $
+ * File: $Id: mbcrc.c,v 1.2 2006/05/14 21:55:01 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/

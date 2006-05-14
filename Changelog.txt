@@ -1,3 +1,13 @@
+2006-05-14 (REL_0_5) Christian Walter <wolti@sil.at>
+
+ The new version includes a new port for the Freescale MCF5235
+ processor.
+
+ Details:
+ - FEATURES: added new MCF5235 port.
+ - REFACTOR: fixed some missing code headers.
+
+
 2006-05-01 (REL_0_4) Christian Walter <wolti@sil.at>
 
  This version removes the t1.5 timers from the Modbus RTU implementation

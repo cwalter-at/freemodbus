@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library: A Modbus serial implementation for FreeRTOS
+ * FreeModbus Library: ATMega168 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.2 2006/02/28 22:36:28 wolti Exp $
+ * File: $Id: port.h,v 1.3 2006/05/14 21:55:01 wolti Exp $
  */
 
 #ifndef _PORT_H

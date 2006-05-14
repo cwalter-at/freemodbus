@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library demo application
+ * FreeModbus Library: STR71x Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: exholding.c,v 1.4 2006/05/01 11:14:07 wolti Exp $
+ * File: $Id: exholding.c,v 1.5 2006/05/14 21:54:16 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/

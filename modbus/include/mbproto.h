@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library: A Modbus serial implementation for FreeRTOS
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbproto.h,v 1.7 2006/02/28 22:41:37 wolti Exp $
+ * File: $Id: mbproto.h,v 1.8 2006/05/13 12:38:08 wolti Exp $
  */
 
 #ifndef _MB_PROTO_H

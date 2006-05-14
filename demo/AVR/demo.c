@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Modbus Library demo application
+ * FreeModbus Library: AVR Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.5 2006/05/01 11:35:18 wolti Exp $
+ * File: $Id: demo.c,v 1.6 2006/05/14 21:55:01 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
