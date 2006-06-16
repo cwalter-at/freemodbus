@@ -16,36 +16,36 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbproto.h,v 1.8 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mbproto.h,v 1.9 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_PROTO_H
 #define _MB_PROTO_H
 
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
+
 /* ----------------------- Defines ------------------------------------------*/
 #define MB_ADDRESS_BROADCAST    ( 0 )   /*! Modbus broadcast address. */
 #define MB_ADDRESS_MIN          ( 1 )   /*! Smallest possible slave address. */
 #define MB_ADDRESS_MAX          ( 247 ) /*! Biggest possible slave address. */
-
-
 #define MB_FUNC_NONE                        (  0 )
 #define MB_FUNC_READ_COILS                  (  1 )
 #define MB_FUNC_READ_DISCRETE_INPUTS        (  2 )
 #define MB_FUNC_WRITE_SINGLE_COIL           (  5 )
 #define MB_FUNC_WRITE_MULTIPLE_COILS        ( 15 )
-
 #define MB_FUNC_READ_HOLDING_REGISTER       (  3 )
 #define MB_FUNC_READ_INPUT_REGISTER         (  4 )
 #define MB_FUNC_WRITE_REGISTER              (  6 )
 #define MB_FUNC_WRITE_MULTIPLE_REGISTERS    ( 16 )
-
 #define MB_FUNC_DIAG_READ_EXCEPTION         (  7 )
 #define MB_FUNC_DIAG_DIAGNOSTIC             (  8 )
 #define MB_FUNC_DIAG_GET_COM_EVENT_CNT      ( 11 )
 #define MB_FUNC_DIAG_GET_COM_EVENT_LOG      ( 12 )
-
 #define MB_FUNC_OTHER_REPORT_SLAVEID        ( 17 )
-
 #define MB_FUNC_ERROR                       ( 128 )
 
 /* ----------------------- Type definitions ---------------------------------*/
@@ -70,5 +70,11 @@ typedef struct
     UCHAR           ucFunctionCode;
     pxMBFunctionHandler pxHandler;
 } xMBFunctionHandler;
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: exdisc.c,v 1.3 2006/05/14 21:54:16 wolti Exp $
+ * File: $Id: exdisc.c,v 1.4 2006/06/15 15:41:13 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -61,7 +61,7 @@ static void
 vModbusTask( void *pvParameters )
 {
     /* Select either ASCII or RTU Mode. */
-    ( void )eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    ( void )eMBInit( MB_RTU, 0x0A, 0, 38400, MB_PAR_EVEN );
 
     /* Initialise the discrete input registers. */
     xMBUtilSetBits( ucRegDiscBuf, 2, 2, 3 );    /* Set bit 2:3 to 11b. */

@@ -17,11 +17,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.1 2006/05/14 21:59:16 wolti Exp $
+ * File: $Id: port.h,v 1.2 2006/06/15 15:29:41 wolti Exp $
  */
 
 #ifndef _PORT_H
 #define _PORT_H
+
+#define INLINE                    inline
+#define PR_BEGIN_EXTERN_C         extern "C" {
+#define PR_END_EXTERN_C           }
 
 #define ENTER_CRITICAL_SECTION( ) prvvPortEnterCritical()
 #define EXIT_CRITICAL_SECTION( )  prvvPortExitCritical()

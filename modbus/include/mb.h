@@ -16,13 +16,20 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.9 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mb.h,v 1.10 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_H
 #define _MB_H
 
 #include "port.h"
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
+
 #include "mbport.h"
 
 /*! \defgroup modbus Modbus
@@ -110,6 +117,8 @@ typedef enum
  * \param eMode If ASCII or RTU mode should be used.
  * \param ucSlaveAddress The slave address. Only frames sent to this
  *   address or to the broadcast address are processed.
+ * \param ucPort The port to use. E.g. 1 for COM1 on windows. This value
+ *   is platform dependent and some ports simply choose to ignore it.
  * \param ulBaudRate The baudrate. E.g. 19200. Supported baudrates depend
  *   on the porting layer.
  * \param eParity Parity used for serial transmission.
@@ -120,7 +129,7 @@ typedef enum
  *        slave addresses are in the range 1 - 247.
  *    - eMBErrorCode::MB_EPORTERR IF the porting layer returned an error.
  */
-eMBErrorCode    eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity );
+eMBErrorCode    eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
 
 /*! \ingroup modbus
  * \brief Enable the Modbus protocol stack.
@@ -298,4 +307,11 @@ eMBErrorCode    eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
  *       a <b>SLAVE DEVICE FAILURE</b> exception is sent as a response.
  */
 eMBErrorCode    eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete );
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
+
 #endif

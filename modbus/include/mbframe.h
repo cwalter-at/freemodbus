@@ -16,11 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbframe.h,v 1.4 2006/05/13 12:34:32 wolti Exp $
+ * File: $Id: mbframe.h,v 1.5 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_FRAME_H
 #define _MB_FRAME_H
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 /*!
  * Constants which defines the format of a modbus frame.
@@ -46,21 +52,25 @@
  */
 
 /* ----------------------- Defines ------------------------------------------*/
-
 #define MB_PDU_SIZE_MAX     253 /*!< Maximum size of a PDU. */
 #define MB_PDU_SIZE_MIN     1   /*!< Function Code */
 #define MB_PDU_FUNC_OFF     0   /*!< Offset of function code in PDU. */
 #define MB_PDU_DATA_OFF     1   /*!< Offset for response data in PDU. */
 
 /* ----------------------- Type definitions ---------------------------------*/
-
 typedef         eMBErrorCode( *peMBFrameStart ) ( void );
 
 typedef         eMBErrorCode( *peMBFrameReceive ) ( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
 
 typedef         eMBErrorCode( *peMBFrameSend ) ( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
 
-typedef         eMBErrorCode( *peMBFrameInit ) ( UCHAR slaveAddress, ULONG ulBaudRate, eMBParity eParity );
+typedef         eMBErrorCode( *peMBFrameInit ) ( UCHAR ucPort, UCHAR slaveAddress, ULONG ulBaudRate,
+                                                 eMBParity eParity );
 
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

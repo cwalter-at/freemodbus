@@ -1,3 +1,11 @@
+2006-06-16 (REL_0_6) Christian Walter <wolti@sil.at>
+
+ The new version includes a new port for the Win32 platform
+
+ Details:
+ - FEATURES: added Win32 platform
+
+
 2006-05-14 (REL_0_5) Christian Walter <wolti@sil.at>
 
  The new version includes a new port for the Freescale MCF5235

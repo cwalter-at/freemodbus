@@ -16,11 +16,17 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbconfig.h,v 1.8 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mbconfig.h,v 1.9 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_CONFIG_H
 #define _MB_CONFIG_H
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 /* ----------------------- Defines ------------------------------------------*/
 
@@ -95,5 +101,11 @@
 #define MB_FUNC_READ_DISCRETE_INPUTS_ENABLED    (  1 )
 
 /*! @} */
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

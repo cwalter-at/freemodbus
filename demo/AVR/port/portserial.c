@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.2 2006/05/14 21:55:01 wolti Exp $
+ * File: $Id: portserial.c,v 1.3 2006/06/15 15:38:08 wolti Exp $
  */
 
 #include <avr/io.h>
@@ -52,10 +52,13 @@ vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 }
 
 BOOL
-xMBPortSerialInit( ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
+xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
 {
+    /* prevent compiler warning. */
+    ( void )ucPORT;
+
     UBRR0 = UART_BAUD_CALC( ulBaudRate, F_CPU );
-    // UCSR0A = UCSR0A = UCSR0C = 0x00;
+
     switch ( eParity )
     {
     case MB_PAR_EVEN:

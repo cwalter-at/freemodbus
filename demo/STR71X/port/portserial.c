@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.5 2006/05/14 21:54:16 wolti Exp $
+ * File: $Id: portserial.c,v 1.6 2006/06/15 15:41:20 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -59,11 +59,13 @@ static inline BOOL prvMBPortRXIsEnabled(  );
 /* ----------------------- Start implementation -----------------------------*/
 
 BOOL
-xMBPortSerialInit( ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
+xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
 {
     BOOL            xResult = TRUE;
     UARTParity_TypeDef eUARTParity;
     UARTMode_TypeDef eUARTMode;
+
+    ( void )ucPort;
 
     switch ( eParity )
     {

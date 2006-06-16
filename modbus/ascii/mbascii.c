@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.c,v 1.8 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mbascii.c,v 1.9 2006/06/16 00:08:35 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -96,14 +96,14 @@ static volatile UCHAR ucMBLFCharacter;
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
-eMBASCIIInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
+eMBASCIIInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
     ENTER_CRITICAL_SECTION(  );
     ucMBLFCharacter = MB_ASCII_DEFAULT_LF;
 
-    if( xMBPortSerialInit( ulBaudRate, 7, eParity ) != TRUE )
+    if( xMBPortSerialInit( ucPort, ulBaudRate, 7, eParity ) != TRUE )
     {
         eStatus = MB_EPORTERR;
     }

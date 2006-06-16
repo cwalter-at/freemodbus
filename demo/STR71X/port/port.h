@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.5 2006/05/14 21:54:16 wolti Exp $
+ * File: $Id: port.h,v 1.6 2006/06/15 15:27:16 wolti Exp $
  */
 
 #ifndef _PORT_H
@@ -24,6 +24,16 @@
 
 #include "assert.h"
 #include "FreeRTOS.h"
+
+/* work aroung a problem when inline is also defined in 71x_conf.h */
+#ifdef INLINE
+#undef INLINE
+#endif
+
+#define INLINE                      inline
+
+#define PR_BEGIN_EXTERN_C           extern "C" {
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   portENTER_CRITICAL( )
 #define EXIT_CRITICAL_SECTION( )    portEXIT_CRITICAL( )

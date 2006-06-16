@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.7 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.9 2006/06/16 00:07:20 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -69,12 +69,18 @@ static volatile USHORT usRcvBufferPos;
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
-eMBRTUInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
+eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
-    USHORT          usTimerT35_50us;
+    ULONG           usTimerT35_50us;
 
     ENTER_CRITICAL_SECTION(  );
+
+    /* Modbus RTU uses 8 Databits. */
+    if( xMBPortSerialInit( ucPort, ulBaudRate, 8, eParity ) != TRUE )
+    {
+        eStatus = MB_EPORTERR;
+    }
 
     /* If baudrate > 19200 then we should use the fixed timer values
      * t35 = 1750us. Otherwise t35 must be 3.5 times the character time.
@@ -95,12 +101,7 @@ eMBRTUInit( UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
          */
         usTimerT35_50us = ( 7UL * 220000UL ) / ( 2UL * ulBaudRate );
     }
-    if( xMBPortTimersInit( usTimerT35_50us ) != TRUE )
-    {
-        eStatus = MB_EPORTERR;
-    }
-    /* Modbus RTU uses 8 Databits. */
-    if( xMBPortSerialInit( ulBaudRate, 8, eParity ) != TRUE )
+    if( xMBPortTimersInit( ( USHORT ) usTimerT35_50us ) != TRUE )
     {
         eStatus = MB_EPORTERR;
     }

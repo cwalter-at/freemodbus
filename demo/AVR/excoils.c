@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: excoils.c,v 1.5 2006/05/14 21:55:01 wolti Exp $
+ * File: $Id: excoils.c,v 1.6 2006/06/15 15:38:02 wolti Exp $
  */
 
 /* ----------------------- Modbus includes ----------------------------------*/
@@ -36,7 +36,7 @@ main( void )
 {
 
     /* Select either ASCII or RTU Mode. */
-    ( void )eMBInit( MB_RTU, 0x0A, 9600, MB_PAR_EVEN );
+    ( void )eMBInit( MB_RTU, 0x0A, 0, 9600, MB_PAR_EVEN );
 
     /* Enable the Modbus Protocol Stack. */
     ( void )eMBEnable(  );

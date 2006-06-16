@@ -20,6 +20,12 @@
 #ifndef _MB_UTILS_H
 #define _MB_UTILS_H
 
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
+
 /*! \defgroup modbus_utils Utilities
  *
  * This module contains some utility functions which can be used by
@@ -87,5 +93,11 @@ void            xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR usN
 UCHAR           xMBUtilGetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR usNBits );
 
 /*! @} */
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.10 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mb.c,v 1.11 2006/06/16 00:08:08 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -89,7 +89,7 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
-eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParity )
+eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
@@ -128,7 +128,7 @@ eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, ULONG ulBaudRate, eMBParity eParit
 #endif
     }
 
-    eStatus = peMBFrameInitCur( ucSlaveAddress, ulBaudRate, eParity );
+    eStatus = peMBFrameInitCur( ucSlaveAddress, ucPort, ulBaudRate, eParity );
     if( eStatus == MB_ENOERR )
     {
         if( !xMBPortEventInit(  ) )

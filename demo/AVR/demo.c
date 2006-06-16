@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.6 2006/05/14 21:55:01 wolti Exp $
+ * File: $Id: demo.c,v 1.7 2006/06/15 15:38:02 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
@@ -42,7 +42,7 @@ main( void )
     const UCHAR     ucSlaveID[] = { 0xAA, 0xBB, 0xCC };
     eMBErrorCode    eStatus;
 
-    eStatus = eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    eStatus = eMBInit( MB_RTU, 0x0A, 0, 38400, MB_PAR_EVEN );
 
     eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
     sei(  );

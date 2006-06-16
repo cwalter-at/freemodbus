@@ -16,13 +16,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.h,v 1.4 2006/05/13 12:38:08 wolti Exp $
+ * File: $Id: mbrtu.h,v 1.5 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_RTU_H
 #define _MB_RTU_H
 
-eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, ULONG ulBaudRate, eMBParity eParity );
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
+
+eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
 
 eMBErrorCode    eMBRTUStart( void );
 
@@ -37,5 +43,11 @@ BOOL            xMBRTUTransmitFSM( void );
 BOOL            xMBRTUTimerT15Expired( void );
 
 BOOL            xMBRTUTimerT35Expired( void );
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: exholding.c,v 1.5 2006/05/14 21:54:16 wolti Exp $
+ * File: $Id: exholding.c,v 1.6 2006/06/15 15:41:13 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -63,7 +63,7 @@ vModbusTask( void *pvParameters )
     int             i;
 
     /* Select either ASCII or RTU Mode. */
-    ( void )eMBInit( MB_RTU, 0x0A, 38400, MB_PAR_EVEN );
+    ( void )eMBInit( MB_RTU, 0x0A, 0, 38400, MB_PAR_EVEN );
 
     /* Initialize the holding register values before starting the
      * Modbus stack. */

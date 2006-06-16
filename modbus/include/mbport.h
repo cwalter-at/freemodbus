@@ -16,14 +16,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.8 2006/05/13 12:34:32 wolti Exp $
+ * File: $Id: mbport.h,v 1.9 2006/06/16 00:08:52 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
 #define _MB_PORT_H
 
-/* ----------------------- Type definitions ---------------------------------*/
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
+/* ----------------------- Type definitions ---------------------------------*/
 typedef enum
 {
     EV_READY,                   /*!< Startup finished. */
@@ -55,20 +60,20 @@ BOOL            xMBPortEventGet(  /*@out@ */ eMBEventType * eEvent );
 
 /* ----------------------- Serial port functions ----------------------------*/
 
-BOOL            xMBPortSerialInit( ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity );
+BOOL            xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity );
 
 void            vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable );
 
-inline BOOL     xMBPortSerialGetByte( CHAR * pucByte );
+INLINE BOOL     xMBPortSerialGetByte( CHAR * pucByte );
 
-inline BOOL     xMBPortSerialPutByte( CHAR ucByte );
+INLINE BOOL     xMBPortSerialPutByte( CHAR ucByte );
 
 /* ----------------------- Timers functions ---------------------------------*/
 BOOL            xMBPortTimersInit( USHORT usTim1Timerout100us );
 
-inline void     vMBPortTimersEnable( void );
+INLINE void     vMBPortTimersEnable( void );
 
-inline void     vMBPortTimersDisable( void );
+INLINE void     vMBPortTimersDisable( void );
 
 /* ----------------------- Callback for the protocol stack ------------------*/
 
@@ -89,5 +94,11 @@ extern          BOOL( *pxMBFrameCBByteReceived ) ( void );
 extern          BOOL( *pxMBFrameCBTransmitterEmpty ) ( void );
 
 extern          BOOL( *pxMBPortCBTimerExpired ) ( void );
+
+#ifdef __cplusplus
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
+#endif
 
 #endif

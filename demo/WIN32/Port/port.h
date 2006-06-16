@@ -1,5 +1,5 @@
 /*
- * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,34 +16,46 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.h,v 1.5 2006/06/16 00:08:52 wolti Exp $
+ * File: $Id: port.h,v 1.1 2006/06/16 00:13:39 wolti Exp $
  */
 
-#ifndef _MB_ASCII_H
-#define _MB_ASCII_H
+#ifndef _PORT_H
+#define _PORT_H
+
+#include <windows.h>
+#include <tchar.h>
+#include <assert.h>
+
+#define INLINE
+#define PR_BEGIN_EXTERN_C           extern "C" {
+#define PR_END_EXTERN_C             }
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
 /* *INDENT-ON* */
 #endif
-
-#if MB_ASCII_ENABLED > 0
-eMBErrorCode    eMBASCIIInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
-
-eMBErrorCode    eMBASCIIStart( void );
-
-eMBErrorCode    eMBASCIIReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
-
-eMBErrorCode    eMBASCIISend( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
-
-BOOL            xMBASCIIReceiveFSM( void );
-
-BOOL            xMBASCIITransmitFSM( void );
-
-BOOL            xMBASCIITimerT1SExpired( void );
-
+#define ENTER_CRITICAL_SECTION( )
+#define EXIT_CRITICAL_SECTION( )
+#ifndef TRUE
+#define TRUE            1
 #endif
+#ifndef FALSE
+#define FALSE           0
+#endif
+#ifdef _DEBUG
+void            TRACEC( const TCHAR * pcFmt, ... );
+void            ERRORC( const TCHAR * pcFmt, DWORD dwError, ... );
+#else
+#define TRACEC( pcFmt, ... )
+#define ERRORC( pcFmt, dwError, ... )
+#endif
+void            vMBPortTimerPoll(  );
+BOOL            xMBPortSerialPoll(  );
+BOOL            xMBPortSerialSetTimeout( DWORD dwTimeoutMs );
+
+SHORT           xMBPortStartPoolingThread(  );
+SHORT           xMBPortStopPoolingThread(  );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */
