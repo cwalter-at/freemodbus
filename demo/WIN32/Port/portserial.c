@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.1 2006/06/16 00:13:39 wolti Exp $
+ * File: $Id: portserial.c,v 1.2 2006/06/17 00:17:45 wolti Exp $
  */
 
 #include <windows.h>
@@ -26,17 +26,21 @@
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
+#include "mbconfig.h"
 
 /* ----------------------- Defines  -----------------------------------------*/
-#define TX_BUF_SIZE 256
-#define RX_BUF_SIZE 256
+#if MB_ASCII_ENABLED == 1
+#define BUF_SIZE    513         /* must hold a complete ASCII frame. */
+#else
+#define BUF_SIZE    256         /* must hold a complete RTU frame. */
+#endif
 
 /* ----------------------- Static variables ---------------------------------*/
 static HANDLE   g_hSerial;
 static BOOL     bRxEnabled;
 static BOOL     bTxEnabled;
 
-static UCHAR    ucBuffer[256];
+static UCHAR    ucBuffer[BUF_SIZE];
 static INT      uiRxBufferPos;
 static INT      uiTxBufferPos;
 
@@ -45,8 +49,8 @@ void
 vMBPortSerialEnable( BOOL bEnableRx, BOOL bEnableTx )
 {
     /* it is not allowed that both receiver and transmitter are enabled. */
-
     assert( !bEnableRx || !bEnableTx );
+
     if( bEnableRx )
     {
         PurgeComm( g_hSerial, PURGE_RXCLEAR );
@@ -125,11 +129,11 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         dcb.fRtsControl = RTS_CONTROL_ENABLE;
         dcb.fDtrControl = DTR_CONTROL_ENABLE;
 
-        /* ----------------- misc parameters ----- */
-        dcb.fErrorChar = 0;
-        dcb.fBinary = 1;
-        dcb.fNull = 0;
-        dcb.fAbortOnError = 0;
+        /* misc parameters */
+        dcb.fErrorChar = FALSE;
+        dcb.fBinary = TRUE;
+        dcb.fNull = FALSE;
+        dcb.fAbortOnError = FALSE;
         dcb.wReserved = 0;
         dcb.XonLim = 2;
         dcb.XoffLim = 4;
@@ -207,7 +211,7 @@ xMBPortSerialClose( void )
 BOOL
 xMBPortSerialPoll(  )
 {
-    BOOL            bError = FALSE;
+    BOOL            bStatus = TRUE;
     DWORD           dwBytesRead;
     DWORD           dwBytesWritten;
     DWORD           i;
@@ -215,17 +219,14 @@ xMBPortSerialPoll(  )
     while( bRxEnabled )
     {
         /* buffer wrap around. */
-        if( uiRxBufferPos >= RX_BUF_SIZE )
+        if( uiRxBufferPos >= BUF_SIZE )
             uiRxBufferPos = 0;
 
-        if( ReadFile( g_hSerial, &ucBuffer[uiRxBufferPos], RX_BUF_SIZE - uiRxBufferPos, &dwBytesRead, NULL ) )
+        if( ReadFile( g_hSerial, &ucBuffer[uiRxBufferPos], BUF_SIZE - uiRxBufferPos, &dwBytesRead, NULL ) )
         {
             if( dwBytesRead == 0 )
             {
-                /* timeout with no bytes. vMBPortTimerPoll() is called
-                 * at the end of this function to notify the protocol
-                 * stack.
-                 */
+                /* timeout with no bytes. */
                 break;
             }
             else if( dwBytesRead > 0 )
@@ -239,13 +240,12 @@ xMBPortSerialPoll(  )
                     ( void )pxMBFrameCBByteReceived(  );
                 }
             }
-
         }
         else
         {
             ERRORC( L"vMBPortSerialPoll: ReadFile failed: ", GetLastError(  ) );
             /* read has failed - this is an I/O error. */
-            bError = TRUE;
+            bStatus = FALSE;
         }
     }
     if( bTxEnabled )
@@ -260,19 +260,17 @@ xMBPortSerialPoll(  )
             || ( dwBytesWritten != uiTxBufferPos ) )
         {
             ERRORC( L"vMBPortSerialPoll: WriteFile failed: ", GetLastError(  ) );
-            bError = FALSE;
+            bStatus = FALSE;
         }
     }
 
-    /* Check if any timers have expired. */
-    vMBPortTimerPoll(  );
-    return bError;
+    return bStatus;
 }
 
 BOOL
 xMBPortSerialPutByte( CHAR ucByte )
 {
-    assert( uiTxBufferPos < TX_BUF_SIZE );
+    assert( uiTxBufferPos < BUF_SIZE );
     ucBuffer[uiTxBufferPos] = ucByte;
     uiTxBufferPos++;
     return TRUE;
@@ -281,7 +279,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 BOOL
 xMBPortSerialGetByte( CHAR *pucByte )
 {
-    assert( uiRxBufferPos < RX_BUF_SIZE );
+    assert( uiRxBufferPos < BUF_SIZE );
     *pucByte = ucBuffer[uiRxBufferPos];
     uiRxBufferPos++;
     return TRUE;

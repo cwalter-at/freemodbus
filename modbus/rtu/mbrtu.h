@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.h,v 1.5 2006/06/16 00:08:52 wolti Exp $
+ * File: $Id: mbrtu.h,v 1.6 2006/06/17 00:14:09 wolti Exp $
  */
 
 #ifndef _MB_RTU_H
@@ -30,7 +30,8 @@ PR_BEGIN_EXTERN_C
 
 eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
 
-eMBErrorCode    eMBRTUStart( void );
+void            eMBRTUStart( void );
+void            eMBRTUStop( void );
 
 eMBErrorCode    eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
 

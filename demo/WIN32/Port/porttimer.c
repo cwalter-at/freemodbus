@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.1 2006/06/16 00:13:39 wolti Exp $
+ * File: $Id: porttimer.c,v 1.2 2006/06/17 00:16:54 wolti Exp $
  */
 
 /* ----------------------- Platform includes --------------------------------*/
@@ -43,6 +43,12 @@ xMBPortTimersInit( USHORT usTim1Timerout50us )
         dwTimeOut = 1;
 
     return xMBPortSerialSetTimeout( dwTimeOut );
+}
+
+void
+xMBPortTimersClose(  )
+{
+    /* Does not use any hardware resources. */
 }
 
 void

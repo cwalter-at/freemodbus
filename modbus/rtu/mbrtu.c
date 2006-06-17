@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.9 2006/06/16 00:07:20 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.10 2006/06/17 00:14:09 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -58,7 +58,7 @@ typedef enum
 
 /* ----------------------- Static variables ---------------------------------*/
 static volatile eMBSndState eSndState;
-static volatile eMBRcvState eRcvState = STATE_RX_INIT;
+static volatile eMBRcvState eRcvState;
 
 volatile UCHAR  ucRTUBuf[MB_SER_PDU_SIZE_MAX];
 
@@ -111,22 +111,29 @@ eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity ePar
     return eStatus;
 }
 
-eMBErrorCode
+void
 eMBRTUStart( void )
 {
     ENTER_CRITICAL_SECTION(  );
-
     /* Initially the receiver is in the state STATE_RX_INIT. we start
      * the timer and if no character is received within t3.5 we change
      * to STATE_RX_IDLE. This makes sure that we delay startup of the
      * modbus protocol stack until the bus is free.
      */
+    eRcvState = STATE_RX_INIT;
     vMBPortSerialEnable( TRUE, FALSE );
     vMBPortTimersEnable(  );
 
     EXIT_CRITICAL_SECTION(  );
+}
 
-    return MB_ENOERR;
+void
+eMBRTUStop( void )
+{
+    ENTER_CRITICAL_SECTION(  );
+    vMBPortSerialEnable( FALSE, FALSE );
+    vMBPortTimersDisable(  );
+    EXIT_CRITICAL_SECTION(  );
 }
 
 eMBErrorCode

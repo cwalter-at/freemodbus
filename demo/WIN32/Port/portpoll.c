@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portpoll.c,v 1.1 2006/06/16 00:13:39 wolti Exp $
+ * File: $Id: portpoll.c,v 1.2 2006/06/17 00:16:31 wolti Exp $
  */
 
 #include <windows.h>
@@ -36,9 +36,11 @@ enum ThreadState
 };
 
 /* ----------------------- Static variables ---------------------------------*/
-static HANDLE   m_hThread;
-static DWORD    m_dwThreadId;
-static enum ThreadState m_eState;
+static CRITICAL_SECTION hLock;
+static HANDLE   hEvents;
+static HANDLE   hThread;
+static DWORD    dwThreadId;
+static enum ThreadState eState;
 
 /* ----------------------- Static functions ---------------------------------*/
 static enum ThreadState prveMBPortGetThreadState(  );
@@ -50,27 +52,36 @@ SHORT
 xMBPortStartPoolingThread(  )
 {
     eMBErrorCode    eStatus;
+    DWORD           dwWaitResult;
+
+    InitializeCriticalSection( &hLock );
 
     if( prveMBPortGetThreadState(  ) != STOPPED )
     {
-        /* already running */
         eStatus = MB_EILLSTATE;
     }
-    if( eMBEnable(  ) != MB_ENOERR )
+    else if( ( hEvents = CreateEvent( NULL, FALSE, FALSE, NULL ) ) == NULL )
     {
-        /* can't start Modbus protocol stack. */
-        eStatus = MB_EILLSTATE;
+        eStatus = MB_ENORES;
     }
-    if( ( m_hThread = CreateThread( NULL, 0, prvdwMBPortPollingThread, NULL, 0, &m_dwThreadId ) ) == NULL )
+    else if( ( hThread = CreateThread( NULL, 0, prvdwMBPortPollingThread, NULL, 0, &dwThreadId ) ) == NULL )
     {
-        /* can't create modbus polling thread. */
         eStatus = MB_ENORES;
     }
     else
     {
-        TRACEC( L"CFreeModbusThread::start: waiting for protocol stack to become ready\r\n" );
+        TRACEC( _T( "CFreeModbusThread::start: waiting for protocol stack to become ready\r\n" ) );
+
+        dwWaitResult = WaitForSingleObject( hEvents, INFINITE );
+        assert( dwWaitResult == WAIT_OBJECT_0 );
 
         eStatus = MB_ENOERR;
+    }
+
+    if( eStatus != MB_ENOERR )
+    {
+        ( void )CloseHandle( hEvents );
+        DeleteCriticalSection( &hLock );
     }
     return eStatus;
 }
@@ -79,6 +90,7 @@ SHORT
 xMBPortStopPoolingThread(  )
 {
     eMBErrorCode    eStatus;
+    DWORD           dwWaitResult;
 
     if( prveMBPortGetThreadState(  ) != RUNNING )
         eStatus = MB_EILLSTATE;
@@ -86,7 +98,16 @@ xMBPortStopPoolingThread(  )
     {
         prveMBPortSetThreadState( SHUTDOWN );
 
-        TRACEC( L"CFreeModbusThread::start: waiting for protocol to shutdown\r\n" );
+        TRACEC( _T( "CFreeModbusThread::start: waiting for protocol to shutdown\r\n" ) );
+        dwWaitResult = WaitForSingleObject( hEvents, INFINITE );
+        assert( dwWaitResult == WAIT_OBJECT_0 );
+
+        DeleteCriticalSection( &hLock );
+        ( void )CloseHandle( hEvents );
+        hEvents = INVALID_HANDLE_VALUE;
+        hThread = INVALID_HANDLE_VALUE;
+        dwThreadId = -1;
+
         eStatus = MB_ENOERR;
     }
     return eStatus;
@@ -96,40 +117,65 @@ DWORD           WINAPI
 prvdwMBPortPollingThread( LPVOID lpParameter )
 {
     prveMBPortSetThreadState( RUNNING );
-    TRACEC( L"PoolingThread: signaling that main thread is ready.\r\n" );
-    do
-    {
-        xMBPortSerialPoll(  );
-        /* If a frame has been received this is checked in the next call
-         * to eMBPoll.
-         */
-        eMBPoll(  );
-        /* We execute again to let the protocol stack generate the anwser.
-         * This seems not very logical but is needed because there is an
-         * additional step between EV_FRAME_RECEIVED and EV_EXECUTE.
-         */
-        eMBPoll(  );
-    }
-    while( prveMBPortGetThreadState(  ) != SHUTDOWN );
+    TRACEC( _T( "PoolingThread: signaling that main thread is ready.\r\n" ) );
+    SetEvent( hEvents );
 
-    TRACEC( L"PoolingThread: signaling that shutdown is finished.\r\n" );
+    if( eMBEnable(  ) == MB_ENOERR )
+    {
+        do
+        {
+            /* Poll the serial device. The serial device timeouts if no
+             * characters have been received within for t3.5 during an
+             * active transmission or if nothing happens within a specified
+             * amount of time. Both timeouts are configured from the timer
+             * init functions.
+             */
+            if( !xMBPortSerialPoll(  ) )
+                break;
+
+            /* Check if any of the timers have expired. */
+            vMBPortTimerPoll(  );
+
+            /* If a frame has been received this is checked in the next call
+             * to eMBPoll.
+             */
+            if( eMBPoll(  ) != MB_ENOERR )
+                break;
+
+            /* We execute again to let the protocol stack generate the anwser.
+             * This seems not very logical but is needed because there is an
+             * additional step between EV_FRAME_RECEIVED and EV_EXECUTE.
+             */
+            if( eMBPoll(  ) != MB_ENOERR )
+                break;
+        }
+        while( prveMBPortGetThreadState(  ) != SHUTDOWN );
+    }
+    ( void )eMBDisable(  );
+
+    prveMBPortSetThreadState( STOPPED );
+
+    TRACEC( _T( "PoolingThread: signaling that shutdown is finished.\r\n" ) );
+    SetEvent( hEvents );
     return 0;
 }
 
 enum ThreadState
 prveMBPortGetThreadState(  )
 {
-    enum ThreadState eState;
+    enum ThreadState eCurState;
 
-    // variable access not locked. make a copy
-    eState = m_eState;
+    EnterCriticalSection( &hLock );
+    eCurState = eState;
+    LeaveCriticalSection( &hLock );
 
-    return eState;
+    return eCurState;
 }
 
 void
 prveMBPortSetThreadState( enum ThreadState eNewState )
 {
-    // variable access not locked. make a copy
-    m_eState = eNewState;
+    EnterCriticalSection( &hLock );
+    eState = eNewState;
+    LeaveCriticalSection( &hLock );
 }

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.c,v 1.9 2006/06/16 00:08:35 wolti Exp $
+ * File: $Id: mbascii.c,v 1.10 2006/06/17 00:14:08 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -78,7 +78,7 @@ static UCHAR    prvucMBLRC( UCHAR * pucFrame, USHORT usLen );
 
 /* ----------------------- Static variables ---------------------------------*/
 static volatile eMBSndState eSndState;
-static volatile eMBRcvState eRcvState = STATE_RX_IDLE;
+static volatile eMBRcvState eRcvState;
 
 /* We reuse the Modbus RTU buffer because only one buffer is needed and the
  * RTU buffer is bigger. */
@@ -118,16 +118,25 @@ eMBASCIIInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eP
     return eStatus;
 }
 
-eMBErrorCode
+void
 eMBASCIIStart( void )
 {
     ENTER_CRITICAL_SECTION(  );
     vMBPortSerialEnable( TRUE, FALSE );
+    eRcvState = STATE_RX_IDLE;
     EXIT_CRITICAL_SECTION(  );
 
     /* No special startup required for ASCII. */
     ( void )xMBPortEventPost( EV_READY );
-    return MB_ENOERR;
+}
+
+void
+eMBASCIIStop( void )
+{
+    ENTER_CRITICAL_SECTION(  );
+    vMBPortSerialEnable( FALSE, FALSE );
+    vMBPortTimersDisable(  );
+    EXIT_CRITICAL_SECTION(  );
 }
 
 eMBErrorCode

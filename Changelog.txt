@@ -1,3 +1,16 @@
+2006-06-17 (REL_0_6_1) Christian Walter <wolti@sil.at>
+
+ Fixed various bugs with the Win32 port
+
+ Details:
+ - FEATURES: implement shutdown functionality for protocol stack.
+ - FEATURES: protocol stack can be enabled and disabled during runtime.
+ - FEATURES: interface functions now do more error checking. For example
+   if eMBPool is called in an uninitialized state.
+ - FEATURES: extended Win32 demo application to use the new features.
+ - BUG: fixed bug in Win32 demo for ASCII mode.
+
+
 2006-06-16 (REL_0_6) Christian Walter <wolti@sil.at>
 
  The new version includes a new port for the Win32 platform

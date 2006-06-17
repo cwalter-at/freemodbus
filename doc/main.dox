@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: main.dox,v 1.3 2006/05/14 22:01:02 wolti Exp $
+ * File: $Id: main.dox,v 1.5 2006/06/17 00:15:03 wolti Exp $
  */
 
 /*! \mainpage FreeModbus
@@ -37,6 +37,12 @@ RTU/ASCII transmission modes defined in the
 
 \par AVR devices:
 - ATMega168 with WinAVR. See AVR/demo.c for an example.
+
+\par Coldfire devices:
+- MCF5235 with GCC. See MCF5235/demo.c for an example.
+
+\par Win32:
+- A Win32 Port
 */
 
 /*!
@@ -49,4 +55,8 @@ RTU/ASCII transmission modes defined in the
 
 /*!
  \example MCF5235/demo.c
+ */
+
+/*!
+ \example WIN32/freemodbus.cpp
  */

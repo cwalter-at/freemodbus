@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.1 2006/06/16 00:13:39 wolti Exp $
+ * File: $Id: port.h,v 1.2 2006/06/17 00:18:19 wolti Exp $
  */
 
 #ifndef _PORT_H
@@ -37,6 +37,7 @@ PR_BEGIN_EXTERN_C
 #endif
 #define ENTER_CRITICAL_SECTION( )
 #define EXIT_CRITICAL_SECTION( )
+#define MB_PORT_HAS_CLOSE   1
 #ifndef TRUE
 #define TRUE            1
 #endif
@@ -47,13 +48,12 @@ PR_BEGIN_EXTERN_C
 void            TRACEC( const TCHAR * pcFmt, ... );
 void            ERRORC( const TCHAR * pcFmt, DWORD dwError, ... );
 #else
-#define TRACEC( pcFmt, ... )
-#define ERRORC( pcFmt, dwError, ... )
+#define         TRACEC( pcFmt, ... )
+#define         ERRORC( pcFmt, dwError, ... )
 #endif
 void            vMBPortTimerPoll(  );
 BOOL            xMBPortSerialPoll(  );
 BOOL            xMBPortSerialSetTimeout( DWORD dwTimeoutMs );
-
 SHORT           xMBPortStartPoolingThread(  );
 SHORT           xMBPortStopPoolingThread(  );
 

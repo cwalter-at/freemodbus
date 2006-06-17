@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbframe.h,v 1.5 2006/06/16 00:08:52 wolti Exp $
+ * File: $Id: mbframe.h,v 1.6 2006/06/17 00:11:18 wolti Exp $
  */
 
 #ifndef _MB_FRAME_H
@@ -58,7 +58,8 @@ PR_BEGIN_EXTERN_C
 #define MB_PDU_DATA_OFF     1   /*!< Offset for response data in PDU. */
 
 /* ----------------------- Type definitions ---------------------------------*/
-typedef         eMBErrorCode( *peMBFrameStart ) ( void );
+typedef void    ( *peMBFrameStart ) ( void );
+typedef void    ( *peMBFrameStop ) ( void );
 
 typedef         eMBErrorCode( *peMBFrameReceive ) ( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
 
