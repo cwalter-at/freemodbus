@@ -1,5 +1,5 @@
 /*
- * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
+ * FreeModbus Library: BSD Socket Library Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,11 +16,19 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.h,v 1.7 2006/06/18 09:57:03 wolti Exp $
+ * File: $Id: port.h,v 1.2 2006/06/26 19:24:07 wolti Exp $
  */
 
-#ifndef _MB_RTU_H
-#define _MB_RTU_H
+#ifndef _PORT_H
+#define _PORT_H
+
+#include <windows.h>
+#include <tchar.h>
+#include <assert.h>
+
+#define INLINE
+#define PR_BEGIN_EXTERN_C           extern "C" {
+#define PR_END_EXTERN_C             }
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */
@@ -28,15 +36,29 @@ PR_BEGIN_EXTERN_C
 /* *INDENT-ON* */
 #endif
 
-eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
-void            eMBRTUStart( void );
-void            eMBRTUStop( void );
-eMBErrorCode    eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
-eMBErrorCode    eMBRTUSend( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
-BOOL            xMBRTUReceiveFSM( void );
-BOOL            xMBRTUTransmitFSM( void );
-BOOL            xMBRTUTimerT15Expired( void );
-BOOL            xMBRTUTimerT35Expired( void );
+/* ----------------------- Defines ------------------------------------------*/
+#define ENTER_CRITICAL_SECTION( )
+#define EXIT_CRITICAL_SECTION( )
+#define MB_PORT_HAS_CLOSE   1
+#ifndef TRUE
+#define TRUE            1
+#endif
+#ifndef FALSE
+#define FALSE           0
+#endif
+
+/* ----------------------- Type definitions ---------------------------------*/
+typedef enum
+{
+    MB_LOG_DEBUG,
+    MB_LOG_INFO,
+    MB_LOG_WARN,
+    MB_LOG_ERROR
+} eMBPortLogLevel;
+
+/* ----------------------- Function prototypes ------------------------------*/
+
+void            vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt, ... );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */

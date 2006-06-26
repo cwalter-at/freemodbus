@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.11 2006/06/17 00:25:55 wolti Exp $
+ * File: $Id: mbport.h,v 1.14 2006/06/26 19:26:50 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -62,6 +62,8 @@ BOOL            xMBPortEventGet(  /*@out@ */ eMBEventType * eEvent );
 
 BOOL            xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity );
 
+void            vMBPortClose( void );
+
 void            xMBPortSerialClose( void );
 
 void            vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable );
@@ -98,6 +100,17 @@ extern          BOOL( *pxMBFrameCBByteReceived ) ( void );
 extern          BOOL( *pxMBFrameCBTransmitterEmpty ) ( void );
 
 extern          BOOL( *pxMBPortCBTimerExpired ) ( void );
+
+/* ----------------------- TCP port functions -------------------------------*/
+BOOL            xMBTCPPortInit( USHORT usTCPPort );
+
+void            vMBTCPPortClose( void );
+
+void            vMBTCPPortDisable( void );
+
+BOOL            xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength );
+
+BOOL            xMBTCPPortSendResponse( const UCHAR * pucMBTCPFrame, USHORT usTCPLength );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */

@@ -16,11 +16,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.h,v 1.7 2006/06/18 09:57:03 wolti Exp $
+ * File: $Id: mbtcp.h,v 1.1 2006/06/25 00:06:07 wolti Exp $
  */
 
-#ifndef _MB_RTU_H
-#define _MB_RTU_H
+#ifndef _MB_TCP_H
+#define _MB_TCP_H
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */
@@ -28,15 +28,15 @@ PR_BEGIN_EXTERN_C
 /* *INDENT-ON* */
 #endif
 
-eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
-void            eMBRTUStart( void );
-void            eMBRTUStop( void );
-eMBErrorCode    eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
-eMBErrorCode    eMBRTUSend( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
-BOOL            xMBRTUReceiveFSM( void );
-BOOL            xMBRTUTransmitFSM( void );
-BOOL            xMBRTUTimerT15Expired( void );
-BOOL            xMBRTUTimerT35Expired( void );
+/* ----------------------- Defines ------------------------------------------*/
+#define MB_TCP_PSEUDO_ADDRESS   255
+
+/* ----------------------- Function prototypes ------------------------------*/
+eMBErrorCode    eMBTCPDoInit( USHORT ucTCPPort );
+void            eMBTCPStart( void );
+void            eMBTCPStop( void );
+eMBErrorCode    eMBTCPReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
+eMBErrorCode    eMBTCPSend( UCHAR _unused, const UCHAR * pucFrame, USHORT usLength );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */

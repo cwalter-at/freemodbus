@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbproto.h,v 1.9 2006/06/16 00:08:52 wolti Exp $
+ * File: $Id: mbproto.h,v 1.10 2006/06/18 09:54:53 wolti Exp $
  */
 
 #ifndef _MB_PROTO_H

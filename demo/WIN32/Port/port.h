@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.2 2006/06/17 00:18:19 wolti Exp $
+ * File: $Id: port.h,v 1.5 2006/06/26 19:25:17 wolti Exp $
  */
 
 #ifndef _PORT_H
@@ -35,6 +35,8 @@
 PR_BEGIN_EXTERN_C
 /* *INDENT-ON* */
 #endif
+
+/* ----------------------- Defines ------------------------------------------*/
 #define ENTER_CRITICAL_SECTION( )
 #define EXIT_CRITICAL_SECTION( )
 #define MB_PORT_HAS_CLOSE   1
@@ -44,18 +46,22 @@ PR_BEGIN_EXTERN_C
 #ifndef FALSE
 #define FALSE           0
 #endif
-#ifdef _DEBUG
-void            TRACEC( const TCHAR * pcFmt, ... );
-void            ERRORC( const TCHAR * pcFmt, DWORD dwError, ... );
-#else
-#define         TRACEC( pcFmt, ... )
-#define         ERRORC( pcFmt, dwError, ... )
-#endif
+
+/* ----------------------- Type definitions ---------------------------------*/
+typedef enum
+{
+    MB_LOG_DEBUG,
+    MB_LOG_INFO,
+    MB_LOG_WARN,
+    MB_LOG_ERROR
+} eMBPortLogLevel;
+
+/* ----------------------- Function prototypes ------------------------------*/
+
+void            vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt, ... );
 void            vMBPortTimerPoll(  );
 BOOL            xMBPortSerialPoll(  );
 BOOL            xMBPortSerialSetTimeout( DWORD dwTimeoutMs );
-SHORT           xMBPortStartPoolingThread(  );
-SHORT           xMBPortStopPoolingThread(  );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="freemodbus"
-	ProjectGUID="{4828281A-F74A-4A4B-A259-3B0269488E0A}"
-	RootNamespace="freemodbus"
+	Name="demo"
+	ProjectGUID="{1F3409AF-6F29-4B50-B698-BEC1E000DC2B}"
+	RootNamespace="demo"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Port&quot;;&quot;$(SolutionDir)\..\..\modbus\include&quot;;&quot;$(SolutionDir)\..\..\modbus\rtu&quot;;&quot;$(SolutionDir)\..\..\modbus\ascii&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Port&quot;;&quot;$(SolutionDir)\..\..\modbus\tcp&quot;;&quot;$(SolutionDir)\..\..\modbus\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,8 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				ShowProgress="0"
+				AdditionalDependencies="WS2_32.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -72,8 +73,6 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				EmbedManifest="true"
-				UseFAT32Workaround="true"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -119,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Port&quot;;&quot;$(SolutionDir)\..\..\modbus\include&quot;;&quot;$(SolutionDir)\..\..\modbus\rtu&quot;;&quot;$(SolutionDir)\..\..\modbus\ascii&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Port&quot;;&quot;$(SolutionDir)\..\..\modbus\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -180,28 +179,12 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\freemodbus.cpp"
+				RelativePath=".\demo.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -232,25 +215,53 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Port\portpoll.c"
+				RelativePath=".\Port\portother.c"
 				>
 			</File>
 			<File
-				RelativePath=".\Port\portserial.c"
-				>
-			</File>
-			<File
-				RelativePath=".\Port\porttimer.c"
+				RelativePath=".\Port\porttcp.c"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="Modbus"
+			Name="modbus"
 			>
 			<File
 				RelativePath="..\..\modbus\mb.c"
 				>
 			</File>
+			<Filter
+				Name="include"
+				>
+				<File
+					RelativePath="..\..\modbus\include\mb.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbconfig.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbframe.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbfunc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbport.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbproto.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\modbus\include\mbutils.h"
+					>
+				</File>
+			</Filter>
 			<Filter
 				Name="functions"
 				>
@@ -284,66 +295,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="rtu"
+				Name="tcp"
 				>
 				<File
-					RelativePath="..\..\modbus\rtu\mbcrc.c"
+					RelativePath="..\..\modbus\tcp\mbtcp.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\modbus\rtu\mbcrc.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\rtu\mbrtu.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\rtu\mbrtu.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="ascii"
-				>
-				<File
-					RelativePath="..\..\modbus\ascii\mbascii.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\ascii\mbascii.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="include"
-				>
-				<File
-					RelativePath="..\..\modbus\include\mb.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbconfig.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbframe.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbfunc.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbport.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbproto.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\modbus\include\mbutils.h"
+					RelativePath="..\..\modbus\tcp\mbtcp.h"
 					>
 				</File>
 			</Filter>

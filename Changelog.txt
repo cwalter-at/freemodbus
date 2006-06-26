@@ -1,3 +1,36 @@
+2006-06-26 (REL_0_7) Christian Walter <wolti@sil.at>
+
+ Changed the WIN32 serial port to better fit into the design.
+
+ Details:
+ - REFACTOR: Design of the WIN32 serial port changed. The polling
+   function for the serial device are now called from the event loop.
+ - REFACTOR: Debugging uses the same interface as the WIN32/TCP port.
+
+
+2006-06-25 (REL_0_6_3) Christian Walter <wolti@sil.at>
+
+ Initial work on a Modbus/TCP port is available. The port includes an
+ example for a Win32 port which uses the Winsock API.
+
+ Details:
+ - FEATURES: added required functions to core protocol stack to support
+   a Modbus/TCP implementation.
+ - FEATURES: added a Win32 port for the Modbus/TCP core. The port is
+   currently limited to one concurrent client.
+ - REFACTOR: The implementation of eMBClose to shutdown the protocol
+   stack was changed to unify it with the new Modbus/TCP code.
+
+
+2006-06-18 (REL_0_6_2) Christian Walter <wolti@sil.at>
+
+ Details:
+ - WHITESPACE: while working on the Win32 port some line feeds got
+   wrong. Also some source files used tabs instead of spaces.
+ - REFACTOR: prototypes for xMBUtilSetBits and xMBUtilGetBits fixed.
+   usNBits should be ucNBits by convention.
+
+
 2006-06-17 (REL_0_6_1) Christian Walter <wolti@sil.at>
 
  Fixed various bugs with the Win32 port

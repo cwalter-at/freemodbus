@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.11 2006/06/17 00:12:32 wolti Exp $
+ * File: $Id: mb.h,v 1.13 2006/06/25 00:03:09 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -58,6 +58,13 @@ PR_BEGIN_EXTERN_C
  * \endcode
  */
 
+/* ----------------------- Defines ------------------------------------------*/
+
+/*! \ingroup modbus
+ * \brief Use the default Modbus TCP port (502)
+ */
+#define MB_TCP_PORT_USE_DEFAULT 0
+
 /* ----------------------- Type definitions ---------------------------------*/
 
 /*! \ingroup modbus
@@ -70,7 +77,8 @@ PR_BEGIN_EXTERN_C
 typedef enum
 {
     MB_RTU,                     /*!< RTU transmission mode. */
-    MB_ASCII                    /*!< ASCII transmission mode. */
+    MB_ASCII,                   /*!< ASCII transmission mode. */
+    MB_TCP                      /*!< TCP mode. */
 } eMBMode;
 
 /*! \ingroup modbus
@@ -133,6 +141,22 @@ typedef enum
  *    - eMBErrorCode::MB_EPORTERR IF the porting layer returned an error.
  */
 eMBErrorCode    eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
+
+/*! \ingroup modbus
+ * \brief Initialize the Modbus protocol stack for Modbus TCP.
+ *
+ * This function initializes the Modbus TCP Module. Please note that
+ * frame processing is still disabled until eMBEnable( ) is called.
+ *
+ * \param usTCPPort The TCP port to listen on.
+ * \return If the protocol stack has been initialized correctly the function
+ *   returns eMBErrorCode::MB_ENOERR. Otherwise one of the following error
+ *   codes is returned:
+ *    - eMBErrorCode::MB_EINVAL If the slave address was not valid. Valid
+ *        slave addresses are in the range 1 - 247.
+ *    - eMBErrorCode::MB_EPORTERR IF the porting layer returned an error.
+ */
+eMBErrorCode    eMBTCPInit( USHORT usTCPPort );
 
 /*! \ingroup modbus
  * \brief Release resources used by the protocol stack.

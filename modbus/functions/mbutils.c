@@ -33,7 +33,7 @@
 
 /* ----------------------- Start implementation -----------------------------*/
 void
-xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucValue )
+xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR ucNBits, UCHAR ucValue )
 {
     USHORT          usWordBuf;
     USHORT          usMask;
@@ -41,7 +41,7 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucVal
     USHORT          usNPreBits;
     USHORT          usValue = ucValue;
 
-    assert( usNBits <= 8 );
+    assert( ucNBits <= 8 );
     assert( ( size_t )BITS_UCHAR == sizeof( UCHAR ) * 8 );
 
     /* Calculate byte offset for first byte containing the bit values starting
@@ -55,7 +55,7 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucVal
     usValue <<= usNPreBits;
 
     /* Prepare a mask for setting the new bits. */
-    usMask = ( USHORT ) ( ( 1 << ( USHORT ) usNBits ) - 1 );
+    usMask = ( USHORT ) ( ( 1 << ( USHORT ) ucNBits ) - 1 );
     usMask <<= usBitOffset - usByteOffset * BITS_UCHAR;
 
     /* copy bits into temporary storage. */
@@ -71,7 +71,7 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits, UCHAR ucVal
 }
 
 UCHAR
-xMBUtilGetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits )
+xMBUtilGetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR ucNBits )
 {
     USHORT          usWordBuf;
     USHORT          usMask;
@@ -86,7 +86,7 @@ xMBUtilGetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR usNBits )
     usNPreBits = ( USHORT ) ( usBitOffset - usByteOffset * BITS_UCHAR );
 
     /* Prepare a mask for setting the new bits. */
-    usMask = ( USHORT ) ( ( 1 << ( USHORT ) usNBits ) - 1 );
+    usMask = ( USHORT ) ( ( 1 << ( USHORT ) ucNBits ) - 1 );
 
     /* copy bits into temporary storage. */
     usWordBuf = ucByteBuf[usByteOffset];

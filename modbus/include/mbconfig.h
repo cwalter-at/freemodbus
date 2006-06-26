@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbconfig.h,v 1.9 2006/06/16 00:08:52 wolti Exp $
+ * File: $Id: mbconfig.h,v 1.12 2006/06/26 18:52:49 wolti Exp $
  */
 
 #ifndef _MB_CONFIG_H
@@ -43,8 +43,14 @@ PR_BEGIN_EXTERN_C
  *  @{
  */
 
-/*! \brief If Modbus ASCII support is required. */
+/*! \brief If Modbus ASCII support is enabled. */
 #define MB_ASCII_ENABLED                        (  1 )
+
+/*! \brief If Modbus RTU support is enabled. */
+#define MB_RTU_ENABLED                          (  1 )
+
+/*! \brief If Modbus TCP support is enabled. */
+#define MB_TCP_ENABLED                          (  0 )
 
 /*! \brief The character timeout value for Modbus ASCII.
  *

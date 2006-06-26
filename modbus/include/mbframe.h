@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbframe.h,v 1.6 2006/06/17 00:11:18 wolti Exp $
+ * File: $Id: mbframe.h,v 1.8 2006/06/25 00:12:28 wolti Exp $
  */
 
 #ifndef _MB_FRAME_H
@@ -29,7 +29,9 @@ PR_BEGIN_EXTERN_C
 #endif
 
 /*!
- * Constants which defines the format of a modbus frame.
+ * Constants which defines the format of a modbus frame. The example is
+ * shown for a Modbus RTU/ASCII frame. Note that the Modbus PDU is not
+ * dependent on the underlying transport.
  *
  * <code>
  * <------------------------ MODBUS SERIAL LINE PDU (1) ------------------->
@@ -57,16 +59,16 @@ PR_BEGIN_EXTERN_C
 #define MB_PDU_FUNC_OFF     0   /*!< Offset of function code in PDU. */
 #define MB_PDU_DATA_OFF     1   /*!< Offset for response data in PDU. */
 
-/* ----------------------- Type definitions ---------------------------------*/
-typedef void    ( *peMBFrameStart ) ( void );
-typedef void    ( *peMBFrameStop ) ( void );
+/* ----------------------- Prototypes  0-------------------------------------*/
+typedef void    ( *pvMBFrameStart ) ( void );
+
+typedef void    ( *pvMBFrameStop ) ( void );
 
 typedef         eMBErrorCode( *peMBFrameReceive ) ( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
 
 typedef         eMBErrorCode( *peMBFrameSend ) ( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
 
-typedef         eMBErrorCode( *peMBFrameInit ) ( UCHAR ucPort, UCHAR slaveAddress, ULONG ulBaudRate,
-                                                 eMBParity eParity );
+typedef void    ( *pvMBFrameClose ) ( void );
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */

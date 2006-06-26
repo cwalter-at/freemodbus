@@ -1,5 +1,5 @@
 /*
- * FreeModbus Library: Win32 Demo Application
+ * FreeModbus Library: Win32TCP Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,15 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: stdafx.h,v 1.3 2006/06/18 13:03:54 wolti Exp $
+ * File: $Id: stdafx.cpp,v 1.1 2006/06/25 00:20:19 wolti Exp $
  */
 
-#pragma once
-
-
-#define WIN32_LEAN_AND_MEAN
-#include <stdio.h>
-#include <tchar.h>
-#include <stdlib.h>
-
-#include <windows.h>
+#include "stdafx.h"

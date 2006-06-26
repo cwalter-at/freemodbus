@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.2 2006/06/17 00:17:45 wolti Exp $
+ * File: $Id: portserial.c,v 1.5 2006/06/26 19:33:16 wolti Exp $
  */
 
 #include <windows.h>
@@ -43,6 +43,9 @@ static BOOL     bTxEnabled;
 static UCHAR    ucBuffer[BUF_SIZE];
 static INT      uiRxBufferPos;
 static INT      uiTxBufferPos;
+
+/* ----------------------- Function prototypes ------------------------------*/
+LPTSTR          Error2String( DWORD dwError );
 
 /* ----------------------- Begin implementation -----------------------------*/
 void
@@ -147,21 +150,22 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 
         if( g_hSerial == INVALID_HANDLE_VALUE )
         {
-            /* can't open serial device. */
-            ERRORC( L"xMBPortSerialInit: can't open %s: ", GetLastError(  ), szDevice );
+            vMBPortLog( MB_LOG_ERROR, _T( "SER-INIT" ), _T( "Can't open serial port %s: %s" ), szDevice,
+                        Error2String( GetLastError(  ) ) );
             bStatus = FALSE;
         }
         else if( !SetCommState( g_hSerial, &dcb ) )
         {
-            ERRORC( L"xMBPortSerialInit: can't configure device %s: ", GetLastError(  ), szDevice );
+            vMBPortLog( MB_LOG_ERROR, _T( "SER-INIT" ), _T( "Can't set settings for serial device %s: %s" ), szDevice,
+                        Error2String( GetLastError(  ) ) );
             bStatus = FALSE;
-            /* can set communication device state. */
         }
         else if( !SetCommMask( g_hSerial, 0 ) )
         {
-            ERRORC( L"xMBPortSerialInit: can't set comm mask on device %s: ", GetLastError(  ), szDevice );
+            vMBPortLog( MB_LOG_ERROR, _T( "SER-INIT" ),
+                        _T( "Can't set communication event mask for serial device %s: %s" ), szDevice,
+                        Error2String( GetLastError(  ) ) );
             bStatus = FALSE;
-            /* can't disable all communication events. */
         }
 
         else
@@ -190,9 +194,9 @@ xMBPortSerialSetTimeout( DWORD dwTimeoutMs )
 
     if( !SetCommTimeouts( g_hSerial, &cto ) )
     {
-        ERRORC( L"xMBPortSerialInit: can't set comm timeouts : ", GetLastError(  ) );
+        vMBPortLog( MB_LOG_ERROR, _T( "SER-INIT" ), _T( "Can't set timeouts for serial device: %s" ),
+                    Error2String( GetLastError(  ) ) );
         bStatus = FALSE;
-        /* can't set timeouts. */
     }
     else
     {
@@ -203,7 +207,7 @@ xMBPortSerialSetTimeout( DWORD dwTimeoutMs )
 }
 
 void
-xMBPortSerialClose( void )
+vMBPortClose( void )
 {
     ( void )CloseHandle( g_hSerial );
 }
@@ -231,9 +235,7 @@ xMBPortSerialPoll(  )
             }
             else if( dwBytesRead > 0 )
             {
-                /* timeout occured and some characters are received. */
-                TRACEC( L"vMBPortSerialPoll: t3.5 timeout with characters\r\n" );
-
+                vMBPortLog( MB_LOG_DEBUG, _T( "SER-POLL" ), _T( "detected end of frame (t3.5 expired.)\r\n" ) );
                 for( i = 0; i < dwBytesRead; i++ )
                 {
                     /* Call the modbus stack and let him fill the buffers. */
@@ -243,8 +245,8 @@ xMBPortSerialPoll(  )
         }
         else
         {
-            ERRORC( L"vMBPortSerialPoll: ReadFile failed: ", GetLastError(  ) );
-            /* read has failed - this is an I/O error. */
+            vMBPortLog( MB_LOG_ERROR, _T( "SER-POLL" ), _T( "I/O error on serial device: %s" ),
+                        Error2String( GetLastError(  ) ) );
             bStatus = FALSE;
         }
     }
@@ -259,7 +261,8 @@ xMBPortSerialPoll(  )
         if( !WriteFile( g_hSerial, &ucBuffer[0], uiTxBufferPos, &dwBytesWritten, NULL )
             || ( dwBytesWritten != uiTxBufferPos ) )
         {
-            ERRORC( L"vMBPortSerialPoll: WriteFile failed: ", GetLastError(  ) );
+            vMBPortLog( MB_LOG_ERROR, _T( "SER-POLL" ), _T( "I/O error on serial device: %s" ),
+                        Error2String( GetLastError(  ) ) );
             bStatus = FALSE;
         }
     }
@@ -284,53 +287,3 @@ xMBPortSerialGetByte( CHAR *pucByte )
     uiRxBufferPos++;
     return TRUE;
 }
-
-#ifdef _DEBUG
-void
-TRACEC( const TCHAR *pcFmt, ... )
-{
-    TCHAR           szUserBuf[160];
-    int             iBufLen = sizeof( szUserBuf ) / sizeof( szUserBuf[0] );
-    int             iBufWritten;
-    va_list         args;
-
-    assert( pcFmt != NULL );
-    va_start( args, pcFmt );
-
-    iBufWritten = _vstprintf_s( szUserBuf, iBufLen, pcFmt, args );
-    if( iBufWritten != -1 )
-    {
-        OutputDebugString( szUserBuf );
-    }
-
-    va_end( args );
-}
-
-void
-ERRORC( const TCHAR *pcFmt, DWORD dwError, ... )
-{
-
-    TCHAR           szUserBuf[160];
-    LPTSTR          lpMsgBuf;
-    int             iBufLen = sizeof( szUserBuf ) / sizeof( szUserBuf[0] );
-    int             iBufWritten;
-    va_list         args;
-
-    assert( pcFmt != NULL );
-    va_start( args, dwError );
-
-    iBufWritten = _vstprintf_s( szUserBuf, iBufLen, pcFmt, args );
-    if( iBufWritten != -1 )
-    {
-        iBufLen -= iBufWritten;
-        ( void )FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwError,
-                               MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), ( LPTSTR ) & lpMsgBuf, 0, NULL );
-        _stprintf_s( &szUserBuf[iBufWritten], iBufLen, L"%s\r\n", lpMsgBuf );
-        LocalFree( lpMsgBuf );
-        OutputDebugString( szUserBuf );
-    }
-
-    va_end( args );
-}
-
-#endif

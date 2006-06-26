@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.10 2006/06/17 00:14:09 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.11 2006/06/18 09:57:03 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
