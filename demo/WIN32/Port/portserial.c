@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.5 2006/06/26 19:33:16 wolti Exp $
+ * File: $Id: portserial.c,v 1.6 2006/07/21 10:59:14 wolti Exp $
  */
 
 #include <windows.h>
@@ -89,7 +89,7 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     dcb.DCBlength = sizeof( dcb );
     dcb.BaudRate = ulBaudRate;
 
-    _stprintf_s( szDevice, 8, L"COM%d", ucPort );
+    _stprintf_s( szDevice, 8, _T( "COM%d" ), ucPort );
 
     switch ( eParity )
     {

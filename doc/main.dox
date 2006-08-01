@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: main.dox,v 1.6 2006/06/26 19:26:01 wolti Exp $
+ * File: $Id: main.dox,v 1.7 2006/08/01 20:58:49 wolti Exp $
  */
 
 /*! \mainpage FreeModbus
@@ -39,10 +39,13 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 - MCF5235 with GCC. See MCF5235/demo.c for an example.
 
 \par Win32:
-- A Win32 Modbus RTU/ASCII Port
+- A Win32 Modbus RTU/ASCII Port.
 
 \par Win32:
-- A Win32 Modbus/TCP Port
+- A Win32 Modbus/TCP Port.
+
+\par Linux:
+- A Linux (uCLinux or other distributions) Modbus RTU/ASCII Port.
 */
 
 /*!
@@ -63,4 +66,8 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 
 /*!
  \example WIN32TCP/demo.cpp
+ */
+
+/*!
+ \example LINUX/demo.c
  */
