@@ -1,3 +1,13 @@
+2006-08-22 (REL_0_8_1) Christian Walter <wolti@sil.at>
+
+ Added porting guide
+
+ Details:
+ - DOC: Added a new porting guide to the documentation.
+ - EXAMPLE: Added a empty example for new ports to the project as a
+   starting point.
+
+
 2006-08-01 (REL_0_8) Christian Walter <wolti@sil.at>
 
  Added Linux RTU/ASCII port.
