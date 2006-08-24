@@ -1,3 +1,13 @@
+2006-08-22 (REL_0_8_2) Christian Walter <wolti@sil.at>
+
+ Fixed bug with Modbus ASCII support
+
+ Details:
+ - BUG: During the last upgrade an error was introduced in the
+   initialization code of Modbus ASCII and therefore ASCII support was
+   broken. The bug is fixed now and was tested with the Win32 port.
+
+
 2006-08-22 (REL_0_8_1) Christian Walter <wolti@sil.at>
 
  Added porting guide

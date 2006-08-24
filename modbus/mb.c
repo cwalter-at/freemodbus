@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.15 2006/06/26 18:54:28 wolti Exp $
+ * File: $Id: mb.c,v 1.16 2006/08/24 11:19:03 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -150,11 +150,12 @@ eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eM
         peMBFrameSendCur = eMBASCIISend;
         peMBFrameReceiveCur = eMBASCIIReceive;
         pvMBFrameCloseCur = MB_PORT_HAS_CLOSE ? vMBPortClose : NULL;
-        pxMBFrameCBByteReceived = xMBRTUReceiveFSM;
-        pxMBFrameCBTransmitterEmpty = xMBRTUTransmitFSM;
-        pxMBPortCBTimerExpired = xMBRTUTimerT35Expired;
+        pxMBFrameCBByteReceived = xMBASCIIReceiveFSM;
+        pxMBFrameCBTransmitterEmpty = xMBASCIITransmitFSM;
+        pxMBPortCBTimerExpired = xMBASCIITimerT1SExpired;
 
         eStatus = eMBASCIIInit( ucMBAddress, ucPort, ulBaudRate, eParity );
+        break;
 #endif
     default:
         eStatus = MB_EINVAL;
