@@ -1,9 +1,12 @@
 #
-# LWOS - Makefile
+# FreeModbus MCF5235 port- Makefile
 #
-# Copyright (c) 2006 Christian Walter, © s::can, Vienna 2006.
+# Copyright (c) 2006 Christian Walter, Vienna 2006.
+#
+# $Id: Makefile,v 1.2 2006/08/30 23:18:06 wolti Exp $
 #
 # ---------------------------------------------------------------------------
+
 BASE        = /opt/gcc-m68k/bin
 CC	        = $(BASE)/m68k-elf-gcc
 CXX	        = $(BASE)/m68k-elf-g++

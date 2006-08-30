@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.16 2006/08/24 11:19:03 wolti Exp $
+ * File: $Id: mb.c,v 1.17 2006/08/30 23:18:07 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -183,14 +183,22 @@ eMBTCPInit( USHORT ucTCPPort )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
-    if( ( eStatus = eMBTCPDoInit( ucTCPPort ) ) == MB_ENOERR )
+    if( ( eStatus = eMBTCPDoInit( ucTCPPort ) ) != MB_ENOERR )
+    {
+        eMBState = STATE_DISABLED;
+    }
+    else if( !xMBPortEventInit(  ) )
+    {
+        /* Port dependent event module initalization failed. */
+        eStatus = MB_EPORTERR;
+    }
+    else
     {
         pvMBFrameStartCur = eMBTCPStart;
         pvMBFrameStopCur = eMBTCPStop;
         peMBFrameReceiveCur = eMBTCPReceive;
         peMBFrameSendCur = eMBTCPSend;
         pvMBFrameCloseCur = MB_PORT_HAS_CLOSE ? vMBTCPPortClose : NULL;
-
         ucMBAddress = MB_TCP_PSEUDO_ADDRESS;
         eMBCurrentMode = MB_TCP;
         eMBState = STATE_DISABLED;
