@@ -1,3 +1,15 @@
+2006-09-04 (REL_1_0_1) Christian Walter <wolti@sil.at>
+
+ Fixed bug in serial driver for STR71x target when the ring buffer
+ overflows.
+
+ Details:
+ - BUG (STR71XTCP): Under high load the ring buffer in the serial driver
+   functions might overflow. There was an error with counting the number
+   of received characters which corrupted received frames. Now receiver
+   correctly recovers in case of dropped bytes.
+
+
 2006-09-04 (REL_1_0) Christian Walter <wolti@sil.at>
 
  Added support for ATmega8, ATmega16, ATmega32, ATmega169 and RS485

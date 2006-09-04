@@ -49,12 +49,12 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" >
-   <Watchpoint evalMode="2" linenumber="173" numelements="4" evalType="0" radix="-1" name="usRegInputBuf" expression="usRegInputBuf" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" />
-   <Watchpoint evalMode="1" linenumber="97" evalType="1" radix="-1" name="tasks" expression="tasks" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
-   <Watchpoint evalMode="1" linenumber="464" evalType="1" radix="16" name="dev" expression="dev" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
-   <Watchpoint evalMode="2" linenumber="249" numelements="2" evalType="0" radix="-1" name="devices" expression="devices" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
-   <Watchpoint evalMode="0" linenumber="97" evalType="1" radix="-1" name="guard2" expression="guard2" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
    <Watchpoint evalMode="0" linenumber="96" evalType="1" radix="-1" name="guard1" expression="guard1" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="0" linenumber="97" evalType="1" radix="-1" name="guard2" expression="guard2" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="2" linenumber="249" numelements="2" evalType="0" radix="-1" name="devices" expression="devices" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
+   <Watchpoint evalMode="1" linenumber="464" evalType="1" radix="16" name="dev" expression="dev" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
+   <Watchpoint evalMode="1" linenumber="97" evalType="1" radix="-1" name="tasks" expression="tasks" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="2" linenumber="173" numelements="4" evalType="0" radix="-1" name="usRegInputBuf" expression="usRegInputBuf" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" />
   </Watches>
  </Watch1>
  <Watch2>

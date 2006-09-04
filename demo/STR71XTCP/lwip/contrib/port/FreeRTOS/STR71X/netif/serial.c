@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: serial.c,v 1.3 2006/09/04 14:39:20 wolti Exp $
+ * File: $Id: serial.c,v 1.4 2006/09/04 20:38:50 wolti Exp $
  */
 
 
@@ -533,12 +533,18 @@ sio_serial_isr( UART_TypeDef *UARTx, u8_t *need_ctx_switch )
 
                 /* Increment the receiver buffer counter. Check for a buffer
                  * overrun. In that case we have overwritten a old character.
-                 * Therefore we have to advance the read position.
+                 * Therefore we have to advance the read position. Note that
+                 * in this error case we must not increment the read counter
+                 * because an old character was lost.
                  */
-                dev->rx_buf_cnt++;
                 if( dev->rx_buf_cnt >= DEFAULT_RX_BUFSIZE )
                 {
+                    /* LWIP_ASSERT( "sio_serial_isr: receiver buffer overflow", 0 ); */
                     dev->rx_buf_rdpos = ( dev->rx_buf_rdpos + 1 ) % DEFAULT_RX_BUFSIZE;
+                }
+                else
+                {
+                    dev->rx_buf_cnt++;
                 }
 
                 /* Get the new status from the UART. */
