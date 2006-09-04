@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.3 2006/05/14 21:55:01 wolti Exp $
+ * File: $Id: porttimer.c,v 1.4 2006/09/03 11:53:10 wolti Exp $
  */
 
 /* ----------------------- AVR includes -------------------------------------*/
@@ -76,7 +76,7 @@ vMBPortTimersDisable(  )
     /* Disable the timer. */
     TCCR1B &= ~( _BV( CS12 ) | _BV( CS10 ) );
     /* Disable the output compare interrupts for channel A/B. */
-    TIMSK1 &= _BV( OCIE1A );
+    TIMSK1 &= ~( _BV( OCIE1A ) );
     /* Clear output compare flags for channel A/B. */
     TIFR1 |= _BV( OCF1A );
 }

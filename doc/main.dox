@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: main.dox,v 1.8 2006/08/30 23:18:07 wolti Exp $
+ * File: $Id: main.dox,v 1.9 2006/09/04 19:37:56 wolti Exp $
  */
 
 /*! \mainpage FreeModbus
@@ -31,6 +31,7 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 
 \par ARM devices:
 - STR71X with FreeRTOS/GCC. See STR71X/simple2.c for an example.
+- STR71TCP with FreeRTOS/lwIP/GCC. This port includes FreeRTOS, lwIP and a fully working PPP stack. The lwIP, PPP and FreeRTOS part is generic and therefore can be used for other ports ( or other projects ).
 
 \par AVR devices:
 - ATMega168 with WinAVR. See AVR/demo.c for an example.
@@ -48,6 +49,10 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 
 /*!
  \example STR71X/simple2.c
+ */
+
+/*!
+ \example STR71XTCP/demo.c
  */
 
 /*!

@@ -19,6 +19,9 @@ Modbus TCP:
    Difficulty: medium
    Priority:   high
 
+ - MCF5235TCP port uses an outdated version of the FreeRTOS/lwIP porting
+   layer. They should be merged with the STR71X porting layer.
+
 Modbus Functions:
 
  - If not initialized the Get Slave ID function must also return the

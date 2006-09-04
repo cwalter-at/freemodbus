@@ -1,3 +1,26 @@
+2006-09-04 (REL_1_0) Christian Walter <wolti@sil.at>
+
+ Added support for ATmega8, ATmega16, ATmega32, ATmega169 and RS485
+ drivers in the AVR support. Special thanks to Tran Minh Hoang for his
+ contribution. Added a new lwIP port for the STR71X target which uses
+ one serial interface for a PPP connection. This can be used for remote
+ Modbus/TCP devices in combination with a Modem (E.g.: GPRS or Analog).
+
+ Details:
+ - FEATURES (AVR): Integrated patches from Tran Minh Hoang to support
+   the ATmega8, ATmega16, ATmega32, ATmega169 controllers.
+ - FEATURES (AVR): Added support for RS485 drivers in the AVR code. The
+   example supports the DS76176.
+ - FEATURES (STR71XTCP): implemented function in STR71X/lwIP porting
+   layer to remove running tasks.
+ - FEATURES (STR71XTCP): added new thread creation function in
+   STR71X/lwIP porting layer which allows specifing the stack size.
+ - BUGS (STR71XTCP): pppOpen defined in ppp.c does not check the return
+   value of sys_thread_new. If task creation fails the system crashes.
+ - BUGS (STR71XTCP): pppMain must not return - Instead it should remove
+   its task from the scheduler.
+
+
 2006-08-30 (REL_0_9) Christian Walter <wolti@sil.at>
 
  Added lwIP port for the MCF5235 target. The lwIP part is generic and
