@@ -1,3 +1,19 @@
+2006-09-06 (REL_1_0_2) Christian Walter <wolti@sil.at>
+
+ Fixed bug in FreeRTOS porting layer for STR71X/lwIP target where memory
+ is not freed in the sys_arch_thread_remove function. Synched MCF5235TCP
+ port with the FreeRTOS/lwIP port for the STR71X.
+
+ Details:
+ - BUG (STR71XTCP): Sys_arch_thread_remove did not free the memory from
+   the TCB.
+ - BUG (STR71XTCP): Unnecessary call to vTaskSuspendAll removed.
+ - BUG (STR71XTCP): Bug with counting variable. The first to lwIP tasks
+   got the same name (lwIP0).
+ - FEATURE (MCF5235TCP): Enhanced functions from the STR71X/lwIP port
+   merged into the Coldfire port.
+
+
 2006-09-04 (REL_1_0_1) Christian Walter <wolti@sil.at>
 
  Fixed bug in serial driver for STR71x target when the ring buffer

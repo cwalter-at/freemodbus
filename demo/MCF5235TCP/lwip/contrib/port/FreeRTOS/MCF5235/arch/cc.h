@@ -37,6 +37,7 @@
 
 /* ------------------------ Project includes ------------------------------ */
 #include "cpu.h"
+#include "sys_arch.h"
 
 /* ------------------------ Defines --------------------------------------- */
 
@@ -72,7 +73,5 @@ typedef u32_t   mem_ptr_t;
 typedef int     sys_prot_t;
 
 /* ------------------------ Prototypes ------------------------------------ */
-void            sys_assert( const char *const msg );
-void            sys_debug( const char *const fmt, ... );
 
 #endif

@@ -30,7 +30,7 @@
  * Author: Adam Dunkels <adam@sics.se>
  * Modifcations: Christian Walter <wolti@sil.at>
  *
- * $Id: sys_arch.c,v 1.3 2006/09/04 14:39:20 wolti Exp $
+ * $Id: sys_arch.c,v 1.5 2006/09/06 19:54:19 wolti Exp $
  */
 
 /* ------------------------ System includes ------------------------------- */
@@ -58,7 +58,6 @@
 /* ------------------------ Defines --------------------------------------- */
 /* This is the number of threads that can be started with sys_thead_new() */
 #define SYS_MBOX_SIZE               ( 16 )
-#define SYS_THREAD_MAX              ( 4 )
 #define MS_TO_TICKS( ms )           \
     ( portTickType )( ( portTickType ) ( ms ) / portTICK_RATE_MS )
 #define TICKS_TO_MS( ticks )        \
@@ -86,7 +85,7 @@ typedef struct sys_tcb
     char            name[THREAD_NAME_LEN_MAX];
 } sys_tcb_t;
 
-/* ------------------------ Prototypes 000000------------------------------ */
+/* ------------------------ Prototypes ------------------------------------ */
 int             putchar( int c );
 
 /* ------------------------ Static functions ------------------------------ */
@@ -209,7 +208,6 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
      * disabled because xTaskCreate contains a call to taskYIELD( ).
      */
     vPortEnterCritical(  );
-    vTaskSuspendAll(  );
 
     p = tasks;
     i = 0;
@@ -224,10 +222,13 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
     }
     else
     {
+        /* First task already counter. */
+        i++;
+        /* Cycle to the end of the list. */
         while( p->next != NULL )
         {
-            p = p->next;
             i++;
+            p = p->next;
         }
         p->next = pvPortMalloc( sizeof( sys_tcb_t ) );
         p = p->next;
@@ -237,7 +238,7 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
     {
         /* Memory allocated. Initialize the data structure. */
         THREAD_INIT( p );
-        ( void )sprintf( p->name, "lwIP%d", i );
+        ( void )snprintf( p->name, THREAD_NAME_LEN_MAX, "lwIP%d", i );
 
         /* Now q points to a free element in the list. */
         if( xTaskCreate( thread, p->name, ssize, arg, prio, &p->pid ) == pdPASS )
@@ -250,7 +251,6 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
         }
     }
 
-    ( void )xTaskResumeAll(  );
     vPortExitCritical(  );
     return thread_hdl;
 }
@@ -258,7 +258,7 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
 void
 sys_arch_thread_remove( sys_thread_t hdl )
 {
-    sys_tcb_t      *current = tasks, *last;
+    sys_tcb_t      *current = tasks, *prev;
     sys_tcb_t      *toremove = hdl;
     xTaskHandle     pid = ( xTaskHandle ) 0;
 
@@ -269,19 +269,19 @@ sys_arch_thread_remove( sys_thread_t hdl )
     vPortEnterCritical(  );
     if( hdl != NULL )
     {
-        last = NULL;
+        prev = NULL;
         while( ( current != NULL ) && ( current != toremove ) )
         {
-            last = current;
+            prev = current;
             current = current->next;
         }
         /* Found it. */
         if( current == toremove )
         {
             /* Not the first entry in the list. */
-            if( last != NULL )
+            if( prev != NULL )
             {
-                last->next = toremove->next;
+                prev->next = toremove->next;
             }
             else
             {
@@ -291,9 +291,7 @@ sys_arch_thread_remove( sys_thread_t hdl )
                          toremove->timeouts.next == NULL );
             pid = toremove->pid;
             THREAD_INIT( toremove );
-
-            vTaskDelete( toremove->pid );
-
+            vPortFree( toremove );
         }
     }
     /* We are done with accessing the shared datastructure. Release the
