@@ -30,7 +30,7 @@
  * Author: Adam Dunkels <adam@sics.se>
  * Modifcations: Christian Walter <wolti@sil.at>
  *
- * $Id: sys_arch.c,v 1.5 2006/09/06 19:54:19 wolti Exp $
+ * $Id: sys_arch.c,v 1.6 2006/09/11 13:40:50 wolti Exp $
  */
 
 /* ------------------------ System includes ------------------------------- */
@@ -65,15 +65,11 @@
 #define THREAD_STACK_SIZE           ( 512 )
 #define THREAD_NAME                 "lwIP"
 
-/* Must hold the string THREAD_NAME + task number + terminating '\0'. */
-#define THREAD_NAME_LEN_MAX         6
-
 #define THREAD_INIT( tcb ) \
     do { \
         tcb->next = NULL; \
         tcb->pid = ( xTaskHandle )0; \
         tcb->timeouts.next = NULL; \
-        memset( tcb->name, 0, THREAD_NAME_LEN_MAX ); \
     } while( 0 )
 
 /* ------------------------ Type definitions ------------------------------ */
@@ -82,7 +78,6 @@ typedef struct sys_tcb
     struct sys_tcb *next;
     struct sys_timeouts timeouts;
     xTaskHandle     pid;
-    char            name[THREAD_NAME_LEN_MAX];
 } sys_tcb_t;
 
 /* ------------------------ Prototypes ------------------------------------ */
@@ -98,7 +93,7 @@ static sys_tcb_t *tasks = NULL;
 void
 sys_init( void )
 {
-    LWIP_ASSERT( "sys_init: not called first\r\n", tasks == NULL );
+    LWIP_ASSERT( "sys_init: not called first", tasks == NULL );
     tasks = NULL;
 }
 
@@ -201,6 +196,7 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
     sys_thread_t    thread_hdl = SYS_THREAD_NULL;
     int             i;
     sys_tcb_t      *p;
+    char            thread_name[ configMAX_TASK_NAME_LEN ];
 
     /* We disable the FreeRTOS scheduler because it might be the case that the new
      * tasks gets scheduled inside the xTaskCreate function. To prevent this we
@@ -238,10 +234,10 @@ sys_arch_thread_new( void ( *thread ) ( void *arg ), void *arg, int prio, size_t
     {
         /* Memory allocated. Initialize the data structure. */
         THREAD_INIT( p );
-        ( void )snprintf( p->name, THREAD_NAME_LEN_MAX, "lwIP%d", i );
+        ( void )snprintf( thread_name, configMAX_TASK_NAME_LEN, "lwIP%d", i );
 
         /* Now q points to a free element in the list. */
-        if( xTaskCreate( thread, p->name, ssize, arg, prio, &p->pid ) == pdPASS )
+        if( xTaskCreate( thread, thread_name, ssize, arg, prio, &p->pid ) == pdPASS )
         {
             thread_hdl = p;
         }
@@ -374,7 +370,7 @@ sys_sem_new( u8_t count )
     }
     else
     {
-        LWIP_ASSERT( "sys_sem_new: xSemaphore == SYS_SEM_NULL\n", xSemaphore != SYS_SEM_NULL );
+        LWIP_ASSERT( "sys_sem_new: xSemaphore == SYS_SEM_NULL", xSemaphore != SYS_SEM_NULL );
     }
 
     return xSemaphore;
@@ -384,7 +380,7 @@ sys_sem_new( u8_t count )
 void
 sys_sem_free( sys_sem_t sem )
 {
-    LWIP_ASSERT( "sys_sem_free: sem != SYS_SEM_NULL\n", sem != SYS_SEM_NULL );
+    LWIP_ASSERT( "sys_sem_free: sem != SYS_SEM_NULL", sem != SYS_SEM_NULL );
     if( sem != SYS_SEM_NULL )
     {
 #ifdef SYS_STATS
@@ -400,7 +396,7 @@ sys_sem_free( sys_sem_t sem )
 void
 sys_sem_signal( sys_sem_t sem )
 {
-    LWIP_ASSERT( "sys_sem_signal: sem != SYS_SEM_NULL\n", sem != SYS_SEM_NULL );
+    LWIP_ASSERT( "sys_sem_signal: sem != SYS_SEM_NULL", sem != SYS_SEM_NULL );
     xSemaphoreGive( sem );
 }
 
@@ -580,10 +576,10 @@ sys_arch_mbox_fetch( sys_mbox_t mbox, void **msg, u32_t timeout )
     return timespent;
 }
 
-unsigned long
+u32_t
 sys_jiffies( void )
 {
     portTickType    xTicks = xTaskGetTickCount(  );
 
-    return ( unsigned long )TICKS_TO_MS( xTicks );
+    return ( u32_t )TICKS_TO_MS( xTicks );
 }

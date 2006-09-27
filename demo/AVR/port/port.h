@@ -20,7 +20,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.5 2006/09/04 18:50:39 wolti Exp $
+ * File: $Id: port.h,v 1.6 2006/09/17 16:45:52 wolti Exp $
  */
 
 #ifndef _PORT_H
@@ -101,6 +101,22 @@ typedef long    LONG;
 #define TCCR1C          TCCR1A  /* dummy */
 #define TIMSK1          TIMSK
 #define TIFR1           TIFR
+
+#elif defined (__AVR_ATmega128__)
+#define UCSRB           UCSR0B
+#define UBRR            UBRR0L
+#define UDR             UDR0
+#define TIMSK1          TIMSK
+#define TIFR1           TIFR
+#define SIG_UART_TRANS  SIG_USART0_TRANS
+#define SIG_USART_DATA  SIG_USART0_DATA
+#define SIG_USART_RECV  SIG_USART0_RECV
+#define UCSZ0           UCSZ00
+#define UCSZ1           UCSZ01
+#define UPM0            UPM00
+#define UPM1            UPM01
+#define UCSRC           UCSR0C
+
 #endif
 
 /* ----------------------- RS485 specifics ----------------------------------*/

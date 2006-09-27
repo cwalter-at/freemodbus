@@ -1,9 +1,6 @@
 <!DOCTYPE CrossStudio_for_ARM_Session_File>
 <session>
  <Breakpoints/>
- <CVS>
-  <Login CVSRoot="" />
- </CVS>
  <ExecutionCountWindow/>
  <Memory1>
   <MemoryWindow autoEvaluate="0" addressText="&amp;tasks" numColumns="8" sizeText="sizeof(tasks)" dataSize="1" radix="16" addressSpace="" />
@@ -24,12 +21,11 @@
   <ProjectSessionItem path="demo;demo;FreeRTOS" name="unnamed" />
   <ProjectSessionItem path="demo;demo;lwIP" name="unnamed" />
   <ProjectSessionItem path="demo;demo;lwIP;api" name="unnamed" />
+  <ProjectSessionItem path="demo;demo;lwIP;core" name="unnamed" />
   <ProjectSessionItem path="demo;demo;lwIP;netif" name="unnamed" />
   <ProjectSessionItem path="demo;demo;lwIP;netif;ppp" name="unnamed" />
   <ProjectSessionItem path="demo;demo;lwIP Port" name="unnamed" />
-  <ProjectSessionItem path="demo;demo;Modbus Port" name="unnamed" />
   <ProjectSessionItem path="demo;demo;STR71X Library" name="unnamed" />
-  <ProjectSessionItem path="demo;demo;System Files" name="unnamed" />
  </Project>
  <Register1>
   <RegisterWindow unsignedDisplays="" asciiDisplays="" octalDisplays="" visibleGroups="CPU - Current Mode" decimalDisplays="@r0" binaryDisplays="" />
@@ -49,12 +45,12 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" >
-   <Watchpoint evalMode="0" linenumber="96" evalType="1" radix="-1" name="guard1" expression="guard1" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
-   <Watchpoint evalMode="0" linenumber="97" evalType="1" radix="-1" name="guard2" expression="guard2" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="0" linenumber="91" evalType="1" radix="-1" name="guard1" expression="guard1" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="0" linenumber="92" evalType="1" radix="-1" name="guard2" expression="guard2" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
    <Watchpoint evalMode="2" linenumber="249" numelements="2" evalType="0" radix="-1" name="devices" expression="devices" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
    <Watchpoint evalMode="1" linenumber="464" evalType="1" radix="16" name="dev" expression="dev" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" />
-   <Watchpoint evalMode="1" linenumber="97" evalType="1" radix="-1" name="tasks" expression="tasks" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
-   <Watchpoint evalMode="2" linenumber="173" numelements="4" evalType="0" radix="-1" name="usRegInputBuf" expression="usRegInputBuf" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" />
+   <Watchpoint evalMode="1" linenumber="92" evalType="1" radix="-1" name="tasks" expression="tasks" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" />
+   <Watchpoint evalMode="2" linenumber="185" numelements="4" evalType="0" radix="-1" name="usRegInputBuf" expression="usRegInputBuf" filename="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" />
   </Watches>
  </Watch1>
  <Watch2>
@@ -67,28 +63,12 @@
   <Watches active="0" />
  </Watch4>
  <Files>
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="31" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" y="216" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" left="0" selected="0" name="unnamed" top="196" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="26" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/porttcp.c" y="159" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/porttcp.c" left="0" selected="0" name="unnamed" top="136" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="33" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwipopts.h" y="178" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwipopts.h" left="0" selected="0" name="unnamed" top="152" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/fsm.c" y="257" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/fsm.c" left="0" selected="0" name="unnamed" top="228" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="4" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/portother.c" y="122" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/portother.c" left="0" selected="0" name="unnamed" top="95" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/portevent.c" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/portevent.c" left="0" selected="0" name="unnamed" top="0" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" y="101" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/sys_arch.c" left="0" selected="0" name="unnamed" top="89" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/core/sys.c" y="113" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/core/sys.c" left="0" selected="0" name="unnamed" top="89" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/core/tcp_out.c" y="90" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/core/tcp_out.c" left="0" selected="0" name="unnamed" top="34" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/modbus/mb.c" y="333" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/modbus/mb.c" left="0" selected="0" name="unnamed" top="305" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/modbus/tcp/mbtcp.c" y="141" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/modbus/tcp/mbtcp.c" left="0" selected="0" name="unnamed" top="105" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="4" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/freertos/tasks.c" y="1642" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/freertos/tasks.c" left="0" selected="0" name="unnamed" top="1640" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="2" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/tcpip.c" y="192" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/tcpip.c" left="0" selected="0" name="unnamed" top="161" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/pap.h" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/pap.h" left="0" selected="0" name="unnamed" top="44" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.h" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.h" left="0" selected="0" name="unnamed" top="352" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/include/lwip/sys.h" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/include/lwip/sys.h" left="0" selected="0" name="unnamed" top="76" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/include/lwip/tcp.h" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/include/lwip/tcp.h" left="0" selected="0" name="unnamed" top="52" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="16" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/port.h" y="69" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/port/port.h" left="0" selected="0" name="unnamed" top="48" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="41" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" y="235" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/contrib/port/FreeRTOS/STR71X/netif/serial.c" left="0" selected="0" name="unnamed" top="526" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="2" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/api_lib.c" y="482" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/api_lib.c" left="0" selected="0" name="unnamed" top="480" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="17" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/library/uart.c" y="308" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/library/uart.c" left="0" selected="0" name="unnamed" top="281" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="6" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/api_msg.c" y="651" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/api/api_msg.c" left="0" selected="0" name="unnamed" top="732" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/freertos/tasks.c" y="1676" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/freertos/tasks.c" left="0" selected="0" name="unnamed" top="134" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" y="80" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/demo.c" left="0" selected="0" name="unnamed" top="80" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/pap.h" y="0" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/pap.h" left="0" selected="0" name="unnamed" top="24" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="20" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.h" y="365" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.h" left="0" selected="0" name="unnamed" top="360" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="33" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwipopts.h" y="177" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwipopts.h" left="0" selected="0" name="unnamed" top="142" />
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="15" debugPath="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.c" y="28" useHTMLEdit="0" path="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP/lwip/src/netif/ppp/ppp.c" left="0" selected="0" name="unnamed" top="0" />
  </Files>
- <ARMCrossStudioWindow activeProject="demo" ignoreExceptions="IRQ;FIQ;SWI" autoConnectTarget="" debugSearchFileMap="" fileDialogInitialDirectory="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP" fileDialogDefaultFilter="*.cpp;*.cxx;*.cc;*.c;*.h" debugSearchPath="" buildConfiguration="ARM Flash Release" />
+ <ARMCrossStudioWindow activeProject="demo" ignoreExceptions="IRQ;FIQ;SWI" autoConnectTarget="/Macraigor Wiggler (20 Pin)" debugSearchFileMap="" fileDialogInitialDirectory="/home/wolti/devel/privat/freemodbus/demo/STR71XTCP" fileDialogDefaultFilter="*.cpp;*.cxx;*.cc;*.c;*.h" debugSearchPath="" buildConfiguration="ARM Flash Debug" />
 </session>

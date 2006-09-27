@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.3 2006/09/04 19:33:31 wolti Exp $
+ * File: $Id: demo.c,v 1.4 2006/09/13 21:19:46 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -48,6 +48,10 @@
 #define REG_INPUT_NREGS         4
 #define REG_HOLDING_START       2000
 #define REG_HOLDING_NREGS       130
+
+#define PPP_AUTH_ENABLED        1
+#define PPP_USER                "freemodbus"
+#define PPP_PASS                "insecure"
 
 /* ----------------------- Type definitions ---------------------------------*/
 typedef enum
@@ -99,6 +103,7 @@ main( void )
         }
         else
         {
+            vMBPortLog( MB_LOG_INFO, "MB-INIT", "FreeModbus demo application starting...\r\n" );
             /* Everything ready. Start the scheduler. */
             vTaskStartScheduler(  );
         }
@@ -128,7 +133,14 @@ vMBServerTask( void *arg )
     portTickType    xTicks;
 
     pppInit(  );
-    pppSetAuth( PPPAUTHTYPE_NONE, NULL, NULL );
+    if( PPP_AUTH_ENABLED )
+    {
+        pppSetAuth( PPPAUTHTYPE_PAP, PPP_USER, PPP_PASS );
+    }
+    else
+    {
+        pppSetAuth( PPPAUTHTYPE_NONE, NULL, NULL );
+    }
     do
     {
         vPortEnterCritical(  );

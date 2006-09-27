@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: excoils.c,v 1.6 2006/06/15 15:38:02 wolti Exp $
+ * File: $Id: excoils.c,v 1.7 2006/09/17 16:46:33 wolti Exp $
  */
 
 /* ----------------------- Modbus includes ----------------------------------*/
@@ -75,7 +75,8 @@ eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegist
         case MB_REG_WRITE:
             while( iNCoils > 0 )
             {
-                xMBUtilSetBits( ucRegCoilsBuf, usBitOffset, ( unsigned char )iNCoils % 8, *pucRegBuffer++ );
+                xMBUtilSetBits( ucRegCoilsBuf, usBitOffset, ( unsigned char )( iNCoils > 8 ? 8 : iNCoils ),
+                                *pucRegBuffer++ );
                 iNCoils -= 8;
             }
             break;

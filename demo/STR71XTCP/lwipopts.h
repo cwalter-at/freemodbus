@@ -175,6 +175,6 @@ a lot of data that needs to be copied, this should be set high. */
 /* ------------------------ PPP options ----------------------------------- */
 
 #define PPP_SUPPORT             1
-#define PAP_SUPPORT             0
+#define PAP_SUPPORT             1
 #define PPP_DEBUG               0
 #endif

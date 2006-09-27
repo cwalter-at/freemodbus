@@ -24,7 +24,9 @@
 *
 ******************************************************************************
 * REVISION HISTORY
-*
+* 06-09-13 Christian Walter <wolti@sil.at>
+*   pppMain now correctly exists by releasing all resources and destroying
+*   the thread.
 * 06-08-04 Christian Walter <wolti@sil.at>
 *   pppOpen code now checks if thread creation was successfull. If not returns
 *   an error.
@@ -1246,7 +1248,7 @@ static void pppMain(void *arg)
 		pc->sig_hup = 0;
     		tcpip_callback(pppHupCB, arg);
         } else {
-		int c = sio_read(pc->fd, p->payload, p->len);
+                int c = sio_read(pc->fd, p->payload, p->len);
 		if(c > 0) {
 			pppInProc(pd, p->payload, c);
 		} else {
@@ -1254,13 +1256,14 @@ static void pppMain(void *arg)
 		}
         }
     }
-	PPPDEBUG((LOG_INFO, "pppMain: unit %d: PHASE_DEAD\n", pd));
+    PPPDEBUG((LOG_INFO, "pppMain: unit %d: PHASE_DEAD\n", pd));
+    pppDrop(pc);
     pbuf_free(p);
 
 out:
-	PPPDEBUG((LOG_DEBUG, "pppMain: unit %d: linkStatusCB=%lx errCode=%d\n", pd, pc->linkStatusCB, pc->errCode));
+    PPPDEBUG((LOG_DEBUG, "pppMain: unit %d: linkStatusCB=%lx errCode=%d\n", pd, pc->linkStatusCB, pc->errCode));
     if(pc->linkStatusCB)
-	    pc->linkStatusCB(pc->linkStatusCtx, pc->errCode ? pc->errCode : PPPERR_PROTOCOL, NULL);
+            pc->linkStatusCB(pc->linkStatusCtx, pc->errCode ? pc->errCode : PPPERR_PROTOCOL, NULL);
 
     pc->openFlag = 0;
 

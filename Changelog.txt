@@ -1,3 +1,16 @@
+2006-09-27 (REL_1_0_3) Christian Walter <wolti@sil.at>
+
+ Added new functions to support registering of custom callback handlers.
+ This makes it possible to implement new Modbus function codes without
+ touching the protocol stack. New port for ATMega128 added. Thanks to
+ Richard C Sandoz Jr. for the patches.
+
+ Details:
+ - FEATURE (ALL): Added support for registering new functions handlers
+   with eMBRegisterCB.
+ - FEATURE (AVR): Added patches from Richard C Sandoz Jr. for ATMega128
+
+
 2006-09-06 (REL_1_0_2) Christian Walter <wolti@sil.at>
 
  Fixed bug in FreeRTOS porting layer for STR71X/lwIP target where memory

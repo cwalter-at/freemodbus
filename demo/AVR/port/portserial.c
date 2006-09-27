@@ -20,7 +20,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.5 2006/09/04 19:36:51 wolti Exp $
+ * File: $Id: portserial.c,v 1.6 2006/09/17 16:45:53 wolti Exp $
  */
 
 #include <avr/io.h>
@@ -112,6 +112,8 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     UCSRC = _BV( URSEL ) | ucUCSRC;
 #elif defined (__AVR_ATmega32__)
     UCSRC = _BV( URSEL ) | ucUCSRC;
+#elif defined (__AVR_ATmega128__)
+    UCSRC |= ucUCSRC;
 #endif
 
     vMBPortSerialEnable( FALSE, FALSE );

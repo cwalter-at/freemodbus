@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.14 2006/06/26 19:26:50 wolti Exp $
+ * File: $Id: mbport.h,v 1.15 2006/09/20 17:15:16 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -73,7 +73,7 @@ INLINE BOOL     xMBPortSerialGetByte( CHAR * pucByte );
 INLINE BOOL     xMBPortSerialPutByte( CHAR ucByte );
 
 /* ----------------------- Timers functions ---------------------------------*/
-BOOL            xMBPortTimersInit( USHORT usTim1Timerout100us );
+BOOL            xMBPortTimersInit( USHORT usTimeOut50us );
 
 void            xMBPortTimersClose( void );
 

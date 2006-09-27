@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.13 2006/06/25 00:03:09 wolti Exp $
+ * File: $Id: mb.h,v 1.15 2006/09/24 23:22:29 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -31,6 +31,7 @@ PR_BEGIN_EXTERN_C
 #endif
 
 #include "mbport.h"
+#include "mbproto.h"
 
 /*! \defgroup modbus Modbus
  * \code #include "mb.h" \endcode
@@ -112,6 +113,7 @@ typedef enum
     MB_EILLSTATE,               /*!< protocol stack in illegal state. */
     MB_ETIMEDOUT                /*!< timeout error occurred. */
 } eMBErrorCode;
+
 
 /* ----------------------- Function prototypes ------------------------------*/
 
@@ -230,6 +232,28 @@ eMBErrorCode    eMBPoll( void );
  *   it returns eMBErrorCode::MB_ENOERR.
  */
 eMBErrorCode    eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning, UCHAR const *pucAdditional, USHORT usAdditionalLen );
+
+/*! \ingroup modbus
+ * \brief Registers a callback handler for a given function code.
+ *
+ * This function registers a new callback handler for a given function code.
+ * The callback handler supplied is responsible for interpreting the Modbus PDU and
+ * the creation of an appropriate response. In case of an error it should return
+ * one of the possible Modbus exceptions which results in a Modbus exception frame
+ * sent by the protocol stack. If no exception occurred, i.e. MB_EX_NONE was
+ * returned the caller must have update the buffer and the length pointer.
+ *
+ * \param ucFunctionCode The Modbus function code for which this handler should
+ *   be registers.
+ * \param pxHandler The function handler which should be called in case
+ *   such a frame is received.
+ *
+ * \return eMBErrorCode::MB_ENOERR if the handler has been installed. If no
+ *   more resources are available it returns eMBErrorCode::MB_ENORES. In this
+ *   case the values in mbconfig.h should be adjusted. If the argument was not
+ *   valid it returns eMBErrorCode::MB_EINVAL.
+ */
+eMBErrorCode    eMBRegisterCB( UCHAR ucFunctionCode, pxMBFunctionHandler pxHandler );
 
 /* ----------------------- Callback -----------------------------------------*/
 

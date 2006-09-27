@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.17 2006/08/30 23:18:07 wolti Exp $
+ * File: $Id: mb.c,v 1.18 2006/09/23 14:13:07 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -206,6 +206,42 @@ eMBTCPInit( USHORT ucTCPPort )
     return eStatus;
 }
 #endif
+
+eMBErrorCode
+eMBRegisterCB( UCHAR ucFunctionCode, pxMBFunctionHandler pxHandler )
+{
+    int             i;
+    eMBErrorCode    eStatus;
+
+    if( pxHandler != NULL )
+    {
+        ENTER_CRITICAL_SECTION(  );
+        for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
+        {
+            if( ( xFuncHandlers[i].pxHandler == NULL ) || ( xFuncHandlers[i].pxHandler == pxHandler ) )
+            {
+                break;
+            }
+        }
+        if( i != MB_FUNC_HANDLERS_MAX )
+        {
+            xFuncHandlers[i].ucFunctionCode = ucFunctionCode;
+            xFuncHandlers[i].pxHandler = pxHandler;
+            eStatus = MB_ENOERR;
+        }
+        else
+        {
+            eStatus = MB_ENORES;
+        }
+        EXIT_CRITICAL_SECTION(  );
+    }
+    else
+    {
+        eStatus = MB_EINVAL;
+    }
+    return eStatus;
+}
+
 
 eMBErrorCode
 eMBClose( void )
