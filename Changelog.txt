@@ -1,3 +1,22 @@
+2006-10-11 (REL_1_0_4) Christian Walter <wolti@sil.at>
+
+ Fixed bug when more than 255 coils are requested. Fixed bug in
+ Linux/Cygwin port when not all bytes could be written by the first call
+ to write. Added support for removing previously registered function
+ handlers.
+
+ Details:
+ - BUG (ALL): mbfunccoils contained a bug which limited the amount of
+   coils to read to 255.
+ - BUG (LINUX): prvbMBPortSerialWrite contained a bug in the loop which
+   writes the RTU/ASCII frame to the serial file descriptor. If not all
+   bytes where written in the first call or write was interrupted the
+   sent frame is corrupted.
+ - FEATURE (ALL): eMBRegisterCB now supports NULL as handler argument in
+   which case a previously registered function handler is deregistered
+   from the protocol stack.
+
+
 2006-09-27 (REL_1_0_3) Christian Walter <wolti@sil.at>
 
  Added new functions to support registering of custom callback handlers.

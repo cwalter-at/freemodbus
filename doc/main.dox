@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: main.dox,v 1.10 2006/09/05 07:48:03 wolti Exp $
+ * File: $Id: main.dox,v 1.11 2006/09/27 20:05:32 wolti Exp $
  */
 
 /*! \mainpage FreeModbus
@@ -34,7 +34,7 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 - STR71TCP with FreeRTOS/lwIP/GCC. This port includes FreeRTOS, lwIP and a fully working PPP stack. The lwIP, PPP and FreeRTOS part is generic and therefore can be used for other ports ( or other projects ).
 
 \par AVR devices:
-- ATMega8/16/32/168/169 with WinAVR. See AVR/demo.c for an example.
+- ATMega8/16/32/128/168/169 with WinAVR. See AVR/demo.c for an example.
 
 \par Coldfire devices:
 - MCF5235 with GCC. See MCF5235/demo.c for an example.

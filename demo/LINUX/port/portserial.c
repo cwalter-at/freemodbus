@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.1 2006/08/01 20:58:50 wolti Exp $
+ * File: $Id: portserial.c,v 1.3 2006/10/12 08:35:34 wolti Exp $
  */
 
 /* ----------------------- Standard includes --------------------------------*/
@@ -26,6 +26,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/select.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
@@ -262,18 +263,20 @@ prvbMBPortSerialWrite( UCHAR *pucBuffer, USHORT usNBytes )
     size_t          left = ( size_t )usNBytes;
     size_t          done = 0;
 
-    do
+    while( left > 0 )
     {
-        if( ( res = write( iSerialFd, pucBuffer + done, left - done ) ) == -1 )
+        if( ( res = write( iSerialFd, pucBuffer + done, left ) ) == -1 )
         {
             if( errno != EINTR )
             {
                 break;
             }
+            /* call write again because of interrupted system call. */
+            continue;
         }
+        done += res;
         left -= res;
     }
-    while( left != 0 );
     return left == 0 ? TRUE : FALSE;
 }
 

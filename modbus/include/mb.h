@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.h,v 1.15 2006/09/24 23:22:29 wolti Exp $
+ * File: $Id: mb.h,v 1.16 2006/10/12 08:54:34 wolti Exp $
  */
 
 #ifndef _MB_H
@@ -240,13 +240,13 @@ eMBErrorCode    eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning, UCHAR const *pu
  * The callback handler supplied is responsible for interpreting the Modbus PDU and
  * the creation of an appropriate response. In case of an error it should return
  * one of the possible Modbus exceptions which results in a Modbus exception frame
- * sent by the protocol stack. If no exception occurred, i.e. MB_EX_NONE was
- * returned the caller must have update the buffer and the length pointer.
+ * sent by the protocol stack.
  *
  * \param ucFunctionCode The Modbus function code for which this handler should
- *   be registers.
+ *   be registers. Valid function codes are in the range 1 to 127.
  * \param pxHandler The function handler which should be called in case
- *   such a frame is received.
+ *   such a frame is received. If \c NULL a previously registered function handler
+ *   for this function code is removed.
  *
  * \return eMBErrorCode::MB_ENOERR if the handler has been installed. If no
  *   more resources are available it returns eMBErrorCode::MB_ENORES. In this

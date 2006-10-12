@@ -74,7 +74,7 @@ eMBFuncReadCoils( UCHAR *pucFrame, USHORT *usLen )
         usRegAddress++;
 
         usCoilCount = pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF] << 8;
-        usCoilCount = pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF + 1];
+        usCoilCount |= pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF + 1];
 
         /* Check if the number of registers to read is valid. If not
          * return Modbus illegal data value exception.

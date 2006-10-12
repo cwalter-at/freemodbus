@@ -5,13 +5,29 @@
 #
 # ---------------------------------------------------------------------------
 
-CC	        = gcc
-CXX	        = g++
+# ---------------------------------------------------------------------------
+# platform dependencies
+# ---------------------------------------------------------------------------
+ifneq ($(strip $(shell gcc -v 2>&1 |grep "cygwin")),)
+	CYGWIN_BUILD = YES
+endif
+CC	    = gcc
+CXX	    = g++
 OBJCOPY	    = objcopy
 INSIGHT     = /opt/insight-x86/bin/insight
-CFLAGS	    = -MD -g3 -pthread -Wall -Iport -I../../modbus/rtu \
-			  -I../../modbus/ascii -I../../modbus/include
-LDFLAGS     = -lpthread
+
+# ---------------------------------------------------------------------------
+# project specifics
+# ---------------------------------------------------------------------------
+CFLAGS	    = -MD -g3 -Wall -Iport -I../../modbus/rtu \
+		-I../../modbus/ascii -I../../modbus/include
+LDFLAGS     =
+ifeq ($(CYGWIN_BUILD),YES)
+else
+LDFLAGS     += -lpthread
+CFLAGS      += -pthread
+endif
+
 TGT         = demo
 OTHER_CSRC  =
 OTHER_ASRC  =

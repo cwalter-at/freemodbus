@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.18 2006/09/23 14:13:07 wolti Exp $
+ * File: $Id: mb.c,v 1.19 2006/10/12 08:54:34 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -213,25 +213,35 @@ eMBRegisterCB( UCHAR ucFunctionCode, pxMBFunctionHandler pxHandler )
     int             i;
     eMBErrorCode    eStatus;
 
-    if( pxHandler != NULL )
+    if( ( 0 < ucFunctionCode ) && ( ucFunctionCode <= 127 ) )
     {
         ENTER_CRITICAL_SECTION(  );
-        for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
+        if( pxHandler != NULL )
         {
-            if( ( xFuncHandlers[i].pxHandler == NULL ) || ( xFuncHandlers[i].pxHandler == pxHandler ) )
+            for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
             {
-                break;
+                if( ( xFuncHandlers[i].pxHandler == NULL ) || ( xFuncHandlers[i].pxHandler == pxHandler ) )
+                {
+                    xFuncHandlers[i].ucFunctionCode = ucFunctionCode;
+                    xFuncHandlers[i].pxHandler = pxHandler;
+                    break;
+                }
             }
-        }
-        if( i != MB_FUNC_HANDLERS_MAX )
-        {
-            xFuncHandlers[i].ucFunctionCode = ucFunctionCode;
-            xFuncHandlers[i].pxHandler = pxHandler;
-            eStatus = MB_ENOERR;
+            eStatus = ( i != MB_FUNC_HANDLERS_MAX ) ? MB_ENOERR : MB_ENORES;
         }
         else
         {
-            eStatus = MB_ENORES;
+            for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
+            {
+                if( xFuncHandlers[i].ucFunctionCode == ucFunctionCode )
+                {
+                    xFuncHandlers[i].ucFunctionCode = 0;
+                    xFuncHandlers[i].pxHandler = NULL;
+                    break;
+                }
+            }
+            /* Remove can't fail. */
+            eStatus = MB_ENOERR;
         }
         EXIT_CRITICAL_SECTION(  );
     }
