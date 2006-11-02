@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.h,v 1.7 2006/06/18 09:57:03 wolti Exp $
+ * File: $Id: mbrtu.h,v 1.8 2006/11/01 12:08:20 wolti Exp $
  */
 
 #ifndef _MB_RTU_H

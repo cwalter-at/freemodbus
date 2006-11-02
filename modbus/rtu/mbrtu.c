@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.11 2006/06/18 09:57:03 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.13 2006/11/01 12:08:20 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -232,6 +232,7 @@ xMBRTUReceiveFSM( void )
          */
     case STATE_RX_ERROR:
         vMBPortTimersEnable(  );
+        break;
 
         /* In the idle state we wait for a new character. If a character
          * is received the t1.5 and t3.5 timers are started and the

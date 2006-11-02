@@ -1,3 +1,24 @@
+2006-10-30 (REL_1_0_5) Christian Walter <wolti@sil.at>
+
+ eMBDisable and eMBClose can now be called multiple times which makes
+ shutdown of the protocol stack easier. Fixed bug in RTU state machine
+ where we switched from the error state immediately to the idle state.
+ Correct behaviour would be to wait till the end of frame. Added new
+ STR71X GCC port which uses only freely available tools like GNU ARM,
+ OpenOCD (Wiggler) and GDB.
+
+ Details:
+ - FEATURE (STR71X): Added GCC standalone port which does not depend on
+   the Rowley Crosswork tools.
+ - FEATURE (ALL): eMBDisable can now be called multiple times and
+   returns MB_ENOERR in case is was already disabled. eMBClose also
+   supports beeing called multiple times in which pvMBFrameCloseCur( )
+   is called when the protocol stack is in state STATE_DISABLED.
+ - BUG (RTU): Fixed bug in xMBRTUReceiveFSM where the error state is
+   immediately left because of a missing break. Instead we should wait
+   till the damaged frame is finished.
+
+
 2006-10-11 (REL_1_0_4) Christian Walter <wolti@sil.at>
 
  Fixed bug when more than 255 coils are requested. Fixed bug in
