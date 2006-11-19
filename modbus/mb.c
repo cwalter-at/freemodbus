@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mb.c,v 1.20 2006/10/30 08:11:51 wolti Exp $
+ * File: $Id: mb.c,v 1.23 2006/11/19 03:01:52 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -98,6 +98,9 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 #endif
 #if MB_FUNC_READ_HOLDING_ENABLED > 0
     {MB_FUNC_WRITE_REGISTER, eMBFuncWriteHoldingRegister},
+#endif
+#if MB_FUNC_READWRITE_HOLDING_ENABLED > 0
+    {MB_FUNC_READWRITE_MULTIPLE_REGISTERS, eMBFuncReadWriteMultipleHoldingRegister},
 #endif
 #if MB_FUNC_READ_COILS_ENABLED > 0
     {MB_FUNC_READ_COILS, eMBFuncReadCoils},
@@ -313,7 +316,7 @@ eMBDisable( void )
 }
 
 eMBErrorCode
-eMBPoll(  )
+eMBPoll( void )
 {
     static UCHAR   *ucMBFrame;
     static UCHAR    ucRcvAddress;

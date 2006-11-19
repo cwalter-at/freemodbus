@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbport.h,v 1.15 2006/09/20 17:15:16 wolti Exp $
+ * File: $Id: mbport.h,v 1.16 2006/11/19 03:03:22 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -34,7 +34,7 @@ typedef enum
     EV_READY,                   /*!< Startup finished. */
     EV_FRAME_RECEIVED,          /*!< Frame received. */
     EV_EXECUTE,                 /*!< Execute function. */
-    EV_FRAME_SENT,              /*!< Frame sent. */
+    EV_FRAME_SENT               /*!< Frame sent. */
 } eMBEventType;
 
 /*! \ingroup modbus

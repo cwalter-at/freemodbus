@@ -1,7 +1,7 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution version="1" Name="demo" >
   <project Name="demo" >
-    <configuration Target="STR711F" property_groups_file_path="$(StudioDir)/targets/ST_STR71x/propertyGroups.xml" linker_memory_map_file="$(StudioDir)/targets/ST_STR71x/ST_STR711F_MemoryMap.xml" project_directory="" link_include_startup_code="No" project_type="Executable" Name="Common" />
+    <configuration Target="STR711F" property_groups_file_path="$(StudioDir)/targets/ST_STR71x/propertyGroups.xml" linker_memory_map_file="$(StudioDir)/targets/ST_STR71x/ST_STR711FR2_MemoryMap.xml" gcc_entry_point="_reset_handler" project_directory="" link_include_startup_code="No" project_type="Executable" Name="Common" />
     <configuration target_reset_script="RAMReset()" Name="RAM" />
     <configuration arm_target_flash_loader_file_path="$(StudioDir)/targets/ST_STR71x/Release/Loader.exe" target_reset_script="FLASHReset()" Name="Flash" />
     <folder Name="System Files" >

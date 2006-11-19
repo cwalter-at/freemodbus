@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbconfig.h,v 1.12 2006/06/26 18:52:49 wolti Exp $
+ * File: $Id: mbconfig.h,v 1.13 2006/11/03 16:53:36 wolti Exp $
  */
 
 #ifndef _MB_CONFIG_H
@@ -105,6 +105,9 @@ PR_BEGIN_EXTERN_C
 
 /*! \brief If the <em>Read Discrete Inputs</em> function should be enabled. */
 #define MB_FUNC_READ_DISCRETE_INPUTS_ENABLED    (  1 )
+
+/*! \brief If the <em>Read/Write Multiple Registers</em> function should be enabled. */
+#define MB_FUNC_READWRITE_HOLDING_ENABLED       (  1 )
 
 /*! @} */
 

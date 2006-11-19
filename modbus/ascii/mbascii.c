@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbascii.c,v 1.11 2006/06/18 09:57:03 wolti Exp $
+ * File: $Id: mbascii.c,v 1.12 2006/11/19 03:02:56 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -60,7 +60,7 @@ typedef enum
     STATE_TX_START,             /*!< Starting transmission (':' sent). */
     STATE_TX_DATA,              /*!< Sending of data (Address, Data, LRC). */
     STATE_TX_END,               /*!< End of transmission. */
-    STATE_TX_NOTIFY,            /*!< Notify sender that the frame has been sent. */
+    STATE_TX_NOTIFY             /*!< Notify sender that the frame has been sent. */
 } eMBSndState;
 
 typedef enum
@@ -217,7 +217,7 @@ xMBASCIIReceiveFSM( void )
 
     assert( eSndState == STATE_TX_IDLE );
 
-    ( void )xMBPortSerialGetByte( &ucByte );
+    ( void )xMBPortSerialGetByte( ( CHAR * ) & ucByte );
     switch ( eRcvState )
     {
         /* A new character is received. If the character is a ':' the input
@@ -420,7 +420,7 @@ xMBASCIITimerT1SExpired( void )
 }
 
 
-UCHAR
+static          UCHAR
 prvucMBCHAR2BIN( UCHAR ucCharacter )
 {
     if( ( ucCharacter >= '0' ) && ( ucCharacter <= '9' ) )
@@ -437,7 +437,7 @@ prvucMBCHAR2BIN( UCHAR ucCharacter )
     }
 }
 
-UCHAR
+static          UCHAR
 prvucMBBIN2CHAR( UCHAR ucByte )
 {
     if( ucByte <= 0x09 )
@@ -457,7 +457,7 @@ prvucMBBIN2CHAR( UCHAR ucByte )
 }
 
 
-UCHAR
+static          UCHAR
 prvucMBLRC( UCHAR *pucFrame, USHORT usLen )
 {
     UCHAR           ucLRC = 0;  /* LRC char initialized */

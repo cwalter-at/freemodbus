@@ -114,6 +114,7 @@ _vectors_ram:
  ******************************************************************************/
      .section .init, "ax"
     .code 32
+    .global _reset_handler
     .align 0
 
 _reset_handler:

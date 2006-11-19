@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbfunc.h,v 1.10 2006/06/18 09:54:53 wolti Exp $
+ * File: $Id: mbfunc.h,v 1.11 2006/11/03 16:53:36 wolti Exp $
  */
 
 #ifndef _MB_FUNC_H
@@ -62,6 +62,10 @@ eMBException    eMBFuncWriteMultipleCoils( UCHAR * pucFrame, USHORT * usLen );
 
 #if MB_FUNC_READ_DISCRETE_INPUTS_ENABLED > 0
 eMBException    eMBFuncReadDiscreteInputs( UCHAR * pucFrame, USHORT * usLen );
+#endif
+
+#if MB_FUNC_READWRITE_HOLDING_ENABLED > 0
+eMBException    eMBFuncReadWriteMultipleHoldingRegister( UCHAR * pucFrame, USHORT * usLen );
 #endif
 
 #ifdef __cplusplus

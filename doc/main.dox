@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: main.dox,v 1.11 2006/09/27 20:05:32 wolti Exp $
+ * File: $Id: main.dox,v 1.12 2006/11/19 02:52:50 wolti Exp $
  */
 
 /*! \mainpage FreeModbus
@@ -39,6 +39,11 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 \par Coldfire devices:
 - MCF5235 with GCC. See MCF5235/demo.c for an example.
 - MCF5235/TCP with GCC. This port features FreeRTOS and the lwIP stack. The lwIP part is generic and therefore it should be used as a basis for other lwIP ports.
+
+\par MSP430 devices
+- MSP430F169 with Rowley Crossworks. See MSP430/demo.c for an example.
+- MSP430F169 with GCC. See MSP430/demo.c for an example.
+
 \par Win32:
 - A Win32 Modbus RTU/ASCII Port.
 - A Win32 Modbus/TCP Port.
@@ -77,4 +82,8 @@ FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded syst
 
 /*!
  \example LINUX/demo.c
+ */
+
+/*!
+ \example MSP430/demo.c
  */

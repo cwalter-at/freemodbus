@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbrtu.c,v 1.13 2006/11/01 12:08:20 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.14 2006/11/19 03:04:11 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -47,13 +47,13 @@ typedef enum
     STATE_RX_INIT,              /*!< Receiver is in initial state. */
     STATE_RX_IDLE,              /*!< Receiver is in idle state. */
     STATE_RX_RCV,               /*!< Frame is beeing received. */
-    STATE_RX_ERROR,             /*!< If the frame is invalid. */
+    STATE_RX_ERROR              /*!< If the frame is invalid. */
 } eMBRcvState;
 
 typedef enum
 {
     STATE_TX_IDLE,              /*!< Transmitter is in idle state. */
-    STATE_TX_XMIT,              /*!< Transmitter is in transfer state. */
+    STATE_TX_XMIT               /*!< Transmitter is in transfer state. */
 } eMBSndState;
 
 /* ----------------------- Static variables ---------------------------------*/
@@ -240,11 +240,11 @@ xMBRTUReceiveFSM( void )
          */
     case STATE_RX_IDLE:
         usRcvBufferPos = 0;
-        ( void )xMBPortSerialGetByte( &ucByte );
+        ( void )xMBPortSerialGetByte( ( CHAR * ) & ucByte );
         ucRTUBuf[usRcvBufferPos++] = ucByte;
         eRcvState = STATE_RX_RCV;
 
-        /* Enable t1.5 and t3.5 timers. */
+        /* Enable t3.5 timers. */
         vMBPortTimersEnable(  );
         break;
 
@@ -256,7 +256,7 @@ xMBRTUReceiveFSM( void )
     case STATE_RX_RCV:
         if( usRcvBufferPos < MB_SER_PDU_SIZE_MAX )
         {
-            ( void )xMBPortSerialGetByte( &ucByte );
+            ( void )xMBPortSerialGetByte( ( CHAR * ) & ucByte );
             ucRTUBuf[usRcvBufferPos++] = ucByte;
         }
         else

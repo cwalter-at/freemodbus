@@ -6,7 +6,7 @@ REQUIREMENTS
 
 This port is the same as the STR71X port  but  contains  complete  startup
 scripts, makefiles  and  debugger  scripts  to  work  without  the  Rowley
-Crosswork tools.
+Crossworks tools.
 On the software side a GCC [1] installation (tested with 4.1.1) is required
 together  with  a  working  C-Library  [2].   If  debugging   is   desired
 a Wiggler interface must be present.  OpenOCD  [3]  binaries  for  Windows
@@ -22,7 +22,7 @@ USAGE
 
 A makefile is supplied with the demo  application  and  a  binary  can  be
 produced by calling 'make all'.  A  special  target  'debug'  is  provided
-which executes the insight debugger.  Commandline debugging  with  GDB  is
+which executes the insight debugger.  Command line debugging  with  GDB  is
 also possible and is described here.  After you have compiled  the  binary
 start the OpenOCD daemon in a shell.
 
@@ -60,7 +60,7 @@ main () at demo.c:53
 Current language:  auto; currently c
 (gdb)
 
-Now you are ready to start or debug the application. If you wan't to  test
+Now you are ready to start or debug the application. If you want to  test
 your system simply enter 'continue' at the prompt.  Now start  the  Modbus
 test application [1] from the 'demo.sh' or 'demo.bat' shell  script.   You
 should see the following output.
@@ -114,7 +114,7 @@ be satisfied for the port to work.
  - If you have changed the execution mode make sure you have called
    'make clean'
 
-$Id: README.txt,v 1.1 2006/11/02 23:14:43 wolti Exp $
+$Id: README.txt,v 1.2 2006/11/02 23:29:47 wolti Exp $
 
 STR71X FreeModbus Port Copyright (c) 2006 Christian Walter.
 
