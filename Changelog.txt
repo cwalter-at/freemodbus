@@ -1,3 +1,25 @@
+2006-11-19 (REL_1_1_1) Christian Walter <wolti@sil.at>
+
+ Fixed bug in Read/Write Multiple Registers function where the registers
+ addresses where calculated wrong. Fixed bug in RTU and ASCII with the
+ resource allocation in case of an error. Changed license to BSD style
+ licsense.
+
+ Details:
+ - LICENSE (ALL): License is now BSD for protocol stack.
+ - BUG (ALL): The registers address received in a Modbus frame must be
+   converted to application addresses. The code for this conversion was
+   missing and therefore has lead to error when this function was used
+   (Registers of by one, Start at > 1).
+ - BUG (ALL): If the serial initialization within the porting fails a
+   timer is still allocated in eMBRTUInit and eMBASCIIInit. This can
+   lead to a memory leak depending upon the implementation of the
+   porting layer.
+ - FEATURE (MCF5235): Added sample shell scripts for testing.
+ - FEATURE (MSP430): Added sample shell script for testing and changed
+   default values to match the other ports.
+
+
 2006-10-30 (REL_1_1) Christian Walter <wolti@sil.at>
 
  Added support for Read/Write Multiple Registers function (0x17). Added
