@@ -58,12 +58,12 @@ eMBFuncReadDiscreteInputs( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen == ( MB_PDU_FUNC_READ_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1] );
         usRegAddress++;
 
-        usDiscreteCnt = pucFrame[MB_PDU_FUNC_READ_DISCCNT_OFF] << 8;
-        usDiscreteCnt = pucFrame[MB_PDU_FUNC_READ_DISCCNT_OFF + 1];
+        usDiscreteCnt = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_DISCCNT_OFF] << 8 );
+        usDiscreteCnt |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_DISCCNT_OFF + 1] );
 
         /* Check if the number of registers to read is valid. If not
          * return Modbus illegal data value exception.

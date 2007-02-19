@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbfunccoils.c,v 1.7 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbfunccoils.c,v 1.8 2007/02/18 23:47:16 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -78,12 +78,12 @@ eMBFuncReadCoils( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen == ( MB_PDU_FUNC_READ_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1] );
         usRegAddress++;
 
-        usCoilCount = pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF] << 8;
-        usCoilCount |= pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF + 1];
+        usCoilCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF] << 8 );
+        usCoilCount |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_COILCNT_OFF + 1] );
 
         /* Check if the number of registers to read is valid. If not
          * return Modbus illegal data value exception.
@@ -152,8 +152,8 @@ eMBFuncWriteCoil( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen == ( MB_PDU_FUNC_WRITE_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF + 1] );
         usRegAddress++;
 
         if( ( pucFrame[MB_PDU_FUNC_WRITE_VALUE_OFF + 1] == 0x00 )
@@ -207,12 +207,12 @@ eMBFuncWriteMultipleCoils( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen > ( MB_PDU_FUNC_WRITE_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF + 1] );
         usRegAddress++;
 
-        usCoilCnt = pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF] << 8;
-        usCoilCnt |= pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF + 1];
+        usCoilCnt = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF] << 8 );
+        usCoilCnt |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_COILCNT_OFF + 1] );
 
         ucByteCount = pucFrame[MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF];
 

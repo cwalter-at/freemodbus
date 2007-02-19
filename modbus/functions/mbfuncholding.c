@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbfuncholding.c,v 1.10 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbfuncholding.c,v 1.12 2007/02/18 23:48:22 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -51,19 +51,19 @@
 #define MB_PDU_FUNC_WRITE_VALUE_OFF             ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_WRITE_SIZE                  ( 4 )
 
-#define MB_PDU_FUNC_WRITE_MUL_ADDR_OFF          ( MB_PDU_DATA_OFF_+ 0 )
+#define MB_PDU_FUNC_WRITE_MUL_ADDR_OFF          ( MB_PDU_DATA_OFF + 0 )
 #define MB_PDU_FUNC_WRITE_MUL_REGCNT_OFF        ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF       ( MB_PDU_DATA_OFF + 4 )
 #define MB_PDU_FUNC_WRITE_MUL_VALUES_OFF        ( MB_PDU_DATA_OFF + 5 )
 #define MB_PDU_FUNC_WRITE_MUL_SIZE_MIN          ( 5 )
 #define MB_PDU_FUNC_WRITE_MUL_REGCNT_MAX        ( 0x0078 )
 
-#define MB_PDU_FUNC_READWRITE_READ_ADDR_OFF     ( MB_PDU_DATA_OFF + 0)
-#define MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF   ( MB_PDU_DATA_OFF + 2)
-#define MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF    ( MB_PDU_DATA_OFF + 4)
-#define MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF  ( MB_PDU_DATA_OFF + 6)
-#define MB_PDU_FUNC_READWRITE_BYTECNT_OFF       ( MB_PDU_DATA_OFF + 8)
-#define MB_PDU_FUNC_READWRITE_WRITE_VALUES_OFF  ( MB_PDU_DATA_OFF + 9)
+#define MB_PDU_FUNC_READWRITE_READ_ADDR_OFF     ( MB_PDU_DATA_OFF + 0 )
+#define MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF   ( MB_PDU_DATA_OFF + 2 )
+#define MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF    ( MB_PDU_DATA_OFF + 4 )
+#define MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF  ( MB_PDU_DATA_OFF + 6 )
+#define MB_PDU_FUNC_READWRITE_BYTECNT_OFF       ( MB_PDU_DATA_OFF + 8 )
+#define MB_PDU_FUNC_READWRITE_WRITE_VALUES_OFF  ( MB_PDU_DATA_OFF + 9 )
 #define MB_PDU_FUNC_READWRITE_SIZE_MIN          ( 9 )
 
 /* ----------------------- Static functions ---------------------------------*/
@@ -82,8 +82,8 @@ eMBFuncWriteHoldingRegister( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen == ( MB_PDU_FUNC_WRITE_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_ADDR_OFF + 1] );
         usRegAddress++;
 
         /* Make callback to update the value. */
@@ -117,12 +117,12 @@ eMBFuncWriteMultipleHoldingRegister( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen >= ( MB_PDU_FUNC_WRITE_MUL_SIZE_MIN + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_ADDR_OFF + 1] );
         usRegAddress++;
 
-        usRegCount = pucFrame[MB_PDU_FUNC_WRITE_MUL_REGCNT_OFF] << 8;
-        usRegCount |= pucFrame[MB_PDU_FUNC_WRITE_MUL_REGCNT_OFF + 1];
+        usRegCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_REGCNT_OFF] << 8 );
+        usRegCount |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_WRITE_MUL_REGCNT_OFF + 1] );
 
         ucRegByteCount = pucFrame[MB_PDU_FUNC_WRITE_MUL_BYTECNT_OFF];
 
@@ -175,12 +175,12 @@ eMBFuncReadHoldingRegister( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen == ( MB_PDU_FUNC_READ_SIZE + MB_PDU_SIZE_MIN ) )
     {
-        usRegAddress = pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8;
-        usRegAddress |= pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1];
+        usRegAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8 );
+        usRegAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1] );
         usRegAddress++;
 
-        usRegCount = pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF] << 8;
-        usRegCount = pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF + 1];
+        usRegCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF] << 8 );
+        usRegCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF + 1] );
 
         /* Check if the number of registers to read is valid. If not
          * return Modbus illegal data value exception.
@@ -243,19 +243,19 @@ eMBFuncReadWriteMultipleHoldingRegister( UCHAR *pucFrame, USHORT *usLen )
 
     if( *usLen >= ( MB_PDU_FUNC_READWRITE_SIZE_MIN + MB_PDU_SIZE_MIN ) )
     {
-        usRegReadAddress = pucFrame[MB_PDU_FUNC_READWRITE_READ_ADDR_OFF] << 8U;
-        usRegReadAddress |= pucFrame[MB_PDU_FUNC_READWRITE_READ_ADDR_OFF + 1];
+        usRegReadAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_READ_ADDR_OFF] << 8U );
+        usRegReadAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_READ_ADDR_OFF + 1] );
         usRegReadAddress++;
 
-        usRegReadCount = pucFrame[MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF] << 8U;
-        usRegReadCount |= pucFrame[MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF + 1];
+        usRegReadCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF] << 8U );
+        usRegReadCount |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_READ_REGCNT_OFF + 1] );
 
-        usRegWriteAddress = pucFrame[MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF] << 8U;
-        usRegWriteAddress |= pucFrame[MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF + 1];
+        usRegWriteAddress = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF] << 8U );
+        usRegWriteAddress |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_WRITE_ADDR_OFF + 1] );
         usRegWriteAddress++;
 
-        usRegWriteCount = pucFrame[MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF] << 8U;
-        usRegWriteCount |= pucFrame[MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF + 1];
+        usRegWriteCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF] << 8U );
+        usRegWriteCount |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READWRITE_WRITE_REGCNT_OFF + 1] );
 
         ucRegWriteByteCount = pucFrame[MB_PDU_FUNC_READWRITE_BYTECNT_OFF];
 

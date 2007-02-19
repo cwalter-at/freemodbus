@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbutils.c,v 1.5 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbutils.c,v 1.6 2007/02/18 23:49:07 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -74,11 +74,11 @@ xMBUtilSetBits( UCHAR *ucByteBuf, USHORT usBitOffset, UCHAR ucNBits, UCHAR ucVal
     usWordBuf |= ucByteBuf[usByteOffset + 1] << BITS_UCHAR;
 
     /* Zero out bit field bits and then or value bits into them. */
-    usWordBuf = ( usWordBuf & ( ~usMask ) ) | usValue;
+    usWordBuf = ( USHORT ) ( ( usWordBuf & ( ~usMask ) ) | usValue );
 
     /* move bits back into storage */
     ucByteBuf[usByteOffset] = ( UCHAR ) ( usWordBuf & 0xFF );
-    ucByteBuf[usByteOffset + 1] = usWordBuf >> BITS_UCHAR;
+    ucByteBuf[usByteOffset + 1] = ( UCHAR ) ( usWordBuf >> BITS_UCHAR );
 }
 
 UCHAR

@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbascii.c,v 1.14 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbascii.c,v 1.15 2007/02/18 23:46:48 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -109,6 +109,8 @@ eMBASCIIInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eP
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
+    ( void )ucSlaveAddress;
+
     ENTER_CRITICAL_SECTION(  );
     ucMBLFCharacter = MB_ASCII_DEFAULT_LF;
 
@@ -166,7 +168,7 @@ eMBASCIIReceive( UCHAR *pucRcvAddress, UCHAR **pucFrame, USHORT *pusLength )
         /* Total length of Modbus-PDU is Modbus-Serial-Line-PDU minus
          * size of address field and CRC checksum.
          */
-        *pusLength = usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_LRC;
+        *pusLength = ( USHORT ) ( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_LRC );
 
         /* Return the start of the Modbus PDU to the caller. */
         *pucFrame = ( UCHAR * ) & ucASCIIBuf[MB_SER_PDU_PDU_OFF];
@@ -256,7 +258,7 @@ xMBASCIIReceiveFSM( void )
             case BYTE_HIGH_NIBBLE:
                 if( usRcvBufferPos < MB_SER_PDU_SIZE_MAX )
                 {
-                    ucASCIIBuf[usRcvBufferPos] = ucResult << 4;
+                    ucASCIIBuf[usRcvBufferPos] = ( UCHAR ) ( ucResult << 4 );
                     eBytePos = BYTE_LOW_NIBBLE;
                     break;
                 }
@@ -337,7 +339,7 @@ xMBASCIITransmitFSM( void )
          * the character ':'. */
     case STATE_TX_START:
         ucByte = ':';
-        xMBPortSerialPutByte( ucByte );
+        xMBPortSerialPutByte( ( CHAR ) ucByte );
         eSndState = STATE_TX_DATA;
         eBytePos = BYTE_HIGH_NIBBLE;
         break;
@@ -352,14 +354,14 @@ xMBASCIITransmitFSM( void )
             switch ( eBytePos )
             {
             case BYTE_HIGH_NIBBLE:
-                ucByte = prvucMBBIN2CHAR( *pucSndBufferCur >> 4 );
-                xMBPortSerialPutByte( ucByte );
+                ucByte = prvucMBBIN2CHAR( ( UCHAR ) ( *pucSndBufferCur >> 4 ) );
+                xMBPortSerialPutByte( ( CHAR ) ucByte );
                 eBytePos = BYTE_LOW_NIBBLE;
                 break;
 
             case BYTE_LOW_NIBBLE:
-                ucByte = prvucMBBIN2CHAR( *pucSndBufferCur & 0x0F );
-                xMBPortSerialPutByte( ucByte );
+                ucByte = prvucMBBIN2CHAR( ( UCHAR ) ( *pucSndBufferCur & 0x0F ) );
+                xMBPortSerialPutByte( ( CHAR ) ucByte );
                 pucSndBufferCur++;
                 eBytePos = BYTE_HIGH_NIBBLE;
                 usSndBufferCount--;
@@ -375,7 +377,7 @@ xMBASCIITransmitFSM( void )
 
         /* Finish the frame by sending a LF character. */
     case STATE_TX_END:
-        xMBPortSerialPutByte( ucMBLFCharacter );
+        xMBPortSerialPutByte( ( CHAR ) ucMBLFCharacter );
         /* We need another state to make sure that the CR character has
          * been sent. */
         eSndState = STATE_TX_NOTIFY;
@@ -433,11 +435,11 @@ prvucMBCHAR2BIN( UCHAR ucCharacter )
 {
     if( ( ucCharacter >= '0' ) && ( ucCharacter <= '9' ) )
     {
-        return ucCharacter - '0';
+        return ( UCHAR ) ( ucCharacter - '0' );
     }
     else if( ( ucCharacter >= 'A' ) && ( ucCharacter <= 'F' ) )
     {
-        return ucCharacter - 'A' + 0x0A;
+        return ( UCHAR ) ( ucCharacter - 'A' + 0x0A );
     }
     else
     {
@@ -450,11 +452,11 @@ prvucMBBIN2CHAR( UCHAR ucByte )
 {
     if( ucByte <= 0x09 )
     {
-        return '0' + ucByte;
+        return ( UCHAR ) ( '0' + ucByte );
     }
     else if( ( ucByte >= 0x0A ) && ( ucByte <= 0x0F ) )
     {
-        return ucByte - 0x0A + 'A';
+        return ( UCHAR ) ( ucByte - 0x0A + 'A' );
     }
     else
     {

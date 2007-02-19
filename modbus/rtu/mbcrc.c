@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbcrc.c,v 1.6 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbcrc.c,v 1.7 2007/02/18 23:50:27 wolti Exp $
  */
 
 /* ----------------------- Platform includes --------------------------------*/
@@ -91,8 +91,8 @@ usMBCRC16( UCHAR *pucFrame, USHORT usLen )
     while( usLen-- )
     {
         iIndex = ucCRCLo ^ *( pucFrame++ );
-        ucCRCLo = ucCRCHi ^ aucCRCHi[iIndex];
+        ucCRCLo = ( UCHAR ) ( ucCRCHi ^ aucCRCHi[iIndex] );
         ucCRCHi = aucCRCLo[iIndex];
     }
-    return ucCRCHi << 8 | ucCRCLo;
+    return ( USHORT ) ( ucCRCHi << 8 | ucCRCLo );
 }

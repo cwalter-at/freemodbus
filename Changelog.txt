@@ -1,3 +1,28 @@
+2007-02-18 (REL_1_1_2) Christian Walter <wolti@sil.at>
+
+ Fixed typo with the defined defining the supported Modbus functions.
+ Fixed bug when illegal slave address was passed to eMBInit where the
+ error was not detected. Fixed typo in the holding registers where the
+ frame for write multiple registers was parsed with the wrong constants.
+ The fix is not critical because the values matched. Fixed bug in
+ discrete input registers implementation where the frame was not parsed
+ correctly. Added new support for a CodeWarrior Coldfire port.
+
+ Details:
+ - BUG (ALL): Modbus functions are compiled into the stack conditionally
+   by changing the MB_FUNC_XXX defines to either true(1) or false(0).
+   The defines for MB_FUNC_READ_HOLDING and MB_FUNC_WRITE_HOLDING were
+   wrong.
+ - BUG (ALL): eMBInit did not correctly check for addresses. Therefore
+   is was possible to start the Modbus stack with an address of 0 or an
+   address greater than 247.
+ - BUG (ALL): eMBFuncWriteHoldingRegister should use
+   MB_PDU_FUNC_WRITE_MUL_ADDR_OFF and not MB_PDU_FUNC_READ_ADDR_OFF.
+ - BUG (ALL): eMBFuncReadDiscreteInputs calculated the number of
+   discrete registers to read wrong.
+ - FEATURE (ALL): Fixed some warnings in the code.
+
+
 2006-11-19 (REL_1_1_1) Christian Walter <wolti@sil.at>
 
  Fixed bug in Read/Write Multiple Registers function where the registers

@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbrtu.c,v 1.16 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbrtu.c,v 1.17 2007/02/18 23:50:27 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -83,6 +83,7 @@ eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity ePar
     eMBErrorCode    eStatus = MB_ENOERR;
     ULONG           usTimerT35_50us;
 
+    ( void )ucSlaveAddress;
     ENTER_CRITICAL_SECTION(  );
 
     /* Modbus RTU uses 8 Databits. */
@@ -166,7 +167,7 @@ eMBRTUReceive( UCHAR *pucRcvAddress, UCHAR **pucFrame, USHORT *pusLength )
         /* Total length of Modbus-PDU is Modbus-Serial-Line-PDU minus
          * size of address field and CRC checksum.
          */
-        *pusLength = usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_CRC;
+        *pusLength = ( USHORT ) ( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_CRC );
 
         /* Return the start of the Modbus PDU to the caller. */
         *pucFrame = ( UCHAR * ) & ucRTUBuf[MB_SER_PDU_PDU_OFF];
@@ -205,8 +206,8 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR *pucFrame, USHORT usLength )
 
         /* Calculate CRC16 checksum for Modbus-Serial-Line-PDU. */
         usCRC16 = usMBCRC16( ( UCHAR * ) pucSndBufferCur, usSndBufferCount );
-        ucRTUBuf[usSndBufferCount++] = usCRC16 & 0xFF;
-        ucRTUBuf[usSndBufferCount++] = usCRC16 >> 8;
+        ucRTUBuf[usSndBufferCount++] = ( UCHAR ) ( usCRC16 & 0xFF );
+        ucRTUBuf[usSndBufferCount++] = ( UCHAR ) ( usCRC16 >> 8 );
 
         /* Activate the transmitter. */
         eSndState = STATE_TX_XMIT;
@@ -300,7 +301,7 @@ xMBRTUTransmitFSM( void )
         /* check if we are finished. */
         if( usSndBufferCount != 0 )
         {
-            xMBPortSerialPutByte( *pucSndBufferCur );
+            xMBPortSerialPutByte( ( CHAR ) * pucSndBufferCur );
             pucSndBufferCur++;  /* next byte in sendbuffer. */
             usSndBufferCount--;
         }
