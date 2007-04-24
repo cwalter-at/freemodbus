@@ -1,3 +1,14 @@
+2007-04-25 (REL_1_2) Christian Walter <wolti@sil.at>
+
+ Added LPC214X ARM port with Keil compiler. Added Z8Encore port for
+ Z8F6422 microcontroller.
+
+ Details:
+ - FEATURE (ARM): Added LPC214X ARM port for Keil ARM 2.41.
+ - FEATURE (Z8ENCORE): Added Z8F6422 for Z8Encore using the ZDS II - Z8
+   Encore! development tools.
+
+
 2007-02-18 (REL_1_1_2) Christian Walter <wolti@sil.at>
 
  Fixed typo with the defined defining the supported Modbus functions.
