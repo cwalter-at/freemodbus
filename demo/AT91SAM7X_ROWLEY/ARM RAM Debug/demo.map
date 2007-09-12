@@ -1,0 +1,722 @@
+Archive member included because of file (symbol)
+
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(__int32_udivmod.o)
+                              ARM RAM Debug/portserial.o (__udivsi3)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(memcpy.o)
+                              ARM RAM Debug/queue.o (memcpy)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(memset.o)
+                              ARM RAM Debug/tasks.o (memset)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strcat.o)
+                              ARM RAM Debug/tasks.o (strcat)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strncpy.o)
+                              ARM RAM Debug/tasks.o (strncpy)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(sprintf.o)
+                              ARM RAM Debug/tasks.o (sprintf)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a(__vfprintf_long.o)
+                              C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(sprintf.o) (__vfprintf)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strlen.o)
+                              C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a(__vfprintf_long.o) (strlen)
+C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(__hex_lc_uc.o)
+                              C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a(__vfprintf_long.o) (__hex_uc)
+
+Allocating common symbols
+Common symbol       size              file
+
+pxMBFrameCBTransmitterEmpty
+                    0x4               ARM RAM Debug/mb.o
+pxMBPortCBTimerExpired
+                    0x4               ARM RAM Debug/mb.o
+ucRTUBuf            0x100             ARM RAM Debug/mbrtu.o
+pxMBFrameCBByteReceived
+                    0x4               ARM RAM Debug/mb.o
+pxMBFrameCBTransmitFSMCur
+                    0x4               ARM RAM Debug/mb.o
+pxMBFrameCBReceiveFSMCur
+                    0x4               ARM RAM Debug/mb.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+UNPLACED_SECTIONS 0xffffffff         0x00000000         xw
+User_Peripherals 0xf0000000         0x0fff0000         xw
+System_Controller 0xfffff000         0x00000000         xw
+SRAM             0x00200000         0x00010000         xw
+FLASH            0x00100000         0x00040000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0xf0000000                __User_Peripherals_segment_start__ = 0xf0000000
+                0xffff0000                __User_Peripherals_segment_end__ = 0xffff0000
+                0xfffff000                __System_Controller_segment_start__ = 0xfffff000
+                0xfffff000                __System_Controller_segment_end__ = 0xfffff000
+                0x00200000                __SRAM_segment_start__ = 0x200000
+                0x00210000                __SRAM_segment_end__ = 0x210000
+                0x00100000                __FLASH_segment_start__ = 0x100000
+                0x00140000                __FLASH_segment_end__ = 0x140000
+                0x00000200                __STACKSIZE__ = 0x200
+                0x00000200                __STACKSIZE_IRQ__ = 0x200
+                0x00000200                __STACKSIZE_FIQ__ = 0x200
+                0x00000200                __STACKSIZE_SVC__ = 0x200
+                0x00000000                __STACKSIZE_ABT__ = 0x0
+                0x00000200                __STACKSIZE_UND__ = 0x200
+                0x00000400                __HEAPSIZE__ = 0x400
+                0x00200000                __vectors_load_start__ = __SRAM_segment_start__
+
+.vectors        0x00200000       0x3c
+                0x00200000                __vectors_start__ = .
+ *(.vectors .vectors.*)
+ .vectors       0x00200000       0x3c ARM RAM Debug/startup.o
+                0x00200000                _vectors
+                0x0020003c                __vectors_end__ = (__vectors_start__ + SIZEOF (.vectors))
+                0x00000001                . = ASSERT (((__vectors_end__ >= __SRAM_segment_start__) && (__vectors_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .vectors is too large to fit in SRAM memory segment)
+                0x0020003c                __fast_load_start__ = (__vectors_end__ ALIGN 0x4)
+
+.fast           0x0020003c        0x0
+                0x0020003c                __fast_start__ = .
+ *(.fast .fast.*)
+                0x0020003c                __fast_end__ = (__fast_start__ + SIZEOF (.fast))
+                0x00000001                . = ASSERT (((__fast_end__ >= __SRAM_segment_start__) && (__fast_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .fast is too large to fit in SRAM memory segment)
+                0x0020003c                __init_load_start__ = (__fast_end__ ALIGN 0x4)
+
+.init           0x0020003c      0x2c4
+                0x0020003c                __init_start__ = .
+ *(.init .init.*)
+ *fill*         0x0020003c        0x4 00
+ .init          0x00200040      0x220 ARM RAM Debug/crt0.o
+                0x00200040                __start
+                0x00200040                _start
+ .init          0x00200260       0xa0 ARM RAM Debug/startup.o
+                0x00200260                reset_handler
+                0x002002d0                undef_handler
+                0x002002d8                pabort_handler
+                0x002002dc                dabort_handler
+                0x002002e4                fiq_handler
+                0x002002e0                irq_handler
+                0x00200300                __init_end__ = (__init_start__ + SIZEOF (.init))
+                0x00000001                . = ASSERT (((__init_end__ >= __SRAM_segment_start__) && (__init_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .init is too large to fit in SRAM memory segment)
+                0x00200300                __text_load_start__ = (__init_end__ ALIGN 0x4)
+
+.text           0x00200300     0x9100
+                0x00200300                __text_start__ = .
+ *(.text .text.* .glue_7t .glue_7 .gnu.linkonce.t.*)
+ .text          0x00200300      0x4d0 ARM RAM Debug/demo.o
+                0x00200760                eMBRegDiscreteCB
+                0x00200300                main
+                0x00200420                eMBRegInputCB
+                0x00200544                eMBRegHoldingCB
+                0x0020072c                eMBRegCoilsCB
+ .text          0x002007d0     0x1e14 ARM RAM Debug/tasks.o
+                0x00200d8c                uxTaskPriorityGet
+                0x00200df8                vTaskPrioritySet
+                0x00201394                vTaskEndScheduler
+                0x00201c88                vTaskPlaceOnEventList
+                0x002011e0                xTaskResumeFromISR
+                0x0020186c                ulTaskEndTrace
+                0x002015fc                xTaskGetTickCount
+                0x00201d90                xTaskRemoveFromEventList
+                0x002017f4                vTaskStartTrace
+                0x00200a1c                vTaskDelete
+                0x00201f24                xTaskCheckForTimeOut
+                0x002013d4                vTaskSuspendAll
+                0x002010f4                vTaskResume
+                0x00201a9c                vTaskSwitchContext
+                0x00200fa4                vTaskSuspend
+                0x00201638                uxTaskGetNumberOfTasks
+                0x002018cc                vTaskIncrementTick
+                0x00201674                vTaskList
+                0x00200b18                vTaskDelayUntil
+                0x002025a8                xTaskGetCurrentTaskHandle
+                0x002024f8                usTaskCheckFreeStackSpace
+                0x0020140c                xTaskResumeAll
+                0x002012fc                vTaskStartScheduler
+                0x00202018                vTaskMissedYield
+                0x002007d0                xTaskCreate
+                0x00200c98                vTaskDelay
+                0x00201edc                vTaskSetTimeOutState
+ .text          0x002025e4      0x810 ARM RAM Debug/croutine.o
+                0x00202d38                xCoRoutineRemoveFromEventList
+                0x002025e4                xCoRoutineCreate
+                0x00202844                vCoRoutineSchedule
+                0x0020275c                vCoRoutineAddToDelayedList
+ .text          0x00202df4      0x2a8 ARM RAM Debug/list.o
+                0x00202e94                vListInsertEnd
+                0x00203004                vListRemove
+                0x00202e68                vListInitialiseItem
+                0x00202df4                vListInitialise
+                0x00202f2c                vListInsert
+ .text          0x0020309c      0xa4c ARM RAM Debug/queue.o
+                0x00203444                xQueueSendFromISR
+                0x0020309c                xQueueCreate
+                0x00203574                xQueueReceive
+                0x002031f8                xQueueSend
+                0x00203928                vQueueDelete
+                0x002037b0                xQueueReceiveFromISR
+                0x002038ec                uxQueueMessagesWaiting
+ .text          0x00203ae8      0x4a0 ARM RAM Debug/port.o
+                0x00203d38                xPortStartScheduler
+                0x00203d60                vPortEndScheduler
+                0x00203ae8                pxPortInitialiseStack
+ .text          0x00203f88      0x2b0 ARM RAM Debug/portISR.o
+                0x00204094                vPreemptiveTick
+                0x002041cc                vPortExitCritical
+                0x00204158                vPortDisableInterruptsFromThumb
+                0x00203fe8                swi_handler
+                0x00203f88                vPortISRStartFirstTask
+                0x00204170                vPortEnableInterruptsFromThumb
+                0x00204188                vPortEnterCritical
+ .text          0x00204238      0x118 ARM RAM Debug/heap_1.o
+                0x00204308                vPortFree
+                0x00204238                pvPortMalloc
+                0x00204328                vPortInitialiseBlocks
+ .text          0x00204350      0x258 ARM RAM Debug/porttimer.o
+                0x002043e8                vMBPortTimerClose
+                0x002044fc                vApplicationTickHook
+                0x00204350                xMBPortTimersInit
+                0x002044a0                vMBPortTimersDisable
+                0x00204438                vMBPortTimersEnable
+ .text          0x002045a8      0x214 ARM RAM Debug/portevent.o
+                0x00204624                vMBPortEventClose
+                0x002045a8                xMBPortEventInit
+                0x00204740                xMBPortEventGet
+                0x00204688                xMBPortEventPost
+ .text          0x002047bc      0x408 ARM RAM Debug/portother.o
+                0x002047bc                vMBPInit
+                0x00204b60                vMBPortClose
+                0x00204b08                vMBPPortEnterCritical
+                0x00204b34                vMBPPortExitCritical
+                0x00204aa4                bMBPIsWithinException
+                0x00204a60                __assert
+ .text          0x00204bc4      0xe6c ARM RAM Debug/portserial.o
+                0x00205618                vMBPortSerialEnable
+                0x00205824                xMBPortSerialGetByte
+                0x00204bc4                xMBPortSerialInit
+                0x0020544c                vMBPortSerialClose
+                0x0020577c                xMBPortSerialPutByte
+ .text          0x00205a30      0x85c ARM RAM Debug/mb.o
+                0x00205f34                eMBDisable
+                0x00205e58                eMBClose
+                0x00205fbc                eMBPoll
+                0x00205ec8                eMBEnable
+                0x00205c9c                eMBRegisterCB
+                0x00205a30                eMBInit
+ .text          0x0020628c      0x338 ARM RAM Debug/mbutils.o
+                0x00206448                xMBUtilGetBits
+                0x0020628c                xMBUtilSetBits
+                0x00206540                prveMBError2Exception
+ .text          0x002065c4      0x4e8 ARM RAM Debug/mbfunccoils.o
+                0x002067cc                eMBFuncWriteCoil
+                0x002065c4                eMBFuncReadCoils
+                0x00206910                eMBFuncWriteMultipleCoils
+ .text          0x00206aac      0x204 ARM RAM Debug/mbfuncdisc.o
+                0x00206aac                eMBFuncReadDiscreteInputs
+ .text          0x00206cb0      0x6a0 ARM RAM Debug/mbfuncholding.o
+                0x00206ee0                eMBFuncReadHoldingRegister
+                0x00206cb0                eMBFuncWriteHoldingRegister
+                0x00206d80                eMBFuncWriteMultipleHoldingRegister
+                0x002070a4                eMBFuncReadWriteMultipleHoldingRegister
+ .text          0x00207350      0x1cc ARM RAM Debug/mbfuncinput.o
+                0x00207350                eMBFuncReadInputRegister
+ .text          0x0020751c      0x1c0 ARM RAM Debug/mbfuncother.o
+                0x0020751c                eMBSetSlaveID
+                0x0020766c                eMBFuncReportSlaveID
+ .text          0x002076dc       0xe4 ARM RAM Debug/mbcrc.o
+                0x002076dc                usMBCRC16
+ .text          0x002077c0      0x770 ARM RAM Debug/mbrtu.o
+                0x0020789c                eMBRTUStart
+                0x002077c0                eMBRTUInit
+                0x00207d18                xMBRTUTransmitFSM
+                0x00207bc0                xMBRTUReceiveFSM
+                0x00207a30                eMBRTUSend
+                0x00207e4c                xMBRTUTimerT35Expired
+                0x0020790c                eMBRTUReceive
+                0x002078dc                eMBRTUStop
+ .text          0x00207f30      0xadc ARM RAM Debug/mbascii.o
+                0x00208590                xMBASCIITransmitFSM
+                0x002087d4                xMBASCIITimerT1SExpired
+                0x00207fdc                eMBASCIIStart
+                0x00207f30                eMBASCIIInit
+                0x00208050                eMBASCIIReceive
+                0x00208174                eMBASCIISend
+                0x002082c4                xMBASCIIReceiveFSM
+                0x00208020                eMBASCIIStop
+ *fill*         0x00208a0c        0x4 00
+ .text          0x00208a10       0x30 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(__int32_udivmod.o)
+                0x00208a10                __int32_udiv
+                0x00208a10                __int32_udivmod
+                0x00208a10                __udivsi3
+ .text          0x00208a40       0x60 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(memcpy.o)
+                0x00208a40                memcpy
+ .text          0x00208aa0       0xa0 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(memset.o)
+                0x00208aa0                memset
+ .text          0x00208b40       0x34 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strcat.o)
+                0x00208b40                strcat
+ .text          0x00208b74       0x78 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strncpy.o)
+                0x00208b74                strncpy
+ .text          0x00208bec       0x44 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(sprintf.o)
+                0x00208bec                sprintf
+ .text          0x00208c30      0x764 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a(__vfprintf_long.o)
+                0x00208cec                __vfprintf
+ *fill*         0x00209394        0xc 00
+ .text          0x002093a0       0x60 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strlen.o)
+                0x002093a0                strlen
+                0x00209400                __text_end__ = (__text_start__ + SIZEOF (.text))
+                0x00000001                . = ASSERT (((__text_end__ >= __SRAM_segment_start__) && (__text_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .text is too large to fit in SRAM memory segment)
+                0x00209400                __dtors_load_start__ = (__text_end__ ALIGN 0x4)
+
+.dtors          0x00209400        0x0
+                0x00209400                __dtors_start__ = .
+ *(SORT(.dtors.*))
+ *(.dtors)
+                0x00209400                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
+                0x00000001                . = ASSERT (((__dtors_end__ >= __SRAM_segment_start__) && (__dtors_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .dtors is too large to fit in SRAM memory segment)
+                0x00209400                __ctors_load_start__ = (__dtors_end__ ALIGN 0x4)
+
+.ctors          0x00209400        0x0
+                0x00209400                __ctors_start__ = .
+ *(SORT(.ctors.*))
+ *(.ctors)
+                0x00209400                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
+                0x00000001                . = ASSERT (((__ctors_end__ >= __SRAM_segment_start__) && (__ctors_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .ctors is too large to fit in SRAM memory segment)
+                0x00209400                __data_load_start__ = (__ctors_end__ ALIGN 0x4)
+
+.data           0x00209400       0x94
+                0x00209400                __data_start__ = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x00209400        0x4 ARM RAM Debug/demo.o
+ .data          0x00209404        0x4 ARM RAM Debug/tasks.o
+ .data          0x00209408        0x4 ARM RAM Debug/portISR.o
+                0x00209408                ulCriticalNesting
+ .data          0x0020940c       0x84 ARM RAM Debug/mb.o
+ .data          0x00209490        0x4 ARM RAM Debug/mbascii.o
+                0x00209494                __data_end__ = (__data_start__ + SIZEOF (.data))
+                0x00000001                . = ASSERT (((__data_end__ >= __SRAM_segment_start__) && (__data_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .data is too large to fit in SRAM memory segment)
+                0x00209494                __rodata_load_start__ = (__data_end__ ALIGN 0x4)
+
+.rodata         0x00209494      0x57c
+                0x00209494                __rodata_start__ = .
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata        0x00209494       0x20 ARM RAM Debug/tasks.o
+ .rodata        0x002094b4       0x58 ARM RAM Debug/porttimer.o
+ .rodata        0x0020950c       0x6c ARM RAM Debug/portserial.o
+ .rodata        0x00209578       0x68 ARM RAM Debug/mbutils.o
+ .rodata        0x002095e0      0x200 ARM RAM Debug/mbcrc.o
+ .rodata        0x002097e0      0x114 ARM RAM Debug/mbrtu.o
+ .rodata        0x002098f4       0xfc ARM RAM Debug/mbascii.o
+ .rodata        0x002099f0       0x20 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(__hex_lc_uc.o)
+                0x002099f0                __hex_uc
+                0x00209a00                __hex_lc
+                0x00209a10                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
+                0x00000001                . = ASSERT (((__rodata_end__ >= __SRAM_segment_start__) && (__rodata_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .rodata is too large to fit in SRAM memory segment)
+                0x00209a10                __bss_load_start__ = (__rodata_end__ ALIGN 0x4)
+
+.bss            0x00209a10      0xc84
+                0x00209a10                __bss_start__ = .
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x00209a10      0x10c ARM RAM Debug/demo.o
+ .bss           0x00209b1c      0x144 ARM RAM Debug/tasks.o
+                0x00209b1c                pxCurrentTCB
+ .bss           0x00209c60       0x80 ARM RAM Debug/croutine.o
+                0x00209c60                pxCurrentCoRoutine
+ .bss           0x00209ce0      0x808 ARM RAM Debug/heap_1.o
+ .bss           0x0020a4e8        0x8 ARM RAM Debug/porttimer.o
+ .bss           0x0020a4f0        0x8 ARM RAM Debug/portevent.o
+ .bss           0x0020a4f8       0x14 ARM RAM Debug/portserial.o
+ .bss           0x0020a50c       0x28 ARM RAM Debug/mb.o
+ .bss           0x0020a534       0x22 ARM RAM Debug/mbfuncother.o
+ *fill*         0x0020a556        0x2 00
+ .bss           0x0020a558       0x10 ARM RAM Debug/mbrtu.o
+ .bss           0x0020a568       0x18 ARM RAM Debug/mbascii.o
+ *(COMMON)
+ COMMON         0x0020a580       0x14 ARM RAM Debug/mb.o
+                0x0020a580                pxMBFrameCBTransmitterEmpty
+                0x0020a584                pxMBPortCBTimerExpired
+                0x0020a588                pxMBFrameCBByteReceived
+                0x0020a58c                pxMBFrameCBTransmitFSMCur
+                0x0020a590                pxMBFrameCBReceiveFSMCur
+ COMMON         0x0020a594      0x100 ARM RAM Debug/mbrtu.o
+                0x0020a594                ucRTUBuf
+                0x0020a694                __bss_end__ = (__bss_start__ + SIZEOF (.bss))
+                0x00000001                . = ASSERT (((__bss_end__ >= __SRAM_segment_start__) && (__bss_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .bss is too large to fit in SRAM memory segment)
+                0x0020a694                __non_init_load_start__ = (__bss_end__ ALIGN 0x4)
+
+.non_init       0x0020a694        0x0
+                0x0020a694                __non_init_start__ = .
+ *(.non_init .non_init.*)
+                0x0020a694                __non_init_end__ = (__non_init_start__ + SIZEOF (.non_init))
+                0x00000001                . = ASSERT (((__non_init_end__ >= __SRAM_segment_start__) && (__non_init_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .non_init is too large to fit in SRAM memory segment)
+                0x0020a694                __heap_load_start__ = (__non_init_end__ ALIGN 0x4)
+
+.heap           0x0020a694      0x400
+                0x0020a694                __heap_start__ = .
+ *(.heap)
+                0x0020aa94                . = ((__heap_start__ + __HEAPSIZE__) MAX_K .)
+ *fill*         0x0020a694      0x400 00
+                0x0020aa94                __heap_end__ = (__heap_start__ + SIZEOF (.heap))
+                0x00000001                . = ASSERT (((__heap_end__ >= __SRAM_segment_start__) && (__heap_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .heap is too large to fit in SRAM memory segment)
+                0x0020aa94                __stack_load_start__ = (__heap_end__ ALIGN 0x4)
+
+.stack          0x0020aa94      0x200
+                0x0020aa94                __stack_start__ = .
+ *(.stack)
+                0x0020ac94                . = ((__stack_start__ + __STACKSIZE__) MAX_K .)
+ *fill*         0x0020aa94      0x200 00
+                0x0020ac94                __stack_end__ = (__stack_start__ + SIZEOF (.stack))
+                0x00000001                . = ASSERT (((__stack_end__ >= __SRAM_segment_start__) && (__stack_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack is too large to fit in SRAM memory segment)
+                0x0020ac94                __stack_irq_load_start__ = (__stack_end__ ALIGN 0x4)
+
+.stack_irq      0x0020ac94      0x200
+                0x0020ac94                __stack_irq_start__ = .
+ *(.stack_irq)
+                0x0020ae94                . = ((__stack_irq_start__ + __STACKSIZE_IRQ__) MAX_K .)
+ *fill*         0x0020ac94      0x200 00
+                0x0020ae94                __stack_irq_end__ = (__stack_irq_start__ + SIZEOF (.stack_irq))
+                0x00000001                . = ASSERT (((__stack_irq_end__ >= __SRAM_segment_start__) && (__stack_irq_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack_irq is too large to fit in SRAM memory segment)
+                0x0020ae94                __stack_fiq_load_start__ = (__stack_irq_end__ ALIGN 0x4)
+
+.stack_fiq      0x0020ae94      0x200
+                0x0020ae94                __stack_fiq_start__ = .
+ *(.stack_fiq)
+                0x0020b094                . = ((__stack_fiq_start__ + __STACKSIZE_FIQ__) MAX_K .)
+ *fill*         0x0020ae94      0x200 00
+                0x0020b094                __stack_fiq_end__ = (__stack_fiq_start__ + SIZEOF (.stack_fiq))
+                0x00000001                . = ASSERT (((__stack_fiq_end__ >= __SRAM_segment_start__) && (__stack_fiq_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack_fiq is too large to fit in SRAM memory segment)
+                0x0020b094                __stack_svc_load_start__ = (__stack_fiq_end__ ALIGN 0x4)
+
+.stack_svc      0x0020b094      0x200
+                0x0020b094                __stack_svc_start__ = .
+ *(.stack_svc)
+                0x0020b294                . = ((__stack_svc_start__ + __STACKSIZE_SVC__) MAX_K .)
+ *fill*         0x0020b094      0x200 00
+                0x0020b294                __stack_svc_end__ = (__stack_svc_start__ + SIZEOF (.stack_svc))
+                0x00000001                . = ASSERT (((__stack_svc_end__ >= __SRAM_segment_start__) && (__stack_svc_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack_svc is too large to fit in SRAM memory segment)
+                0x0020b294                __stack_abt_load_start__ = (__stack_svc_end__ ALIGN 0x4)
+
+.stack_abt      0x0020b294        0x0
+                0x0020b294                __stack_abt_start__ = .
+ *(.stack_abt)
+                0x0020b294                . = ((__stack_abt_start__ + __STACKSIZE_ABT__) MAX_K .)
+                0x0020b294                __stack_abt_end__ = (__stack_abt_start__ + SIZEOF (.stack_abt))
+                0x00000001                . = ASSERT (((__stack_abt_end__ >= __SRAM_segment_start__) && (__stack_abt_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack_abt is too large to fit in SRAM memory segment)
+                0x0020b294                __stack_und_load_start__ = (__stack_abt_end__ ALIGN 0x4)
+
+.stack_und      0x0020b294      0x200
+                0x0020b294                __stack_und_start__ = .
+ *(.stack_und)
+                0x0020b494                . = ((__stack_und_start__ + __STACKSIZE_UND__) MAX_K .)
+ *fill*         0x0020b294      0x200 00
+                0x0020b494                __stack_und_end__ = (__stack_und_start__ + SIZEOF (.stack_und))
+                0x0020b494                __SRAM_segment_used_end__ = ((__stack_abt_end__ ALIGN 0x4) + SIZEOF (.stack_und))
+                0x00000001                . = ASSERT (((__stack_und_end__ >= __SRAM_segment_start__) && (__stack_und_end__ <= (__SRAM_segment_start__ + 0x10000))), error: .stack_und is too large to fit in SRAM memory segment)
+START GROUP
+LOAD ARM RAM Debug/crt0.o
+LOAD ARM RAM Debug/startup.o
+LOAD ARM RAM Debug/demo.o
+LOAD ARM RAM Debug/tasks.o
+LOAD ARM RAM Debug/croutine.o
+LOAD ARM RAM Debug/list.o
+LOAD ARM RAM Debug/queue.o
+LOAD ARM RAM Debug/port.o
+LOAD ARM RAM Debug/portISR.o
+LOAD ARM RAM Debug/heap_1.o
+LOAD ARM RAM Debug/porttimer.o
+LOAD ARM RAM Debug/portevent.o
+LOAD ARM RAM Debug/portother.o
+LOAD ARM RAM Debug/portserial.o
+LOAD ARM RAM Debug/mb.o
+LOAD ARM RAM Debug/mbutils.o
+LOAD ARM RAM Debug/mbfunccoils.o
+LOAD ARM RAM Debug/mbfuncdiag.o
+LOAD ARM RAM Debug/mbfuncdisc.o
+LOAD ARM RAM Debug/mbfuncholding.o
+LOAD ARM RAM Debug/mbfuncinput.o
+LOAD ARM RAM Debug/mbfuncother.o
+LOAD ARM RAM Debug/mbcrc.o
+LOAD ARM RAM Debug/mbrtu.o
+LOAD ARM RAM Debug/mbascii.o
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libarmdi_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libm_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libcpp_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libgccfp_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a
+LOAD C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfscanf_long_v4t_a_le.a
+END GROUP
+OUTPUT(ARM RAM Debug/demo.elf elf32-littlearm)
+
+.debug_line     0x00000000     0x22f4
+ .debug_line    0x00000000       0xdd ARM RAM Debug/crt0.o
+ .debug_line    0x000000dd       0xaf ARM RAM Debug/startup.o
+ .debug_line    0x0000018c      0x14c ARM RAM Debug/demo.o
+ .debug_line    0x000002d8      0x32d ARM RAM Debug/tasks.o
+ .debug_line    0x00000605      0x1c0 ARM RAM Debug/croutine.o
+ .debug_line    0x000007c5      0x156 ARM RAM Debug/list.o
+ .debug_line    0x0000091b      0x247 ARM RAM Debug/queue.o
+ .debug_line    0x00000b62      0x1a2 ARM RAM Debug/port.o
+ .debug_line    0x00000d04       0xbf ARM RAM Debug/portISR.o
+ .debug_line    0x00000dc3       0xed ARM RAM Debug/heap_1.o
+ .debug_line    0x00000eb0       0xf9 ARM RAM Debug/porttimer.o
+ .debug_line    0x00000fa9      0x14b ARM RAM Debug/portevent.o
+ .debug_line    0x000010f4      0x135 ARM RAM Debug/portother.o
+ .debug_line    0x00001229      0x276 ARM RAM Debug/portserial.o
+ .debug_line    0x0000149f      0x1c2 ARM RAM Debug/mb.o
+ .debug_line    0x00001661      0x14f ARM RAM Debug/mbutils.o
+ .debug_line    0x000017b0      0x17d ARM RAM Debug/mbfunccoils.o
+ .debug_line    0x0000192d       0x1d ARM RAM Debug/mbfuncdiag.o
+ .debug_line    0x0000194a      0x146 ARM RAM Debug/mbfuncdisc.o
+ .debug_line    0x00001a90      0x196 ARM RAM Debug/mbfuncholding.o
+ .debug_line    0x00001c26      0x145 ARM RAM Debug/mbfuncinput.o
+ .debug_line    0x00001d6b      0x13f ARM RAM Debug/mbfuncother.o
+ .debug_line    0x00001eaa       0xcb ARM RAM Debug/mbcrc.o
+ .debug_line    0x00001f75      0x1a2 ARM RAM Debug/mbrtu.o
+ .debug_line    0x00002117      0x1dd ARM RAM Debug/mbascii.o
+
+.debug_info     0x00000000     0x92d0
+ .debug_info    0x00000000       0x9f ARM RAM Debug/crt0.o
+ .debug_info    0x0000009f       0x9a ARM RAM Debug/startup.o
+ .debug_info    0x00000139      0x50a ARM RAM Debug/demo.o
+ .debug_info    0x00000643     0x1402 ARM RAM Debug/tasks.o
+ .debug_info    0x00001a45      0x78a ARM RAM Debug/croutine.o
+ .debug_info    0x000021cf      0x3d8 ARM RAM Debug/list.o
+ .debug_info    0x000025a7      0x7ab ARM RAM Debug/queue.o
+ .debug_info    0x00002d52      0x658 ARM RAM Debug/port.o
+ .debug_info    0x000033aa      0x265 ARM RAM Debug/portISR.o
+ .debug_info    0x0000360f      0x238 ARM RAM Debug/heap_1.o
+ .debug_info    0x00003847      0x324 ARM RAM Debug/porttimer.o
+ .debug_info    0x00003b6b      0x359 ARM RAM Debug/portevent.o
+ .debug_info    0x00003ec4      0x727 ARM RAM Debug/portother.o
+ .debug_info    0x000045eb     0x16b2 ARM RAM Debug/portserial.o
+ .debug_info    0x00005c9d      0x9a5 ARM RAM Debug/mb.o
+ .debug_info    0x00006642      0x4b2 ARM RAM Debug/mbutils.o
+ .debug_info    0x00006af4      0x521 ARM RAM Debug/mbfunccoils.o
+ .debug_info    0x00007015      0x3f6 ARM RAM Debug/mbfuncdisc.o
+ .debug_info    0x0000740b      0x5f1 ARM RAM Debug/mbfuncholding.o
+ .debug_info    0x000079fc      0x3e0 ARM RAM Debug/mbfuncinput.o
+ .debug_info    0x00007ddc      0x461 ARM RAM Debug/mbfuncother.o
+ .debug_info    0x0000823d      0x24a ARM RAM Debug/mbcrc.o
+ .debug_info    0x00008487      0x66b ARM RAM Debug/mbrtu.o
+ .debug_info    0x00008af2      0x7de ARM RAM Debug/mbascii.o
+
+.debug_abbrev   0x00000000     0x174a
+ .debug_abbrev  0x00000000       0x14 ARM RAM Debug/crt0.o
+ .debug_abbrev  0x00000014       0x10 ARM RAM Debug/startup.o
+ .debug_abbrev  0x00000024      0x103 ARM RAM Debug/demo.o
+ .debug_abbrev  0x00000127      0x1b9 ARM RAM Debug/tasks.o
+ .debug_abbrev  0x000002e0      0x1bc ARM RAM Debug/croutine.o
+ .debug_abbrev  0x0000049c       0xd8 ARM RAM Debug/list.o
+ .debug_abbrev  0x00000574      0x17e ARM RAM Debug/queue.o
+ .debug_abbrev  0x000006f2      0x189 ARM RAM Debug/port.o
+ .debug_abbrev  0x0000087b       0x8b ARM RAM Debug/portISR.o
+ .debug_abbrev  0x00000906       0xd1 ARM RAM Debug/heap_1.o
+ .debug_abbrev  0x000009d7       0xdb ARM RAM Debug/porttimer.o
+ .debug_abbrev  0x00000ab2       0xe4 ARM RAM Debug/portevent.o
+ .debug_abbrev  0x00000b96      0x13b ARM RAM Debug/portother.o
+ .debug_abbrev  0x00000cd1      0x230 ARM RAM Debug/portserial.o
+ .debug_abbrev  0x00000f01      0x14a ARM RAM Debug/mb.o
+ .debug_abbrev  0x0000104b       0xce ARM RAM Debug/mbutils.o
+ .debug_abbrev  0x00001119       0xd4 ARM RAM Debug/mbfunccoils.o
+ .debug_abbrev  0x000011ed        0x1 ARM RAM Debug/mbfuncdiag.o
+ .debug_abbrev  0x000011ee       0x80 ARM RAM Debug/mbfuncdisc.o
+ .debug_abbrev  0x0000126e       0xa8 ARM RAM Debug/mbfuncholding.o
+ .debug_abbrev  0x00001316       0x80 ARM RAM Debug/mbfuncinput.o
+ .debug_abbrev  0x00001396       0xa6 ARM RAM Debug/mbfuncother.o
+ .debug_abbrev  0x0000143c       0x90 ARM RAM Debug/mbcrc.o
+ .debug_abbrev  0x000014cc      0x119 ARM RAM Debug/mbrtu.o
+ .debug_abbrev  0x000015e5      0x165 ARM RAM Debug/mbascii.o
+
+.debug_aranges  0x00000000      0x308
+ .debug_aranges
+                0x00000000       0x20 ARM RAM Debug/crt0.o
+ .debug_aranges
+                0x00000020       0x28 ARM RAM Debug/startup.o
+ .debug_aranges
+                0x00000048       0x20 ARM RAM Debug/demo.o
+ .debug_aranges
+                0x00000068       0x20 ARM RAM Debug/tasks.o
+ .debug_aranges
+                0x00000088       0x20 ARM RAM Debug/croutine.o
+ .debug_aranges
+                0x000000a8       0x20 ARM RAM Debug/list.o
+ .debug_aranges
+                0x000000c8       0x20 ARM RAM Debug/queue.o
+ .debug_aranges
+                0x000000e8       0x20 ARM RAM Debug/port.o
+ .debug_aranges
+                0x00000108       0x20 ARM RAM Debug/portISR.o
+ .debug_aranges
+                0x00000128       0x20 ARM RAM Debug/heap_1.o
+ .debug_aranges
+                0x00000148       0x20 ARM RAM Debug/porttimer.o
+ .debug_aranges
+                0x00000168       0x20 ARM RAM Debug/portevent.o
+ .debug_aranges
+                0x00000188       0x20 ARM RAM Debug/portother.o
+ .debug_aranges
+                0x000001a8       0x20 ARM RAM Debug/portserial.o
+ .debug_aranges
+                0x000001c8       0x20 ARM RAM Debug/mb.o
+ .debug_aranges
+                0x000001e8       0x20 ARM RAM Debug/mbutils.o
+ .debug_aranges
+                0x00000208       0x20 ARM RAM Debug/mbfunccoils.o
+ .debug_aranges
+                0x00000228       0x20 ARM RAM Debug/mbfuncdisc.o
+ .debug_aranges
+                0x00000248       0x20 ARM RAM Debug/mbfuncholding.o
+ .debug_aranges
+                0x00000268       0x20 ARM RAM Debug/mbfuncinput.o
+ .debug_aranges
+                0x00000288       0x20 ARM RAM Debug/mbfuncother.o
+ .debug_aranges
+                0x000002a8       0x20 ARM RAM Debug/mbcrc.o
+ .debug_aranges
+                0x000002c8       0x20 ARM RAM Debug/mbrtu.o
+ .debug_aranges
+                0x000002e8       0x20 ARM RAM Debug/mbascii.o
+
+.debug_frame    0x00000000     0x1f14
+ .debug_frame   0x00000000      0x144 ARM RAM Debug/demo.o
+ .debug_frame   0x00000144      0x614 ARM RAM Debug/tasks.o
+ .debug_frame   0x00000758      0x144 ARM RAM Debug/croutine.o
+ .debug_frame   0x0000089c       0xec ARM RAM Debug/list.o
+ .debug_frame   0x00000988      0x1c8 ARM RAM Debug/queue.o
+ .debug_frame   0x00000b50      0x170 ARM RAM Debug/port.o
+ .debug_frame   0x00000cc0       0xd4 ARM RAM Debug/portISR.o
+ .debug_frame   0x00000d94       0x94 ARM RAM Debug/heap_1.o
+ .debug_frame   0x00000e28       0xec ARM RAM Debug/porttimer.o
+ .debug_frame   0x00000f14       0xc0 ARM RAM Debug/portevent.o
+ .debug_frame   0x00000fd4      0x220 ARM RAM Debug/portother.o
+ .debug_frame   0x000011f4      0x5a0 ARM RAM Debug/portserial.o
+ .debug_frame   0x00001794      0x118 ARM RAM Debug/mb.o
+ .debug_frame   0x000018ac       0x94 ARM RAM Debug/mbutils.o
+ .debug_frame   0x00001940       0x94 ARM RAM Debug/mbfunccoils.o
+ .debug_frame   0x000019d4       0x3c ARM RAM Debug/mbfuncdisc.o
+ .debug_frame   0x00001a10       0xc0 ARM RAM Debug/mbfuncholding.o
+ .debug_frame   0x00001ad0       0x3c ARM RAM Debug/mbfuncinput.o
+ .debug_frame   0x00001b0c       0x68 ARM RAM Debug/mbfuncother.o
+ .debug_frame   0x00001b74       0x3c ARM RAM Debug/mbcrc.o
+ .debug_frame   0x00001bb0      0x170 ARM RAM Debug/mbrtu.o
+ .debug_frame   0x00001d20      0x1f4 ARM RAM Debug/mbascii.o
+
+.debug_loc      0x00000000     0x1c0e
+ .debug_loc     0x00000000      0x126 ARM RAM Debug/demo.o
+ .debug_loc     0x00000126      0x5be ARM RAM Debug/tasks.o
+ .debug_loc     0x000006e4      0x126 ARM RAM Debug/croutine.o
+ .debug_loc     0x0000080a       0xd2 ARM RAM Debug/list.o
+ .debug_loc     0x000008dc      0x1a4 ARM RAM Debug/queue.o
+ .debug_loc     0x00000a80      0x150 ARM RAM Debug/port.o
+ .debug_loc     0x00000bd0       0x7e ARM RAM Debug/portISR.o
+ .debug_loc     0x00000c4e       0x7e ARM RAM Debug/heap_1.o
+ .debug_loc     0x00000ccc       0xd2 ARM RAM Debug/porttimer.o
+ .debug_loc     0x00000d9e       0xa8 ARM RAM Debug/portevent.o
+ .debug_loc     0x00000e46      0x1f8 ARM RAM Debug/portother.o
+ .debug_loc     0x0000103e      0x540 ARM RAM Debug/portserial.o
+ .debug_loc     0x0000157e       0xfc ARM RAM Debug/mb.o
+ .debug_loc     0x0000167a       0x7e ARM RAM Debug/mbutils.o
+ .debug_loc     0x000016f8       0x7e ARM RAM Debug/mbfunccoils.o
+ .debug_loc     0x00001776       0x2a ARM RAM Debug/mbfuncdisc.o
+ .debug_loc     0x000017a0       0xa8 ARM RAM Debug/mbfuncholding.o
+ .debug_loc     0x00001848       0x2a ARM RAM Debug/mbfuncinput.o
+ .debug_loc     0x00001872       0x54 ARM RAM Debug/mbfuncother.o
+ .debug_loc     0x000018c6       0x2a ARM RAM Debug/mbcrc.o
+ .debug_loc     0x000018f0      0x150 ARM RAM Debug/mbrtu.o
+ .debug_loc     0x00001a40      0x1ce ARM RAM Debug/mbascii.o
+
+.debug_pubnames
+                0x00000000      0xc69
+ .debug_pubnames
+                0x00000000       0x68 ARM RAM Debug/demo.o
+ .debug_pubnames
+                0x00000068      0x26c ARM RAM Debug/tasks.o
+ .debug_pubnames
+                0x000002d4       0x96 ARM RAM Debug/croutine.o
+ .debug_pubnames
+                0x0000036a       0x71 ARM RAM Debug/list.o
+ .debug_pubnames
+                0x000003db       0x9f ARM RAM Debug/queue.o
+ .debug_pubnames
+                0x0000047a       0x5a ARM RAM Debug/port.o
+ .debug_pubnames
+                0x000004d4       0xdb ARM RAM Debug/portISR.o
+ .debug_pubnames
+                0x000005af       0x4b ARM RAM Debug/heap_1.o
+ .debug_pubnames
+                0x000005fa       0x88 ARM RAM Debug/porttimer.o
+ .debug_pubnames
+                0x00000682       0x66 ARM RAM Debug/portevent.o
+ .debug_pubnames
+                0x000006e8       0x8a ARM RAM Debug/portother.o
+ .debug_pubnames
+                0x00000772       0x89 ARM RAM Debug/portserial.o
+ .debug_pubnames
+                0x000007fb       0xf8 ARM RAM Debug/mb.o
+ .debug_pubnames
+                0x000008f3       0x52 ARM RAM Debug/mbutils.o
+ .debug_pubnames
+                0x00000945       0x5a ARM RAM Debug/mbfunccoils.o
+ .debug_pubnames
+                0x0000099f       0x30 ARM RAM Debug/mbfuncdisc.o
+ .debug_pubnames
+                0x000009cf       0xa5 ARM RAM Debug/mbfuncholding.o
+ .debug_pubnames
+                0x00000a74       0x2f ARM RAM Debug/mbfuncinput.o
+ .debug_pubnames
+                0x00000aa3       0x3d ARM RAM Debug/mbfuncother.o
+ .debug_pubnames
+                0x00000ae0       0x20 ARM RAM Debug/mbcrc.o
+ .debug_pubnames
+                0x00000b00       0xb3 ARM RAM Debug/mbrtu.o
+ .debug_pubnames
+                0x00000bb3       0xb6 ARM RAM Debug/mbascii.o
+
+.debug_str      0x00000000      0x468
+ .debug_str     0x00000000       0x33 ARM RAM Debug/demo.o
+ .debug_str     0x00000033       0xdb ARM RAM Debug/tasks.o
+ .debug_str     0x0000010e       0x4f ARM RAM Debug/croutine.o
+ .debug_str     0x0000015d       0x2b ARM RAM Debug/list.o
+ .debug_str     0x00000188       0x5e ARM RAM Debug/queue.o
+ .debug_str     0x000001e6       0x12 ARM RAM Debug/port.o
+ .debug_str     0x000001f8       0x12 ARM RAM Debug/portISR.o
+ .debug_str     0x0000020a       0x12 ARM RAM Debug/heap_1.o
+ .debug_str     0x0000021c       0x12 ARM RAM Debug/porttimer.o
+ .debug_str     0x0000022e       0x1c ARM RAM Debug/portevent.o
+ .debug_str     0x0000024a       0x28 ARM RAM Debug/portother.o
+ .debug_str     0x00000272       0x79 ARM RAM Debug/portserial.o
+ .debug_str     0x000002eb       0x33 ARM RAM Debug/mb.o
+ .debug_str     0x0000031e       0x38 ARM RAM Debug/mbutils.o
+ .debug_str     0x00000356       0x3b ARM RAM Debug/mbfunccoils.o
+ .debug_str     0x00000391       0x46 ARM RAM Debug/mbfuncholding.o
+ .debug_str     0x000003d7       0x12 ARM RAM Debug/mbfuncother.o
+ .debug_str     0x000003e9       0x12 ARM RAM Debug/mbcrc.o
+ .debug_str     0x000003fb       0x3c ARM RAM Debug/mbrtu.o
+ .debug_str     0x00000437       0x31 ARM RAM Debug/mbascii.o
+
+.comment        0x00000000      0x4b4
+ .comment       0x00000000       0x2b ARM RAM Debug/demo.o
+ .comment       0x0000002b       0x2b ARM RAM Debug/tasks.o
+ .comment       0x00000056       0x2b ARM RAM Debug/croutine.o
+ .comment       0x00000081       0x2b ARM RAM Debug/list.o
+ .comment       0x000000ac       0x2b ARM RAM Debug/queue.o
+ .comment       0x000000d7       0x2b ARM RAM Debug/port.o
+ .comment       0x00000102       0x2b ARM RAM Debug/portISR.o
+ .comment       0x0000012d       0x2b ARM RAM Debug/heap_1.o
+ .comment       0x00000158       0x2b ARM RAM Debug/porttimer.o
+ .comment       0x00000183       0x2b ARM RAM Debug/portevent.o
+ .comment       0x000001ae       0x2b ARM RAM Debug/portother.o
+ .comment       0x000001d9       0x2b ARM RAM Debug/portserial.o
+ .comment       0x00000204       0x2b ARM RAM Debug/mb.o
+ .comment       0x0000022f       0x2b ARM RAM Debug/mbutils.o
+ .comment       0x0000025a       0x2b ARM RAM Debug/mbfunccoils.o
+ .comment       0x00000285       0x2b ARM RAM Debug/mbfuncdiag.o
+ .comment       0x000002b0       0x2b ARM RAM Debug/mbfuncdisc.o
+ .comment       0x000002db       0x2b ARM RAM Debug/mbfuncholding.o
+ .comment       0x00000306       0x2b ARM RAM Debug/mbfuncinput.o
+ .comment       0x00000331       0x2b ARM RAM Debug/mbfuncother.o
+ .comment       0x0000035c       0x2b ARM RAM Debug/mbcrc.o
+ .comment       0x00000387       0x2b ARM RAM Debug/mbrtu.o
+ .comment       0x000003b2       0x2b ARM RAM Debug/mbascii.o
+ .comment       0x000003dd       0x2b C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strcat.o)
+ .comment       0x00000408       0x2b C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(strncpy.o)
+ .comment       0x00000433       0x2b C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(sprintf.o)
+ .comment       0x0000045e       0x2b C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/lib_vfprintf_long_v4t_a_le.a(__vfprintf_long.o)
+ .comment       0x00000489       0x2b C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 1.6/lib/libc_v4t_a_le.a(__hex_lc_uc.o)

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.2 2006/11/19 03:36:01 wolti Exp $
+ * File: $Id: porttimer.c,v 1.3 2007/06/12 06:42:01 wolti Exp $
  */
 
 /* ----------------------- Platform includes --------------------------------*/
@@ -42,7 +42,7 @@ BOOL
 xMBPortTimersInit( USHORT usTim1Timeout50us )
 {
     BOOL            bInitialized = FALSE;
-    ULONG           ulReloadValue = ( MB_TIMER_TICKS * usTim1Timeout50us ) / ACLK;
+    ULONG           ulReloadValue = ( ACLK * ( ULONG ) usTim1Timeout50us ) / MB_TIMER_TICKS;
 
     if( ulReloadValue <= 1 )
     {

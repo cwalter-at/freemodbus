@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbfuncinput.c,v 1.9 2007/02/18 23:48:45 wolti Exp $
+ * File: $Id: mbfuncinput.c,v 1.10 2007/09/12 10:15:56 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -72,7 +72,7 @@ eMBFuncReadInputRegister( UCHAR *pucFrame, USHORT *usLen )
         usRegAddress++;
 
         usRegCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF] << 8 );
-        usRegCount = ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF + 1] );
+        usRegCount |= ( USHORT ) ( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF + 1] );
 
         /* Check if the number of registers to read is valid. If not
          * return Modbus illegal data value exception.

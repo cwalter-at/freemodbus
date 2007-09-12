@@ -1,3 +1,25 @@
+2007-07-17 (REL_1_3) Christian Walter <wolti@sil.at>
+
+ Added ARM7/AT91SAM7X port. Added Linux/TCP port from Steven Guo.
+
+ Details:
+ - FEATURES (ARM7): Added ARM7/AT91SAM7x port.
+ - FEATURES (LINUX): Added Linux/TCP port from Steven Guo.
+ - BUGS (ALL): Fixed bug in <eMBFuncReadInputRegister> where the high
+   byte of the register count was ignored. This does not have a
+   practical impact because the actual number of registers is always
+   lower.
+
+
+2007-07-17 (REL_1_3) Christian Walter <wolti@sil.at>
+
+ Added Linux/TCP port. Fixed bug in MSP430 port.
+
+ Detailted notes:
+ - FEATURE (LINUX): Added Linux/TCP port.
+ - BUGS (MSP430): Fixed bug with calculating the timer value.
+
+
 2007-04-25 (REL_1_2) Christian Walter <wolti@sil.at>
 
  Added LPC214X ARM port with Keil compiler. Added Z8Encore port for

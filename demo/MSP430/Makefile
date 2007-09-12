@@ -3,11 +3,11 @@
 #
 # Copyright (c) 2006 Christian Walter, Vienna 2006.
 #
-# $Id: Makefile,v 1.2 2006/11/19 03:57:49 wolti Exp $
+# $Id: Makefile,v 1.3 2007/06/12 06:42:01 wolti Exp $
 #
 # ---------------------------------------------------------------------------
 
-BASE        = /opt/gcc-msp430/
+BASE        = /cygdrive/c/mspgcc
 CC	        = $(BASE)/bin/msp430-gcc
 LD          = $(BASE)/bin/msp430-ld
 CXX	        = $(BASE)/bin/msp430-g++
