@@ -85,7 +85,6 @@
  </Watch4>
  <Files>
   <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\FreeRTOS\include\FreeRTOS.h" y="0" useHTMLEdit="0" path="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\FreeRTOS\include\FreeRTOS.h" left="0" selected="0" name="unnamed" top="0" />
-  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\port\mbportother.c" y="0" useHTMLEdit="0" path="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\port\mbportother.c" left="0" selected="0" name="unnamed" top="0" />
   <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="2" debugPath="c:\projects\freemodbus\demo\at91sam7x_rowley\system\crt0.s" y="34" useHTMLEdit="0" path="c:\projects\freemodbus\demo\at91sam7x_rowley\system\crt0.s" left="0" selected="0" name="unnamed" top="9" />
   <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="49" debugPath="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\demo.c" y="77" useHTMLEdit="0" path="C:\Projects\freemodbus\demo\AT91SAM7X_ROWLEY\demo.c" left="0" selected="1" name="unnamed" top="2" />
   <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="0" debugPath="C:\Projects\freemodbus\modbus\include\mb.h" y="33" useHTMLEdit="0" path="C:\Projects\freemodbus\modbus\include\mb.h" left="0" selected="0" name="unnamed" top="9" />

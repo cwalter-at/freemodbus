@@ -18,7 +18,7 @@ You should first check the file <tt>port.h</tt> and check the if the examples ar
 The Modbus protocol stacks needs a timer to detect the end of the frame. The timers should have a resolution of half the time of a serial character. For example for 38400 baud the character time is approx. 280us assuming 11bits for a single character. The smallest timeout used by the protocol stack is 3.5 times the character timeout.
 <p>You should start by implementing the function <code>xMBPortTimersInit( USHORT usTim1Timerout50us )</code> and <code>vMBPortTimersEnable(  )</code>. Test the function with the following sample code:
 \code
-vMBPortTimersInit( 20 );
+xMBPortTimersInit( 20 );
 vMBPortTimersEnable( );
 for( ;; );
 \endcode
@@ -82,7 +82,7 @@ void prvvUARTTxReadyISR( void )
     }
     else
     {
-        vMBPortSerialDisable( FALSE, FALSE );
+        vMBPortSerialEnable( FALSE, FALSE );
     }
 }
 \endcode

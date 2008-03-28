@@ -1,3 +1,13 @@
+2007-08-28 (REL_1_4) Christian Walter <wolti@sil.at>
+
+ Added support for HCS08. Fixed some small bugs in the documentation for
+ the porting layer.
+
+ Details:
+ - FEATURES (HCS08): Added new port.
+ - BUGS (ALL): Fixed some small bugs in the porting guide.
+
+
 2007-07-17 (REL_1_3) Christian Walter <wolti@sil.at>
 
  Added ARM7/AT91SAM7X port. Added Linux/TCP port from Steven Guo.
