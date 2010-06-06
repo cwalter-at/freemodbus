@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mb.c,v 1.27 2007/02/18 23:45:41 wolti Exp $
+ * File: $Id: mb.c,v 1.28 2010/06/06 13:54:40 wolti Exp $
  */
 
 /* ----------------------- System includes ----------------------------------*/
@@ -394,6 +394,10 @@ eMBPoll( void )
                     usLength = 0;
                     ucMBFrame[usLength++] = ( UCHAR ) ( ucFunctionCode | MB_FUNC_ERROR );
                     ucMBFrame[usLength++] = eException;
+                }
+                if( ( eMBCurrentMode == MB_ASCII ) && MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS )
+                {
+                    vMBPortTimersDelay( MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS );
                 }
                 eStatus = peMBFrameSendCur( ucMBAddress, ucMBFrame, usLength );
             }

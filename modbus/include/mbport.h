@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbport.h,v 1.17 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbport.h,v 1.19 2010/06/06 13:54:40 wolti Exp $
  */
 
 #ifndef _MB_PORT_H
@@ -77,18 +77,20 @@ void            xMBPortSerialClose( void );
 
 void            vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable );
 
-INLINE BOOL     xMBPortSerialGetByte( CHAR * pucByte );
+BOOL            xMBPortSerialGetByte( CHAR * pucByte );
 
-INLINE BOOL     xMBPortSerialPutByte( CHAR ucByte );
+BOOL            xMBPortSerialPutByte( CHAR ucByte );
 
 /* ----------------------- Timers functions ---------------------------------*/
 BOOL            xMBPortTimersInit( USHORT usTimeOut50us );
 
 void            xMBPortTimersClose( void );
 
-INLINE void     vMBPortTimersEnable( void );
+void            vMBPortTimersEnable( void );
 
-INLINE void     vMBPortTimersDisable( void );
+void            vMBPortTimersDisable( void );
+
+void            vMBPortTimersDelay( USHORT usTimeOutMS );
 
 /* ----------------------- Callback for the protocol stack ------------------*/
 

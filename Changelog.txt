@@ -1,3 +1,11 @@
+2010-05-06 (REL_1_5) Christian Walter <cwalter@embedded-solutions.at>
+
+ Added support for Atmel AT91SAM3S (Cortex M3) for IAR.
+
+ Details:
+ - FEATURES (ATSAM3S): Added new port.
+
+
 2007-08-28 (REL_1_4) Christian Walter <wolti@sil.at>
 
  Added support for HCS08. Fixed some small bugs in the documentation for

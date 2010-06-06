@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: mbconfig.h,v 1.14 2006/12/07 22:10:34 wolti Exp $
+ * File: $Id: mbconfig.h,v 1.15 2010/06/06 13:54:40 wolti Exp $
  */
 
 #ifndef _MB_CONFIG_H
@@ -68,6 +68,19 @@ PR_BEGIN_EXTERN_C
  * time of the network.
  */
 #define MB_ASCII_TIMEOUT_SEC                    (  1 )
+
+/*! \brief Timeout to wait in ASCII prior to enabling transmitter.
+ *
+ * If defined the function calls vMBPortSerialDelay with the argument
+ * MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS to allow for a delay before
+ * the serial transmitter is enabled. This is required because some
+ * targets are so fast that there is no time between receiving and
+ * transmitting the frame. If the master is to slow with enabling its
+ * receiver then he will not receive the response correctly.
+ */
+#ifndef MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS
+#define MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS    ( 0 )
+#endif
 
 /*! \brief Maximum number of Modbus functions codes the protocol stack
  *    should support.
