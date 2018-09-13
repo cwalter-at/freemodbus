@@ -1,3 +1,6 @@
+2018-09-13 (REL_1_6_0) Christian Walter <cwalter@embedded-solutions.at>
+ Notes: Changed licensing for mbfuncdisc.c. Updating licensing info
+  and contact details in core stack.
 
 2010-05-06 (REL_1_5_0) Christian Walter <cwalter@embedded-solutions.at>
  Notes: Added support for Atmel AT91SAM3S (Cortex M3) for IAR.
