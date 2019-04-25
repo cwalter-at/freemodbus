@@ -1,0 +1,3 @@
+[submodule "freemodbus-source"]
+	path = freemodbus-source
+	url = https://github.com/SadCl0wn/freemodbus-source.git
