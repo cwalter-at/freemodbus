@@ -82,7 +82,7 @@ vMBPortTimersDisable(  )
     TIFR1 |= _BV( OCF1A ) ;
 }
 
-/* This signal vecotr was changed! avr-libc
+/* This signal vector was changed! avr-libc
  * https://stackoverflow.com/questions/15174021/error-attempt-to-use-poisoned-sig-output-compare0a#15174455
  * http://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
  */

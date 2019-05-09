@@ -29,8 +29,10 @@
 
 # if defined  (__AVR_ATmega2560__)
 /* Which USART should we use? Select only one! */
-#define USART0
-//#define USART1
+			/* USB & Pins 0(RX), 1(TX) On mini mega bard: */
+//#define USART0
+			/* Pins 19(RX), 18(TX) On mini megea board: */
+#define USART1
 #endif
 
 #include "port.h"
