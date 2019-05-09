@@ -25,7 +25,7 @@ If one wants to recompile the software the WinAVR tools should be installed if t
 
 Example:
 ```
-$ ./modpoll -m rtu -a 0x0c -r 1000 -c 4 -t 3:hex -b 57600 -d 8 -p odd -s2 /dev/ttyUSB0 -l 1
+$ ./modpoll -m rtu -a 0x0c -r 1000 -c 4 -t 3:hex -b 57600 -d 8 -p even -s1 /dev/ttyUSB0 -l 1
 ```
 
 Start the Modbus Sample Application and test if the input registers starting
