@@ -12,7 +12,7 @@ In addition it requires an ATMega2560 target microcontroller. The micro-controll
 
 If avrdude is used for flashing the Makefile contains a target 'flash' which can be executed by calling 'make flash'. This programs the micro-controller with the current binary named 'demo.hex'.
 
-Example: (
+Example of manually flashing demo.hex:
 ```
 $ avrdude -b 115200 -c wiring -p atmega2560 -U flash:w:demo.hex -P /dev/ttyACM0 -D
 ```
