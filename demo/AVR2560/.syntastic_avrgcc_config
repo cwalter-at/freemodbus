@@ -1,0 +1,10 @@
+-I../../modbus/rtu
+-I../../modbus/ascii
+-I../../modbus/include
+-Iport
+-std=c99
+-Wall
+-Wextra
+-Wpedantic
+-DF_CPU=16000000UL
+-mmcu=atmega2560
