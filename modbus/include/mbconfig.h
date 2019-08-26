@@ -75,6 +75,15 @@ PR_BEGIN_EXTERN_C
 #define MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS    ( 0 )
 #endif
 
+/*! \brief Timeout to wait in RTU prior to enabling transmitter.
+ *
+ * As per ASCII, this waits before replying, to help master devices
+ * that are too slow to switch to listen mode
+ */
+#ifndef MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS
+#define MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS      ( 0 )
+#endif
+
 /*! \brief Maximum number of Modbus functions codes the protocol stack
  *    should support.
  *
