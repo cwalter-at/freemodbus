@@ -400,6 +400,11 @@ eMBPoll( void )
                 {
                     vMBPortTimersDelay( MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS );
                 }                
+#elif MB_RTU_ENABLED > 0
+                if ( ( eMBCurrentMode == MB_RTU ) && MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS )
+                {
+                    vMBPortTimersDelay( MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS );
+                }
 #endif
                 eStatus = peMBFrameSendCur( ucMBAddress, ucMBFrame, usLength );
             }
