@@ -211,7 +211,15 @@ prvvMBTCPPortError( void *pvArg, err_t xErr )
 #ifdef MB_TCP_DEBUG
         vMBPortLog( MB_LOG_DEBUG, "MBTCP-ERROR", "Error with client connection! Droping it.\r\n" );
 #endif
-        prvvMBPortReleaseClient( pxPCB );
+
+        if( pxPCB == pxPCBListen )
+        {
+            pxPCBListen = NULL;
+            
+#ifdef MB_TCP_DEBUG
+            vMBPortLog( MB_LOG_ERROR, "MBTCP-ERROR", "Error with listening connection!\r\n" );
+#endif
+        }
     }
 }
 
