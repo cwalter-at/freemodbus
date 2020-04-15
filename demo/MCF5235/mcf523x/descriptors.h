@@ -3,8 +3,8 @@
  *                                                                                  *
  *                                                                                  *
  *    $RCSfile: descriptors.h,v $                                                            *
- *    $Revision: 1.1 $                                                              *
- *    $Date: 2006/05/14 21:59:16 $                                                  *
+ *    $Revision$                                                              *
+ *    $Date$                                                  *
  *                                                                                  *
  * DESCRIPTION                                                                      *
  *   USB Descriptors definitions.                                                   *

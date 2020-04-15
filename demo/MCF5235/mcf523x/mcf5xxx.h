@@ -3,8 +3,8 @@
  *                                                                                  *
  *                                                                                  *
  *    $RCSfile: mcf5xxx.h,v $                                                            *
- *    $Revision: 1.1 $                                                              *
- *    $Date: 2006/05/14 21:59:16 $                                                  *
+ *    $Revision$                                                              *
+ *    $Date$                                                  *
  *                                                                                  *
  * DESCRIPTION                                                                      *
  *   Definitions common to all ColdFire processors.                                 *

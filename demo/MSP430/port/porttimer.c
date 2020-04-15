@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: porttimer.c,v 1.3 2007/06/12 06:42:01 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Platform includes --------------------------------*/

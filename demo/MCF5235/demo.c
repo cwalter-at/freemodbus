@@ -17,7 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.2 2006/06/15 15:38:55 wolti Exp $
+ * File: $Id$
  */
 
 #include "mcf5xxx.h"

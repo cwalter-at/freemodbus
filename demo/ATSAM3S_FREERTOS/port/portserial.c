@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: portserial.c,v 1.1 2010/06/06 13:07:20 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- System includes ----------------------------------*/

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: simple2.c,v 1.8 2006/05/14 21:54:16 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- System includes ----------------------------------*/

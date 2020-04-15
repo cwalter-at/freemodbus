@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.1 2008/03/28 15:59:07 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Modbus includes ----------------------------------*/

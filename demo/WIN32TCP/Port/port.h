@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: port.h,v 1.2 2006/06/26 19:24:07 wolti Exp $
+ * File: $Id$
  */
 
 #ifndef _PORT_H

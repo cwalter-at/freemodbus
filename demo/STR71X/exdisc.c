@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: exdisc.c,v 1.4 2006/06/15 15:41:13 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- System includes ----------------------------------*/

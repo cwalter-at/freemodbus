@@ -26,7 +26,7 @@
  *
  * Author: Christian Walter <wolti@sil.at>
  *
- * File: $Id: fec.h,v 1.1 2006/08/30 23:18:07 wolti Exp $
+ * File: $Id$
  */
 
 #ifndef _FEC_H

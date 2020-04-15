@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.3 2006/11/19 15:22:40 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Platform includes --------------------------------*/

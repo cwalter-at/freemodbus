@@ -20,7 +20,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.6 2006/09/17 16:45:53 wolti Exp $
+ * File: $Id$
  */
 
 #include <avr/io.h>

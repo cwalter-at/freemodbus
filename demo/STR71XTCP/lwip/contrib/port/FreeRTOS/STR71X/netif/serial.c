@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: serial.c,v 1.4 2006/09/04 20:38:50 wolti Exp $
+ * File: $Id$
  */
 
 

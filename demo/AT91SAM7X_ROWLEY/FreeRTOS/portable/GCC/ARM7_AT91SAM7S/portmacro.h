@@ -3,7 +3,7 @@
  * Copyright (c) 2007 Christian Walter <wolti@sil.at>
  * All rights reserved.
  *
- * $Id: portmacro.h,v 1.1 2007/09/12 10:15:56 wolti Exp $
+ * $Id$
  */
 
 /*

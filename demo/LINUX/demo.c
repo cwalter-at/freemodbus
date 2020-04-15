@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: demo.c,v 1.2 2006/10/12 08:12:06 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Standard includes --------------------------------*/

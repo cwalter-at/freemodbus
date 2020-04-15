@@ -27,7 +27,7 @@
  * Note: Most of the network buffer code is based on the MCF5235 examples from
  *   Freescale.
  *
- * File: $Id: nbuf.c,v 1.1 2006/08/30 23:18:07 wolti Exp $
+ * File: $Id$
  */
 
 /* ------------------------ Platform includes ----------------------------- */

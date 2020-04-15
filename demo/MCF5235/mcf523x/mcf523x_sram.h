@@ -3,8 +3,8 @@
  *                                                                                  *
  *                                                                                  *
  *    $RCSfile: mcf523x_sram.h,v $                                                            *
- *    $Revision: 1.1 $                                                              *
- *    $Date: 2006/05/14 21:59:16 $                                                  *
+ *    $Revision$                                                              *
+ *    $Date$                                                  *
  *                                                                                  *
  * DESCRIPTION                                                                      *
  *   Register and bit definitions for the MCF523X.                                  *

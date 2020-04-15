@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: mbcrc.c,v 1.2 2006/05/14 21:55:01 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- System includes ----------------------------------*/

@@ -25,7 +25,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * File: $Id: portevent.c,v 1.1 2010/06/05 09:57:48 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Modbus includes ----------------------------------*/

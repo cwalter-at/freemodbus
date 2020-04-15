@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * File: $Id: portserial.c,v 1.3 2006/11/19 03:57:49 wolti Exp $
+ * File: $Id$
  */
 
 /* ----------------------- Platform includes --------------------------------*/
