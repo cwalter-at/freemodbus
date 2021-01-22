@@ -360,7 +360,11 @@ eMBPoll( void )
             if( eStatus == MB_ENOERR )
             {
                 /* Check if the frame is for us. If not ignore the frame. */
+#if MB_SUPPORT_IGNORE_BROADCAST > 0
+                if( ( ucRcvAddress == ucMBAddress ) || ( ( ucRcvAddress == MB_ADDRESS_BROADCAST ) && !xMBIgnoreBroadcast() ) )
+#else
                 if( ( ucRcvAddress == ucMBAddress ) || ( ucRcvAddress == MB_ADDRESS_BROADCAST ) )
+#endif
                 {
                     ( void )xMBPortEventPost( EV_EXECUTE );
                 }
@@ -398,7 +402,7 @@ eMBPoll( void )
                 if( ( eMBCurrentMode == MB_ASCII ) && MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS )
                 {
                     vMBPortTimersDelay( MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS );
-                }                
+                }
                 eStatus = peMBFrameSendCur( ucMBAddress, ucMBFrame, usLength );
             }
             break;

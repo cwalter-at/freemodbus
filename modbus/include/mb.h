@@ -410,6 +410,20 @@ eMBErrorCode    eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
 eMBErrorCode    eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress,
                                   USHORT usNDiscrete );
 
+/*! \defgroup protocol_mgmt Protocol management
+ * \code #include "mb.h" \endcode
+ */
+
+/*! \brief Callback determining if a broadcast frame should be responded to.
+ *
+ * The callback is evaluated once for each incoming Modbus broadcast frame.
+ * See the <em>MB_SUPPORT_IGNORE_BROADCAST</em>
+ * configuration macro on how to enable the callback.
+ *
+ * \return non-zero to ignore the broadcast frame, zero otherwise.
+ */
+UCHAR			xMBIgnoreBroadcast( void );
+
 #ifdef __cplusplus
 PR_END_EXTERN_C
 #endif

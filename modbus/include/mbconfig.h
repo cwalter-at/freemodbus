@@ -75,6 +75,19 @@ PR_BEGIN_EXTERN_C
 #define MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS    ( 0 )
 #endif
 
+/*! \brief If <em>xMBIgnoreBroadcast</em> should be supported.
+ *
+ * Defaults to zero, meaning freemodbus
+ * behaves classically (always responds to broadcast).
+ *
+ * If you enable this, you must implement the mentioned callback function.
+ * Since this is just a default, you can define the macro externally,
+ * and avoid modifications to this file.
+ */
+#ifndef MB_SUPPORT_IGNORE_BROADCAST
+#define MB_SUPPORT_IGNORE_BROADCAST             ( 0 )
+#endif
+
 /*! \brief Maximum number of Modbus functions codes the protocol stack
  *    should support.
  *
