@@ -59,7 +59,9 @@
 /* ----------------------- Static variables ---------------------------------*/
 
 static UCHAR    ucMBAddress;
+#if MB_ASCII_ENABLED > 0
 static eMBMode  eMBCurrentMode;
+#endif
 
 static enum
 {
@@ -183,7 +185,9 @@ eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eM
             }
             else
             {
+#if MB_ASCII_ENABLED > 0
                 eMBCurrentMode = eMode;
+#endif
                 eMBState = STATE_DISABLED;
             }
         }
@@ -214,7 +218,9 @@ eMBTCPInit( USHORT ucTCPPort )
         peMBFrameSendCur = eMBTCPSend;
         pvMBFrameCloseCur = MB_PORT_HAS_CLOSE ? vMBTCPPortClose : NULL;
         ucMBAddress = MB_TCP_PSEUDO_ADDRESS;
+#if MB_ASCII_ENABLED > 0
         eMBCurrentMode = MB_TCP;
+#endif
         eMBState = STATE_DISABLED;
     }
     return eStatus;
@@ -395,10 +401,12 @@ eMBPoll( void )
                     ucMBFrame[usLength++] = ( UCHAR )( ucFunctionCode | MB_FUNC_ERROR );
                     ucMBFrame[usLength++] = eException;
                 }
+#if MB_ASCII_ENABLED > 0
                 if( ( eMBCurrentMode == MB_ASCII ) && MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS )
                 {
                     vMBPortTimersDelay( MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS );
-                }                
+                }
+#endif
                 eStatus = peMBFrameSendCur( ucMBAddress, ucMBFrame, usLength );
             }
             break;
