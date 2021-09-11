@@ -65,7 +65,7 @@ xMBTCPPortInit( USHORT usTCPPort )
 {
     struct tcp_pcb *pxPCBListenNew, *pxPCBListenOld;
     BOOL            bOkay = FALSE;
-    USHORT          usPort;
+    USHORT          usPort = MB_TCP_DEFAULT_PORT;
 
     if( usTCPPort == 0 )
     {
@@ -155,7 +155,7 @@ vMBTCPPortDisable( void )
 err_t
 prvxMBTCPPortAccept( void *pvArg, struct tcp_pcb *pxPCB, err_t xErr )
 {
-    err_t           error;
+    err_t           error = ERR_OK;
 
     if( xErr != ERR_OK )
     {
@@ -220,7 +220,7 @@ prvxMBTCPPortReceive( void *pvArg, struct tcp_pcb *pxPCB, struct pbuf *p, err_t 
 {
     USHORT          usLength;
 
-    err_t           error;
+    err_t           error = ERR_OK;
 
     if( xErr != ERR_OK )
     {
