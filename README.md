@@ -1,1 +1,7 @@
-This project sees little-to-no activity from the original creators, yet it seems it is still very popular. Let's try a more open and courageous way forward - everyone is welcomed to participate, create PRs, and contribute in any way. The PRs will be merged if properly justified and no pushback from community. It's understood that bugs and errors may enter the codebase with this approach, hence the last version 1.6.0 Christian Walter is the latest official release. You will therefore always have the option to decide to use either `master` or `1.6.0`
+# Freemodbus
+
+## Introduction
+
+This is a fork of the freemodbus protocol stack, extended with a port for ADuc702x processors.
+
+
