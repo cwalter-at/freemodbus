@@ -99,7 +99,6 @@ static volatile eMBBytePos eBytePos;
 static volatile UCHAR *pucSndBufferCur;
 static volatile USHORT usSndBufferCount;
 
-static volatile UCHAR ucLRC;
 static volatile UCHAR ucMBLFCharacter;
 
 /* ----------------------- Start implementation -----------------------------*/

@@ -81,7 +81,7 @@ static const UCHAR aucCRCLo[] = {
 };
 
 USHORT
-usMBCRC16( UCHAR * pucFrame, USHORT usLen )
+usMBCRC16( const UCHAR * pucFrame, USHORT usLen )
 {
     UCHAR           ucCRCHi = 0xFF;
     UCHAR           ucCRCLo = 0xFF;
