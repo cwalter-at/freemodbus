@@ -154,7 +154,7 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     USHORT          usCRC16Result = 0;
 
     ENTER_CRITICAL_SECTION(  );
-    assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
+    assert( usRcvBufferPos <= MB_SER_PDU_SIZE_MAX );
 
     /* Length and CRC check */
 #ifdef STM32_CMAKE // work around nasty gcc compiler bug
