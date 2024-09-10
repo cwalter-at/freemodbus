@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MCF5235 Port
+ * FreeModbus Library: MCF5235 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
  *
@@ -76,33 +76,33 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     BOOL            bStatus = TRUE;
     UCHAR           ucMode = 0;
 
-    (void)ucPort;
+    ( void )ucPort;
 
     switch ( eParity )
     {
-        case MB_PAR_EVEN:
-            ucMode |= MCF_UART_UMR_PM( 0x0 );
-            break;
-        case MB_PAR_ODD:
-            ucMode |= MCF_UART_UMR_PM( 0x0 ) | MCF_UART_UMR_PT;
-            break;
-        case MB_PAR_NONE:
-            ucMode |= MCF_UART_UMR_PM( 0x3 );
-            break;
-        default:
-            bStatus = FALSE;
+    case MB_PAR_EVEN:
+        ucMode |= MCF_UART_UMR_PM( 0x0 );
+        break;
+    case MB_PAR_ODD:
+        ucMode |= MCF_UART_UMR_PM( 0x0 ) | MCF_UART_UMR_PT;
+        break;
+    case MB_PAR_NONE:
+        ucMode |= MCF_UART_UMR_PM( 0x3 );
+        break;
+    default:
+        bStatus = FALSE;
     }
 
     switch ( ucDataBits )
     {
-        case 8:
-            ucMode |= MCF_UART_UMR_BC( 0x3 );
-            break;
-        case 7:
-            ucMode |= MCF_UART_UMR_BC( 0x2 );
-            break;
-        default:
-            bStatus = FALSE;
+    case 8:
+        ucMode |= MCF_UART_UMR_BC( 0x3 );
+        break;
+    case 7:
+        ucMode |= MCF_UART_UMR_BC( 0x2 );
+        break;
+    default:
+        bStatus = FALSE;
     }
     if( bStatus == TRUE )
     {
@@ -128,8 +128,7 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         MCF_UART_UACR0 = 0;
 
         /* UART 0: Enable pins */
-        MCF_GPIO_PAR_UART = MCF_GPIO_PAR_UART_PAR_U0RXD |
-            MCF_GPIO_PAR_UART_PAR_U0TXD;
+        MCF_GPIO_PAR_UART = MCF_GPIO_PAR_UART_PAR_U0RXD | MCF_GPIO_PAR_UART_PAR_U0TXD;
         vMBPortSerialEnable( FALSE, FALSE );
     }
 
@@ -144,7 +143,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = MCF_UART_URB0;
     return TRUE;

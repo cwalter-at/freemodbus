@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,9 +31,9 @@
 /// \unit
 ///
 /// !!!Purpose
-/// 
+///
 /// Utility for BMP
-/// 
+///
 //------------------------------------------------------------------------------
 
 #ifndef BMP_H
@@ -110,7 +110,7 @@ extern unsigned char BMP_Decode(
     unsigned int height,
     unsigned char bpp);
 
-extern void WriteBMPheader(unsigned int* pAddressHeader, 
+extern void WriteBMPheader(unsigned int* pAddressHeader,
                     unsigned int  bmpHSize,
                     unsigned int  bmpVSize,
                     unsigned char bmpRgb,

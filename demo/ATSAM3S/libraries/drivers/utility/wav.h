@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -60,7 +60,7 @@ typedef struct _WavHeader
 	/// SampleRate * NumChannels * BitsPerSample/8
 	unsigned int   byteRate;
 	/// NumChannels * BitsPerSample/8
-	unsigned short blockAlign; 
+	unsigned short blockAlign;
 	/// 8 bits = 8, 16 bits = 16, etc.
 	unsigned short bitsPerSample;
 	/// Contains the letters "data".

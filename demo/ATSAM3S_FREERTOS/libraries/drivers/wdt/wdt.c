@@ -37,12 +37,12 @@
 /** \addtogroup wdt_module Working with WDT
  * The WDT driver provides the interface to configure and use the WDT
  * peripheral.
- * 
+ *
  * The WDT can be used to prevent system lock-up if the software becomes
  * trapped in a deadlock. It can generate a general reset or a processor
  * reset only. It is clocked by slow clock divided by 128.
- * 
- * The WDT is running at reset with 16 seconds watchdog period (slow clock at 32.768 kHz) 
+ *
+ * The WDT is running at reset with 16 seconds watchdog period (slow clock at 32.768 kHz)
  * and external reset generation enabled. The user must either disable it or
  * reprogram it to meet the application requires.
  *
@@ -55,9 +55,9 @@
  * For more accurate information, please look at the WDT section of the
  * Datasheet.
  *
- * \note 
+ * \note
  * The Watchdog Mode Register (WDT_MR) can be written only once.\n
- * 
+ *
  * Related files :\n
  * \ref wdt.c\n
  * \ref wdt.h.\n
@@ -103,7 +103,7 @@ void WDT_Enable(uint32_t mode)
 void WDT_Disable(void)
 {
     Wdt *pWDT = WDT;
-    
+
     pWDT->WDT_MR = WDT_MR_WDDIS;
 }
 
@@ -113,7 +113,7 @@ void WDT_Disable(void)
 void WDT_Restart(void)
 {
     Wdt *pWDT = WDT;
-    
+
     pWDT->WDT_CR = 0xA5000001;
 }
 
@@ -123,7 +123,7 @@ void WDT_Restart(void)
 uint32_t WDT_GetStatus(void)
 {
     Wdt *pWDT = WDT;
-    
+
     return(pWDT->WDT_SR & 0x3);
 }
 

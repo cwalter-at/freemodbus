@@ -78,7 +78,7 @@ inline void WDG_CntReloadUpdate ( u16 PreLoadValue )
 * Function Name  : WDG_PeriodValueConfig
 * Description    : Set the prescaler and counter reload value based on the
 *                  needed time.
-* Input          : Amount of time (µs) needed, peripheral clock2 value
+* Input          : Amount of time (Âµs) needed, peripheral clock2 value
 * Return         : None
 *******************************************************************************/
 void WDG_PeriodValueConfig ( u32 Time );

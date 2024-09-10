@@ -113,7 +113,7 @@ void PCU_LPMEnter ( LPM_MODES Xmode  )
       // Write '1' to Stop Bit
       XTI->CTRL |= 0x04;
       // add Delay
-      
+
       temp = 0;
       temp = 1;
       temp = 2;

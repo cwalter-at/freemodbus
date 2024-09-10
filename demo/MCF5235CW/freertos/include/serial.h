@@ -19,13 +19,13 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS.org, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 	***************************************************************************
 */
@@ -36,58 +36,58 @@
 typedef void * xComPortHandle;
 
 typedef enum
-{ 
-	serCOM1, 
-	serCOM2, 
-	serCOM3, 
-	serCOM4, 
-	serCOM5, 
-	serCOM6, 
-	serCOM7, 
-	serCOM8 
+{
+	serCOM1,
+	serCOM2,
+	serCOM3,
+	serCOM4,
+	serCOM5,
+	serCOM6,
+	serCOM7,
+	serCOM8
 } eCOMPort;
 
-typedef enum 
-{ 
-	serNO_PARITY, 
-	serODD_PARITY, 
-	serEVEN_PARITY, 
-	serMARK_PARITY, 
-	serSPACE_PARITY 
+typedef enum
+{
+	serNO_PARITY,
+	serODD_PARITY,
+	serEVEN_PARITY,
+	serMARK_PARITY,
+	serSPACE_PARITY
 } eParity;
 
-typedef enum 
-{ 
-	serSTOP_1, 
-	serSTOP_2 
+typedef enum
+{
+	serSTOP_1,
+	serSTOP_2
 } eStopBits;
 
-typedef enum 
-{ 
-	serBITS_5, 
-	serBITS_6, 
-	serBITS_7, 
-	serBITS_8 
+typedef enum
+{
+	serBITS_5,
+	serBITS_6,
+	serBITS_7,
+	serBITS_8
 } eDataBits;
 
-typedef enum 
-{ 
-	ser50,		
-	ser75,		
-	ser110,		
-	ser134,		
-	ser150,    
+typedef enum
+{
+	ser50,
+	ser75,
+	ser110,
+	ser134,
+	ser150,
 	ser200,
-	ser300,		
-	ser600,		
-	ser1200,	
-	ser1800,	
-	ser2400,   
+	ser300,
+	ser600,
+	ser1200,
+	ser1800,
+	ser2400,
 	ser4800,
-	ser9600,		
-	ser19200,	
-	ser38400,	
-	ser57600,	
+	ser9600,
+	ser19200,
+	ser38400,
+	ser57600,
 	ser115200
 } eBaud;
 

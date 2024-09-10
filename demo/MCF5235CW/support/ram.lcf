@@ -1,5 +1,5 @@
 #
-# FreeModbus Libary: MCF5235 Demo Application
+# FreeModbus Library: MCF5235 Demo Application
 # Copyright (C) 2007 Christian Walter <wolti@sil.at>
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
 # File: $Id: ram.lcf,v 1.1 2007/02/19 00:56:14 wolti Exp $
 #
 
-MEMORY 
+MEMORY
 {
     ext_flash   (RWX) : ORIGIN = 0x00000000, LENGTH = 0x0
     sdram       (RWX) : ORIGIN = 0x10000000, LENGTH = 0x0
@@ -37,14 +37,14 @@ MEMORY
     ipsbar      (RWX) : ORIGIN = 0x40000000, LENGTH = 0x0
 }
 
-SECTIONS 
+SECTIONS
 {
     .sdram      : {} > sdram
     .vector_ram : {} > vector_ram
     .ipsbar     : {} > ipsbar
     .sram       : {} > sram
     .ext_flash  : {} > ext_flash
-    
+
     .vectors :
     {
         . = ALIGN (0x4);
@@ -56,10 +56,10 @@ SECTIONS
         *(.text)
         . = ALIGN (0x4);
         *(.rodata)
-        . = ALIGN (0x4);        
+        . = ALIGN (0x4);
     } >> user
 
-    .data : 
+    .data :
     {
         ___sinit__ = .;
         STATICINIT
@@ -72,8 +72,8 @@ SECTIONS
         *(.sdata)
         __END_SDATA = .;
         __SDA_BASE = .;
-        . = ALIGN (0x4);        
-        
+        . = ALIGN (0x4);
+
     } >> user
 
     .bss :
@@ -86,10 +86,10 @@ SECTIONS
         __START_BSS = .;
         *(.bss)
         *(COMMON)
-        __END_BSS = .;  
+        __END_BSS = .;
         . = ALIGN(0x4);
     } >> user
-    
+
     .custom :
     {
 
@@ -100,7 +100,7 @@ SECTIONS
 
         .               = ALIGN (0x4);
     } >> user
-    
+
     ___IPSBAR           = ADDR(.ipsbar);
     ___VECTOR_RAM       = ADDR(.vector_ram);
 
@@ -112,10 +112,10 @@ SECTIONS
 
     ___EXT_FLASH        = ADDR(.ext_flash);
     ___EXT_FLASH_SIZE   = 0x00200000;
-    
+
     ___heap_addr    = ___HEAP_START;
     ___heap_size    = 0x10000;
     __SP_INIT       = ___SP_INIT;
     __S_romp        = 0x0;
-    
+
 }

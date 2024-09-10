@@ -1,9 +1,9 @@
 // Memory Configuration File
 //
 // Description:
-//  A memory configuration file contains commands that define the legally 
-//  accessible areas of memory for your specific board. Useful for example 
-//  when the debugger tries to display the content of a "char *" variable, 
+//  A memory configuration file contains commands that define the legally
+//  accessible areas of memory for your specific board. Useful for example
+//  when the debugger tries to display the content of a "char *" variable,
 //  that has not yet been initialized.
 //  In this case the debugger may try to read from a bogus address, which
 //  could cause a bus error.

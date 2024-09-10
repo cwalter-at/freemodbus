@@ -36,28 +36,28 @@ void EIC_Init(void)
   u32 dOffset=((u32)&T0TIMI_Addr);
 
   /* Disable FIQ and IRQ interrupts */
-  EIC->ICR = 0x00000000; 
+  EIC->ICR = 0x00000000;
 
   /* Disable all channels interrupts */
-  EIC->IER = 0x00000000; 
+  EIC->IER = 0x00000000;
 
   /* Clear all pending bits */
-  EIC->IPR = 0xFFFFFFFF; 
+  EIC->IPR = 0xFFFFFFFF;
 
   /* Disable all FIQ channels interrupts and clear FIQ */
-  EIC->FIR = 0x0000000C; 
+  EIC->FIR = 0x0000000C;
 
   /* channels pending bits */
-  /* Ste the current priority level to zero */                         
-  EIC->CIPR = 0x00000000; 
+  /* Ste the current priority level to zero */
+  EIC->CIPR = 0x00000000;
 
   /* IVR = high half of load PC instruction */
-  EIC->IVR  = 0xE59F0000; 
+  EIC->IVR  = 0xE59F0000;
 
   dOffset = (dOffset+0x00007E0)<<16;
 
   /* Initialize SIRn registers */
-  for(bCounter=0; bCounter<32; bCounter++) 
+  for(bCounter=0; bCounter<32; bCounter++)
   {
     EIC->SIR[bCounter] = dOffset|0xF0000000;
     dOffset += 0x00000004 << 16;
@@ -76,16 +76,16 @@ void EIC_CurrentPriorityLevelConfig(u8 NewPriorityLevel)
   u32 dVal;
 
   /* Save ICR content */
-  dVal = EIC->ICR;              
+  dVal = EIC->ICR;
 
   /* Disable IRQ interrupts. */
-  EIC->ICR &= ~0x0001;          
+  EIC->ICR &= ~0x0001;
 
   /* Change the current priority */
-  EIC->CIPR = NewPriorityLevel; 
+  EIC->CIPR = NewPriorityLevel;
 
   /* Restore ICR content */
-  EIC->ICR = dVal;              
+  EIC->ICR = dVal;
 }
 
 /******************* (C) COPYRIGHT 2003 STMicroelectronics *****END OF FILE****/

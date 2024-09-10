@@ -27,15 +27,15 @@
 
 typedef enum { TIM_EXTERNAL,
                TIM_INTERNAL
-             } TIM_Clocks; 
+             } TIM_Clocks;
 
 typedef enum { TIM_RISING,
                TIM_FALLING
-             } TIM_Clock_Edges; 
+             } TIM_Clock_Edges;
 
 typedef enum { TIM_CHANNEL_A,
                TIM_CHANNEL_B
-             } TIM_Channels;  
+             } TIM_Channels;
 
 typedef enum { TIM_WITH_IT,
                TIM_WITHOUT_IT
@@ -43,16 +43,16 @@ typedef enum { TIM_WITH_IT,
 
 typedef enum { TIM_TIMING,
                TIM_WAVE
-             } TIM_OC_Modes; 
+             } TIM_OC_Modes;
 
 typedef enum { TIM_HIGH,
                TIM_LOW
-             } TIM_Logic_Levels; 
+             } TIM_Logic_Levels;
 
 typedef enum { TIM_START,
                TIM_STOP,
                TIM_CLEAR
-             } TIM_CounterOperations; 
+             } TIM_CounterOperations;
 
 typedef enum { TIM_ICFA = 0x8000,
                TIM_OCFA = 0x4000,
@@ -63,37 +63,37 @@ typedef enum { TIM_ICFA = 0x8000,
 
 typedef struct { u16 Pulse;
                  u16 Period;
-               } PWMI_parameters; 
+               } PWMI_parameters;
 
-#define TIM_ECKEN_Mask  0x0001 
-#define TIM_EXEDG_Mask  0x0002 
+#define TIM_ECKEN_Mask  0x0001
+#define TIM_EXEDG_Mask  0x0002
 
-#define TIM_IEDGA_Mask  0x0004 
-#define TIM_IEDGB_Mask  0x0008 
+#define TIM_IEDGA_Mask  0x0004
+#define TIM_IEDGB_Mask  0x0008
 
-#define TIM_PWM_Mask    0x0010 
+#define TIM_PWM_Mask    0x0010
 
-#define TIM_OPM_Mask    0x0020 
+#define TIM_OPM_Mask    0x0020
 
-#define TIM_OCAE_Mask   0x0040 
-#define TIM_OCBE_Mask   0x0080  
+#define TIM_OCAE_Mask   0x0040
+#define TIM_OCBE_Mask   0x0080
 
-#define TIM_OLVLA_Mask  0x0100 
-#define TIM_OLVLB_Mask  0x0200  
+#define TIM_OLVLA_Mask  0x0100
+#define TIM_OLVLB_Mask  0x0200
 
-#define TIM_FOLVA_Mask  0x0400  
-#define TIM_FOLVB_Mask  0x0800 
+#define TIM_FOLVA_Mask  0x0400
+#define TIM_FOLVB_Mask  0x0800
 
-#define TIM_PWMI_Mask   0x4000 
+#define TIM_PWMI_Mask   0x4000
 
-#define TIM_EN_Mask     0x8000  
+#define TIM_EN_Mask     0x8000
 
-#define TIM_OCBIE_mask  0x0800  
-#define TIM_ICBIE_Mask  0x1000  
-#define TIM_TOE_Mask    0x2000  
-#define TIM_OCAIE_mask  0x4000   
+#define TIM_OCBIE_mask  0x0800
+#define TIM_ICBIE_Mask  0x1000
+#define TIM_TOE_Mask    0x2000
+#define TIM_OCAIE_mask  0x4000
 
-#define TIM_ICAIE_Mask  0x8000   
+#define TIM_ICAIE_Mask  0x8000
 
 #define TIM_ICA_IT   0x8000 /* Input Capture Channel A  */
 #define TIM_OCA_IT   0x4000 /* Output Compare Channel A */

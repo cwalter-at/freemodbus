@@ -1,4 +1,4 @@
-/* 
+/*
  * MODBUS Library: AT91SAM7X/FreeRTOS port
  * Copyright (c) 2007 Christian Walter <wolti@sil.at>
  * All rights reserved.

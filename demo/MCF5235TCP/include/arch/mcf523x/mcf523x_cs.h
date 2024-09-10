@@ -2,8 +2,8 @@
  * File:	mcf523x_cs.h
  * Purpose:	Register and bit definitions for the MCF523X
  *
- * Notes:	
- *	
+ * Notes:
+ *
  */
 
 #ifndef __MCF523X_CS_H__

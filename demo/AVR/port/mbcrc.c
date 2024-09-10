@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ATMega168 Port
+ * FreeModbus Library: ATMega168 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -103,7 +103,7 @@ static const PROGMEM UCHAR aucCRCLo[] = {
 };
 
 USHORT
-usMBCRC16( UCHAR * pucFrame, USHORT usLen )
+usMBCRC16( UCHAR *pucFrame, USHORT usLen )
 {
     UCHAR           ucCRCHi = 0xFF;
     UCHAR           ucCRCLo = 0xFF;
@@ -113,7 +113,7 @@ usMBCRC16( UCHAR * pucFrame, USHORT usLen )
     {
         iIndex = ucCRCLo ^ *( pucFrame++ );
         ucCRCLo = ucCRCHi ^ pgm_read_byte( &aucCRCHi[iIndex] );
-        ucCRCHi = pgm_read_byte( &aucCRCLo[iIndex] );;
+        ucCRCHi = pgm_read_byte( &aucCRCLo[iIndex] );
     }
     return ucCRCHi << 8 | ucCRCLo;
 }

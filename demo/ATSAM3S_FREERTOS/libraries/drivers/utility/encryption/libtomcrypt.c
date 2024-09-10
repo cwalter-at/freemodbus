@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -71,7 +71,7 @@
 /// \param Buffer to store converted value
 /// \param Length of buffer
 //------------------------------------------------------------------------------
-static inline void ASCII2Hex(const char * ascii, unsigned char * binary, unsigned int length) 
+static inline void ASCII2Hex(const char * ascii, unsigned char * binary, unsigned int length)
 {
     unsigned int i;
 
@@ -100,7 +100,7 @@ static inline void ASCII2Hex(const char * ascii, unsigned char * binary, unsigne
 /// Initializes the decryption process
 //------------------------------------------------------------------------------
 #ifdef ONLY_ONE_ENCRYPTION
-void ltc_init(void) 
+void ltc_init(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -141,7 +141,7 @@ void ltc_init(void)
 //------------------------------------------------------------------------------
 #ifndef ONLY_ONE_ENCRYPTION
 #if defined(ENCRYPTION_CBC)
-void ltc_init_AES_CBC(void) 
+void ltc_init_AES_CBC(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -170,7 +170,7 @@ void ltc_init_AES_CBC(void)
 /// Initializes the decryption process for AES, mode CTR
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_CTR)
-void ltc_init_AES_CTR(void) 
+void ltc_init_AES_CTR(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -199,7 +199,7 @@ void ltc_init_AES_CTR(void)
 /// Initializes the decryption process for AES, mode ECB
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_ECB)
-void ltc_init_AES_ECB(void) 
+void ltc_init_AES_ECB(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -224,7 +224,7 @@ void ltc_init_AES_ECB(void)
 /// Initializes the decryption process for 3DES, mode CBC
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_CBC)
-void ltc_init_3DES_CBC(void) 
+void ltc_init_3DES_CBC(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -253,7 +253,7 @@ void ltc_init_3DES_CBC(void)
 /// Initializes the decryption process for 3DES, mode CTR
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_CTR)
-void ltc_init_3DES_CTR(void) 
+void ltc_init_3DES_CTR(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];
@@ -282,7 +282,7 @@ void ltc_init_3DES_CTR(void)
 /// Initializes the decryption process for 3DES, mode ECB
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_ECB)
-void ltc_init_3DES_ECB(void) 
+void ltc_init_3DES_ECB(void)
 {
     int cipherID;
     unsigned char key[ENCRYPTION_KEY_LENGTH];

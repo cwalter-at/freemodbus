@@ -10,7 +10,7 @@ passive
 persist
 # proxy into lan
 proxyarp
-# disable compressoin 
+# disable compressoin
 #nodeflate
 #nobsdcomp
 #novj

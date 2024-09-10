@@ -159,7 +159,7 @@ typedef volatile uint32		vuint32; /* 32 bits */
 /*
  * Functions provided by mcf5xxx.s
  */
- 
+
 int 	asm_set_ipl (uint32);
 void	mcf5xxx_wr_cacr (uint32);
 void	mcf5xxx_wr_acr0 (uint32);

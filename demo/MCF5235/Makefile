@@ -23,7 +23,7 @@ LDSCRIPT    = m5235-ram.ld
 LDFLAGS	    = -nostartfiles -m528x -Wl,--script=$(LDSCRIPT)
 
 TGT         = demo
-OTHER_CSRC  = 
+OTHER_CSRC  =
 OTHER_ASRC  = vector.S crt0.S
 CSRC        = demo.c init.c port/portserial.c port/portother.c \
               port/portevent.c port/porttimer.c \
@@ -36,8 +36,8 @@ CSRC        = demo.c init.c port/portserial.c port/portother.c \
               ../../modbus/functions/mbfuncinput.c \
               ../../modbus/functions/mbfuncother.c \
               ../../modbus/functions/mbfuncdisc.c \
-              ../../modbus/functions/mbutils.c 
-ASRC        = 
+              ../../modbus/functions/mbutils.c
+ASRC        =
 OBJS        = $(CSRC:.c=.o) $(ASRC:.S=.o)
 NOLINK_OBJS = $(OTHER_CSRC:.c=.o) $(OTHER_ASRC:.S=.o)
 DEPS        = $(OBJS:.o=.d) $(NOLINK_OBJS:.o=.d)

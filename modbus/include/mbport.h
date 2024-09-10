@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -31,11 +31,12 @@
 #define _MB_PORT_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
 
 /* ----------------------- Type definitions ---------------------------------*/
-
 typedef enum
 {
     EV_READY,                   /*!< Startup finished. */
@@ -67,8 +68,7 @@ BOOL            xMBPortEventGet(  /*@out@ */ eMBEventType * eEvent );
 
 /* ----------------------- Serial port functions ----------------------------*/
 
-BOOL            xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate,
-                                   UCHAR ucDataBits, eMBParity eParity );
+BOOL            xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity );
 
 void            vMBPortClose( void );
 
@@ -118,11 +118,14 @@ void            vMBTCPPortClose( void );
 
 void            vMBTCPPortDisable( void );
 
-BOOL            xMBTCPPortGetRequest( UCHAR **ppucMBTCPFrame, USHORT * usTCPLength );
+BOOL            xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength );
 
-BOOL            xMBTCPPortSendResponse( const UCHAR *pucMBTCPFrame, USHORT usTCPLength );
+BOOL            xMBTCPPortSendResponse( const UCHAR * pucMBTCPFrame, USHORT usTCPLength );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

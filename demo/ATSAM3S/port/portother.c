@@ -1,8 +1,8 @@
 /*
- * FreeModbus Libary: Atmel AT91SAM3S Demo Application
+ * FreeModbus Library: Atmel AT91SAM3S Demo Application
  * Copyright (C) 2010 Christian Walter <cwalter@embedded-solutions.at>
  *
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -13,7 +13,7 @@
  *   documentation and/or other materials provided with the distribution.
  * 3. The name of the author may not be used to endorse or promote products
  *   derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * IF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -45,6 +45,7 @@ void
 vMBPortEnterCritical( void )
 {
     __istate_t      xCurState;
+
     xCurState = __get_interrupt_state(  );
     __disable_interrupt(  );
     if( ulNesting == 0 )
@@ -67,8 +68,9 @@ vMBPortExitCritical( void )
 void
 vMBPortClose( void )
 {
-    extern void vMBPortSerialClose( void );
-    extern void vMBPortTimerClose( void );
+    extern void     vMBPortSerialClose( void );
+    extern void     vMBPortTimerClose( void );
+
     vMBPortSerialClose(  );
     vMBPortTimerClose(  );
 }

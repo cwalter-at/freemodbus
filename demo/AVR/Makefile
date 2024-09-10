@@ -17,10 +17,10 @@ COMMON = -mmcu=$(MCU)
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON) \
 		 -Iport -I. \
-		 -I../../modbus/rtu -I../../modbus/ascii -I../../modbus/include 
+		 -I../../modbus/rtu -I../../modbus/ascii -I../../modbus/include
 CFLAGS += -Wall -gstabs -DF_CPU=20000000UL  -Os -Wall -Wstrict-prototypes
 
-CFLAGS += -Wp,-M,-MP,-MT,$(*F).o,-MF,dep/$(@F).d 
+CFLAGS += -Wp,-M,-MP,-MT,$(*F).o,-MF,dep/$(@F).d
 
 ## Assembly specific flags
 ASMFLAGS = $(COMMON)
@@ -54,11 +54,11 @@ MBOBJECTS = ../../modbus/mb.o \
 			../../modbus/functions/mbfuncinput.o \
 			../../modbus/functions/mbfuncother.o \
 			../../modbus/functions/mbfuncdisc.o \
-			../../modbus/functions/mbutils.o 
+			../../modbus/functions/mbutils.o
 
 
 ## Build
-all: $(TARGET).elf $(TARGET).cof $(TARGET).hex $(TARGET).eep 
+all: $(TARGET).elf $(TARGET).cof $(TARGET).hex $(TARGET).eep
 
 ## Compile
 demo.o: demo.c
@@ -85,7 +85,7 @@ $(TARGET).elf: $(OBJECTS) $(MBOBJECTS) $(MBPORTOBJECTS)
 	$(OBJCOPY) -h -S $< > $@
 
 flash:
-	$(AVRDUDE) -p m168 -c stk200 -U flash:w:$(TARGET).hex				
+	$(AVRDUDE) -p m168 -c stk200 -U flash:w:$(TARGET).hex
 
 #size: ${TARGET}
 #	@echo
@@ -94,7 +94,7 @@ flash:
 ## Clean target
 .PHONY: clean
 clean:
-	-rm -rf $(OBJECTS) $(MBOBJECTS) $(MBPORTOBJECTS) 
+	-rm -rf $(OBJECTS) $(MBOBJECTS) $(MBPORTOBJECTS)
 	-rm -rf $(TARGET).elf $(TARGET).hex $(TARGET).eep $(TARGET).cof $(TARGET).map
 	-rm -rf dep
 

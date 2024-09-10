@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MCF5235 Port
+ * FreeModbus Library: MCF5235 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
  *
@@ -30,10 +30,10 @@
 #include "mbport.h"
 
 /* ----------------------- Defines ----------------------------------------- */
-#define PIT_PRESCALER 				1024UL
+#define PIT_PRESCALER               1024UL
 #define PIT_TIMER_TICKS             ( FCPU / PIT_PRESCALER )
-#define PIT_MODULUS_REGISTER(t50us)	\
-	( (t50us * PIT_TIMER_TICKS )/20000UL - 1UL)
+#define PIT_MODULUS_REGISTER(t50us) \
+    ( (t50us * PIT_TIMER_TICKS )/20000UL - 1UL)
 
 /* ----------------------- Static variables -------------------------------- */
 USHORT          usTimerModulus;

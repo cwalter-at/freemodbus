@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2009, Atmel Corporation
  *
@@ -26,7 +26,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
  */
- 
+
 /**
  * \file
  *
@@ -36,17 +36,17 @@
  *
  * \par Usage
  *
- * -# Enable/disable %flash ready interrupt sources using EFC_EnableFrdyIt() 
+ * -# Enable/disable %flash ready interrupt sources using EFC_EnableFrdyIt()
  *    and EFC_DisableFrdyIt().
- * -# Translates the given address into which EEFC, page and offset values 
+ * -# Translates the given address into which EEFC, page and offset values
  *    for difference density %flash memory using EFC_TranslateAddress().
- * -# Computes the address of a %flash access given the EFC, page and offset 
+ * -# Computes the address of a %flash access given the EFC, page and offset
  *    for difference density %flash memory using EFC_ComputeAddress().
  * -# Start the executing command with EFC_StartCommand()
  * -# Retrieve the current status of the EFC using EFC_GetStatus().
  * -# Retrieve the result of the last executed command with EFC_GetResult().
  */
- 
+
 #ifndef EFC_H
 #define EFC_H
 
@@ -68,7 +68,7 @@
 #define EFC_FCMD_GFB     0x0D
 #define EFC_FCMD_STUI    0x0E
 #define EFC_FCMD_SPUI    0x0F
- 
+
 /* The IAP function entry addreass */
 #define CHIP_FLASH_IAP_ADDRESS  (0x00800008)
 

@@ -62,19 +62,19 @@ typedef enum
   FLASH_WPF     =  0xA8  /* 101-01000 = 1010 1000 = 0xA8 */ /* FLASH_ER.8*/
 } flashflags;
 
-#define FLASH_WMS_Mask   0x80000000 
-#define FLASH_SUSP_Mask  0x40000000 
-#define FLASH_WPG_Mask   0x20000000 
-#define FLASH_DWPG_Mask  0x10000000  
-#define FLASH_SER_Mask   0x08000000  
-#define FLASH_SPR_Mask   0x01000000 
+#define FLASH_WMS_Mask   0x80000000
+#define FLASH_SUSP_Mask  0x40000000
+#define FLASH_WPG_Mask   0x20000000
+#define FLASH_DWPG_Mask  0x10000000
+#define FLASH_SER_Mask   0x08000000
+#define FLASH_SPR_Mask   0x01000000
 #define FLASH_DBGP_Mask  0x00000002
 #define FLASH_ACCP_Mask  0x00000001
 
-#define FLASH_Reg_Mask   0xE0 
-#define FLASH_Flag_Mask  0x1F 
+#define FLASH_Reg_Mask   0xE0
+#define FLASH_Flag_Mask  0x1F
 
-#define FLASH_INTM_Mask  0x00200000 
+#define FLASH_INTM_Mask  0x00200000
 
 
 /*******************************************************************************
@@ -89,8 +89,8 @@ void FLASH_Init(void);
 * Function Name  : FLASH_FlagStatus
 * Description    : Returns the NewState of Flash flags
 * Input 1        : Flash Flag (FLASH_BSYA0,  FLASH_BSYA1, FLASH_LOCK, FLASH_INTP
-*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER, 
-*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF)  
+*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER,
+*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF)
 * Return         : flagstatus (SET or RESET)
 *******************************************************************************/
 FlagStatus FLASH_FlagStatus(flashflags Xflag);
@@ -99,7 +99,7 @@ FlagStatus FLASH_FlagStatus(flashflags Xflag);
 * Function Name  : FLASH_WriteOpStatus
 * Description    : Checks the write operation status
 * Input 1        : Flash bank (FLASH_BANK0 or FLASH_BANK1)
-* Return         : write operation status (Write operation is going on if 
+* Return         : write operation status (Write operation is going on if
 *                  FlagStatus is SET and write operation is completed if
 *                  FlagStatus is RESET)
 *******************************************************************************/
@@ -214,7 +214,7 @@ inline void FLASH_ITClear(void)
 
 /*******************************************************************************
 * Function Name  : FLASH_WritePrConfig
-* Description    : Enable Write protection or Disable temporarily Write 
+* Description    : Enable Write protection or Disable temporarily Write
 *                  protection of a flash sector.
 * Input 1        : Flash Sector.
 * Input 2        : Enable or disable Flash sector Write Protection.
@@ -234,12 +234,12 @@ void FLASH_PermanentDebugPrConfig(FunctionalState NewState);
 * Function Name  : FLASH_ProtectionLevel
 * Description    : If the flash is Debug protected, up to 16 unprotection/
 *                  protection cycles are possible using the NVAPR1 register.
-*                  This routine returns the number of times of Debug unprotection. 
+*                  This routine returns the number of times of Debug unprotection.
 * Input          : None.
 * Return         : Number of times of Debug Protection/Unprotection(0..15)
-*                  Example: if 5 is returned, this means that the flash was debug 
-*                  unprotected 5 times(using PDS bits)and debug protected 5 times 
-*                  (1 time:using DBGP bit & 4 times: using PEN bits).   
+*                  Example: if 5 is returned, this means that the flash was debug
+*                  unprotected 5 times(using PDS bits)and debug protected 5 times
+*                  (1 time:using DBGP bit & 4 times: using PEN bits).
 *******************************************************************************/
 u16 FLASH_ProtectionLevel(void);
 

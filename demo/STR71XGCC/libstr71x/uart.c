@@ -23,14 +23,14 @@
 
 /*******************************************************************************
 * Function Name  : UART_Init
-* Description    : This function initializes the selected UART registers to 
+* Description    : This function initializes the selected UART registers to
 *                  their reset values
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
 * Output         : None
 * Return         : None
 *******************************************************************************/
 void UART_Init(UART_TypeDef *UARTx)
-{ 
+{
   UARTx->CR = 0x0000;
   UARTx->IER = 0x0000;
   (void)UARTx->RxBUFR;
@@ -61,14 +61,14 @@ void UART_BaudRateConfig(UART_TypeDef *UARTx, u32 BaudRate)
 * Input 2        : u32 The baudrate value
 * Input 3        : The parity type, it can be UART_EVEN_PARITY, UART_ODD_PARITY
 *		   or UART_NO_PARITY
-* Input 4        : The number of stop bits UART_0_5_StopBits, UART_1_StopBits, 
+* Input 4        : The number of stop bits UART_0_5_StopBits, UART_1_StopBits,
 *                  UART_1_5_StopBits or UART_2_StopBits
 * Input 5        : The UART mode, it can be
 *                  UARTM_8D 	for 8-bit data format
 *                  UARTM_7D_P 	for 7-bit data + parity format
 *                  UART_9D 	for 9-bit data format
 *                  UART_8D_W	for 8-bit data + wake-up bit format
-*                  UART_8D_P	for 8-bit data + parity bit format   
+*                  UART_8D_P	for 8-bit data + parity bit format
 * Output         : None
 * Return         : None
 *******************************************************************************/
@@ -86,7 +86,7 @@ void UART_Config(UART_TypeDef *UARTx, u32 BaudRate, UARTParity_TypeDef Parity,
 * Description    : This function enables or disables one or several interrupt
 *                  sources of the selected UART.
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
-* Input 2        : The new interrupt flag or flags    
+* Input 2        : The new interrupt flag or flags
 * Input 3        : ENABLE or DISABLE
 * Output         : None
 * Return         : None
@@ -175,14 +175,14 @@ void UART_OnOffConfig(UART_TypeDef *UARTx, FunctionalState NewState)
 *******************************************************************************/
 void UART_ByteSend(UART_TypeDef *UARTx, u8 *Data)
 {
- /* if FIFO ENABLED */  
+ /* if FIFO ENABLED */
  if (UARTx->CR & 0x0400)
 
     /* Wait until the TxFIFO contains at least 1 free place */
     while((UARTx->SR & UART_TxFull));
 
- /* if FIFO DISABLED */  
- else 
+ /* if FIFO DISABLED */
+ else
 
     /* Wait until the transmit shift register is empty */
     while (!(UARTx->SR & UART_TxEmpty));
@@ -200,17 +200,17 @@ void UART_ByteSend(UART_TypeDef *UARTx, u8 *Data)
 *******************************************************************************/
 void UART_9BitByteSend(UART_TypeDef *UARTx, u16 *Data)
 {
- /* if FIFO ENABLED */  
+ /* if FIFO ENABLED */
  if(UARTx->CR & 0x0400)
 
-    /* Wait until the TxFIFO contains at least 1 free place */    
+    /* Wait until the TxFIFO contains at least 1 free place */
     while((UARTx->SR & UART_TxFull));
 
- /* if FIFO DISABLED */  
+ /* if FIFO DISABLED */
  else
 
     /* Wait until the transmit shift register is empty */
-    while (!(UARTx->SR & UART_TxEmpty)); 
+    while (!(UARTx->SR & UART_TxEmpty));
 
   UARTx->TxBUFR = ((*Data) & 0x01FF);
 }
@@ -226,7 +226,7 @@ void UART_9BitByteSend(UART_TypeDef *UARTx, u16 *Data)
 *******************************************************************************/
 void UART_DataSend(UART_TypeDef *UARTx, u8 *Data, u8 DataLength)
 {
-  
+
  while(DataLength--)
   {
     UART_ByteSend(UARTx,Data);
@@ -239,7 +239,7 @@ void UART_DataSend(UART_TypeDef *UARTx, u8 *Data, u8 DataLength)
 * Description    : This function sends several 9-bit data to the selected UART.
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
 * Input 2        : A pointer to the data to send
-* Input 3        : The data length 
+* Input 3        : The data length
 * Output         : None
 * Return         : None
 *******************************************************************************/
@@ -312,9 +312,9 @@ u16 UART_9BitByteReceive(UART_TypeDef *UARTx, u16 *Data, u8 TimeOut)
 
 /* while the UART_RxFIFO is empty and no Timeoutidle */
   while (!((wStatus=UARTx->SR) & (UART_TimeOutIdle|UART_RxHalfFull|UART_RxBufFull)));
- 
+
 /* then read the RxBUFR*/
-  *Data = (u16)UARTx->RxBUFR; 
+  *Data = (u16)UARTx->RxBUFR;
   return wStatus;
 }
 
@@ -347,9 +347,9 @@ u16 UART_DataReceive(UART_TypeDef *UARTx, u8 *Data, u8 DataLength, u8 TimeOut)
 * Return         : The UARTx.SR register contents
 *******************************************************************************/
 u16 UART_9BitDataReceive(UART_TypeDef *UARTx, u16 *Data, u8 DataLength, u8 TimeOut)
-{ 
+{
  u16 wStatus = 0;
-  
+
   while(DataLength--)
     wStatus=UART_9BitByteReceive(UARTx,Data++,TimeOut);
   return wStatus;

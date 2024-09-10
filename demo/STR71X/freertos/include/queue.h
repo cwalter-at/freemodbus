@@ -19,13 +19,13 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 	***************************************************************************
 */
@@ -38,9 +38,9 @@ typedef void * xQueueHandle;
 /**
  * queue. h
  * <pre>
- xQueueHandle xQueueCreate( 
-                              unsigned portBASE_TYPE uxQueueLength, 
-                              unsigned portBASE_TYPE uxItemSize 
+ xQueueHandle xQueueCreate(
+                              unsigned portBASE_TYPE uxQueueLength,
+                              unsigned portBASE_TYPE uxItemSize
                           );
  * </pre>
  *
@@ -49,15 +49,15 @@ typedef void * xQueueHandle;
  *
  * @param uxQueueLength The maximum number of items that the queue can contain.
  *
- * @param uxItemSize The number of bytes each item in the queue will require.  
+ * @param uxItemSize The number of bytes each item in the queue will require.
  * Items are queued by copy, not by reference, so this is the number of bytes
  * that will be copied for each posted item.  Each item on the queue must be
  * the same size.
  *
- * @return If the queue is successfully create then a handle to the newly 
+ * @return If the queue is successfully create then a handle to the newly
  * created queue is returned.  If the queue cannot be created then 0 is
  * returned.
- * 
+ *
  * Example usage:
    <pre>
  struct AMessage
@@ -96,10 +96,10 @@ xQueueHandle xQueueCreate( unsigned portBASE_TYPE uxQueueLength, unsigned portBA
 /**
  * queue. h
  * <pre>
- portBASE_TYPE xQueueSend( 
-                             xQueueHandle xQueue, 
-                             const void * pvItemToQueue, 
-                             portTickType xTicksToWait 
+ portBASE_TYPE xQueueSend(
+                             xQueueHandle xQueue,
+                             const void * pvItemToQueue,
+                             portTickType xTicksToWait
                          );
  * </pre>
  *
@@ -108,8 +108,8 @@ xQueueHandle xQueueCreate( unsigned portBASE_TYPE uxQueueLength, unsigned portBA
  * See xQueueSendFromISR () for an alternative which may be used in an ISR.
  *
  * @param xQueue The handle to the queue on which the item is to be posted.
- * 
- * @param pvItemToQueue A pointer to the item that is to be placed on the 
+ *
+ * @param pvItemToQueue A pointer to the item that is to be placed on the
  * queue.  The size of the items the queue will hold was defined when the
  * queue was created, so this many bytes will be copied from pvItemToQueue
  * into the queue storage area.
@@ -117,7 +117,7 @@ xQueueHandle xQueueCreate( unsigned portBASE_TYPE uxQueueLength, unsigned portBA
  * @param xTicksToWait The maximum amount of time the task should block
  * waiting for space to become available on the queue, should it already
  * be full.  The call will return immediately if this is set to 0.  The
- * time is defined in tick periods so the constant portTICK_RATE_MS 
+ * time is defined in tick periods so the constant portTICK_RATE_MS
  * should be used to convert to real time if this is required.
  *
  * @return pdTRUE if the item was successfully posted, otherwise errQUEUE_FULL.
@@ -148,7 +148,7 @@ xQueueHandle xQueueCreate( unsigned portBASE_TYPE uxQueueLength, unsigned portBA
 
     if( xQueue1 != 0 )
     {
-        // Send an unsigned long.  Wait for 10 ticks for space to become 
+        // Send an unsigned long.  Wait for 10 ticks for space to become
         // available if necessary.
         if( xQueueSend( xQueue1, ( void * ) &ulVar, ( portTickType ) 10 ) != pdPASS )
         {
@@ -175,13 +175,13 @@ signed portBASE_TYPE xQueueSend( xQueueHandle xQueue, const void * pvItemToQueue
 /**
  * queue. h
  * <pre>
- portBASE_TYPE xQueueReceive( 
-                                xQueueHandle xQueue, 
-                                void *pcBuffer, 
-                                portTickType xTicksToWait 
+ portBASE_TYPE xQueueReceive(
+                                xQueueHandle xQueue,
+                                void *pcBuffer,
+                                portTickType xTicksToWait
                             );</pre>
  *
- * Receive an item from a queue.  The item is received by copy so a buffer of 
+ * Receive an item from a queue.  The item is received by copy so a buffer of
  * adequate size must be provided.  The number of bytes copied into the buffer
  * was defined when the queue was created.
  *
@@ -193,10 +193,10 @@ signed portBASE_TYPE xQueueSend( xQueueHandle xQueue, const void * pvItemToQueue
  *
  * @param pcBuffer Pointer to the buffer into which the received item will
  * be copied.
- * 
+ *
  * @param xTicksToWait The maximum amount of time the task should block
  * waiting for an item to receive should the queue be empty at the time
- * of the call.    The time is defined in tick periods so the constant 
+ * of the call.    The time is defined in tick periods so the constant
  * portTICK_RATE_MS should be used to convert to real time if this is required.
  *
  * @return pdTRUE if an item was successfully received from the queue,
@@ -211,7 +211,7 @@ signed portBASE_TYPE xQueueSend( xQueueHandle xQueue, const void * pvItemToQueue
  } xMessage;
 
  xQueueHandle xQueue;
- 
+
  // Task to create a queue and post a value.
  void vATask( void *pvParameters )
  {
@@ -266,7 +266,7 @@ signed portBASE_TYPE xQueueReceive( xQueueHandle xQueue, void *pcBuffer, portTic
  * Return the number of messages stored in a queue.
  *
  * @param xQueue A handle to the queue being queried.
- * 
+ *
  * @return The number of messages available in the queue.
  *
  * \page uxQueueMessagesWaiting uxQueueMessagesWaiting
@@ -280,7 +280,7 @@ unsigned portBASE_TYPE uxQueueMessagesWaiting( xQueueHandle xQueue );
  *
  * Delete a queue - freeing all the memory allocated for storing of items
  * placed on the queue.
- * 
+ *
  * @param xQueue A handle to the queue to be deleted.
  *
  * \page vQueueDelete vQueueDelete
@@ -291,10 +291,10 @@ void vQueueDelete( xQueueHandle xQueue );
 /**
  * queue. h
  * <pre>
- portBASE_TYPE xQueueSendFromISR( 
-                                    xQueueHandle pxQueue, 
-                                    const void *pvItemToQueue, 
-                                    portBASE_TYPE xTaskPreviouslyWoken 
+ portBASE_TYPE xQueueSendFromISR(
+                                    xQueueHandle pxQueue,
+                                    const void *pvItemToQueue,
+                                    portBASE_TYPE xTaskPreviouslyWoken
                                 );
  </pre>
  *
@@ -306,8 +306,8 @@ void vQueueDelete( xQueueHandle xQueue );
  * it would be preferable to store a pointer to the item being queued.
  *
  * @param xQueue The handle to the queue on which the item is to be posted.
- * 
- * @param pvItemToQueue A pointer to the item that is to be placed on the 
+ *
+ * @param pvItemToQueue A pointer to the item that is to be placed on the
  * queue.  The size of the items the queue will hold was defined when the
  * queue was created, so this many bytes will be copied from pvItemToQueue
  * into the queue storage area.
@@ -318,7 +318,7 @@ void vQueueDelete( xQueueHandle xQueue );
  * the value returned from the previous call.  See the file serial .c in the
  * PC port for a good example of this mechanism.
  *
- * @return pdTRUE if a task was woken by posting onto the queue.  This is 
+ * @return pdTRUE if a task was woken by posting onto the queue.  This is
  * used by the ISR to determine if a context switch may be required following
  * the ISR.
  *
@@ -337,12 +337,12 @@ void vQueueDelete( xQueueHandle xQueue );
     do
     {
         // Obtain a byte from the buffer.
-        cIn = portINPUT_BYTE( RX_REGISTER_ADDRESS );						
+        cIn = portINPUT_BYTE( RX_REGISTER_ADDRESS );
 
         // Post the byte.  The first time round the loop cTaskWokenByPost
         // will be pdFALSE.  If the queue send causes a task to wake we do
         // not want the task to run until we have finished the ISR, so
-        // xQueueSendFromISR does not cause a context switch.  Also we 
+        // xQueueSendFromISR does not cause a context switch.  Also we
         // don't want subsequent posts to wake any other tasks, so we store
         // the return value back into cTaskWokenByPost so xQueueSendFromISR
         // knows not to wake any task the next iteration of the loop.
@@ -366,11 +366,11 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
 /**
  * queue. h
  * <pre>
- portBASE_TYPE xQueueReceiveFromISR( 
-                                       xQueueHandle pxQueue, 
-                                       void *pcBuffer, 
-                                       portBASE_TYPE *pxTaskWoken 
-                                   ); 
+ portBASE_TYPE xQueueReceiveFromISR(
+                                       xQueueHandle pxQueue,
+                                       void *pcBuffer,
+                                       portBASE_TYPE *pxTaskWoken
+                                   );
  * </pre>
  *
  * Receive an item from a queue.  It is safe to use this function from within an
@@ -381,7 +381,7 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
  *
  * @param pcBuffer Pointer to the buffer into which the received item will
  * be copied.
- * 
+ *
  * @param pcTaskWoken A task may be blocked waiting for space to become
  * available on the queue.  If xQueueReceiveFromISR causes such a task to
  * unblock *pcTaskWoken will get set to pdTRUE, otherwise *pcTaskWoken will
@@ -392,9 +392,9 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
  *
  * Example usage:
    <pre>
- 
+
  xQueueHandle xQueue;
- 
+
  // Function to create a queue and post some values.
  void vAFunction( void *pvParameters )
  {
@@ -424,7 +424,7 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
     xQueueSend( xQueue, ( void * ) &cValueToPost, xBlockTime );
  }
 
- // ISR that outputs all the characters received on the queue. 
+ // ISR that outputs all the characters received on the queue.
  void vISR_Routine( void )
  {
  portBASE_TYPE xTaskWokenByReceive = pdFALSE;
@@ -435,7 +435,7 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
         // A character was received.  Output the character now.
         vOutputCharacter( cRxedChar );
 
-        // If removing the character from the queue woke the task that was 
+        // If removing the character from the queue woke the task that was
         // posting onto the queue cTaskWokenByReceive will have been set to
         // pdTRUE.  No matter how many times this loop iterates only one
         // task will be woken.

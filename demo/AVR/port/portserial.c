@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ATMega168 Port
+ * FreeModbus Library: ATMega168 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *   - Initial version and ATmega168 support
  * Modfications Copyright (C) 2006 Tran Minh Hoang:
@@ -43,7 +43,7 @@ void
 vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 {
 #ifdef RTS_ENABLE
-    UCSRB |= _BV( TXEN ) | _BV(TXCIE);
+    UCSRB |= _BV( TXEN ) | _BV( TXCIE );
 #else
     UCSRB |= _BV( TXEN );
 #endif
@@ -73,33 +73,33 @@ vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 BOOL
 xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
 {
-    UCHAR ucUCSRC = 0;
+    UCHAR           ucUCSRC = 0;
 
     /* prevent compiler warning. */
-    (void)ucPORT;
-	
+    ( void )ucPORT;
+
     UBRR = UART_BAUD_CALC( ulBaudRate, F_CPU );
 
     switch ( eParity )
     {
-        case MB_PAR_EVEN:
-            ucUCSRC |= _BV( UPM1 );
-            break;
-        case MB_PAR_ODD:
-            ucUCSRC |= _BV( UPM1 ) | _BV( UPM0 );
-            break;
-        case MB_PAR_NONE:
-            break;
+    case MB_PAR_EVEN:
+        ucUCSRC |= _BV( UPM1 );
+        break;
+    case MB_PAR_ODD:
+        ucUCSRC |= _BV( UPM1 ) | _BV( UPM0 );
+        break;
+    case MB_PAR_NONE:
+        break;
     }
 
     switch ( ucDataBits )
     {
-        case 8:
-            ucUCSRC |= _BV( UCSZ0 ) | _BV( UCSZ1 );
-            break;
-        case 7:
-            ucUCSRC |= _BV( UCSZ1 );
-            break;
+    case 8:
+        ucUCSRC |= _BV( UCSZ0 ) | _BV( UCSZ1 );
+        break;
+    case 7:
+        ucUCSRC |= _BV( UCSZ1 );
+        break;
     }
 
 #if defined (__AVR_ATmega168__)
@@ -132,7 +132,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = UDR;
     return TRUE;
@@ -154,4 +154,3 @@ SIGNAL( SIG_UART_TRANS )
     RTS_LOW;
 }
 #endif
-

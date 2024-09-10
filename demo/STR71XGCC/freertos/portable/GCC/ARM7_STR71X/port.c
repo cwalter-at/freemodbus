@@ -20,13 +20,13 @@
 
     A special exception to the GPL can be applied should you wish to distribute
     a combined work that includes FreeRTOS, without being obliged to provide
-    the source code for any proprietary components.  See the licensing section 
+    the source code for any proprietary components.  See the licensing section
     of http://www.FreeRTOS.org for full details of how and when the exception
     can be applied.
 
     ***************************************************************************
-    See http://www.FreeRTOS.org for documentation, latest information, license 
-    and contact details.  Please ensure to read the configuration and relevant 
+    See http://www.FreeRTOS.org for documentation, latest information, license
+    and contact details.  Please ensure to read the configuration and relevant
     port sections of the online documentation.
     ***************************************************************************
 */
@@ -53,17 +53,17 @@
 /* Setup the timer to generate the tick interrupts. */
 static void     prvSetupTimerInterrupt( void );
 
-/* The scheduler can only be started from ARM mode, so 
- * vPortISRStartFirstSTask() is defined in portISR.c. 
+/* The scheduler can only be started from ARM mode, so
+ * vPortISRStartFirstSTask() is defined in portISR.c.
  */
 extern void     vPortISRStartFirstTask( void );
 
 /* ----------------------- Start Implementation -----------------------------*/
-/* 
- * Initialise the stack of a task to look exactly as if a call to 
+/*
+ * Initialise the stack of a task to look exactly as if a call to
  * portSAVE_CONTEXT had been called.
  *
- * See header file for description. 
+ * See header file for description.
  */
 portSTACK_TYPE *
 pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
@@ -72,13 +72,13 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
 
     pxOriginalTOS = pxTopOfStack;
 
-    /* Setup the initial stack of the task.  The stack is set exactly as 
-     * expected by the portRESTORE_CONTEXT() macro. 
+    /* Setup the initial stack of the task.  The stack is set exactly as
+     * expected by the portRESTORE_CONTEXT() macro.
      */
 
     /* First on the stack is the return address - which in this case is the
      * start of the task.  The offset is added to make the return address appear
-     * as it would within an IRQ ISR. 
+     * as it would within an IRQ ISR.
      */
     *pxTopOfStack = ( portSTACK_TYPE ) pxCode + portINSTRUCTION_SIZE;
     pxTopOfStack--;
@@ -113,13 +113,13 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
     pxTopOfStack--;
 
     /* When the task starts is will expect to find the function parameter in
-     * R0. 
+     * R0.
      */
     *pxTopOfStack = ( portSTACK_TYPE ) pvParameters;    /* R0 */
     pxTopOfStack--;
 
     /* The last thing onto the stack is the status register, which is set for
-     * system mode, with interrupts enabled. 
+     * system mode, with interrupts enabled.
      */
     *pxTopOfStack = ( portSTACK_TYPE ) portINITIAL_SPSR;
 
@@ -132,10 +132,10 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
 
     pxTopOfStack--;
 
-    /* Some optimisation levels use the stack differently to others.  This 
+    /* Some optimisation levels use the stack differently to others.  This
      * means the interrupt flags cannot always be stored on the stack and will
      * instead be stored in a variable, which is then saved as part of the
-     * tasks context. 
+     * tasks context.
      */
     *pxTopOfStack = portNO_CRITICAL_SECTION_NESTING;
 
@@ -163,7 +163,7 @@ vPortEndScheduler( void )
        is nothing to return to.  */
 }
 
-/* 
+/*
  * Setup timer 3 to generate ticks at the required frequency.
  */
 static void

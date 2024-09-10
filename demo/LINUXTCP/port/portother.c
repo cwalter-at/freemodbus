@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
  */
 
  /**********************************************************
- *	Linux TCP support.
- *	Based on Walter's project. 
- *	Modified by Steven Guo <gotop167@163.com>
+ *  Linux TCP support.
+ *  Based on Walter's project.
+ *  Modified by Steven Guo <gotop167@163.com>
  ***********************************************************/
 
 #include <stdio.h>
@@ -38,13 +38,13 @@
 
 
 BOOL
-prvMBTCPPortAddressToString( SOCKET xSocket, CHAR * szAddr, USHORT usBufSize )
+prvMBTCPPortAddressToString( SOCKET xSocket, CHAR *szAddr, USHORT usBufSize )
 {
     return TRUE;
 }
 
 CHAR           *
-prvMBTCPPortFrameToString( UCHAR * pucFrame, USHORT usFrameLen )
+prvMBTCPPortFrameToString( UCHAR *pucFrame, USHORT usFrameLen )
 {
     return NULL;
 }
@@ -56,7 +56,7 @@ WsaError2String( int iError )
 }
 
 void
-vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... )
+vMBPortLog( eMBPortLogLevel eLevel, const CHAR *szModule, const CHAR *szFmt, ... )
 {
     va_list         args;
     static const CHAR *arszLevel2Str[] = { "DEBUG", "INFO", "WARN", "ERROR" };

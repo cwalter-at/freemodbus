@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -87,14 +87,14 @@ static inline void ASCII2Hex(const unsigned char * ascii,
 /// Initializes the AES peripheral
 //------------------------------------------------------------------------------
 #ifdef ONLY_ONE_ENCRYPTION
-void aes_hard_init(void) 
+void aes_hard_init(void)
 {
     unsigned char key[16];
 
 #if defined(ENCRYPTION_CTR) || defined(ENCRYPTION_CBC)
     unsigned char IV[16];
 #endif
-  
+
     TRACE_DEBUG("AES/HARD: Initializing ...\n\r");
 
     // Activate peripheral clock
@@ -118,7 +118,7 @@ void aes_hard_init(void)
 #elif defined(ENCRYPTION_CTR)
     AT91C_BASE_AES->AES_MR = AT91C_AES_SMOD_PDC | AT91C_AES_OPMOD_CTR;
 #endif
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)ENCRYPTION_KEY, key, ENCRYPTION_KEY_LENGTH);
 
@@ -140,11 +140,11 @@ void aes_hard_init(void)
 //------------------------------------------------------------------------------
 #ifndef ONLY_ONE_ENCRYPTION
 #if defined(ENCRYPTION_CBC)
-void aes_hard_init_CBC(void) 
+void aes_hard_init_CBC(void)
 {
     unsigned char key[16];
     unsigned char IV[16];
-  
+
     TRACE_DEBUG("aes_hard_init_CBC\n\r");
 
     // Activate peripheral clock
@@ -160,7 +160,7 @@ void aes_hard_init_CBC(void)
 
     // Load mode
     AT91C_BASE_AES->AES_MR = AT91C_AES_SMOD_PDC | AT91C_AES_OPMOD_CBC;
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)ENCRYPTION_KEY, key, ENCRYPTION_KEY_LENGTH);
 
@@ -177,11 +177,11 @@ void aes_hard_init_CBC(void)
 /// Initializes the AES peripheral for CTR mode
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_CTR)
-void aes_hard_init_CTR(void) 
+void aes_hard_init_CTR(void)
 {
     unsigned char key[16];
     unsigned char IV[16];
-  
+
     TRACE_DEBUG("aes_hard_init_CTR\n\r");
 
     // Activate peripheral clock
@@ -197,7 +197,7 @@ void aes_hard_init_CTR(void)
 
     // Load mode
     AT91C_BASE_AES->AES_MR = AT91C_AES_SMOD_PDC | AT91C_AES_OPMOD_CTR;
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)ENCRYPTION_KEY, key, ENCRYPTION_KEY_LENGTH);
 
@@ -214,7 +214,7 @@ void aes_hard_init_CTR(void)
 /// Initializes the AES peripheral for ECB mode
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_ECB)
-void aes_hard_init_ECB(void) 
+void aes_hard_init_ECB(void)
 {
     unsigned char key[16];
 
@@ -234,7 +234,7 @@ void aes_hard_init_ECB(void)
     // Load mode
     //AES_Configure(AT91C_AES_CIPHER, AT91C_AES_SMOD_MANUAL, AT91C_AES_OPMOD_ECB);
     AT91C_BASE_AES->AES_MR = AT91C_AES_SMOD_PDC | AT91C_AES_OPMOD_ECB;
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)ENCRYPTION_KEY, key, ENCRYPTION_KEY_LENGTH);
 
@@ -246,7 +246,7 @@ void aes_hard_init_ECB(void)
 //------------------------------------------------------------------------------
 /// Cleans up the AES peripheral
 //------------------------------------------------------------------------------
-void aes_hard_cleanup(void) 
+void aes_hard_cleanup(void)
 {
     TRACE_DEBUG("AES/HARD: Cleaning up ...\n\r");
 

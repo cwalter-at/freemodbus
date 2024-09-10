@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: HCS08 Port
+ * FreeModbus Library: HCS08 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Copyright (C) 2008 Trond Melen
  *

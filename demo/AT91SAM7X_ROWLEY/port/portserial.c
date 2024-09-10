@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ARM7/AT91SAM7X Port
+ * FreeModbus Library: ARM7/AT91SAM7X Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -80,8 +80,8 @@ STATIC xMBPSerialIntHandle xSerialHdls[1];
 STATIC BOOL     bIsInitalized = FALSE;
 
 /* ----------------------- Static functions ---------------------------------*/
-STATIC void     vUSART0ISR( void ) __attribute__ ( ( interrupt( "IRQ" ) ) );
-STATIC void     vUSART1ISR( void ) __attribute__ ( ( interrupt( "IRQ" ) ) );
+STATIC void     vUSART0ISR( void ) __attribute__( ( interrupt( "IRQ" ) ) );
+STATIC void     vUSART1ISR( void ) __attribute__( ( interrupt( "IRQ" ) ) );
 
 /* ----------------------- Start implementation -----------------------------*/
 
@@ -149,12 +149,10 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         if( bOkay )
         {
             AT91F_PMC_EnablePeriphClock( AT91C_BASE_PMC, 1 << xSerialHdls[0].uiAT91C_ID_USX );
-            AT91F_US_Configure( xSerialHdls[0].pxCOM, configCPU_CLOCK_HZ, uiUARTMode, ulBaudRate,
-                                0 );
+            AT91F_US_Configure( xSerialHdls[0].pxCOM, configCPU_CLOCK_HZ, uiUARTMode, ulBaudRate, 0 );
             xSerialHdls[0].pxCOM->US_CR = AT91C_US_TXEN | AT91C_US_RXEN;
-            AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, xSerialHdls[0].uiAT91C_ID_USX,
-                                   USART_INTERRUPT_LEVEL, AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL,
-                                   xSerialHdls[0].pvIRQHandlerFN );
+            AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, xSerialHdls[0].uiAT91C_ID_USX, USART_INTERRUPT_LEVEL,
+                                   AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL, xSerialHdls[0].pvIRQHandlerFN );
             AT91F_AIC_EnableIt( AT91C_BASE_AIC, xSerialHdls[0].uiAT91C_ID_USX );
             UART_INIT( xSerialHdls[0].uiAT91C_ID_USX );
         }
@@ -235,7 +233,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     assert( NULL != xSerialHdls[0].pxCOM );
     *pucByte = ( CHAR ) AT91F_US_GetChar( xSerialHdls[0].pxCOM );

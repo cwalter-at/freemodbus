@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: LPC214X Port
+ * FreeModbus Library: LPC214X Port
  * Copyright (C) 2007 Tiago Prado Lone <tiago@maxwellbohr.com.br>
  *
  * This library is free software; you can redistribute it and/or

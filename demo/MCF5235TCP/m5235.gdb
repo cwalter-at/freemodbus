@@ -17,14 +17,14 @@ define delay
   set $delay = 0
   while ($delay < 20000)
     set $delay += 1
-  end  
+  end
 end
 
 define delay_memsync
   set $delay = 0
   while ($delay < 10000)
     set $delay += 1
-  end  
+  end
 end
 
 define setup-cs
@@ -103,7 +103,7 @@ define debug-ramtest
   set $sdramsize = 0x01000000
   set $j = 0
   printf "Testing SDRAM : 0x%08X - 0x%08X\n", $sdrambase, ($sdrambase + $sdramsize)
-  set $i = $sdrambase 
+  set $i = $sdrambase
   while $i < ($sdrambase + $sdramsize)
     set *(unsigned long *)($i) = 0xAA55AA55
     delay_memsync

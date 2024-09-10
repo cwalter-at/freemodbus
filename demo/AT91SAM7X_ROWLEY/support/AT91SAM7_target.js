@@ -54,7 +54,7 @@ function RAMReset()
 {
   Reset();
   /* Remap SRAM to 0x00000000 */
-  TargetInterface.pokeWord(0xFFFFFF00, 1); // MC_RCR 
+  TargetInterface.pokeWord(0xFFFFFF00, 1); // MC_RCR
 }
 
 function FLASHReset()

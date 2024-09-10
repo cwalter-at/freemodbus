@@ -32,7 +32,7 @@
  *
  * Interface for draw font on LCD.
  *
- */ 
+ */
 
 /**
  *

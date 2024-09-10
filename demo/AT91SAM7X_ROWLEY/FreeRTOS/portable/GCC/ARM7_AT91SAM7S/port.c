@@ -1,10 +1,11 @@
-/* 
+/*
  * MODBUS Library: SAM7X Port
  * Copyright (c) 2007 Christian Walter <wolti@sil.at>
  * All rights reserved.
  *
  * $Id$
  */
+
 /*
  * FreeRTOS.org V4.4.0 - Copyright (C) 2003-2007 Richard Barry.
  *
@@ -14,25 +15,25 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * FreeRTOS.org is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with FreeRTOS.org; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * A special exception to the GPL can be applied should you wish to distribute
  * a combined work that includes FreeRTOS.org, without being obliged to provide
- * the source code for any proprietary components.  See the licensing section 
+ * the source code for any proprietary components.  See the licensing section
  * of http://www.FreeRTOS.org for full details of how and when the exception
  * can be applied.
- * 
+ *
  ****************************************************************************
- * See http://www.FreeRTOS.org for documentation, latest information, license 
- * and contact details.  Please ensure to read the configuration and relevant 
+ * See http://www.FreeRTOS.org for documentation, latest information, license
+ * and contact details.  Please ensure to read the configuration and relevant
  * port sections of the online documentation.
  *
  * Also see http://www.SafeRTOS.com for an IEC 61508 compliant version along
@@ -76,7 +77,7 @@
 
 /* ----------------------- Function prototypes ------------------------------*/
 extern void     vPortISRStartFirstTask( void );
-extern void     vNonPreemptiveTick ( void );
+extern void     vNonPreemptiveTick( void );
 extern void     vPreemptiveTick( void );
 
 /* ----------------------- Static functions ---------------------------------*/
@@ -85,18 +86,18 @@ static void     prvSetupTimerInterrupt( void );
 /* ----------------------- Start implementation -----------------------------*/
 
 portSTACK_TYPE *
-pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
+pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
 {
     portSTACK_TYPE *pxOriginalTOS;
 
     pxOriginalTOS = pxTopOfStack;
-    /* Setup the initial stack of the task.  The stack is set exactly as 
-     * expected by the portRESTORE_CONTEXT() macro. 
+    /* Setup the initial stack of the task.  The stack is set exactly as
+     * expected by the portRESTORE_CONTEXT() macro.
      */
 
     /* First on the stack is the return address - which in this case is the
      * start of the task.  The offset is added to make the return address appear
-     * as it would within an IRQ ISR. 
+     * as it would within an IRQ ISR.
      */
     *pxTopOfStack = ( portSTACK_TYPE ) pxCode + portINSTRUCTION_SIZE;
     pxTopOfStack--;
@@ -137,7 +138,7 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
     pxTopOfStack--;
 
     /* The last thing onto the stack is the status register, which is set for
-     * system mode, with interrupts enabled. 
+     * system mode, with interrupts enabled.
      */
     *pxTopOfStack = ( portSTACK_TYPE ) portINITIAL_SPSR;
 
@@ -150,7 +151,7 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
 
     pxTopOfStack--;
 
-    /* Some optimisation levels use the stack differently to others.  This 
+    /* Some optimisation levels use the stack differently to others.  This
      * means the interrupt flags cannot always be stored on the stack and will
      * instead be stored in a variable, which is then saved as part of the
      * tasks context.
@@ -164,7 +165,7 @@ portBASE_TYPE
 xPortStartScheduler( void )
 {
     /* Start the timer that generates the tick ISR.  Interrupts are disabled
-     * here already. 
+     * here already.
      */
     prvSetupTimerInterrupt(  );
 
@@ -187,17 +188,15 @@ static void
 prvSetupTimerInterrupt( void )
 {
     /* Setup the AIC for PIT interrupts.  The interrupt routine chosen depends
-     * on whether the preemptive or cooperative scheduler is being used. 
+     * on whether the preemptive or cooperative scheduler is being used.
      */
 #if configUSE_PREEMPTION == 0
-    AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST, 
-                           AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL,
+    AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST, AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL,
                            ( void ( * )( void ) )vNonPreemptiveTick );
 #else
-    AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST,
-                           AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL,
+    AT91F_AIC_ConfigureIt( AT91C_BASE_AIC, AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST, AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL,
                            ( void ( * )( void ) )vPreemptiveTick );
-    
+
 #endif
 
     /* Configure the PIT period. */

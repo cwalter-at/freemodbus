@@ -164,7 +164,7 @@ u32 FLASH_WordRead(u32 FLASH_SourceAdd)
 void FLASH_WritePrConfig(u32 Xsectors, FunctionalState NewState)
 {
   FLASH_WaitForLastTask();
-  
+
   if (NewState == ENABLE)
   {
    // Set the Set protection Bit

@@ -45,7 +45,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 #ifndef __ASSEMBLY__
 #include <stdint.h>
@@ -59,7 +59,7 @@ typedef volatile       uint32_t RwReg; /**< Read-Write 32-bit register (volatile
 #define CAST(type, value) ((type *) value)
 #define REG_ACCESS(type, address) (*(type*)address) /**< C code: Register value */
 #else
-#define CAST(type, value) (value) 
+#define CAST(type, value) (value)
 #define REG_ACCESS(type, address) (address) /**< Assembly code: Register address */
 #endif
 
@@ -71,7 +71,7 @@ typedef volatile       uint32_t RwReg; /**< Read-Write 32-bit register (volatile
 /*@{*/
 
 /**
- * \brief Configuration of the Cortex-M3 Processor and Core Peripherals 
+ * \brief Configuration of the Cortex-M3 Processor and Core Peripherals
  */
 #define __MPU_PRESENT             0 /**< AT91SAM3S does not provide a MPU present or not */
 #define __NVIC_PRIO_BITS          4 /**< AT91SAM3S uses 4 Bits for the Priority Levels */
@@ -90,7 +90,7 @@ typedef enum IRQn
   PendSV_IRQn                 = -2,     /**< 14 Cortex-M3 Pend SV Interrupt           */
   SysTick_IRQn                = -1,     /**< 15 Cortex-M3 System Tick Interrupt       */
 /******  AT91SAM3S specific Interrupt Numbers *****************************************/
-  
+
   SUPC_IRQn            =  0, /**<  0 AT91SAM3S Supply Controller (SUPC) */
   RSTC_IRQn            =  1, /**<  1 AT91SAM3S Reset Controller (RSTC) */
   RTC_IRQn             =  2, /**<  2 AT91SAM3S Real Time Clock (RTC) */
@@ -142,7 +142,7 @@ typedef enum IRQn
 typedef struct {
   WoReg ACC_CR;        /**< \brief (Acc Offset: 0x00) Control Register */
   RwReg ACC_MR;        /**< \brief (Acc Offset: 0x04) Mode Register */
-  RwReg Reserved1[7]; 
+  RwReg Reserved1[7];
   WoReg ACC_IER;       /**< \brief (Acc Offset: 0x24) Interrupt Enable Register */
   WoReg ACC_IDR;       /**< \brief (Acc Offset: 0x28) Interrupt Disable Register */
   RoReg ACC_IMR;       /**< \brief (Acc Offset: 0x2C) Interrupt Mask Register */
@@ -212,13 +212,13 @@ typedef struct {
   WoReg ADC_CHER;      /**< \brief (Adc Offset: 0x10) Channel Enable Register */
   WoReg ADC_CHDR;      /**< \brief (Adc Offset: 0x14) Channel Disable Register */
   RoReg ADC_CHSR;      /**< \brief (Adc Offset: 0x18) Channel Status Register */
-  RwReg Reserved1[1]; 
+  RwReg Reserved1[1];
   RoReg ADC_LCDR;      /**< \brief (Adc Offset: 0x20) Last Converted Data Register */
   WoReg ADC_IER;       /**< \brief (Adc Offset: 0x24) Interrupt Enable Register */
   WoReg ADC_IDR;       /**< \brief (Adc Offset: 0x28) Interrupt Disable Register */
   RoReg ADC_IMR;       /**< \brief (Adc Offset: 0x2C) Interrupt Mask Register */
   RoReg ADC_ISR;       /**< \brief (Adc Offset: 0x30) Interrupt Status Register */
-  RwReg Reserved2[2]; 
+  RwReg Reserved2[2];
   RoReg ADC_OVER;      /**< \brief (Adc Offset: 0x3C) Overrun Status Register */
   RwReg ADC_EMR;       /**< \brief (Adc Offset: 0x40) Extended Mode Register */
   RwReg ADC_CWR;       /**< \brief (Adc Offset: 0x44) Compare Window Register */
@@ -240,12 +240,12 @@ typedef struct {
   RoReg ADC_CDR13;      /**< \brief (Adc Offset: 0x84) Channel Data Register 13 */
   RoReg ADC_CDR14;      /**< \brief (Adc Offset: 0x88) Channel Data Register 14 */
   RoReg ADC_CDR15;     /**< \brief (Adc Offset: 0x8C) Channel Data Register 15 */
-  RwReg Reserved3[1]; 
+  RwReg Reserved3[1];
   RwReg ADC_ACR;       /**< \brief (Adc Offset: 0x94) Analog Control Register */
   RwReg Reserved4[19];
   RwReg ADC_WPMR;      /**< \brief (Adc Offset: 0xE4) Write Protect Mode Register */
   RoReg ADC_WPSR;      /**< \brief (Adc Offset: 0xE8) Write Protect Status Register */
-  RwReg Reserved5[5]; 
+  RwReg Reserved5[5];
   RwReg ADC_RPR;       /**< \brief (Adc Offset: 0x100) Receive Pointer Register */
   RwReg ADC_RCR;       /**< \brief (Adc Offset: 0x104) Receive Counter Register */
   RwReg ADC_TPR;       /**< \brief (Adc Offset: 0x108) Transmit Pointer Register */
@@ -615,7 +615,7 @@ typedef struct {
 /** \brief Crccu hardware registers */
 typedef struct {
   RwReg CRCCU_DSCR;    /**< \brief (Crccu Offset: 0x00000000) CRCCU  Descriptor Base Register */
-  RwReg Reserved1[1]; 
+  RwReg Reserved1[1];
   WoReg CRCCU_DMA_EN;  /**< \brief (Crccu Offset: 0x00000008) CRCCU DMA  Enable Register */
   WoReg CRCCU_DMA_DIS; /**< \brief (Crccu Offset: 0x0000000C) CRCCU DMA  Disable Register */
   RoReg CRCCU_DMA_SR;  /**< \brief (Crccu Offset: 0x00000010) CRCCU DMA  Status Register */
@@ -623,7 +623,7 @@ typedef struct {
   WoReg CRCCU_DMA_IDR; /**< \brief (Crccu Offset: 0x00000018) CRCCU DMA  Interrupt Disable Register */
   RoReg CRCCU_DMA_IMR; /**< \brief (Crccu Offset: 0x0000001C) CRCCU DMA  Interrupt Mask Register */
   RoReg CRCCU_DMA_ISR; /**< \brief (Crccu Offset: 0x00000020) CRCCU DMA  Interrupt Status Register */
-  RwReg Reserved2[4]; 
+  RwReg Reserved2[4];
   WoReg CRCCU_CR;      /**< \brief (Crccu Offset: 0x00000034) CRCCU Control Register */
   RwReg CRCCU_MR;      /**< \brief (Crccu Offset: 0x00000038) CRCCU Mode Register */
   RoReg CRCCU_SR;      /**< \brief (Crccu Offset: 0x0000003C) CRCCU Status Register */
@@ -683,11 +683,11 @@ typedef struct {
 typedef struct {
   WoReg DACC_CR;       /**< \brief (Dacc Offset: 0x00) Control Register */
   RwReg DACC_MR;       /**< \brief (Dacc Offset: 0x04) Mode Register */
-  RwReg Reserved1[2]; 
+  RwReg Reserved1[2];
   WoReg DACC_CHER;     /**< \brief (Dacc Offset: 0x10) Channel Enable Register */
   WoReg DACC_CHDR;     /**< \brief (Dacc Offset: 0x14) Channel Disable Register */
   RoReg DACC_CHSR;     /**< \brief (Dacc Offset: 0x18) Channel Status Register */
-  RwReg Reserved2[1]; 
+  RwReg Reserved2[1];
   WoReg DACC_CDR;      /**< \brief (Dacc Offset: 0x20) Conversion Data Register */
   WoReg DACC_IER;      /**< \brief (Dacc Offset: 0x24) Interrupt Enable Register */
   WoReg DACC_IDR;      /**< \brief (Dacc Offset: 0x28) Interrupt Disable Register */
@@ -698,7 +698,7 @@ typedef struct {
   RwReg Reserved4[19];
   RwReg DACC_WPMR;     /**< \brief (Dacc Offset: 0xE4) Write Protect Mode register */
   RoReg DACC_WPSR;     /**< \brief (Dacc Offset: 0xE8) Write Protect Status register */
-  RwReg Reserved5[5]; 
+  RwReg Reserved5[5];
   RwReg DACC_RPR;      /**< \brief (Dacc Offset: 0x100) Receive Pointer Register */
   RwReg DACC_RCR;      /**< \brief (Dacc Offset: 0x104) Receive Counter Register */
   RwReg DACC_TPR;      /**< \brief (Dacc Offset: 0x108) Transmit Pointer Register */
@@ -888,17 +888,17 @@ typedef struct {
   RoReg HSMCI_RSPR[4]; /**< \brief (Hsmci Offset: 0x20) Response Register */
   RoReg HSMCI_RDR;     /**< \brief (Hsmci Offset: 0x30) Receive Data Register */
   WoReg HSMCI_TDR;     /**< \brief (Hsmci Offset: 0x34) Transmit Data Register */
-  RwReg Reserved1[2]; 
+  RwReg Reserved1[2];
   RoReg HSMCI_SR;      /**< \brief (Hsmci Offset: 0x40) Status Register */
   WoReg HSMCI_IER;     /**< \brief (Hsmci Offset: 0x44) Interrupt Enable Register */
   WoReg HSMCI_IDR;     /**< \brief (Hsmci Offset: 0x48) Interrupt Disable Register */
   RoReg HSMCI_IMR;     /**< \brief (Hsmci Offset: 0x4C) Interrupt Mask Register */
-  RwReg Reserved2[1]; 
+  RwReg Reserved2[1];
   RwReg HSMCI_CFG;     /**< \brief (Hsmci Offset: 0x54) Configuration Register */
   RwReg Reserved3[35];
   RwReg HSMCI_WPMR;    /**< \brief (Hsmci Offset: 0xE4) Write Protection Mode Register */
   RoReg HSMCI_WPSR;    /**< \brief (Hsmci Offset: 0xE8) Write Protection Status Register */
-  RwReg Reserved4[5]; 
+  RwReg Reserved4[5];
   RwReg HSMCI_RPR;     /**< \brief (Hsmci Offset: 0x100) Receive Pointer Register */
   RwReg HSMCI_RCR;     /**< \brief (Hsmci Offset: 0x104) Receive Counter Register */
   RwReg HSMCI_TPR;     /**< \brief (Hsmci Offset: 0x108) Transmit Pointer Register */
@@ -1118,23 +1118,23 @@ typedef struct {
 /** \brief Matrix hardware registers */
 typedef struct {
   RwReg MATRIX_MCFG[4]; /**< \brief (Matrix Offset: 0x0000) Master Configuration Register */
-  RwReg Reserved1[12]; 
+  RwReg Reserved1[12];
   RwReg MATRIX_SCFG[5]; /**< \brief (Matrix Offset: 0x0040) Slave Configuration Register */
-  RwReg Reserved2[11]; 
+  RwReg Reserved2[11];
   RwReg MATRIX_PRAS0;   /**< \brief (Matrix Offset: 0x0080) Priority Register A for Slave 0 */
-  RwReg Reserved3[1];  
+  RwReg Reserved3[1];
   RwReg MATRIX_PRAS1;   /**< \brief (Matrix Offset: 0x0088) Priority Register A for Slave 1 */
-  RwReg Reserved4[1];  
+  RwReg Reserved4[1];
   RwReg MATRIX_PRAS2;   /**< \brief (Matrix Offset: 0x0090) Priority Register A for Slave 2 */
-  RwReg Reserved5[1];  
+  RwReg Reserved5[1];
   RwReg MATRIX_PRAS3;   /**< \brief (Matrix Offset: 0x0098) Priority Register A for Slave 3 */
-  RwReg Reserved6[1];  
+  RwReg Reserved6[1];
   RwReg MATRIX_PRAS4;   /**< \brief (Matrix Offset: 0x00A0) Priority Register A for Slave 4 */
-  RwReg Reserved7[28]; 
+  RwReg Reserved7[28];
   RwReg CCFG_SYSIO;     /**< \brief (Matrix Offset: 0x0114) System IO Configuration register */
-  RwReg Reserved8[1];  
+  RwReg Reserved8[1];
   RwReg CCFG_SMCNFCS;   /**< \brief (Matrix Offset: 0x011C) SMC Chip Select NAND Flash Assignment Register */
-  RwReg Reserved9[49]; 
+  RwReg Reserved9[49];
   RwReg MATRIX_WPMR;    /**< \brief (Matrix Offset: 0x1E4) Write Protect Mode Register */
   RoReg MATRIX_WPSR;    /**< \brief (Matrix Offset: 0x1E8) Write Protect Status Register */
 } Matrix;
@@ -1259,15 +1259,15 @@ typedef struct {
   WoReg PIO_PER;        /**< \brief (Pio Offset: 0x0000) PIO Enable Register */
   WoReg PIO_PDR;        /**< \brief (Pio Offset: 0x0004) PIO Disable Register */
   RoReg PIO_PSR;        /**< \brief (Pio Offset: 0x0008) PIO Status Register */
-  RwReg Reserved1[1];  
+  RwReg Reserved1[1];
   WoReg PIO_OER;        /**< \brief (Pio Offset: 0x0010) Output Enable Register */
   WoReg PIO_ODR;        /**< \brief (Pio Offset: 0x0014) Output Disable Register */
   RoReg PIO_OSR;        /**< \brief (Pio Offset: 0x0018) Output Status Register */
-  RwReg Reserved2[1];  
+  RwReg Reserved2[1];
   WoReg PIO_IFER;       /**< \brief (Pio Offset: 0x0020) Glitch Input Filter Enable Register */
   WoReg PIO_IFDR;       /**< \brief (Pio Offset: 0x0024) Glitch Input Filter Disable Register */
   RoReg PIO_IFSR;       /**< \brief (Pio Offset: 0x0028) Glitch Input Filter Status Register */
-  RwReg Reserved3[1];  
+  RwReg Reserved3[1];
   WoReg PIO_SODR;       /**< \brief (Pio Offset: 0x0030) Set Output Data Register */
   WoReg PIO_CODR;       /**< \brief (Pio Offset: 0x0034) Clear Output Data Register */
   RwReg PIO_ODSR;       /**< \brief (Pio Offset: 0x0038) Output Data Status Register */
@@ -1279,13 +1279,13 @@ typedef struct {
   WoReg PIO_MDER;       /**< \brief (Pio Offset: 0x0050) Multi-driver Enable Register */
   WoReg PIO_MDDR;       /**< \brief (Pio Offset: 0x0054) Multi-driver Disable Register */
   RoReg PIO_MDSR;       /**< \brief (Pio Offset: 0x0058) Multi-driver Status Register */
-  RwReg Reserved4[1];  
+  RwReg Reserved4[1];
   WoReg PIO_PUDR;       /**< \brief (Pio Offset: 0x0060) Pull-up Disable Register */
   WoReg PIO_PUER;       /**< \brief (Pio Offset: 0x0064) Pull-up Enable Register */
   RoReg PIO_PUSR;       /**< \brief (Pio Offset: 0x0068) Pad Pull-up Status Register */
-  RwReg Reserved5[1];  
+  RwReg Reserved5[1];
   RwReg PIO_ABCDSR[2];  /**< \brief (Pio Offset: 0x0070) Peripheral Select Register */
-  RwReg Reserved6[2];  
+  RwReg Reserved6[2];
   WoReg PIO_SCIFSR;     /**< \brief (Pio Offset: 0x0080) System Clock Glitch Input Filter Select Register */
   WoReg PIO_DIFSR;      /**< \brief (Pio Offset: 0x0084) Debouncing Input Filter Select Register */
   RoReg PIO_IFDGSR;     /**< \brief (Pio Offset: 0x0088) Glitch or Debouncing Input Filter Clock Selection Status Register */
@@ -1293,27 +1293,27 @@ typedef struct {
   WoReg PIO_PPDDR;      /**< \brief (Pio Offset: 0x0090) Pad Pull-down Disable Register */
   WoReg PIO_PPDER;      /**< \brief (Pio Offset: 0x0094) Pad Pull-down Enable Register */
   RoReg PIO_PPDSR;      /**< \brief (Pio Offset: 0x0098) Pad Pull-down Status Register */
-  RwReg Reserved7[1];  
+  RwReg Reserved7[1];
   WoReg PIO_OWER;       /**< \brief (Pio Offset: 0x00A0) Output Write Enable */
   WoReg PIO_OWDR;       /**< \brief (Pio Offset: 0x00A4) Output Write Disable */
   RoReg PIO_OWSR;       /**< \brief (Pio Offset: 0x00A8) Output Write Status Register */
-  RwReg Reserved8[1];  
+  RwReg Reserved8[1];
   WoReg PIO_AIMER;      /**< \brief (Pio Offset: 0x00B0) Additional Interrupt Modes Enable Register */
   WoReg PIO_AIMDR;      /**< \brief (Pio Offset: 0x00B4) Additional Interrupt Modes Disables Register */
   RoReg PIO_AIMMR;      /**< \brief (Pio Offset: 0x00B8) Additional Interrupt Modes Mask Register */
-  RwReg Reserved9[1];  
+  RwReg Reserved9[1];
   WoReg PIO_ESR;        /**< \brief (Pio Offset: 0x00C0) Edge Select Register */
   WoReg PIO_LSR;        /**< \brief (Pio Offset: 0x00C4) Level Select Register */
   RoReg PIO_ELSR;       /**< \brief (Pio Offset: 0x00C8) Edge/Level Status Register */
-  RwReg Reserved10[1]; 
+  RwReg Reserved10[1];
   WoReg PIO_FELLSR;     /**< \brief (Pio Offset: 0x00D0) Falling Edge/Low Level Select Register */
   WoReg PIO_REHLSR;     /**< \brief (Pio Offset: 0x00D4) Rising Edge/ High Level Select Register */
   RoReg PIO_FRLHSR;     /**< \brief (Pio Offset: 0x00D8) Fall/Rise - Low/High Status Register */
-  RwReg Reserved11[1]; 
+  RwReg Reserved11[1];
   RoReg PIO_LOCKSR;     /**< \brief (Pio Offset: 0x00E0) Lock Status */
   RwReg PIO_WPMR;       /**< \brief (Pio Offset: 0x00E4) Write Protect Mode Register */
   RoReg PIO_WPSR;       /**< \brief (Pio Offset: 0x00E8) Write Protect Status Register */
-  RwReg Reserved12[5]; 
+  RwReg Reserved12[5];
   RwReg PIO_SCHMITT;    /**< \brief (Pio Offset: 0x0100) Schmitt Trigger Register */
   RwReg Reserved13[19];
   RwReg PIO_PCMR;       /**< \brief (Pio Offset: 0x150) Parallel Capture Mode Register */
@@ -2840,21 +2840,21 @@ typedef struct {
   WoReg PMC_SCER;      /**< \brief (Pmc Offset: 0x0000) System Clock Enable Register */
   WoReg PMC_SCDR;      /**< \brief (Pmc Offset: 0x0004) System Clock Disable Register */
   RoReg PMC_SCSR;      /**< \brief (Pmc Offset: 0x0008) System Clock Status Register */
-  RwReg Reserved1[1]; 
+  RwReg Reserved1[1];
   WoReg PMC_PCER0;     /**< \brief (Pmc Offset: 0x0010) Peripheral Clock Enable Register 0 */
   WoReg PMC_PCDR0;     /**< \brief (Pmc Offset: 0x0014) Peripheral Clock Disable Register 0 */
   RoReg PMC_PCSR0;     /**< \brief (Pmc Offset: 0x0018) Peripheral Clock Status Register 0 */
-  RwReg Reserved2[1]; 
+  RwReg Reserved2[1];
   RwReg CKGR_MOR;      /**< \brief (Pmc Offset: 0x0020) Main Oscillator Register */
   RoReg CKGR_MCFR;     /**< \brief (Pmc Offset: 0x0024) Main Clock Frequency Register */
   RwReg CKGR_PLLAR;    /**< \brief (Pmc Offset: 0x0028) PLLA Register */
   RwReg CKGR_PLLBR;    /**< \brief (Pmc Offset: 0x002C) PLLB Register */
   RwReg PMC_MCKR;      /**< \brief (Pmc Offset: 0x0030) Master Clock Register */
-  RwReg Reserved3[1]; 
+  RwReg Reserved3[1];
   RwReg PMC_USB;       /**< \brief (Pmc Offset: 0x0038) USB Clock Register */
-  RwReg Reserved4[1]; 
+  RwReg Reserved4[1];
   RwReg PMC_PCK[3];    /**< \brief (Pmc Offset: 0x0040) Programmable Clock 0 Register */
-  RwReg Reserved5[5]; 
+  RwReg Reserved5[5];
   WoReg PMC_IER;       /**< \brief (Pmc Offset: 0x0060) Interrupt Enable Register */
   WoReg PMC_IDR;       /**< \brief (Pmc Offset: 0x0064) Interrupt Disable Register */
   RoReg PMC_SR;        /**< \brief (Pmc Offset: 0x0068) Status Register */
@@ -2865,11 +2865,11 @@ typedef struct {
   RwReg Reserved6[26];
   RwReg PMC_WPMR;      /**< \brief (Pmc Offset: 0x00E4) Write Protect Mode Register */
   RoReg PMC_WPSR;      /**< \brief (Pmc Offset: 0x00E8) Write Protect Status Register */
-  RwReg Reserved7[5]; 
+  RwReg Reserved7[5];
   WoReg PMC_PCER1;     /**< \brief (Pmc Offset: 0x0100) Peripheral Clock Enable Register 1 */
   WoReg PMC_PCDR1;     /**< \brief (Pmc Offset: 0x0104) Peripheral Clock Disable Register 1 */
   RoReg PMC_PCSR1;     /**< \brief (Pmc Offset: 0x0108) Peripheral Clock Status Register 1 */
-  RwReg Reserved8[1]; 
+  RwReg Reserved8[1];
   RwReg PMC_OCR;       /**< \brief (Pmc Offset: 0x0110) Oscillator Calibration Register */
 } Pmc;
 #endif /* __ASSEMBLY__ */
@@ -3256,7 +3256,7 @@ typedef struct {
   RoReg      PWM_IMR1;      /**< \brief (Pwm Offset: 0x18) PWM Interrupt Mask Register 1 */
   RoReg      PWM_ISR1;      /**< \brief (Pwm Offset: 0x1C) PWM Interrupt Status Register 1 */
   RwReg      PWM_SCM;       /**< \brief (Pwm Offset: 0x20) PWM Sync Channels Mode Register */
-  RwReg      Reserved1[1]; 
+  RwReg      Reserved1[1];
   RwReg      PWM_SCUC;      /**< \brief (Pwm Offset: 0x28) PWM Sync Channels Update Control Register */
   RwReg      PWM_SCUP;      /**< \brief (Pwm Offset: 0x2C) PWM Sync Channels Update Period Register */
   WoReg      PWM_SCUPUPD;   /**< \brief (Pwm Offset: 0x30) PWM Sync Channels Update Period Update Register */
@@ -3275,14 +3275,14 @@ typedef struct {
   WoReg      PWM_FCR;       /**< \brief (Pwm Offset: 0x64) PWM Fault Clear Register */
   RwReg      PWM_FPV;       /**< \brief (Pwm Offset: 0x68) PWM Fault Protection Value Register */
   RwReg      PWM_FPE;       /**< \brief (Pwm Offset: 0x6C) PWM Fault Protection Enable Register */
-  RwReg      Reserved2[3]; 
+  RwReg      Reserved2[3];
   RwReg      PWM_ELxMR[2];  /**< \brief (Pwm Offset: 0x7C) PWM Event Line 0 Mode Register */
   RwReg      Reserved3[11];
   RwReg      PWM_SMMR;      /**< \brief (Pwm Offset: 0xB0) PWM Stepper Motor Mode Register */
   RwReg      Reserved4[12];
   WoReg      PWM_WPCR;      /**< \brief (Pwm Offset: 0xE4) PWM Write Protect Control Register */
   RoReg      PWM_WPSR;      /**< \brief (Pwm Offset: 0xE8) PWM Write Protect Status Register */
-  RwReg      Reserved5[5]; 
+  RwReg      Reserved5[5];
   RwReg      PWM_RPR;       /**< \brief (Pwm Offset: 0x100) Receive Pointer Register */
   RwReg      PWM_RCR;       /**< \brief (Pwm Offset: 0x104) Receive Counter Register */
   RwReg      PWM_TPR;       /**< \brief (Pwm Offset: 0x108) Transmit Pointer Register */
@@ -3293,7 +3293,7 @@ typedef struct {
   RwReg      PWM_TNCR;      /**< \brief (Pwm Offset: 0x11C) Transmit Next Counter Register */
   WoReg      PWM_PTCR;      /**< \brief (Pwm Offset: 0x120) Transfer Control Register */
   RoReg      PWM_PTSR;      /**< \brief (Pwm Offset: 0x124) Transfer Status Register */
-  RwReg      Reserved6[2]; 
+  RwReg      Reserved6[2];
   RwReg      PWM_CMP0V;     /**< \brief (Pwm Offset: 0x130) PWM Comparison 0 Value Register */
   WoReg      PWM_CMP0VUPD;  /**< \brief (Pwm Offset: 0x134) PWM Comparison 0 Value Update Register */
   RwReg      PWM_CMP0M;     /**< \brief (Pwm Offset: 0x138) PWM Comparison 0 Mode Register */
@@ -4062,11 +4062,11 @@ typedef struct {
 /** \brief Smc hardware registers */
 typedef struct {
   SmcCs_number  SMC_CS_NUMBER[5]; /**< \brief (Smc Offset: 0x0) CS_number = 0 .. 4 */
-  RwReg         Reserved1[12];   
+  RwReg         Reserved1[12];
   RwReg         SMC_OCMS;         /**< \brief (Smc Offset: 0x80) SMC OCMS MODE Register */
   WoReg         SMC_KEY1;         /**< \brief (Smc Offset: 0x84) SMC OCMS KEY1 Register */
   WoReg         SMC_KEY2;         /**< \brief (Smc Offset: 0x88) SMC OCMS KEY2 Register */
-  RwReg         Reserved2[22];   
+  RwReg         Reserved2[22];
   RwReg         SMC_WPMR;         /**< \brief (Smc Offset: 0xE4) SMC Write Protect Mode Register */
   RoReg         SMC_WPSR;         /**< \brief (Smc Offset: 0xE8) SMC Write Protect Status Register */
 } Smc;
@@ -4217,12 +4217,12 @@ typedef struct {
   WoReg SPI_IER;       /**< \brief (Spi Offset: 0x14) Interrupt Enable Register */
   WoReg SPI_IDR;       /**< \brief (Spi Offset: 0x18) Interrupt Disable Register */
   RoReg SPI_IMR;       /**< \brief (Spi Offset: 0x1C) Interrupt Mask Register */
-  RwReg Reserved1[4]; 
+  RwReg Reserved1[4];
   RwReg SPI_CSR[4];    /**< \brief (Spi Offset: 0x30) Chip Select Register */
   RwReg Reserved2[41];
   RwReg SPI_WPMR;      /**< \brief (Spi Offset: 0xE4) Write Protection Control Register */
   RoReg SPI_WPSR;      /**< \brief (Spi Offset: 0xE8) Write Protection Status Register */
-  RwReg Reserved3[5]; 
+  RwReg Reserved3[5];
   RwReg SPI_RPR;       /**< \brief (Spi Offset: 0x100) Receive Pointer Register */
   RwReg SPI_RCR;       /**< \brief (Spi Offset: 0x104) Receive Counter Register */
   RwReg SPI_TPR;       /**< \brief (Spi Offset: 0x108) Transmit Pointer Register */
@@ -4369,14 +4369,14 @@ typedef struct {
 typedef struct {
   WoReg SSC_CR;        /**< \brief (Ssc Offset: 0x0) Control Register */
   RwReg SSC_CMR;       /**< \brief (Ssc Offset: 0x4) Clock Mode Register */
-  RwReg Reserved1[2]; 
+  RwReg Reserved1[2];
   RwReg SSC_RCMR;      /**< \brief (Ssc Offset: 0x10) Receive Clock Mode Register */
   RwReg SSC_RFMR;      /**< \brief (Ssc Offset: 0x14) Receive Frame Mode Register */
   RwReg SSC_TCMR;      /**< \brief (Ssc Offset: 0x18) Transmit Clock Mode Register */
   RwReg SSC_TFMR;      /**< \brief (Ssc Offset: 0x1C) Transmit Frame Mode Register */
   RoReg SSC_RHR;       /**< \brief (Ssc Offset: 0x20) Receive Holding Register */
   WoReg SSC_THR;       /**< \brief (Ssc Offset: 0x24) Transmit Holding Register */
-  RwReg Reserved2[2]; 
+  RwReg Reserved2[2];
   RoReg SSC_RSHR;      /**< \brief (Ssc Offset: 0x30) Receive Sync. Holding Register */
   RwReg SSC_TSHR;      /**< \brief (Ssc Offset: 0x34) Transmit Sync. Holding Register */
   RwReg SSC_RC0R;      /**< \brief (Ssc Offset: 0x38) Receive Compare 0 Register */
@@ -4388,7 +4388,7 @@ typedef struct {
   RwReg Reserved3[37];
   RwReg SSC_WPMR;      /**< \brief (Ssc Offset: 0xE4) Write Protect Mode Register */
   RoReg SSC_WPSR;      /**< \brief (Ssc Offset: 0xE8) Write Protect Status Register */
-  RwReg Reserved4[5]; 
+  RwReg Reserved4[5];
   RwReg SSC_RPR;       /**< \brief (Ssc Offset: 0x100) Receive Pointer Register */
   RwReg SSC_RCR;       /**< \brief (Ssc Offset: 0x104) Receive Counter Register */
   RwReg SSC_TPR;       /**< \brief (Ssc Offset: 0x108) Transmit Pointer Register */
@@ -4817,7 +4817,7 @@ typedef struct {
 typedef struct {
   RwReg      TC_CCR;        /**< \brief (TcChannel Offset: 0x0) Channel Control Register */
   RwReg      TC_CMR;        /**< \brief (TcChannel Offset: 0x4) Channel Mode Register */
-  RwReg      Reserved1[2]; 
+  RwReg      Reserved1[2];
   RwReg      TC_CV;         /**< \brief (TcChannel Offset: 0x10) Counter Value */
   RwReg      TC_RA;         /**< \brief (TcChannel Offset: 0x14) Register A */
   RwReg      TC_RB;         /**< \brief (TcChannel Offset: 0x18) Register B */
@@ -4826,7 +4826,7 @@ typedef struct {
   RwReg      TC_IER;        /**< \brief (TcChannel Offset: 0x24) Interrupt Enable Register */
   RwReg      TC_IDR;        /**< \brief (TcChannel Offset: 0x28) Interrupt Disable Register */
   RwReg      TC_IMR;        /**< \brief (TcChannel Offset: 0x2C) Interrupt Mask Register */
-  RwReg      Reserved2[4]; 
+  RwReg      Reserved2[4];
 } TcChannel;
 /** \brief Tc hardware registers */
 typedef struct {
@@ -4838,9 +4838,9 @@ typedef struct {
   RoReg      TC_QIMR;       /**< \brief (Tc Offset: 0xD0) QDEC Interrupt Mask Register */
   RoReg      TC_QISR;       /**< \brief (Tc Offset: 0xD4) QDEC Interrupt Status Register */
   RwReg      TC_FMR;        /**< \brief (Tc Offset: 0xD8) Fault Mode Register */
-  RwReg      Reserved1[2]; 
+  RwReg      Reserved1[2];
   RwReg      TC_WPMR;       /**< \brief (Tc Offset: 0xE4) Write Protect Mode Register */
-  RwReg      Reserved2[5]; 
+  RwReg      Reserved2[5];
   RoReg      TC_VER;        /**< \brief (Tc Offset: 0xFC) Version Register */
 } Tc;
 #endif /* __ASSEMBLY__ */
@@ -5172,7 +5172,7 @@ typedef struct {
   RwReg TWI_SMR;       /**< \brief (Twi Offset: 0x08) Slave Mode Register */
   RwReg TWI_IADR;      /**< \brief (Twi Offset: 0x0C) Internal Address Register */
   RwReg TWI_CWGR;      /**< \brief (Twi Offset: 0x10) Clock Waveform Generator Register */
-  RwReg Reserved1[3]; 
+  RwReg Reserved1[3];
   RoReg TWI_SR;        /**< \brief (Twi Offset: 0x20) Status Register */
   WoReg TWI_IER;       /**< \brief (Twi Offset: 0x24) Interrupt Enable Register */
   WoReg TWI_IDR;       /**< \brief (Twi Offset: 0x28) Interrupt Disable Register */
@@ -5590,16 +5590,16 @@ typedef struct {
   RwReg US_BRGR;       /**< \brief (Usart Offset: 0x0020) Baud Rate Generator Register */
   RwReg US_RTOR;       /**< \brief (Usart Offset: 0x0024) Receiver Time-out Register */
   RwReg US_TTGR;       /**< \brief (Usart Offset: 0x0028) Transmitter Timeguard Register */
-  RwReg Reserved1[5]; 
+  RwReg Reserved1[5];
   RwReg US_FIDI;       /**< \brief (Usart Offset: 0x0040) FI DI Ratio Register */
   RoReg US_NER;        /**< \brief (Usart Offset: 0x0044) Number of Errors Register */
-  RwReg Reserved2[1]; 
+  RwReg Reserved2[1];
   RwReg US_IF;         /**< \brief (Usart Offset: 0x004C) IrDA Filter Register */
   RwReg US_MAN;        /**< \brief (Usart Offset: 0x0050) Manchester Encoder Decoder Register */
   RwReg Reserved3[36];
   RwReg US_WPMR;       /**< \brief (Usart Offset: 0xE4) Write Protect Mode Register */
   RoReg US_WPSR;       /**< \brief (Usart Offset: 0xE8) Write Protect Status Register */
-  RwReg Reserved4[4]; 
+  RwReg Reserved4[4];
   RoReg US_VERSION;    /**< \brief (Usart Offset: 0xFC) Version Register */
   RwReg US_RPR;        /**< \brief (Usart Offset: 0x100) Receive Pointer Register */
   RwReg US_RCR;        /**< \brief (Usart Offset: 0x104) Receive Counter Register */

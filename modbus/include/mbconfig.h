@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -31,9 +31,13 @@
 #define _MB_CONFIG_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 /* ----------------------- Defines ------------------------------------------*/
+
 /*! \defgroup modbus_cfg Modbus Configuration
  *
  * Most modules in the protocol stack are completly optional and can be
@@ -42,9 +46,11 @@ PR_BEGIN_EXTERN_C
  *
  * All of these settings are available in the file <code>mbconfig.h</code>
  */
+
 /*! \addtogroup modbus_cfg
  *  @{
  */
+
 /*! \brief If Modbus ASCII support is enabled. */
 #define MB_ASCII_ENABLED                        (  1 )
 
@@ -68,7 +74,7 @@ PR_BEGIN_EXTERN_C
  * MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS to allow for a delay before
  * the serial transmitter is enabled. This is required because some
  * targets are so fast that there is no time between receiving and
- * transmitting the frame. If the master is to slow with enabling its 
+ * transmitting the frame. If the master is to slow with enabling its
  * receiver then he will not receive the response correctly.
  */
 #ifndef MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS
@@ -125,7 +131,11 @@ PR_BEGIN_EXTERN_C
 #define MB_FUNC_READWRITE_HOLDING_ENABLED       (  1 )
 
 /*! @} */
+
 #ifdef __cplusplus
-    PR_END_EXTERN_C
+/* *INDENT-OFF* */
+PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -28,7 +28,7 @@ static eMBEventType eQueuedEvent;
 static BOOL     xEventInQueue;
 
 /* ----------------------- Function prototypes ------------------------------*/
-BOOL xMBPortTCPPool( void );
+BOOL            xMBPortTCPPool( void );
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
@@ -47,7 +47,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * eEvent )
+xMBPortEventGet( eMBEventType *eEvent )
 {
     BOOL            xEventHappened = FALSE;
 

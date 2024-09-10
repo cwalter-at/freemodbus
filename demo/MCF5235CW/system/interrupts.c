@@ -40,7 +40,7 @@ exception_handler( void *framep )
 __interrupt__ void
 irq_handler( void )
 {
-    /* 
+    /*
      * This is the catch all interrupt handler for all user defined
      * interrupts.  To create specific handlers, create a new interrupt
      * handler and change vectors.s to point to the new handler.

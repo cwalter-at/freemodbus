@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ARM7/AT91SAM7X Port
+ * FreeModbus Library: ARM7/AT91SAM7X Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -44,16 +44,16 @@ void            vMBPortTimerClose( void );
 /* ----------------------- Static variables ---------------------------------*/
 
 /* ----------------------- Static functions ---------------------------------*/
-STATIC void     vDefaultHandler( void ) __attribute__ ( ( interrupt( "IRQ" ) ) );
-STATIC void     vDefaultSpuriousHandler( void ) __attribute__ ( ( interrupt( "IRQ" ) ) );
+STATIC void     vDefaultHandler( void ) __attribute__( ( interrupt( "IRQ" ) ) );
+STATIC void     vDefaultSpuriousHandler( void ) __attribute__( ( interrupt( "IRQ" ) ) );
 
 /* ----------------------- Start implementation -----------------------------*/
 
 void
 vMBPInit( void )
 {
-    AT91F_AIC_Open( AT91C_BASE_AIC, AT91C_AIC_BRANCH_OPCODE, AT91C_AIC_BRANCH_OPCODE,
-                    vDefaultHandler, vDefaultSpuriousHandler, AT91C_AIC_DCR_PROT );
+    AT91F_AIC_Open( AT91C_BASE_AIC, AT91C_AIC_BRANCH_OPCODE, AT91C_AIC_BRANCH_OPCODE, vDefaultHandler,
+                    vDefaultSpuriousHandler, AT91C_AIC_DCR_PROT );
 }
 
 void

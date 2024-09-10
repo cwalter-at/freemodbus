@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2009, Atmel Corporation
  *
@@ -33,7 +33,7 @@
  * The flash driver provides the unified interface for flash program operations.
  *
  */
- 
+
 #ifndef FLASHD_H
 #define FLASHD_H
 

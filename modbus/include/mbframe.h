@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -31,7 +31,9 @@
 #define _MB_FRAME_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
 
 /*!
@@ -70,17 +72,16 @@ typedef void    ( *pvMBFrameStart ) ( void );
 
 typedef void    ( *pvMBFrameStop ) ( void );
 
-typedef eMBErrorCode( *peMBFrameReceive ) ( UCHAR * pucRcvAddress,
-                                            UCHAR ** pucFrame,
-                                            USHORT * pusLength );
+typedef         eMBErrorCode( *peMBFrameReceive ) ( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
 
-typedef eMBErrorCode( *peMBFrameSend ) ( UCHAR slaveAddress,
-                                         const UCHAR * pucFrame,
-                                         USHORT usLength );
+typedef         eMBErrorCode( *peMBFrameSend ) ( UCHAR slaveAddress, const UCHAR * pucFrame, USHORT usLength );
 
-typedef void( *pvMBFrameClose ) ( void );
+typedef void    ( *pvMBFrameClose ) ( void );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

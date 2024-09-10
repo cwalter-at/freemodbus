@@ -134,7 +134,7 @@ inline void CAN_EnterInitMode(u8 mask)
 	CAN->CR = mask | CAN_CR_INIT;
 
     /* reset the status */
-	CAN->SR = 0;					
+	CAN->SR = 0;
 }
 
 /*******************************************************************************

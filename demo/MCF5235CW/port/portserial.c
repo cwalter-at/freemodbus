@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MCF5235 Port
+ * FreeModbus Library: MCF5235 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
  *
@@ -142,7 +142,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = ( CHAR ) MCF_UART_URB0;
     return TRUE;

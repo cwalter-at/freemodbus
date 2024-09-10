@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2009, Atmel Corporation
  *
@@ -29,11 +29,11 @@
 
 /**------------------------------------------------------------------------------
  *  \unit
- * 
+ *
  *  Purpose
- * 
+ *
  *  API for configuring and using Timer Counter (TC) peripherals.
- * 
+ *
  *  Usage
  *  -# Optionally, use TC_FindMckDivisor() to let the program find the best
  *     TCCLKS field value automatically.

@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -31,10 +31,12 @@
 #define _MB_RTU_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
-    eMBErrorCode eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate,
-                             eMBParity eParity );
+
+eMBErrorCode    eMBRTUInit( UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
 void            eMBRTUStart( void );
 void            eMBRTUStop( void );
 eMBErrorCode    eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );
@@ -45,6 +47,9 @@ BOOL            xMBRTUTimerT15Expired( void );
 BOOL            xMBRTUTimerT35Expired( void );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

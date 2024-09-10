@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: lwIP Port
+ * FreeModbus Library: lwIP Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@
 
 #ifdef MB_TCP_DEBUG
 void
-prvvMBTCPLogFrame( UCHAR * pucMsg, UCHAR * pucFrame, USHORT usFrameLen )
+prvvMBTCPLogFrame( UCHAR *pucMsg, UCHAR *pucFrame, USHORT usFrameLen )
 {
     int             i;
     int             res = 0;
@@ -112,7 +112,7 @@ prvvMBTCPLogFrame( UCHAR * pucMsg, UCHAR * pucFrame, USHORT usFrameLen )
 #endif
 
 void
-vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... )
+vMBPortLog( eMBPortLogLevel eLevel, const CHAR *szModule, const CHAR *szFmt, ... )
 {
     va_list         args;
     static const char *arszLevel2Str[] = { "DEBUG", "INFO", "WARN", "ERROR" };

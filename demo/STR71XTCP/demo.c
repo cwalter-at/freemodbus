@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71XTCP Demo Application
+ * FreeModbus Library: STR71XTCP Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -135,11 +135,11 @@ vMBServerTask( void *arg )
     pppInit(  );
     if( PPP_AUTH_ENABLED )
     {
-      pppSetAuth( PPPAUTHTYPE_PAP, PPP_USER, PPP_PASS );
+        pppSetAuth( PPPAUTHTYPE_PAP, PPP_USER, PPP_PASS );
     }
     else
     {
-      pppSetAuth( PPPAUTHTYPE_NONE, NULL, NULL );
+        pppSetAuth( PPPAUTHTYPE_NONE, NULL, NULL );
     }
     do
     {
@@ -222,12 +222,9 @@ vPPPStatusCB( void *ctx, int err, void *arg )
         ePPPThrCtlNew = CONNECTED;
         ppp_addrs = arg;
         vMBPortLog( MB_LOG_INFO, "PPP", "new PPP connection established\r\n" );
-        vMBPortLog( MB_LOG_INFO, "PPP", "  our IP address = %s\r\n",
-                    _inet_ntoa( ppp_addrs->our_ipaddr.addr ) );
-        vMBPortLog( MB_LOG_INFO, "PPP", "  his IP address = %s\r\n",
-                    _inet_ntoa( ppp_addrs->his_ipaddr.addr ) );
-        vMBPortLog( MB_LOG_INFO, "PPP", "  netmask = %s\r\n",
-                    _inet_ntoa( ppp_addrs->netmask.addr ) );
+        vMBPortLog( MB_LOG_INFO, "PPP", "  our IP address = %s\r\n", _inet_ntoa( ppp_addrs->our_ipaddr.addr ) );
+        vMBPortLog( MB_LOG_INFO, "PPP", "  his IP address = %s\r\n", _inet_ntoa( ppp_addrs->his_ipaddr.addr ) );
+        vMBPortLog( MB_LOG_INFO, "PPP", "  netmask = %s\r\n", _inet_ntoa( ppp_addrs->netmask.addr ) );
         break;
     default:
         ePPPThrCtlNew = DISCONNECT;
@@ -240,13 +237,12 @@ vPPPStatusCB( void *ctx, int err, void *arg )
 }
 
 eMBErrorCode
-eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
+eMBRegInputCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     int             iRegIndex;
 
-    if( ( usAddress >= REG_INPUT_START )
-        && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
+    if( ( usAddress >= REG_INPUT_START ) && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
     {
         iRegIndex = ( int )( usAddress - usRegInputStart );
         while( usNRegs > 0 )
@@ -265,13 +261,12 @@ eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 }
 
 eMBErrorCode
-eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
+eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     int             iRegIndex;
 
-    if( ( usAddress >= REG_HOLDING_START ) &&
-        ( usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS ) )
+    if( ( usAddress >= REG_HOLDING_START ) && ( usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS ) )
     {
         iRegIndex = ( int )( usAddress - usRegHoldingStart );
         switch ( eMode )
@@ -308,13 +303,13 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 
 
 eMBErrorCode
-eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
+eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
 {
     return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
+eMBRegDiscreteCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
 {
     return MB_ENOREG;
 }

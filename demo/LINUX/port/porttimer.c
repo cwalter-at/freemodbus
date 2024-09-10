@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Linux Port
+ * FreeModbus Library: Linux Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -70,8 +70,8 @@ vMBPortTimerPoll(  )
         }
         else
         {
-            ulDeltaMS = ( xTimeCur.tv_sec - xTimeLast.tv_sec ) * 1000L +
-                ( xTimeCur.tv_usec - xTimeLast.tv_usec ) * 1000L;
+            ulDeltaMS =
+                ( xTimeCur.tv_sec - xTimeLast.tv_sec ) * 1000L + ( xTimeCur.tv_usec - xTimeLast.tv_usec ) * 1000L;
             if( ulDeltaMS > ulTimeOut )
             {
                 bTimeoutEnable = FALSE;

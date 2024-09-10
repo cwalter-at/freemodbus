@@ -1,8 +1,8 @@
 /*
- * FreeModbus Libary: Atmel AT91SAM3S Demo Application
+ * FreeModbus Library: Atmel AT91SAM3S Demo Application
  * Copyright (C) 2010 Christian Walter <cwalter@embedded-solutions.at>
  *
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -13,7 +13,7 @@
  *   documentation and/or other materials provided with the distribution.
  * 3. The name of the author may not be used to endorse or promote products
  *   derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * IF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -41,9 +41,9 @@
 #include <usart/usart.h>
 
 /* ----------------------- Defines ------------------------------------------*/
-#define	INLINE                      inline
+#define INLINE                      inline
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   vMBPortEnterCritical()
 #define EXIT_CRITICAL_SECTION( )    vMBPortExitCritical()
@@ -69,7 +69,7 @@ typedef long    LONG;
 #define FALSE                                   0
 #endif
 
-#define MB_PORT_HAS_CLOSE	                    1
+#define MB_PORT_HAS_CLOSE                       1
 #define MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS    2
 
 /* ----------------------- Prototypes ---------------------------------------*/

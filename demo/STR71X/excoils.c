@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Demo Application
+ * FreeModbus Library: STR71x Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -51,8 +51,7 @@ main( void )
     EIC_Init(  );
     EIC_IRQConfig( ENABLE );
 
-    ( void )xTaskCreate( vModbusTask, NULL, configMINIMAL_STACK_SIZE, NULL,
-                         tskIDLE_PRIORITY, NULL );
+    ( void )xTaskCreate( vModbusTask, NULL, configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
 
     vTaskStartScheduler(  );
     return 0;
@@ -76,45 +75,39 @@ vModbusTask( void *pvParameters )
 }
 
 eMBErrorCode
-eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils,
-               eMBRegisterMode eMode )
+eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     int             iNCoils = ( int )usNCoils;
     unsigned short  usBitOffset;
 
     /* Check if we have registers mapped at this block. */
-    if( ( usAddress >= REG_COILS_START ) &&
-        ( usAddress + usNCoils <= REG_COILS_START + REG_COILS_SIZE ) )
+    if( ( usAddress >= REG_COILS_START ) && ( usAddress + usNCoils <= REG_COILS_START + REG_COILS_SIZE ) )
     {
         usBitOffset = ( unsigned short )( usAddress - REG_COILS_START );
         switch ( eMode )
         {
-                /* Read current values and pass to protocol stack. */
-            case MB_REG_READ:
-                while( iNCoils > 0 )
-                {
-                    *pucRegBuffer++ =
-                        xMBUtilGetBits( ucRegCoilsBuf, usBitOffset,
-                                        ( unsigned char )( iNCoils >
-                                                           8 ? 8 :
-                                                           iNCoils ) );
-                    iNCoils -= 8;
-                    usBitOffset += 8;
-                }
-                break;
+            /* Read current values and pass to protocol stack. */
+        case MB_REG_READ:
+            while( iNCoils > 0 )
+            {
+                *pucRegBuffer++ =
+                    xMBUtilGetBits( ucRegCoilsBuf, usBitOffset, ( unsigned char )( iNCoils > 8 ? 8 : iNCoils ) );
+                iNCoils -= 8;
+                usBitOffset += 8;
+            }
+            break;
 
-                /* Update current register values. */
-            case MB_REG_WRITE:
-                while( iNCoils > 0 )
-                {
-                    xMBUtilSetBits( ucRegCoilsBuf, usBitOffset, 
-                                    ( unsigned char )( iNCoils > 8 ? 8 : iNCoils ),
-                                    *pucRegBuffer++ );
-                    iNCoils -= 8;
-                    usBitOffset += 8;
-                }
-                break;
+            /* Update current register values. */
+        case MB_REG_WRITE:
+            while( iNCoils > 0 )
+            {
+                xMBUtilSetBits( ucRegCoilsBuf, usBitOffset, ( unsigned char )( iNCoils > 8 ? 8 : iNCoils ),
+                                *pucRegBuffer++ );
+                iNCoils -= 8;
+                usBitOffset += 8;
+            }
+            break;
         }
 
     }
@@ -127,20 +120,19 @@ eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils,
 
 
 eMBErrorCode
-eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
+eMBRegInputCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 {
     return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs,
-                 eMBRegisterMode eMode )
+eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
 {
     return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
+eMBRegDiscreteCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
 {
     return MB_ENOREG;
 }

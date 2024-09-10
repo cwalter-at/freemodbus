@@ -270,7 +270,7 @@ signed portBASE_TYPE xReturn;
 
 		+ xQueueReceiveFromISR().  As per xQueueSendFromISR().
 	*/
-		
+
 	/* If the queue is already full we may have to block. */
 	if( prvIsQueueFull( pxQueue ) )
 	{
@@ -281,11 +281,11 @@ signed portBASE_TYPE xReturn;
 			/* We are going to place ourselves on the xTasksWaitingToSend event
 			list, and will get woken should the delay expire, or space become
 			available on the queue.
-			
+
 			As detailed above we do not require mutual exclusion on the event
 			list as nothing else can modify it or the ready lists while we
 			have the scheduler suspended and queue locked.
-			
+
 			It is possible that an ISR has removed data from the queue since we
 			checked if any was available.  If this is the case then the data
 			will have been copied from the queue, and the queue variables
@@ -297,7 +297,7 @@ signed portBASE_TYPE xReturn;
 			this from within a critical section as the task we are
 			switching to has its own context.  When we return here (i.e. we
 			unblock) we will leave the critical section as normal.
-			
+
 			It is possible that an ISR has caused an event on an unrelated and
 			unlocked queue.  If this was the case then the event list for that
 			queue will have been updated but the ready lists left unchanged -
@@ -308,7 +308,7 @@ signed portBASE_TYPE xReturn;
 				/* We can safely unlock the queue and scheduler here as
 				interrupts are disabled.  We must not yield with anything
 				locked, but we can yield from within a critical section.
-				
+
 				Tasks that have been placed on the pending ready list cannot
 				be tasks that are waiting for events on this queue.  See
 				in comment xTaskRemoveFromEventList(). */
@@ -324,12 +324,12 @@ signed portBASE_TYPE xReturn;
 				/* Before leaving the critical section we have to ensure
 				exclusive access again. */
 				vTaskSuspendAll();
-				prvLockQueue( pxQueue );				
+				prvLockQueue( pxQueue );
 			}
 			taskEXIT_CRITICAL();
 		}
 	}
-		
+
 	/* When we are here it is possible that we unblocked as space became
 	available on the queue.  It is also possible that an ISR posted to the
 	queue since we left the critical section, so it may be that again there
@@ -339,8 +339,8 @@ signed portBASE_TYPE xReturn;
 	{
 		if( pxQueue->uxMessagesWaiting < pxQueue->uxLength )
 		{
-			/* There is room in the queue, copy the data into the queue. */			
-			prvCopyQueueData( pxQueue, pvItemToQueue );		
+			/* There is room in the queue, copy the data into the queue. */
+			prvCopyQueueData( pxQueue, pvItemToQueue );
 			xReturn = pdPASS;
 
 			/* Update the TxLock count so prvUnlockQueue knows to check for
@@ -396,7 +396,7 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
 		{
 			/* We only want to wake one task per ISR, so check that a task has
 			not already been woken. */
-			if( !xTaskPreviouslyWoken )		
+			if( !xTaskPreviouslyWoken )
 			{
 				if( !listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToReceive ) ) )
 				{
@@ -438,7 +438,7 @@ signed portBASE_TYPE xReturn;
 	if( prvIsQueueEmpty( pxQueue ) )
 	{
 		/* There are no messages in the queue, do we want to block or just
-		leave with nothing? */			
+		leave with nothing? */
 		if( xTicksToWait > ( portTickType ) 0 )
 		{
 			vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToReceive ), xTicksToWait );
@@ -602,7 +602,7 @@ signed portBASE_TYPE xYieldRequired = pdFALSE;
 					context	switch is required. */
 					xYieldRequired = pdTRUE;
 				}
-			}			
+			}
 		}
 	}
 	taskEXIT_CRITICAL();
@@ -622,7 +622,7 @@ signed portBASE_TYPE xYieldRequired = pdFALSE;
 				{
 					xYieldRequired = pdTRUE;
 				}
-			}			
+			}
 		}
 	}
 	taskEXIT_CRITICAL();
@@ -659,9 +659,9 @@ signed portBASE_TYPE xReturn;
 signed portBASE_TYPE xQueueCRSend( xQueueHandle pxQueue, const void *pvItemToQueue, portTickType xTicksToWait )
 {
 signed portBASE_TYPE xReturn;
-		
+
 	/* If the queue is already full we may have to block.  A critical section
-	is required to prevent an interrupt removing something from the queue 
+	is required to prevent an interrupt removing something from the queue
 	between the check to see if the queue is full and blocking on the queue. */
 	portDISABLE_INTERRUPTS();
 	{
@@ -673,7 +673,7 @@ signed portBASE_TYPE xReturn;
 			{
 				/* As this is called from a coroutine we cannot block directly, but
 				return indicating that we need to block. */
-				vCoRoutineAddToDelayedList( xTicksToWait, &( pxQueue->xTasksWaitingToSend ) );				
+				vCoRoutineAddToDelayedList( xTicksToWait, &( pxQueue->xTasksWaitingToSend ) );
 				portENABLE_INTERRUPTS();
 				return errQUEUE_BLOCKED;
 			}
@@ -685,27 +685,27 @@ signed portBASE_TYPE xReturn;
 		}
 	}
 	portENABLE_INTERRUPTS();
-		
+
 	portNOP();
 
 	portDISABLE_INTERRUPTS();
 	{
 		if( pxQueue->uxMessagesWaiting < pxQueue->uxLength )
 		{
-			/* There is room in the queue, copy the data into the queue. */			
-			prvCopyQueueData( pxQueue, pvItemToQueue );		
+			/* There is room in the queue, copy the data into the queue. */
+			prvCopyQueueData( pxQueue, pvItemToQueue );
 			xReturn = pdPASS;
 
 			/* Were any co-routines waiting for data to become available? */
 			if( !listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToReceive ) ) )
 			{
-				/* In this instance the co-routine could be placed directly 
-				into the ready list as we are within a critical section.  
+				/* In this instance the co-routine could be placed directly
+				into the ready list as we are within a critical section.
 				Instead the same pending ready list mechansim is used as if
 				the event were caused from within an interrupt. */
 				if( xCoRoutineRemoveFromEventList( &( pxQueue->xTasksWaitingToReceive ) ) != pdFALSE )
 				{
-					/* The co-routine waiting has a higher priority so record 
+					/* The co-routine waiting has a higher priority so record
 					that a yield might be appropriate. */
 					xReturn = errQUEUE_YIELD;
 				}
@@ -729,14 +729,14 @@ signed portBASE_TYPE xQueueCRReceive( xQueueHandle pxQueue, void *pvBuffer, port
 signed portBASE_TYPE xReturn;
 
 	/* If the queue is already empty we may have to block.  A critical section
-	is required to prevent an interrupt adding something to the queue 
+	is required to prevent an interrupt adding something to the queue
 	between the check to see if the queue is empty and blocking on the queue. */
 	portDISABLE_INTERRUPTS();
 	{
 		if( prvIsQueueEmpty( pxQueue ) )
 		{
 			/* There are no messages in the queue, do we want to block or just
-			leave with nothing? */			
+			leave with nothing? */
 			if( xTicksToWait > ( portTickType ) 0 )
 			{
 				/* As this is a co-routine we cannot block directly, but return
@@ -774,15 +774,15 @@ signed portBASE_TYPE xReturn;
 			/* Were any co-routines waiting for space to become available? */
 			if( !listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToSend ) ) )
 			{
-				/* In this instance the co-routine could be placed directly 
-				into the ready list as we are within a critical section.  
+				/* In this instance the co-routine could be placed directly
+				into the ready list as we are within a critical section.
 				Instead the same pending ready list mechansim is used as if
 				the event were caused from within an interrupt. */
 				if( xCoRoutineRemoveFromEventList( &( pxQueue->xTasksWaitingToSend ) ) != pdFALSE )
 				{
 					xReturn = errQUEUE_YIELD;
 				}
-			}	
+			}
 		}
 		else
 		{
@@ -807,9 +807,9 @@ signed portBASE_TYPE xQueueCRSendFromISR( xQueueHandle pxQueue, const void *pvIt
 	{
 		prvCopyQueueData( pxQueue, pvItemToQueue );
 
-		/* We only want to wake one co-routine per ISR, so check that a 
+		/* We only want to wake one co-routine per ISR, so check that a
 		co-routine has not already been woken. */
-		if( !xCoRoutinePreviouslyWoken )		
+		if( !xCoRoutinePreviouslyWoken )
 		{
 			if( !listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToReceive ) ) )
 			{

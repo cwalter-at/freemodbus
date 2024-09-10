@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MSP430 Port
+ * FreeModbus Library: MSP430 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@
 #include "mbport.h"
 
 /* ----------------------- Defines ------------------------------------------*/
+
 /* Timer ticks are counted in multiples of 50us. Therefore 20000 ticks are
  * one second.
  */
@@ -41,7 +42,7 @@ BOOL
 xMBPortTimersInit( USHORT usTim1Timeout50us )
 {
     BOOL            bInitialized = FALSE;
-    ULONG           ulReloadValue = ( ACLK * ( ULONG )usTim1Timeout50us ) / MB_TIMER_TICKS;
+    ULONG           ulReloadValue = ( ACLK * ( ULONG ) usTim1Timeout50us ) / MB_TIMER_TICKS;
 
     if( ulReloadValue <= 1 )
     {
@@ -82,10 +83,11 @@ vMBPortTimersDisable( void )
 }
 
 #if defined (__GNUC__)
-interrupt (TIMERA0_VECTOR) prvvMBTimerIRQHandler( void )
+interrupt( TIMERA0_VECTOR ) prvvMBTimerIRQHandler( void )
 #else
 void
-prvvMBTimerIRQHandler( void ) __interrupt[TIMERA0_VECTOR]
+prvvMBTimerIRQHandler( void )
+    __interrupt[TIMERA0_VECTOR]
 #endif
 {
     ( void )pxMBPortCBTimerExpired(  );

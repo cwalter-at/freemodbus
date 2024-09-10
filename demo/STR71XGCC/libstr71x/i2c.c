@@ -76,13 +76,13 @@ void I2C_OnOffConfig (I2C_TypeDef *I2Cx, FunctionalState NewState)
 FlagStatus I2C_FlagStatus (I2C_TypeDef *I2Cx, RegisterAccess Access, I2C_Flags Flag, ...)
 {
   u32 Tmp=0;
-  
+
   if (Access == DIRECT)
     /* Store in Tmp variable the register where is located the flag */
     Tmp = I2C_GetStatus(I2Cx)&Flag;
   else
-  { 
-    va_list list;  
+  {
+    va_list list;
     /* Get the fourth register */
     va_start(list,Flag);
     Tmp = va_arg(list,u32);

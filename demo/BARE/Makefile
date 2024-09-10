@@ -15,10 +15,10 @@ COMMON =
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON) \
 		 -Iport -I. \
-		 -I../../modbus/rtu -I../../modbus/ascii -I../../modbus/include 
+		 -I../../modbus/rtu -I../../modbus/ascii -I../../modbus/include
 CFLAGS += -Wall -gstabs -Os -Wall -Wstrict-prototypes
 
-CFLAGS += -Wp,-M,-MP,-MT,$(*F).o,-MF,dep/$(@F).d 
+CFLAGS += -Wp,-M,-MP,-MT,$(*F).o,-MF,dep/$(@F).d
 
 ## Assembly specific flags
 ASMFLAGS = $(COMMON)
@@ -43,11 +43,11 @@ MBOBJECTS = ../../modbus/mb.o \
 			../../modbus/functions/mbfuncinput.o \
 			../../modbus/functions/mbfuncother.o \
 			../../modbus/functions/mbfuncdisc.o \
-			../../modbus/functions/mbutils.o 
+			../../modbus/functions/mbutils.o
 
 
 ## Build
-all: $(TARGET).elf 
+all: $(TARGET).elf
 
 ## Compile
 demo.o: demo.c

@@ -23,7 +23,7 @@
 
 /*******************************************************************************
 * Function Name      : ADC12_Init
-* Description        : This routine is used to initialize the ADC12 registers to 
+* Description        : This routine is used to initialize the ADC12 registers to
 *                      their reset values
 * Input              : None.
 * Return             : None.
@@ -70,7 +70,7 @@ void ADC12_ITConfig(FunctionalState NewState)
         case 0x20 : ADC12->CSR |= ADC12_IT2_Mask;  break;
         case 0x30 : ADC12->CSR |= ADC12_IT3_Mask;  break;
       }
-    }    
+    }
 
     else
       /* Set all interrupt bits in case of round robin mode is selected */

@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -72,7 +72,7 @@
        -1 if the IAP feature is not implemented in the ROM code.
 */
 unsigned long IAP_PerformCmd(unsigned long FlashCmd)
-{   
+{
     // Pointer on IAP function in ROM
     static void (*IAP_Function)(unsigned int) = 0;
 

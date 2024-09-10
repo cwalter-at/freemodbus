@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,7 +31,7 @@
 /// \unit
 ///
 /// !!!Purpose
-/// 
+///
 /// Video structure, used for LCD and ISI.
 /// Conversion Video from YCC to RGB
 ///
@@ -65,7 +65,7 @@ typedef struct _AT91S_VIDEO
     unsigned int  Isi_fbd_base;
     /// Start of Line Delay
     unsigned int  Hblank;
-    /// Start of frame Delay 
+    /// Start of frame Delay
     unsigned int  Vblank;
     /// Vertical size of the Image sensor [0..2047]
     unsigned int  codec_vsize;
@@ -75,8 +75,8 @@ typedef struct _AT91S_VIDEO
     unsigned int  codec_fb_addr;
     /// Buffer index
     unsigned int  IsiPrevBuffIndex;
-    /// Type of video 
-    unsigned char rgb_or_yuv;        
+    /// Type of video
+    unsigned char rgb_or_yuv;
 }AT91S_VIDEO, *AT91PS_VIDEO;
 
 

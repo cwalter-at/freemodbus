@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,9 +31,9 @@
  */
 
  /**********************************************************
- *	Linux TCP support.
- *	Based on Walter's project. 
- *	Modified by Steven Guo <gotop167@163.com>
+ *  Linux TCP support.
+ *  Based on Walter's project.
+ *  Modified by Steven Guo <gotop167@163.com>
  ***********************************************************/
 
 #include <stdio.h>
@@ -134,7 +134,7 @@ xMBTCPPortInit( USHORT usTCPPort )
 void
 vMBTCPPortClose(  )
 {
-    // Close all client sockets. 
+    // Close all client sockets.
     if( xClientSocket != SOCKET_ERROR )
     {
         prvvMBPortReleaseClient(  );
@@ -162,8 +162,8 @@ vMBTCPPortDisable( void )
  *   for new events.
  * \internal
  *
- * This function checks if new clients want to connect or if already connected 
- * clients are sending requests. If a new client is connected and there are 
+ * This function checks if new clients want to connect or if already connected
+ * clients are sending requests. If a new client is connected and there are
  * still client slots left (The current implementation supports only one)
  * then the connection is accepted and an event object for the new client
  * socket is activated (See prvbMBPortAcceptClient() ).
@@ -173,7 +173,7 @@ vMBTCPPortDisable( void )
  * and if a complete frame has been received the Modbus Stack is notified.
  *
  * \return FALSE in case of an internal I/O error. For example if the internal
- *   event objects are in an invalid state. Note that this does not include any 
+ *   event objects are in an invalid state. Note that this does not include any
  *   client errors. In all other cases returns TRUE.
  */
 BOOL
@@ -211,8 +211,7 @@ xMBPortTCPPool( void )
     {
         FD_ZERO( &fread );
         FD_SET( xClientSocket, &fread );
-        if( ( ( ret = select( xClientSocket + 1, &fread, NULL, NULL, &tval ) ) == SOCKET_ERROR )
-            || !ret )
+        if( ( ( ret = select( xClientSocket + 1, &fread, NULL, NULL, &tval ) ) == SOCKET_ERROR ) || !ret )
         {
             continue;
         }
@@ -220,9 +219,8 @@ xMBPortTCPPool( void )
         {
             if( FD_ISSET( xClientSocket, &fread ) )
             {
-                if( ( ( ret =
-                        recv( xClientSocket, &aucTCPBuf[usTCPBufPos], usTCPFrameBytesLeft,
-                              0 ) ) == SOCKET_ERROR ) || ( !ret ) )
+                if( ( ( ret = recv( xClientSocket, &aucTCPBuf[usTCPBufPos], usTCPFrameBytesLeft, 0 ) ) == SOCKET_ERROR )
+                    || ( !ret ) )
                 {
                     close( xClientSocket );
                     xClientSocket = INVALID_SOCKET;
@@ -265,11 +263,11 @@ xMBPortTCPPool( void )
  * \ingroup port_win32tcp
  * \brief Receives parts of a Modbus TCP frame and if complete notifies
  *    the protocol stack.
- * \internal 
+ * \internal
  *
  * This function reads a complete Modbus TCP frame from the protocol stack.
  * It starts by reading the header with an initial request size for
- * usTCPFrameBytesLeft = MB_TCP_FUNC. If the header is complete the 
+ * usTCPFrameBytesLeft = MB_TCP_FUNC. If the header is complete the
  * number of bytes left can be calculated from it (See Length in MBAP header).
  * Further read calls are issued until the frame is complete.
  *
@@ -278,7 +276,7 @@ xMBPortTCPPool( void )
  */
 
 BOOL
-xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength )
+xMBTCPPortGetRequest( UCHAR **ppucMBTCPFrame, USHORT *usTCPLength )
 {
     *ppucMBTCPFrame = &aucTCPBuf[0];
     *usTCPLength = usTCPBufPos;
@@ -290,7 +288,7 @@ xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength )
 }
 
 BOOL
-xMBTCPPortSendResponse( const UCHAR * pucMBTCPFrame, USHORT usTCPLength )
+xMBTCPPortSendResponse( const UCHAR *pucMBTCPFrame, USHORT usTCPLength )
 {
     BOOL            bFrameSent = FALSE;
     BOOL            bAbort = FALSE;

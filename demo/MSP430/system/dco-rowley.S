@@ -96,7 +96,7 @@ _cTISetDCO:
     push.w  &TACCTL2
     mov.w   #10000, r11         /* max number of times to loop */
     mov.w   r15, r12
-    clr.w   r15                 
+    clr.w   r15
     mov.b   &BCSCTL1, r13       /* Copy BC settings to preserve */
     and.w   #0xF8,    r13       /* Mask out bits which will change (0-2) 1xx */
 SetupBC:
@@ -116,7 +116,7 @@ TestDCO:
     jz      ExitTimeOutError
 TestDCO2:
     bit.w   #CCIFG, &TACCTL2    /* Test capture flag */
-    jz      TestDCO2            
+    jz      TestDCO2
     bic.w   #CCIFG, &TACCTL2    /* Clear capture flag */
 
 AdjDCO:
@@ -129,7 +129,7 @@ AdjDCO:
     cmp.w   #0xFFFF, r10        /* DCO can be off by 1 for a tolerance */
     jeq     ExitNoError
     cmp.w   r12,   r14          /* Delta = SMCLK/(32768/8) */
-    jlo     IncDCO                  
+    jlo     IncDCO
 DecDCO:
     dec.b   &DCOCTL             /* Slow DCO with DCO and MOD */
     jc      TestDCO             /* Slower? */
@@ -144,7 +144,7 @@ IncDCO:
     cmp.b   #(XT2OFF + DIVA_3 + 0x7), &BCSCTL1
     jeq     ExitFastestSetting  /* jmp> DCO at fastest setting */
     inc.b   &BCSCTL1            /* Increment RSEL.x */
-    jmp     TestDCO             
+    jmp     TestDCO
 ExitSlowestSetting:
     clr.b   &DCOCTL
     mov.w   #0x01, r15

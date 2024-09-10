@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,11 +31,11 @@
 /// \unit
 ///
 /// !Purpose
-/// 
+///
 /// Firmware encryption using libTomCrypt
-/// 
+///
 /// !Usage
-/// 
+///
 /// -# ltc_init: Initialize LibTomCrypt
 /// -# ltc_init_AES_CBC
 /// -# ltc_init_AES_CTR
@@ -79,7 +79,7 @@
 #if defined(ENCRYPTION_AES_LTC)
   #if (ENCRYPTION_KEY_LENGTH != 16) && \
       (ENCRYPTION_KEY_LENGTH != 24) && \
-      (ENCRYPTION_KEY_LENGTH != 32) 
+      (ENCRYPTION_KEY_LENGTH != 32)
     #error Only a key length of 128, 192 or 256 bits are supported with AES.
   #endif
 #elif defined(ENCRYPTION_3DES_LTC)

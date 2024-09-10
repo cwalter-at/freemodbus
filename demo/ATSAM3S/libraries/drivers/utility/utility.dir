@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,7 +31,7 @@
 /// \dir
 ///
 /// !!!Purpose
-/// 
+///
 /// The utility directory contains several very small APIs for performing
 /// specific tasks, such as LED configuration, BMP header decoding, etc.
 ///

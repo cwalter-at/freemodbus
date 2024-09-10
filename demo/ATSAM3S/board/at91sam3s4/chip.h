@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -26,7 +26,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
  */
- 
+
 //------------------------------------------------------------------------------
 /// \unit
 /// !Purpose
@@ -38,8 +38,8 @@
 /// -# For IP features, see "AT91SAM3S4 - IP features".
 /// -# For misc, see "AT91SAM3S4 - Misc".
 //------------------------------------------------------------------------------
- 
-#ifndef CHIP_H 
+
+#ifndef CHIP_H
 #define CHIP_H
 
 //------------------------------------------------------------------------------
@@ -73,31 +73,31 @@
 // EFC GPNVM number
 #define CHIP_EFC_NUM_GPNVMS    3
 
-/// Indicates chip has an Enhanced EFC. 
-#define CHIP_FLASH_EEFC 
+/// Indicates chip has an Enhanced EFC.
+#define CHIP_FLASH_EEFC
 
 // DMA channels number
 #define CHIP_DMA_CHANNEL_NUM   4
 
-// Indicate chip's MCI interface. 
+// Indicate chip's MCI interface.
 #define MCI2_INTERFACE
 
-// Indicate chip SSC has DMA interface. 
+// Indicate chip SSC has DMA interface.
 #define CHIP_SSC_DMA
 
 // Indicate chip SPI has DMA interface.
 #define CHIP_SPI_DMA
 
-/// Indicates chip has an UDP Full Speed. 
-#define CHIP_USB_UDP 
+/// Indicates chip has an UDP Full Speed.
+#define CHIP_USB_UDP
 
-/// Indicates chip has an internal pull-up. 
-#define CHIP_USB_PULLUP_INTERNAL 
+/// Indicates chip has an internal pull-up.
+#define CHIP_USB_PULLUP_INTERNAL
 
-/// Number of USB endpoints 
-#define CHIP_USB_NUMENDPOINTS 8 
+/// Number of USB endpoints
+#define CHIP_USB_NUMENDPOINTS 8
 
-/// Endpoints max paxcket size 
+/// Endpoints max paxcket size
 #define CHIP_USB_ENDPOINTS_MAXPACKETSIZE(i) \
    ((i == 0) ? 64 : \
    ((i == 1) ? 64 : \
@@ -108,7 +108,7 @@
    ((i == 6) ? 64 : \
    ((i == 7) ? 64 : 0 ))))))))
 
-/// Endpoints Number of Bank 
+/// Endpoints Number of Bank
 #define CHIP_USB_ENDPOINTS_BANKS(i) \
    ((i == 0) ? 1 : \
    ((i == 1) ? 2 : \
@@ -124,7 +124,7 @@
 /// This page lists misc features
 ///
 
-//Misc 
+//Misc
 
 #endif //#ifndef CHIP_H
 

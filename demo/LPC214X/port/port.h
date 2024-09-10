@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Library: BARE Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,15 +25,15 @@
 #include <assert.h>
 #include <inttypes.h>
 
-#define	INLINE
+#define INLINE
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
-#define ENTER_CRITICAL_SECTION( )		EnterCriticalSection( )
+#define ENTER_CRITICAL_SECTION( )       EnterCriticalSection( )
 #define EXIT_CRITICAL_SECTION( )    ExitCriticalSection( )
 
-#define CCLK	60000000L
-#define PCLK	CCLK/4
+#define CCLK    60000000L
+#define PCLK    CCLK/4
 
 void            EnterCriticalSection( void );
 void            ExitCriticalSection( void );

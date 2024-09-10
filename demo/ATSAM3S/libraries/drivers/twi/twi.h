@@ -33,7 +33,7 @@
  * Interface for configuration the Two Wire Interface (TWI) peripheral.
  *
  */
- 
+
 #ifndef TWI_H
 #define TWI_H
 

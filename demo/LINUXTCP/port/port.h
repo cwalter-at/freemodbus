@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BSD Socket Library Port
+ * FreeModbus Library: BSD Socket Library Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
  */
 
  /**********************************************************
- *	Linux TCP support.
- *	Based on Walter's project. 
- *	Modified by Steven Guo <gotop167@163.com>
+ *  Linux TCP support.
+ *  Based on Walter's project.
+ *  Modified by Steven Guo <gotop167@163.com>
  ***********************************************************/
 
 #ifndef _PORT_H
@@ -31,23 +31,27 @@
 
 #include <assert.h>
 
-#define	INLINE
-#define PR_BEGIN_EXTERN_C			extern "C" {
-#define	PR_END_EXTERN_C				}
+#define INLINE
+#define PR_BEGIN_EXTERN_C           extern "C" {
+#define PR_END_EXTERN_C             }
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 /* ----------------------- Defines ------------------------------------------*/
 #define ENTER_CRITICAL_SECTION( )
 #define EXIT_CRITICAL_SECTION( )
-#define MB_PORT_HAS_CLOSE	1
+#define MB_PORT_HAS_CLOSE   1
 #ifndef TRUE
 #define TRUE            1
 #endif
 #ifndef FALSE
 #define FALSE           0
 #endif
+
 /* ----------------------- Type definitions ---------------------------------*/
 typedef int     SOCKET;
 
@@ -72,10 +76,12 @@ typedef enum
 
 /* ----------------------- Function prototypes ------------------------------*/
 
-void            TcpvMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt,
-                               ... );
+void            TcpvMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

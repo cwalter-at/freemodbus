@@ -177,10 +177,10 @@ typedef void * xTaskHandle;
  {
  unsigned char ucParameterToPass;
  xTaskHandle xHandle;
-		
+
      // Create the task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, &ucParameterToPass, tskIDLE_PRIORITY, &xHandle );
-		
+
      // Use the handle to delete the task.
      vTaskDelete( xHandle );
  }
@@ -218,10 +218,10 @@ signed portBASE_TYPE xTaskCreate( pdTASK_CODE pvTaskCode, const signed portCHAR 
  void vOtherFunction( void )
  {
  xTaskHandle xHandle;
-		
+
      // Create the task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
-		
+
      // Use the handle to delete the task.
      vTaskDelete( xHandle );
  }
@@ -363,10 +363,10 @@ void vTaskDelayUntil( portTickType *pxPreviousWakeTime, portTickType xTimeIncrem
  void vAFunction( void )
  {
  xTaskHandle xHandle;
-		
+
      // Create a task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
-		
+
      // ...
 
      // Use the handle to obtain the priority of the created task.
@@ -413,7 +413,7 @@ unsigned portBASE_TYPE uxTaskPriorityGet( xTaskHandle pxTask );
  void vAFunction( void )
  {
  xTaskHandle xHandle;
-		
+
      // Create a task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
 
@@ -455,22 +455,22 @@ void vTaskPrioritySet( xTaskHandle pxTask, unsigned portBASE_TYPE uxNewPriority 
  void vAFunction( void )
  {
  xTaskHandle xHandle;
-		
+
      // Create a task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
-		
+
      // ...
 
      // Use the handle to suspend the created task.
      vTaskSuspend( xHandle );
 
      // ...
-		
+
      // The created task will not run during this period, unless
      // another task calls vTaskResume( xHandle ).
-		
+
      //...
-		
+
 
      // Suspend ourselves.
      vTaskSuspend( NULL );
@@ -504,22 +504,22 @@ void vTaskSuspend( xTaskHandle pxTaskToSuspend );
  void vAFunction( void )
  {
  xTaskHandle xHandle;
-		
+
      // Create a task, storing the handle.
      xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
-		
+
      // ...
 
      // Use the handle to suspend the created task.
      vTaskSuspend( xHandle );
 
      // ...
-	
+
      // The created task will not run during this period, unless
      // another task calls vTaskResume( xHandle ).
-		
+
      //...
-		
+
 
      // Resume the suspended task ourselves.
      vTaskResume( xHandle );
@@ -537,7 +537,7 @@ void vTaskResume( xTaskHandle pxTaskToResume );
  * task. h
  * <pre>void xTaskResumeFromISR( xTaskHandle pxTaskToResume );</pre>
  *
- * INCLUDE_xTaskResumeFromISR must be defined as 1 for this function to be 
+ * INCLUDE_xTaskResumeFromISR must be defined as 1 for this function to be
  * available.  See the configuration section for more information.
  *
  * An implementation of vTaskResume() that can be called from within an ISR.

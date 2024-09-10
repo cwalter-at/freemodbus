@@ -32,7 +32,7 @@
 
 /*
 Changes from V1.00:
-	
+
 	+ Call to portRESTORE_CONTEXT has been removed.  The first context
 	  switch is now performed within sPortStartScheduler().
 
@@ -135,14 +135,14 @@ Changes from V3.2.0
 
 Changes from V3.2.4
 
-	+ Changed the volatile declarations on some variables to reflect the 
+	+ Changed the volatile declarations on some variables to reflect the
 	  changes to the list definitions.
 	+ Changed the order of the TCB definition so there is commonality between
 	  the task control block and a co-routine control block.
 	+ Allow the scheduler to be started even if no tasks other than the idle
 	  task has been created.  This allows co-routines to run even when no tasks
 	  have been created.
-	+ The need for a context switch is now signalled if a task woken by an 
+	+ The need for a context switch is now signalled if a task woken by an
 	  event has a priority greater or equal to the currently running task.
 	  Previously this was only greater than.
 
@@ -153,8 +153,8 @@ Changes from V4.0.0
 Changes from V4.0.1
 
 	+ The function vTaskList() now suspends the scheduler rather than disabling
-	  interrupts during the creation of the task list.  
-	+ Allow a task to delete itself by passing in its own handle.  Previously 
+	  interrupts during the creation of the task list.
+	+ Allow a task to delete itself by passing in its own handle.  Previously
 	  this could only be done by passing in NULL.
 	+ The tick hook function is now called only within a tick isr.  Previously
 	  it was also called when the tick function was called during the scheduler
@@ -214,7 +214,7 @@ Changed from V4.0.4
 
 #ifndef INCLUDE_xTaskResumeFromISR
 	#define INCLUDE_xTaskResumeFromISR 1
-#endif 
+#endif
 
 /*
  * Task control block.  A task control block (TCB) is allocated to each task,
@@ -234,7 +234,7 @@ typedef struct tskTaskControlBlock
 
 /*lint -e956 */
 
-tskTCB * volatile pxCurrentTCB = NULL;					
+tskTCB * volatile pxCurrentTCB = NULL;
 
 /* Lists for ready and blocked tasks. --------------------*/
 
@@ -350,7 +350,7 @@ static volatile portBASE_TYPE xMissedYield						= ( portBASE_TYPE ) pdFALSE;
 		uxTopReadyPriority = pxTCB->uxPriority;																	\
 	}																											\
 	vListInsertEnd( ( xList * ) &( pxReadyTasksLists[ pxTCB->uxPriority ] ), &( pxTCB->xGenericListItem ) );	\
-}		
+}
 
 /*
  * Macro that looks at the list of tasks that are currently delayed to see if
@@ -378,7 +378,7 @@ register tskTCB *pxTCB;																								\
 		}																											\
 		prvAddTaskToReadyQueue( pxTCB );														\
 	}																												\
-}																							
+}
 
 /*
  * Several functions take an xTaskHandle parameter that can optionally be NULL,
@@ -487,7 +487,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 	pxNewTCB = prvAllocateTCBAndStack( usStackDepth );
 
 	if( pxNewTCB != NULL )
-	{		
+	{
 		portSTACK_TYPE *pxTopOfStack;
 
 		/* Setup the newly allocated TCB with the initial state of the task. */
@@ -503,7 +503,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 		}
 		#else
 		{
-			pxTopOfStack = pxNewTCB->pxStack;	
+			pxTopOfStack = pxNewTCB->pxStack;
 		}
 		#endif
 
@@ -529,7 +529,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 				prvInitialiseTaskLists();
 			}
 			else
-			{	
+			{
 				/* If the scheduler is not already running, make this task the
 				current task if it is the highest priority task to be created
 				so far. */
@@ -537,10 +537,10 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 				{
 					if( pxCurrentTCB->uxPriority <= uxPriority )
 					{
-						pxCurrentTCB = pxNewTCB;	
+						pxCurrentTCB = pxNewTCB;
 					}
 				}
-			}				
+			}
 
 			/* Remember the top priority to make context switching faster.  Use
 			the priority in pxNewTCB as this has been capped to a valid value. */
@@ -597,7 +597,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 
 		taskENTER_CRITICAL();
 		{
-			/* Ensure a yield is performed if the current task is being 
+			/* Ensure a yield is performed if the current task is being
 			deleted. */
 			if( pxTaskToDelete == pxCurrentTCB )
 			{
@@ -613,7 +613,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 			scheduler for the TCB and stack. */
 			vListRemove( &( pxTCB->xGenericListItem ) );
 
-			/* Is the task waiting on an event also? */												
+			/* Is the task waiting on an event also? */
 			if( pxTCB->xEventListItem.pvContainer )
 			{
 				vListRemove( &( pxTCB->xEventListItem ) );
@@ -629,7 +629,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 		taskEXIT_CRITICAL();
 
 		/* Force a reschedule if we have just deleted the current task. */
-		if( xSchedulerRunning != pdFALSE ) 
+		if( xSchedulerRunning != pdFALSE )
 		{
 			if( ( void * ) pxTaskToDelete == NULL )
 			{
@@ -719,8 +719,8 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 		{
 			taskYIELD();
 		}
-	}	
-	
+	}
+
 #endif
 /*-----------------------------------------------------------*/
 
@@ -740,7 +740,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 				scheduler is suspended will not get placed in the ready
 				list or removed from the blocked list until the scheduler
 				is resumed.
-				
+
 				This task cannot be in an event list as it is the currently
 				executing task. */
 
@@ -771,7 +771,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 			}
 			xAlreadyYielded = xTaskResumeAll();
 		}
-		
+
 		/* Force a reschedule if xTaskResumeAll has not already done so, we may
 		have put ourselves to sleep. */
 		if( !xAlreadyYielded )
@@ -779,7 +779,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 			taskYIELD();
 		}
 	}
-	
+
 #endif
 /*-----------------------------------------------------------*/
 
@@ -829,7 +829,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 			{
 				/* The priority change may have readied a task of higher
 				priority than the calling task. */
-				if( uxNewPriority > pxCurrentTCB->uxPriority ) 
+				if( uxNewPriority > pxCurrentTCB->uxPriority )
 				{
 					if( pxTask != NULL )
 					{
@@ -846,7 +846,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 					task of higher priority that is ready to execute. */
 					xYieldRequired = pdTRUE;
 				}
-			
+
 				pxTCB->uxPriority = uxNewPriority;
 				listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), configMAX_PRIORITIES - ( portTickType ) uxNewPriority );
 
@@ -861,12 +861,12 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 					can do this even if the scheduler is suspended. */
 					vListRemove( &( pxTCB->xGenericListItem ) );
 					prvAddTaskToReadyQueue( pxTCB );
-				}			
-				
+				}
+
 				if( xYieldRequired == pdTRUE )
 				{
 					taskYIELD();
-				}				
+				}
 			}
 		}
 		taskEXIT_CRITICAL();
@@ -883,7 +883,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 
 		taskENTER_CRITICAL();
 		{
-			/* Ensure a yield is performed if the current task is being 
+			/* Ensure a yield is performed if the current task is being
 			suspended. */
 			if( pxTaskToSuspend == pxCurrentTCB )
 			{
@@ -896,7 +896,7 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 			/* Remove task from the ready/delayed list and place in the	suspended list. */
 			vListRemove( &( pxTCB->xGenericListItem ) );
 
-			/* Is the task waiting on an event also? */												
+			/* Is the task waiting on an event also? */
 			if( pxTCB->xEventListItem.pvContainer )
 			{
 				vListRemove( &( pxTCB->xEventListItem ) );
@@ -937,8 +937,8 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 				{
 					/* Has the task already been resumed from within an ISR? */
 					if( listIS_CONTAINED_WITHIN( &xPendingReadyList, &( pxTCB->xEventListItem ) ) != pdTRUE )
-					{			
-						/* As we are in a critical section we can access the ready 
+					{
+						/* As we are in a critical section we can access the ready
 						lists even if the scheduler is suspended. */
 						vListRemove(  &( pxTCB->xGenericListItem ) );
 						prvAddTaskToReadyQueue( pxTCB );
@@ -979,13 +979,13 @@ static unsigned portBASE_TYPE uxTaskNumber = 0; /*lint !e956 Static is deliberat
 				if( uxSchedulerSuspended == ( unsigned portBASE_TYPE ) pdFALSE )
 				{
 					xYieldRequired = ( pxTCB->uxPriority >= pxCurrentTCB->uxPriority );
-					vListRemove(  &( pxTCB->xGenericListItem ) );	
+					vListRemove(  &( pxTCB->xGenericListItem ) );
 					prvAddTaskToReadyQueue( pxTCB );
 				}
 				else
 				{
 					/* We cannot access the delayed or ready lists, so will hold this
-					task pending until the scheduler is resumed, at which point a 
+					task pending until the scheduler is resumed, at which point a
 					yield will be preformed if necessary. */
 					vListInsertEnd( ( xList * ) &( xPendingReadyList ), &( pxTCB->xEventListItem ) );
 				}
@@ -1019,7 +1019,7 @@ portBASE_TYPE xReturn;
 		the created tasks contain a status word with interrupts switched on
 		so interrupts will automatically get re-enabled when the first task
 		starts to run.
-		
+
 		STEPPING THROUGH HERE USING A DEBUGGER CAN CAUSE BIG PROBLEMS IF THE
 		DEBUGGER ALLOWS INTERRUPTS TO BE PROCESSED. */
 		portDISABLE_INTERRUPTS();
@@ -1076,11 +1076,11 @@ signed portBASE_TYPE xAlreadyYielded = pdFALSE;
 		--uxSchedulerSuspended;
 
 		if( uxSchedulerSuspended == ( unsigned portBASE_TYPE ) pdFALSE )
-		{			
+		{
 			if( uxCurrentNumberOfTasks > ( unsigned portBASE_TYPE ) 0 )
 			{
 				portBASE_TYPE xYieldRequired = pdFALSE;
-				
+
 				/* Move any readied tasks from the pending list into the
 				appropriate ready list. */
 				while( ( pxTCB = ( tskTCB * ) listGET_OWNER_OF_HEAD_ENTRY(  ( ( xList * ) &xPendingReadyList ) ) ) != NULL )
@@ -1088,7 +1088,7 @@ signed portBASE_TYPE xAlreadyYielded = pdFALSE;
 					vListRemove( &( pxTCB->xEventListItem ) );
 					vListRemove( &( pxTCB->xGenericListItem ) );
 					prvAddTaskToReadyQueue( pxTCB );
-					
+
 					/* If we have moved a task that has a priority higher than
 					the current task then we should yield. */
 					if( pxTCB->uxPriority >= pxCurrentTCB->uxPriority )
@@ -1113,7 +1113,7 @@ signed portBASE_TYPE xAlreadyYielded = pdFALSE;
 					the task actually running. */
 					xYieldRequired = pdTRUE;
 				}
-				
+
 				if( ( xYieldRequired == pdTRUE ) || ( xMissedYield == pdTRUE ) )
 				{
 					xAlreadyYielded = pdTRUE;
@@ -1191,7 +1191,7 @@ unsigned portBASE_TYPE uxNumberOfTasks;
 
 				if( !listLIST_IS_EMPTY( &( pxReadyTasksLists[ uxQueue ] ) ) )
 				{
-					prvListTaskWithinSingleList( pcWriteBuffer, ( xList * ) &( pxReadyTasksLists[ uxQueue ] ), tskREADY_CHAR );			
+					prvListTaskWithinSingleList( pcWriteBuffer, ( xList * ) &( pxReadyTasksLists[ uxQueue ] ), tskREADY_CHAR );
 				}
 			}while( uxQueue > ( unsigned portSHORT ) tskIDLE_PRIORITY );
 
@@ -1275,8 +1275,8 @@ inline void vTaskIncrementTick( void )
 		{
 			xList *pxTemp;
 
-			/* Tick count has overflowed so we need to swap the delay lists.  
-			If there are any items in pxDelayedTaskList here then there is 
+			/* Tick count has overflowed so we need to swap the delay lists.
+			If there are any items in pxDelayedTaskList here then there is
 			an error! */
 			pxTemp = pxDelayedTaskList;
 			pxDelayedTaskList = pxOverflowDelayedTaskList;
@@ -1290,7 +1290,7 @@ inline void vTaskIncrementTick( void )
 	{
 		++uxMissedTicks;
 
-		/* The tick hook gets called at regular intervals, even if the 
+		/* The tick hook gets called at regular intervals, even if the
 		scheduler is locked. */
 		#if ( configUSE_TICK_HOOK == 1 )
 		{
@@ -1363,7 +1363,7 @@ inline void vTaskIncrementTick( void )
 			vListRemove( ( xListItem * ) &( pxTCB->xGenericListItem ) );
 
 			prvDeleteTCB( ( tskTCB * ) pxTCB );
-		}		
+		}
 
 		while( !listLIST_IS_EMPTY( &xPendingReadyList ) )
 		{
@@ -1371,7 +1371,7 @@ inline void vTaskIncrementTick( void )
 			vListRemove( ( xListItem * ) &( pxTCB->xGenericListItem ) );
 
 			prvDeleteTCB( ( tskTCB * ) pxTCB );
-		}		
+		}
 	}
 
 #endif
@@ -1447,7 +1447,7 @@ portBASE_TYPE xReturn;
 	/* The event list is sorted in priority order, so we can remove the
 	first in the list, remove the TCB from the delayed list, and add
 	it to the ready list.
-	
+
 	If an event is for a queue that is locked then this function will never
 	get called - the lock count on the queue will get modified instead.  This
 	means we can always expect exclusive access to the event list here. */
@@ -1513,7 +1513,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 			see if any other task has become available.  If we are using
 			preemption we don't need to do this as any task becoming available
 			will automatically get the processor anyway. */
-			taskYIELD();	
+			taskYIELD();
 		}
 		#endif
 
@@ -1523,7 +1523,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 			timesliced.  If a task that is sharing the idle priority is ready
 			to run then the idle task should yield before the end of the
 			timeslice.
-			
+
 			A critical region is not required here as we are just reading from
 			the list, and an occasional incorrect value will not matter.  If
 			the ready list at the idle priority contains more than one task
@@ -1624,9 +1624,9 @@ unsigned portBASE_TYPE uxPriority;
 /*-----------------------------------------------------------*/
 
 static void prvCheckTasksWaitingTermination( void )
-{							
+{
 	#if ( INCLUDE_vTaskDelete == 1 )
-	{				
+	{
 		portBASE_TYPE xListIsEmpty;
 
 		/* ucTasksDeleted is used to prevent vTaskSuspendAll() being called
@@ -1634,7 +1634,7 @@ static void prvCheckTasksWaitingTermination( void )
 		if( uxTasksDeleted > ( unsigned portBASE_TYPE ) 0 )
 		{
 			vTaskSuspendAll();
-				xListIsEmpty = listLIST_IS_EMPTY( &xTasksWaitingTermination );				
+				xListIsEmpty = listLIST_IS_EMPTY( &xTasksWaitingTermination );
 			xTaskResumeAll();
 
 			if( !xListIsEmpty )
@@ -1642,7 +1642,7 @@ static void prvCheckTasksWaitingTermination( void )
 				tskTCB *pxTCB;
 
 				portENTER_CRITICAL();
-				{			
+				{
 					pxTCB = ( tskTCB * ) listGET_OWNER_OF_HEAD_ENTRY( ( ( xList * ) &xTasksWaitingTermination ) );
 					vListRemove( &( pxTCB->xGenericListItem ) );
 					--uxCurrentNumberOfTasks;
@@ -1676,9 +1676,9 @@ tskTCB *pxNewTCB;
 		if( pxNewTCB->pxStack == NULL )
 		{
 			/* Could not allocate the stack.  Delete the allocated TCB. */
-			vPortFree( pxNewTCB );			
-			pxNewTCB = NULL;			
-		}		
+			vPortFree( pxNewTCB );
+			pxNewTCB = NULL;
+		}
 		else
 		{
 			/* Just to help debugging. */

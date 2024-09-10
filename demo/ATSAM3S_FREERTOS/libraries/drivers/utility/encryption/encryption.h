@@ -31,9 +31,9 @@
 /// \unit
 ///
 /// !Purpose
-/// 
+///
 /// Firmware encryption
-/// 
+///
 /// !Usage
 ///
 /// This file must include the header of every encryption module implemented for

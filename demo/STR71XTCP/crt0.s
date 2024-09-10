@@ -10,7 +10,7 @@
     .section .init, "ax"
     .code   32
     .align  0
-                
+
     .weak   _start
     .global __start
     .global __gccmain
@@ -22,15 +22,15 @@
  * Description : Main entry point and startup code for C system.             *
  *****************************************************************************/
 _start:
-__start:                        
+__start:
     mrs r0, cpsr
     bic r0, r0, #0x1F
 
-    /* Setup stacks */ 
+    /* Setup stacks */
     orr r1, r0, #0x1B /* Undefined mode */
     msr cpsr_cxsf, r1
     ldr sp, =__stack_und_end__
-  
+
     orr r1, r0, #0x17 /* Abort mode */
     msr cpsr_cxsf, r1
     ldr sp, =__stack_abt_end__
@@ -48,7 +48,7 @@ __start:
     ldr sp, =__stack_svc_end__
 #ifdef SUPERVISOR_START
     /* Start application in supervisor mode */
-    ldr r1, =__stack_end__ /* Setup user/system mode stack */ 
+    ldr r1, =__stack_end__ /* Setup user/system mode stack */
     mov r2, sp
     stmfd r2!, {r1}
     ldmfd r2, {sp}^
@@ -58,57 +58,57 @@ __start:
     msr cpsr_cxsf, r1
     ldr sp, =__stack_end__
 #endif
-  
+
     /* Copy from initialised data section to data section (if necessary). */
     ldr r0, =__data_load_start__
     ldr r1, =__data_start__
     cmp r0, r1
     beq copy_data_end
-  
+
     ldr r2, =__data_end__
     subs r2, r2, r1
     beq copy_data_end
-  
+
 copy_data_loop:
     ldrb r3, [r0], #+1
     strb r3, [r1], #+1
     subs r2, r2, #1
     bne copy_data_loop
-copy_data_end:  
+copy_data_end:
 
     /* Copy from initialised text section to text section (if necessary). */
     ldr r0, =__text_load_start__
     ldr r1, =__text_start__
     cmp r0, r1
     beq copy_text_end
-  
+
     ldr r2, =__text_end__
     subs r2, r2, r1
     beq copy_text_end
-  
+
 copy_text_loop:
     ldrb r3, [r0], #+1
     strb r3, [r1], #+1
     subs r2, r2, #1
     bne copy_text_loop
-copy_text_end:  
+copy_text_end:
 
     /* Copy from initialised fast_text section to fast_text section (if necessary). */
     ldr r0, =__fast_load_start__
     ldr r1, =__fast_start__
     cmp r0, r1
     beq copy_fast_end
-  
+
     ldr r2, =__fast_end__
     subs r2, r2, r1
     beq copy_fast_end
-  
+
 copy_fast_loop:
     ldrb r3, [r0], #+1
     strb r3, [r1], #+1
     subs r2, r2, #1
     bne copy_fast_loop
-copy_fast_end:  
+copy_fast_end:
 
     /* Zero the bss. */
     ldr r0, =__bss_start__
@@ -119,12 +119,12 @@ zero_bss_loop:
     beq zero_bss_end
     strb r2, [r0], #+1
     b zero_bss_loop
-zero_bss_end:    
+zero_bss_end:
 
     /* Initialise the heap */
     ldr r0, = __heap_start__
     ldr r1, = __heap_end__
-    sub r1, r1, r0     /* r1 = r1-r0 */ 
+    sub r1, r1, r0     /* r1 = r1-r0 */
     mov r2, #0
     str r2, [r0], #+4 /* *r0++ = 0 */
     str r1, [r0]      /* *r0 = __heap_end__ - __heap_start__ */

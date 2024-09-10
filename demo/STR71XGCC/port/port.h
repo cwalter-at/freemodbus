@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Port
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@
 #define INLINE
 
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   portENTER_CRITICAL( )
 #define EXIT_CRITICAL_SECTION( )    portEXIT_CRITICAL( )

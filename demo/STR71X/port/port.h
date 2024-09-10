@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Port
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -27,13 +27,13 @@
 
 /* work aroung a problem when inline is also defined in 71x_conf.h */
 #ifdef INLINE
-#undef INLINE  
+#undef INLINE
 #endif
 
 #define INLINE                      inline
 
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   portENTER_CRITICAL( )
 #define EXIT_CRITICAL_SECTION( )    portEXIT_CRITICAL( )

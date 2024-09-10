@@ -1,5 +1,5 @@
 
-                FreeModbus STR71X/FreeRTOS/GCC Port 
+                FreeModbus STR71X/FreeRTOS/GCC Port
 
 REQUIREMENTS
 ============
@@ -14,9 +14,9 @@ and Linux are provided in the tools directory  together  with  a  suitable
 configuration.
 
  [1] ... GNU ARM Homepage http://www.gnuarm.org/
- [2] ... The Newlib Homepage http://sources.redhat.com/newlib 
+ [2] ... The Newlib Homepage http://sources.redhat.com/newlib
  [3] ... OpenOCD homepage http://openocd.berlios.de/web/
- 
+
 USAGE
 =====
 
@@ -113,7 +113,7 @@ be satisfied for the port to work.
 
  - If you have changed the execution mode make sure you have called
    'make clean'
- 
+
 $Id: README.txt,v 1.2 2006/11/02 23:29:47 wolti Exp $
 
 STR71X FreeModbus Port Copyright (c) 2006 Christian Walter.

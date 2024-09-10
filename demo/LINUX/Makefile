@@ -20,7 +20,7 @@ INSIGHT     = /opt/insight-x86/bin/insight
 # project specifics
 # ---------------------------------------------------------------------------
 CFLAGS	    = -MD -g3 -Wall -Iport -I../../modbus/rtu \
-		-I../../modbus/ascii -I../../modbus/include 
+		-I../../modbus/ascii -I../../modbus/include
 LDFLAGS     =
 ifeq ($(CYGWIN_BUILD),YES)
 else
@@ -29,8 +29,8 @@ CFLAGS      += -pthread
 endif
 
 TGT         = demo
-OTHER_CSRC  = 
-OTHER_ASRC  = 
+OTHER_CSRC  =
+OTHER_ASRC  =
 CSRC        = demo.c port/portserial.c port/portother.c \
               port/portevent.c port/porttimer.c \
               ../../modbus/mb.c \
@@ -42,8 +42,8 @@ CSRC        = demo.c port/portserial.c port/portother.c \
               ../../modbus/functions/mbfuncinput.c \
               ../../modbus/functions/mbfuncother.c \
               ../../modbus/functions/mbfuncdisc.c \
-              ../../modbus/functions/mbutils.c 
-ASRC        = 
+              ../../modbus/functions/mbutils.c
+ASRC        =
 OBJS        = $(CSRC:.c=.o) $(ASRC:.S=.o)
 NOLINK_OBJS = $(OTHER_CSRC:.c=.o) $(OTHER_ASRC:.S=.o)
 DEPS        = $(OBJS:.o=.d) $(NOLINK_OBJS:.o=.d)

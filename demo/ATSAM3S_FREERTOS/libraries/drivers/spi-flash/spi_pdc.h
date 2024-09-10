@@ -26,7 +26,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
  */
- 
+
 /**
  * \file
  *
@@ -74,7 +74,7 @@
 typedef void (*SpidCallback )(uint8_t, void *);
 
 /** Spi Transfer Request prepared by the application upper layer. This structure
-    is sent to the SPI_SendCommand function to start the transfer. At the end of 
+    is sent to the SPI_SendCommand function to start the transfer. At the end of
     the transfer, the callback is invoked by the interrupt handler.*/
 typedef struct _SpidCmd {
 
@@ -120,7 +120,7 @@ extern uint8_t SPID_Configure(
     uint8_t spiId);
 
 extern void SPID_ConfigureCS(Spid *pSpid, uint8_t cs, uint32_t csr);
-	
+
 extern uint8_t SPID_SendCommand(
 	Spid *pSpid,
 	SpidCmd *pCommand);

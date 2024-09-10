@@ -1,8 +1,8 @@
 /*
- * FreeModbus Libary: Atmel AT91SAM3S Demo Application
+ * FreeModbus Library: Atmel AT91SAM3S Demo Application
  * Copyright (C) 2010 Christian Walter <cwalter@embedded-solutions.at>
  *
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -13,7 +13,7 @@
  *   documentation and/or other materials provided with the distribution.
  * 3. The name of the author may not be used to endorse or promote products
  *   derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * IF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -61,9 +61,11 @@
 #endif
 
 #ifndef SYSTICK_COUNTFLAG
+
 /* missing in CMSIS */
-#define SYSTICK_COUNTFLAG                   ( 16 )             
+#define SYSTICK_COUNTFLAG                   ( 16 )
 #endif
+
 /* ----------------------- Static variables ---------------------------------*/
 #if MB_TIMER_DEBUG == 1
 const static Pin xTimerDebugPins[] = { TIMER_PIN };
@@ -90,7 +92,7 @@ xMBPortTimersInit( USHORT usTim1Timerout50us )
     return TRUE;
 }
 
-void 
+void
 vMBPortTimerClose( void )
 {
     NVIC_DisableIRQ( TCXIRQ );
@@ -101,8 +103,8 @@ void
 vMBPortTimersEnable(  )
 {
 #if MB_TIMER_DEBUG == 1
-    PIO_Set( &xTimerDebugPins[0] );  
-#endif  
+    PIO_Set( &xTimerDebugPins[0] );
+#endif
     TCX->TC_CHANNEL[TCCHANNEL].TC_IER = TC_IERX_CPAS;
     TC_Start( TCX, 0 );
 }
@@ -113,7 +115,7 @@ vMBPortTimersDisable(  )
     TC_Stop( TCX, 0 );
 #if MB_TIMER_DEBUG == 1
     PIO_Clear( &xTimerDebugPins[0] );
-#endif   
+#endif
 }
 
 void
@@ -121,9 +123,9 @@ vMBPortTimersDelay( USHORT usTimeOutMS )
 {
 
     SysTick->CTRL = 0;
-    SysTick->LOAD = BOARD_MCK / 1000;  
-    SysTick->VAL = 0; /* Clear COUNTFLAG */
-    SysTick->CTRL = ( 1 << SYSTICK_CLKSOURCE) | ( 1<<SYSTICK_ENABLE);   
+    SysTick->LOAD = BOARD_MCK / 1000;
+    SysTick->VAL = 0;           /* Clear COUNTFLAG */
+    SysTick->CTRL = ( 1 << SYSTICK_CLKSOURCE ) | ( 1 << SYSTICK_ENABLE );
     while( usTimeOutMS )
     {
         while( 0 == ( SysTick->CTRL & ( 1 << SYSTICK_COUNTFLAG ) ) );

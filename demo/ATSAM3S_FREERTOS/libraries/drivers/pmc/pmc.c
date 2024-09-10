@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -113,7 +113,7 @@ void PMC_EnableAllPeripherals(void)
     while( (PMC->PMC_PCSR0 & MASK_STATUS0) != MASK_STATUS0);
     PMC->PMC_PCER1 = MASK_STATUS1;
     while( (PMC->PMC_PCSR1 & MASK_STATUS1) != MASK_STATUS1);
-    TRACE_DEBUG("Enable all periph clocks\n\r"); 
+    TRACE_DEBUG("Enable all periph clocks\n\r");
 }
 /**
  * \brief Disable all the periph clock via PMC

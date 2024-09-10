@@ -19,13 +19,13 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS.org, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 
 	Also see http://www.SafeRTOS.com for an IEC 61508 compliant version along
@@ -69,7 +69,7 @@ typedef xQueueHandle xSemaphoreHandle;
     if( xSemaphore != NULL )
     {
         // The semaphore was created successfully.
-        // The semaphore can now be used.  
+        // The semaphore can now be used.
     }
  }
  </pre>
@@ -86,12 +86,12 @@ typedef xQueueHandle xSemaphoreHandle;
 
 /**
  * semphr. h
- * xSemaphoreTake( 
- *                   xSemaphoreHandle xSemaphore, 
- *                   portTickType xBlockTime 
+ * xSemaphoreTake(
+ *                   xSemaphoreHandle xSemaphore,
+ *                   portTickType xBlockTime
  *               )</pre>
  *
- * <i>Macro</i> to obtain a semaphore.  The semaphore must of been created using 
+ * <i>Macro</i> to obtain a semaphore.  The semaphore must of been created using
  * vSemaphoreCreateBinary ().
  *
  * @param xSemaphore A handle to the semaphore being obtained.  This is the
@@ -123,7 +123,7 @@ typedef xQueueHandle xSemaphoreHandle;
     if( xSemaphore != NULL )
     {
         // See if we can obtain the semaphore.  If the semaphore is not available
-        // wait 10 ticks to see if it becomes free.	
+        // wait 10 ticks to see if it becomes free.
         if( xSemaphoreTake( xSemaphore, ( portTickType ) 10 ) == pdTRUE )
         {
             // We were able to obtain the semaphore and can now access the
@@ -131,7 +131,7 @@ typedef xQueueHandle xSemaphoreHandle;
 
             // ...
 
-            // We have finished accessing the shared resource.  Release the 
+            // We have finished accessing the shared resource.  Release the
             // semaphore.
             xSemaphoreGive( xSemaphore );
         }
@@ -152,7 +152,7 @@ typedef xQueueHandle xSemaphoreHandle;
  * semphr. h
  * <pre>xSemaphoreGive( xSemaphoreHandle xSemaphore )</pre>
  *
- * <i>Macro</i> to release a semaphore.  The semaphore must of been created using 
+ * <i>Macro</i> to release a semaphore.  The semaphore must of been created using
  * vSemaphoreCreateBinary (), and obtained using sSemaphoreTake ().
  *
  * This must not be used from an ISR.  See xSemaphoreGiveFromISR () for
@@ -163,7 +163,7 @@ typedef xQueueHandle xSemaphoreHandle;
  *
  * @return pdTRUE if the semaphore was released.  pdFALSE if an error occurred.
  * Semaphores are implemented using queues.  An error can occur if there is
- * no space on the queue to post a message - indicating that the 
+ * no space on the queue to post a message - indicating that the
  * semaphore was not first obtained correctly.
  *
  * Example usage:
@@ -210,12 +210,12 @@ typedef xQueueHandle xSemaphoreHandle;
 /**
  * semphr. h
  * <pre>
- xSemaphoreGiveFromISR( 
-                          xSemaphoreHandle xSemaphore, 
-                          portSHORT sTaskPreviouslyWoken 
+ xSemaphoreGiveFromISR(
+                          xSemaphoreHandle xSemaphore,
+                          portSHORT sTaskPreviouslyWoken
                       )</pre>
  *
- * <i>Macro</i> to  release a semaphore.  The semaphore must of been created using 
+ * <i>Macro</i> to  release a semaphore.  The semaphore must of been created using
  * vSemaphoreCreateBinary (), and obtained using xSemaphoreTake ().
  *
  * This macro can be used from an ISR.
@@ -229,7 +229,7 @@ typedef xQueueHandle xSemaphoreHandle;
  * the value returned from the previous call.  See the file serial .c in the
  * PC port for a good example of using xSemaphoreGiveFromISR ().
  *
- * @return pdTRUE if a task was woken by releasing the semaphore.  This is 
+ * @return pdTRUE if a task was woken by releasing the semaphore.  This is
  * used by the ISR to determine if a context switch may be required following
  * the ISR.
  *
@@ -244,7 +244,7 @@ typedef xQueueHandle xSemaphoreHandle;
  {
     for( ;; )
     {
-        // We want this task to run every 10 ticks or a timer.  The semaphore 
+        // We want this task to run every 10 ticks or a timer.  The semaphore
         // was created before this task was started
 
         // Block waiting for the semaphore to become available.
@@ -255,7 +255,7 @@ typedef xQueueHandle xSemaphoreHandle;
             // ...
 
             // We have finished our task.  Return to the top of the loop where
-            // we will block on the semaphore until it is time to execute 
+            // we will block on the semaphore until it is time to execute
             // again.
         }
     }

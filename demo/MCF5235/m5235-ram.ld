@@ -27,7 +27,7 @@ SECTIONS
     *(.eh_frame)
     . = ALIGN (16);
 
-    *(.gnu.linkonce.t.*) 
+    *(.gnu.linkonce.t.*)
 
     . = ALIGN(0x4);
      __CTOR_LIST__ = .;
@@ -43,7 +43,7 @@ SECTIONS
      LONG(0)
     __DTOR_END__ = .;
     *(.rodata)
-    *(.gcc_except_table) 
+    *(.gcc_except_table)
 
     . = ALIGN(0x2);
     __INIT_SECTION__ = . ;

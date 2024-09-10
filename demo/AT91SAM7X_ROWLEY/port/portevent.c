@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ARM7/AT91SAM7X Port
+ * FreeModbus Library: ARM7/AT91SAM7X Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,6 +18,7 @@
  *
  * File: $Id$
  */
+
 /* ----------------------- System includes ----------------------------------*/
 #include <stdlib.h>
 
@@ -93,8 +94,7 @@ xMBPortEventPost( eMBEventType eEvent )
     {
         if( bMBPIsWithinException(  ) )
         {
-            xEventSent =
-                xQueueSendFromISR( arxEventHdls[0].xQueueHdl, ( const void * )&eEvent, pdFALSE );
+            xEventSent = xQueueSendFromISR( arxEventHdls[0].xQueueHdl, ( const void * )&eEvent, pdFALSE );
         }
         else
         {
@@ -106,7 +106,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * peEvent )
+xMBPortEventGet( eMBEventType *peEvent )
 {
     BOOL            bEventInQueue = FALSE;
 

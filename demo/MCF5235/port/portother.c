@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MCF5235 Port
+ * FreeModbus Library: MCF5235 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
  *
@@ -37,16 +37,13 @@ static char    *heap_ptr;
 void
 prvvPortEnterCritical(  )
 {
-    asm volatile    ( "move.w	%%sr, %%d0\n"
-                      "move.w	%%d0, %0\n"
-                      "move.w	#0x2700, %%sr":"=m" ( usRegSR )::"%%d0" );
+    asm volatile    ( "move.w   %%sr, %%d0\n" "move.w   %%d0, %0\n" "move.w   #0x2700, %%sr":"=m" ( usRegSR )::"%%d0" );
 }
 
 void
 prvvPortExitCritical(  )
 {
-    asm volatile    ( "move.w	%0, %%d0\n"
-                      "move.w	%%d0, %%sr\n"::"m" ( usRegSR ):"%%d0" );
+    asm volatile    ( "move.w   %0, %%d0\n" "move.w   %%d0, %%sr\n"::"m" ( usRegSR ):"%%d0" );
 }
 
 

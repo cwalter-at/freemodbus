@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,12 +31,12 @@
 /// \unit
 ///
 /// !Purpose
-/// 
+///
 /// Firmware encryption using AES reference implementation
-/// 
+///
 /// !Usage
-/// 
-/// -# aes_ref_init: Initialize AES hardware 
+///
+/// -# aes_ref_init: Initialize AES hardware
 /// -# aes_ref_init_CBC: for the CBC mode
 /// -# aes_ref_init_ECB: for the CTR mode
 /// -# aes_ref_init_CTR: for the ECB mode
@@ -72,7 +72,7 @@
 // Supported key length
 #if (ENCRYPTION_KEY_LENGTH != 16) && \
     (ENCRYPTION_KEY_LENGTH != 24) && \
-    (ENCRYPTION_KEY_LENGTH != 32) 
+    (ENCRYPTION_KEY_LENGTH != 32)
   #error Only key lengths of 128, 192 or 256 bits are supported.
 #endif
 

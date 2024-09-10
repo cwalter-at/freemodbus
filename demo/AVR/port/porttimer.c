@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ATMega168 Port
+ * FreeModbus Library: ATMega168 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -45,8 +45,7 @@ BOOL
 xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
     /* Calculate overflow counter an OCR values for Timer1. */
-    usTimerOCRADelta =
-        ( MB_TIMER_TICKS * usTim1Timerout50us ) / ( MB_50US_TICKS );
+    usTimerOCRADelta = ( MB_TIMER_TICKS * usTim1Timerout50us ) / ( MB_50US_TICKS );
 
     TCCR1A = 0x00;
     TCCR1B = 0x00;
@@ -79,11 +78,10 @@ vMBPortTimersDisable(  )
     /* Disable the output compare interrupts for channel A/B. */
     TIMSK1 &= ~( _BV( OCIE1A ) );
     /* Clear output compare flags for channel A/B. */
-    TIFR1 |= _BV( OCF1A ) ;
+    TIFR1 |= _BV( OCF1A );
 }
 
 SIGNAL( SIG_OUTPUT_COMPARE1A )
 {
     ( void )pxMBPortCBTimerExpired(  );
 }
-

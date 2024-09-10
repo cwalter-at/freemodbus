@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Z8Encore Port for Z8F6422
+ * FreeModbus Library: Z8Encore Port for Z8F6422
  * Copyright (C) 2007 Tiago Prado Lone <tiago@maxwellbohr.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,11 +26,11 @@
 
 #include <eZ8.h>
 
-#define	INLINE
+#define INLINE
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
-#define CLOCK						18432000
+#define CLOCK                       18432000
 
 #define ENTER_CRITICAL_SECTION( )   DI()
 #define EXIT_CRITICAL_SECTION( )    EI()

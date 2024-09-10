@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -26,15 +26,18 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
- 
+
 #ifndef _MB_FUNC_H
 #define _MB_FUNC_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #if MB_FUNC_OTHER_REP_SLAVEID_BUF > 0
-    eMBException eMBFuncReportSlaveID( UCHAR * pucFrame, USHORT * usLen );
+eMBException    eMBFuncReportSlaveID( UCHAR * pucFrame, USHORT * usLen );
 #endif
 
 #if MB_FUNC_READ_INPUT_ENABLED > 0
@@ -74,6 +77,9 @@ eMBException    eMBFuncReadWriteMultipleHoldingRegister( UCHAR * pucFrame, USHOR
 #endif
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

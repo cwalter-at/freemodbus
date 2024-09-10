@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MSP430 Port
+ * FreeModbus Library: MSP430 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,9 +31,9 @@
 #undef CHAR
 
 /* ----------------------- Defines ------------------------------------------*/
-#define	INLINE
+#define INLINE
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   EnterCriticalSection( )
 #define EXIT_CRITICAL_SECTION( )    ExitCriticalSection( )

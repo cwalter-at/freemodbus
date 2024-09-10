@@ -67,7 +67,7 @@ static void PIO_SetPeripheralA(
 
         pio->PIO_PUDR = mask;
     }
-    
+
     abcdsr = pio->PIO_ABCDSR[0];
     pio->PIO_ABCDSR[0] &= (~mask & abcdsr);
     abcdsr = pio->PIO_ABCDSR[1];
@@ -107,7 +107,7 @@ static void PIO_SetPeripheralB(
     pio->PIO_ABCDSR[0] = (mask | abcdsr);
     abcdsr = pio->PIO_ABCDSR[1];
     pio->PIO_ABCDSR[1] &= (~mask & abcdsr);
-    
+
     pio->PIO_PDR = mask;
 }
 
@@ -143,7 +143,7 @@ static void PIO_SetPeripheralC(
     pio->PIO_ABCDSR[0] &= (~mask & abcdsr);
     abcdsr = pio->PIO_ABCDSR[1];
     pio->PIO_ABCDSR[1] = (mask | abcdsr);
-    
+
     pio->PIO_PDR = mask;
 }
 
@@ -179,7 +179,7 @@ static void PIO_SetPeripheralD(
     pio->PIO_ABCDSR[0] = (mask | abcdsr);
     abcdsr = pio->PIO_ABCDSR[1];
     pio->PIO_ABCDSR[1] = (mask | abcdsr);
-    
+
     pio->PIO_PDR = mask;
 }
 
@@ -297,7 +297,7 @@ static void PIO_SetInterrupt(
     if (additionnalItMode) {
         /* enable additional interrupt mode */
         pio->PIO_AIMER       = mask;
-        
+
         /* if bit field of selected pin is 1, set as Rising Edge/High level detection event */
         if (risingEdgeOrHighLevel)
             pio->PIO_REHLSR    = mask;
@@ -352,7 +352,7 @@ unsigned char PIO_Configure(const Pin *list, unsigned int size)
                                    list->mask,
                                    (list->attribute & PIO_PULLUP) ? 1 : 0);
                 break;
-                
+
             case PIO_PERIPH_D:
                 PIO_SetPeripheralD(list->pio,
                                    list->mask,
@@ -381,7 +381,7 @@ unsigned char PIO_Configure(const Pin *list, unsigned int size)
 
             default: return 0;
         }
-                         
+
         list++;
         size--;
     }

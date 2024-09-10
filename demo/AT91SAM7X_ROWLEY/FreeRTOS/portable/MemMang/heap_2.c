@@ -200,12 +200,12 @@ void *pvReturn = NULL;
 					following the number of bytes requested. The void cast is
 					used to prevent byte alignment warnings from the compiler. */
 					pxNewBlockLink = ( void * ) ( ( ( unsigned portCHAR * ) pxBlock ) + xWantedSize );
-					
+
 					/* Calculate the sizes of two blocks split from the single
 					block. */
-					pxNewBlockLink->xBlockSize = pxBlock->xBlockSize - xWantedSize;	
-					pxBlock->xBlockSize = xWantedSize;			
-					
+					pxNewBlockLink->xBlockSize = pxBlock->xBlockSize - xWantedSize;
+					pxBlock->xBlockSize = xWantedSize;
+
 					/* Insert the new block into the list of free blocks. */
 					prvInsertBlockIntoFreeList( ( pxNewBlockLink ) );
 				}
@@ -233,7 +233,7 @@ xBlockLink *pxLink;
 		pxLink = ( void * ) puc;
 
 		vTaskSuspendAll();
-		{				
+		{
 			/* Add this block to the list of free blocks. */
 			prvInsertBlockIntoFreeList( ( ( xBlockLink * ) pxLink ) );
 		}

@@ -28,13 +28,13 @@
     port sections of the online documentation.
     ***************************************************************************
  */
- 
+
 #ifdef _UNDERSCORE_
 #define exception_handler	_exception_handler
 #define mcf523x_init		_mcf523x_init
 #define _start				__start
 #endif
- 
+
 	.extern ___IPSBAR
 	.extern ___SRAM
 	.extern ___SP_INIT
@@ -101,7 +101,7 @@
     .global _mcf5xxx_wr_mbar0
     .global mcf5xxx_wr_mbar1
     .global _mcf5xxx_wr_mbar1
-  
+
 	.text
 
 /********************************************************************
@@ -109,13 +109,13 @@
  */
 asm_startmeup:
 _asm_startmeup:
-	
+
 	move.w	#0x2700,sr
 
 	/* Initialize IPSBAR */
 	move.l	#(___IPSBAR + 1),d0
 	move.l	d0,0x40000000
-	
+
 	/* Initialize RAMBAR1: locate SRAM and validate it */
 	move.l	#(___SRAM + 0x21),d0
     .long   0x4e7b0C05      /* movec d0,RAMBAR1	*/
@@ -126,18 +126,18 @@ _asm_startmeup:
 	/* Initialize mcf523x periphs, etc */
 	jsr		mcf523x_init
 
-	/* Relocate Stack Pointer */ 
+	/* Relocate Stack Pointer */
 	move.l	#___SP_INIT,sp
 
 	/* Jump to the main process */
 	jmp		_start
-	
+
 	bra		.
 	nop
 	nop
 	halt
-	
-	
+
+
 /********************************************************************
 /*
  * This routine is the lowest-level exception handler.
@@ -153,7 +153,7 @@ _asm_exception_handler:
 	lea     24(sp), sp
 	rte
 
-	
+
 /********************************************************************
  * The MCF523x cache can be configured as instruction, data or split.
  * Invalidate the entire cache.
@@ -164,7 +164,7 @@ _cpu_cache_flush:
 	move.l	#0x01000000,d0	/* Invalidate the I-Cache */
 	movec 	d0,cacr
 	rts
-	
+
 /********************************************************************/
 /*
  * This routines changes the IPL to the value passed into the routine.

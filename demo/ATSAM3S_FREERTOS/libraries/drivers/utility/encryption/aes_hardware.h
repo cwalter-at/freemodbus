@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,14 +31,14 @@
 /// \unit
 ///
 /// !Purpose
-/// 
+///
 /// Firmware encryption using AES hardware acceleration
 /// This code is based on the AES reference implementation published by Paulo
 /// Barreto and Vincent Rijmen.
-/// 
+///
 /// !Usage
-/// 
-/// -# aes_hard_init: Initialize AES hardware 
+///
+/// -# aes_hard_init: Initialize AES hardware
 /// -# aes_hard_init_CBC: for the CBC mode
 /// -# aes_hard_init_CTR: for the CTR mode
 /// -# aes_hard_init_ECB: for the ECB mode

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Linux Port
+ * FreeModbus Library: Linux Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -102,13 +102,11 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 
     if( ( iSerialFd = open( szDevice, O_RDWR | O_NOCTTY ) ) < 0 )
     {
-        vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't open serial port %s: %s\n", szDevice,
-                    strerror( errno ) );
+        vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't open serial port %s: %s\n", szDevice, strerror( errno ) );
     }
     else if( tcgetattr( iSerialFd, &xOldTIO ) != 0 )
     {
-        vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't get settings from port %s: %s\n", szDevice,
-                    strerror( errno ) );
+        vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't get settings from port %s: %s\n", szDevice, strerror( errno ) );
     }
     else
     {
@@ -164,18 +162,18 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         {
             if( cfsetispeed( &xNewTIO, xNewSpeed ) != 0 )
             {
-                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set baud rate %ld for port %s: %s\n",
-                            ulBaudRate, strerror( errno ) );
+                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set baud rate %ld for port %s: %s\n", ulBaudRate,
+                            strerror( errno ) );
             }
             else if( cfsetospeed( &xNewTIO, xNewSpeed ) != 0 )
             {
-                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set baud rate %ld for port %s: %s\n",
-                            ulBaudRate, szDevice, strerror( errno ) );
+                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set baud rate %ld for port %s: %s\n", ulBaudRate, szDevice,
+                            strerror( errno ) );
             }
             else if( tcsetattr( iSerialFd, TCSANOW, &xNewTIO ) != 0 )
             {
-                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set settings for port %s: %s\n",
-                            szDevice, strerror( errno ) );
+                vMBPortLog( MB_LOG_ERROR, "SER-INIT", "Can't set settings for port %s: %s\n", szDevice,
+                            strerror( errno ) );
             }
             else
             {
@@ -213,7 +211,7 @@ vMBPortClose( void )
 }
 
 BOOL
-prvbMBPortSerialRead( UCHAR * pucBuffer, USHORT usNBytes, USHORT * usNBytesRead )
+prvbMBPortSerialRead( UCHAR *pucBuffer, USHORT usNBytes, USHORT *usNBytesRead )
 {
     BOOL            bResult = TRUE;
     ssize_t         res;
@@ -259,10 +257,10 @@ prvbMBPortSerialRead( UCHAR * pucBuffer, USHORT usNBytes, USHORT * usNBytesRead 
 }
 
 BOOL
-prvbMBPortSerialWrite( UCHAR * pucBuffer, USHORT usNBytes )
+prvbMBPortSerialWrite( UCHAR *pucBuffer, USHORT usNBytes )
 {
     ssize_t         res;
-    size_t          left = ( size_t ) usNBytes;
+    size_t          left = ( size_t )usNBytes;
     size_t          done = 0;
 
     while( left > 0 )
@@ -310,8 +308,7 @@ xMBPortSerialPoll(  )
         }
         else
         {
-            vMBPortLog( MB_LOG_ERROR, "SER-POLL", "read failed on serial device: %s\n",
-                        strerror( errno ) );
+            vMBPortLog( MB_LOG_ERROR, "SER-POLL", "read failed on serial device: %s\n", strerror( errno ) );
             bStatus = FALSE;
         }
     }
@@ -324,8 +321,7 @@ xMBPortSerialPoll(  )
         }
         if( !prvbMBPortSerialWrite( &ucBuffer[0], uiTxBufferPos ) )
         {
-            vMBPortLog( MB_LOG_ERROR, "SER-POLL", "write failed on serial device: %s\n",
-                        strerror( errno ) );
+            vMBPortLog( MB_LOG_ERROR, "SER-POLL", "write failed on serial device: %s\n", strerror( errno ) );
             bStatus = FALSE;
         }
     }
@@ -343,7 +339,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     assert( uiRxBufferPos < BUF_SIZE );
     *pucByte = ucBuffer[uiRxBufferPos];

@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -51,7 +51,7 @@
 #include <stdio.h>
 
 // Disable semihosting
-#pragma import(__use_no_semihosting_swi) 
+#pragma import(__use_no_semihosting_swi)
 
 struct __FILE { int handle;} ;
 FILE __stdout;

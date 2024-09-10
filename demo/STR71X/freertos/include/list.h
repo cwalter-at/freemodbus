@@ -19,26 +19,26 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 	***************************************************************************
 */
 
 /*
  * This is the list implementation used by the scheduler.  While it is tailored
- * heavily for the schedulers needs, it is also available for use by 
- * application code.  
+ * heavily for the schedulers needs, it is also available for use by
+ * application code.
  *
  * xLists can only store pointers to xListItems.  Each xListItem contains a
- * numeric value (xItemValue).  Most of the time the lists are sorted in 
+ * numeric value (xItemValue).  Most of the time the lists are sorted in
  * descending item value order.
- * 
+ *
  * Lists are created already containing one list item.  The value of this
  * item is the maximum possible that can be stored, it is therefore always at
  * the end of the list and acts as a marker.  The list member pxHead always
@@ -49,11 +49,11 @@
  * In addition to it's value, each list item contains a pointer to the next
  * item in the list (pxNext), a pointer to the list it is in (pxContainer)
  * and a pointer to back to the object that contains it.  These later two
- * pointers are included for efficiency of list manipulation.  There is 
- * effectively a two way link between the object containing the list item and 
+ * pointers are included for efficiency of list manipulation.  There is
+ * effectively a two way link between the object containing the list item and
  * the list item itself.
- *  
- *  
+ *
+ *
  * \page ListIntroduction List Implementation
  * \ingroup FreeRTOSIntro
  */
@@ -105,7 +105,7 @@ typedef struct xLIST
 #define listSET_LIST_ITEM_VALUE( pxListItem, xValue )		{ ( pxListItem )->xItemValue = xValue; }
 
 /*
- * Access macro the retrieve the value of the list item.  The value can 
+ * Access macro the retrieve the value of the list item.  The value can
  * represent anything - for example a the priority of a task, or the time at
  * which a task should be unblocked.
  *
@@ -131,7 +131,7 @@ typedef struct xLIST
 /*
  * Access function to obtain the owner of the next entry in a list.
  *
- * The list member pxIndex is used to walk through a list.  Calling 
+ * The list member pxIndex is used to walk through a list.  Calling
  * listGET_OWNER_OF_NEXT_ENTRY increments pxIndex to the next item in the list
  * and returns that entries pxOwner parameter.  Using multiple calls to this
  * function it is therefore possible to move through every item contained in
@@ -139,7 +139,7 @@ typedef struct xLIST
  *
  * The pxOwner parameter of a list item is a pointer to the object that owns
  * the list item.  In the scheduler this is normally a task control block.
- * The pxOwner parameter effectively creates a two way link between the list 
+ * The pxOwner parameter effectively creates a two way link between the list
  * item and its owner.
  *
  * @param pxList The list from which the next item owner is to be returned.
@@ -231,7 +231,7 @@ void vListInsert( xList *pxList, xListItem *pxNewListItem );
  * such that it will be the last item within the list returned by multiple
  * calls to listGET_OWNER_OF_NEXT_ENTRY.
  *
- * The list member pvIndex is used to walk through a list.  Calling 
+ * The list member pvIndex is used to walk through a list.  Calling
  * listGET_OWNER_OF_NEXT_ENTRY increments pvIndex to the next item in the list.
  * Placing an item in a list using vListInsertEnd effectively places the item
  * in the list position pointed to by pvIndex.  This means that every other

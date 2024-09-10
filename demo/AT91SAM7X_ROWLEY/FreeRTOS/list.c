@@ -68,7 +68,7 @@ Changes from V3.2.4
 	+ Removed the pxHead member of the xList structure.  This always pointed
 	  to the same place so has been removed to free a few bytes of RAM.
 
-	+ Introduced the xMiniListItem structure that does not include the 
+	+ Introduced the xMiniListItem structure that does not include the
 	  xListItem members that are not required by the xListEnd member of a list.
 	  Again this was done to reduce RAM usage.
 
@@ -77,7 +77,7 @@ Changes from V3.2.4
 
 Changes from V4.0.4
 
-	+ Optimised vListInsert() in the case when the wake time is the maximum 
+	+ Optimised vListInsert() in the case when the wake time is the maximum
 	  tick count value.
 */
 
@@ -150,9 +150,9 @@ portTickType xValueOfInsertion;
 	/* If the list already contains a list item with the same item value then
 	the new list item should be placed after it.  This ensures that TCB's which
 	are stored in ready lists (all of which have the same ulListItem value)
-	get an equal share of the CPU.  However, if the xItemValue is the same as 
+	get an equal share of the CPU.  However, if the xItemValue is the same as
 	the back marker the iteration loop below will not end.  This means we need
-	to guard against this by checking the value first and modifying the 
+	to guard against this by checking the value first and modifying the
 	algorithm slightly if necessary. */
 	if( xValueOfInsertion == portMAX_DELAY )
 	{
@@ -186,7 +186,7 @@ xList * pxList;
 
 	pxItemToRemove->pxNext->pxPrevious = pxItemToRemove->pxPrevious;
 	pxItemToRemove->pxPrevious->pxNext = pxItemToRemove->pxNext;
-	
+
 	/* The list item knows which list it is in.  Obtain the list from the list
 	item. */
 	pxList = ( xList * ) pxItemToRemove->pvContainer;

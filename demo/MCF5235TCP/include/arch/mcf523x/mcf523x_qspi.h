@@ -2,8 +2,8 @@
  * File:	mcf523x_qspi.h
  * Purpose:	Register and bit definitions for the MCF523X
  *
- * Notes:	
- *	
+ * Notes:
+ *
  */
 
 #ifndef __MCF523X_QSPI_H__

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Port
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -54,7 +54,7 @@
 static USHORT   usTimerDeltaOCRA;
 
 /* ----------------------- Static functions ---------------------------------*/
-void            prvvMBTimerIRQHandler( void ) __attribute__ ( ( naked ) );
+void            prvvMBTimerIRQHandler( void ) __attribute__( ( naked ) );
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
@@ -62,15 +62,13 @@ xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
     /* Calculate output compare value for timer1. */
     usTimerDeltaOCRA =
-        ( ( configCPU_CLOCK_HZ / ( MB_TIMER_PRESCALER + 1 ) ) *
-          usTim1Timerout50us ) / ( MB_TIMER_TICKS );
+        ( ( configCPU_CLOCK_HZ / ( MB_TIMER_PRESCALER + 1 ) ) * usTim1Timerout50us ) / ( MB_TIMER_TICKS );
 
     TIM_Init( MB_TIMER_DEV );
     TIM_PrescalerConfig( MB_TIMER_DEV, MB_TIMER_PRESCALER );
     if( usTimerDeltaOCRA > 0 )
     {
-        TIM_OCMPModeConfig( MB_TIMER_DEV, TIM_CHANNEL_A, usTimerDeltaOCRA,
-                            TIM_TIMING, TIM_LOW );
+        TIM_OCMPModeConfig( MB_TIMER_DEV, TIM_CHANNEL_A, usTimerDeltaOCRA, TIM_TIMING, TIM_LOW );
     }
 
     vMBPortTimersDisable(  );
@@ -87,8 +85,7 @@ prvvMBTimerIRQHandler( void )
 
     static portBASE_TYPE xTaskSwitch = pdFALSE;
 
-    if( ( usTimerDeltaOCRA > 0 )
-        && ( TIM_FlagStatus( MB_TIMER_DEV, TIM_OCFA ) ) )
+    if( ( usTimerDeltaOCRA > 0 ) && ( TIM_FlagStatus( MB_TIMER_DEV, TIM_OCFA ) ) )
     {
         xTaskSwitch |= pxMBPortCBTimerExpired(  );
         TIM_FlagClear( MB_TIMER_DEV, TIM_OCFA );

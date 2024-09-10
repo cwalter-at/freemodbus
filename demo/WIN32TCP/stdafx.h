@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32TCP Demo Application
+ * FreeModbus Library: Win32TCP Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or

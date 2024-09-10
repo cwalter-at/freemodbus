@@ -13,7 +13,7 @@
  *                                                                                  *
  *                                                                                  *
  * HISTORY                                                                          *
- *                                                                                  *	
+ *                                                                                  *
  ************************************************************************************/
 
 #ifndef __MCF523X_CAN_H__
@@ -219,24 +219,24 @@
 #define MCF_CAN_MBUF15_BYTE5(x)		(*(vuint8  *)(void *)(&__IPSBAR[0x1C017D+((x)*0x30000)]))
 #define MCF_CAN_MBUF15_BYTE6(x)		(*(vuint8  *)(void *)(&__IPSBAR[0x1C017E+((x)*0x30000)]))
 #define MCF_CAN_MBUF15_BYTE7(x)		(*(vuint8  *)(void *)(&__IPSBAR[0x1C017F+((x)*0x30000)]))
-																				  
-																				  
+
+
 #define MCF_CAN_MBUF0_DATAL(x)	    (*(vuint32  *)(void *)(&__IPSBAR[0x1C0088+((x)*0x30000)]))
 #define MCF_CAN_MBUF0_DATAH(x)	    (*(vuint32  *)(void *)(&__IPSBAR[0x1C008C+((x)*0x30000)]))
 #define MCF_CAN_MBUF1_DATAL(x)		(*(vuint32  *)(void *)(&__IPSBAR[0x1C0098+((x)*0x30000)]))
 #define MCF_CAN_MBUF1_DATAH(x)		(*(vuint32  *)(void *)(&__IPSBAR[0x1C009C+((x)*0x30000)]))
 #define MCF_CAN_MBUF2_DATAL(x)	    (*(vuint32  *)(void *)(&__IPSBAR[0x1C00A8+((x)*0x30000)]))
 #define MCF_CAN_MBUF2_DATAH(x)	    (*(vuint32  *)(void *)(&__IPSBAR[0x1C00AC+((x)*0x30000)]))
-																				  
-																				  
-/* Bit definitions and macros for MCF_CAN_CANMCR */								  
-#define MCF_CAN_CANMCR_MAXMB(x)            (((x)&0x0000000F)<<0)				  
-#define MCF_CAN_CANMCR_SUPV                (0x00800000)							  
-#define MCF_CAN_CANMCR_FRZACK              (0x01000000)							  
-#define MCF_CAN_CANMCR_SOFTRST             (0x02000000)							  
-#define MCF_CAN_CANMCR_HALT                (0x10000000)							  
-#define MCF_CAN_CANMCR_FRZ                 (0x40000000)							  
-#define MCF_CAN_CANMCR_MDIS                (0x80000000)							  
+
+
+/* Bit definitions and macros for MCF_CAN_CANMCR */
+#define MCF_CAN_CANMCR_MAXMB(x)            (((x)&0x0000000F)<<0)
+#define MCF_CAN_CANMCR_SUPV                (0x00800000)
+#define MCF_CAN_CANMCR_FRZACK              (0x01000000)
+#define MCF_CAN_CANMCR_SOFTRST             (0x02000000)
+#define MCF_CAN_CANMCR_HALT                (0x10000000)
+#define MCF_CAN_CANMCR_FRZ                 (0x40000000)
+#define MCF_CAN_CANMCR_MDIS                (0x80000000)
 
 /* Bit definitions and macros for MCF_CAN_CANCTRL */
 #define MCF_CAN_CANCTRL_PROPSEG(x)         (((x)&0x00000007)<<0)

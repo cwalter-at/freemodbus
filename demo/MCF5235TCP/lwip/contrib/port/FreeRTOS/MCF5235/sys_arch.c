@@ -267,7 +267,7 @@ sys_arch_thread_remove( sys_thread_t hdl )
             vPortFree( toremove );
         }
     }
-    /* We are done with accessing the shared datastructure. Release the 
+    /* We are done with accessing the shared datastructure. Release the
      * resources.
      */
     vPortExitCritical(  );

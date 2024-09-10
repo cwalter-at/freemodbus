@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Linux Port
+ * FreeModbus Library: Linux Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -29,8 +29,11 @@
 #define PR_END_EXTERN_C             }
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 /* ----------------------- Defines ------------------------------------------*/
 #define ENTER_CRITICAL_SECTION( ) vMBPortEnterCritical()
 #define EXIT_CRITICAL_SECTION( ) vMBPortExitCritical()
@@ -41,8 +44,9 @@ PR_BEGIN_EXTERN_C
 #ifndef FALSE
 #define FALSE           0
 #endif
+
 /* ----------------------- Type definitions ---------------------------------*/
-    typedef enum
+typedef enum
 {
     MB_LOG_ERROR = 0,
     MB_LOG_WARN = 1,
@@ -63,13 +67,15 @@ typedef long    LONG;
 
 void            vMBPortEnterCritical( void );
 void            vMBPortExitCritical( void );
-void            vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule,
-                            const CHAR * szFmt, ... );
+void            vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... );
 void            vMBPortTimerPoll(  );
 BOOL            xMBPortSerialPoll(  );
 BOOL            xMBPortSerialSetTimeout( ULONG dwTimeoutMs );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
  */
 
  /**********************************************************
- *	Linux TCP support.
- *	Based on Walter's project. 
- *	Modified by Steven Guo <gotop167@163.com>
+ *  Linux TCP support.
+ *  Based on Walter's project.
+ *  Modified by Steven Guo <gotop167@163.com>
  ***********************************************************/
 
 /* ----------------------- Modbus includes ----------------------------------*/
@@ -53,7 +53,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * eEvent )
+xMBPortEventGet( eMBEventType *eEvent )
 {
     BOOL            xEventHappened = FALSE;
 

@@ -30,7 +30,7 @@
 /** \addtogroup ssc module Working with SSC
  * The SSC driver provides the interface to configure and use the SSC
  * peripheral.
- * 
+ *
  * !Usage
  *
  * -# Enable the SSC interface pins.
@@ -94,7 +94,7 @@ void SSC_Configure(uint32_t bitRate, uint32_t masterClock)
     SSC->SSC_PTCR = SSC_PTCR_RXTDIS | SSC_PTCR_TXTDIS;
     /* Configure clock frequency */
     if (bitRate != 0) {
-    
+
         SSC->SSC_CMR = masterClock / (2 * bitRate);
     }
     else {
@@ -115,7 +115,7 @@ void SSC_ConfigureTransmitter(uint32_t tcmr, uint32_t tfmr)
 }
 
 /**
- * \brief Configures the receiver of a SSC peripheral. 
+ * \brief Configures the receiver of a SSC peripheral.
  * \param rcmr Receive Clock Mode Register value.
  * \param rfmr Receive Frame Mode Register value.
  */
@@ -222,7 +222,7 @@ uint8_t SSC_WriteBuffer(void *buffer, uint32_t length)
 }
 
 /**
- * \brief Reads data coming from a SSC peripheral receiver and stores it into the 
+ * \brief Reads data coming from a SSC peripheral receiver and stores it into the
  * giving buffer with PDC.
  * \param buffer ata buffer used for reception.
  * \param length Size of the data buffer.

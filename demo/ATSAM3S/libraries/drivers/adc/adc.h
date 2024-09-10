@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2009, Atmel Corporation
  *
@@ -29,20 +29,20 @@
 
 /**
  *  \unit
- * 
+ *
  *  !Purpose
- * 
+ *
  *  Interface for configuration the Analog-to-Digital Converter (ADC) peripheral.
- * 
+ *
  *  !Usage
- * 
+ *
  *  -# Configurate the pins for ADC
  *  -# Initialize the ADC with ADC_Initialize().
  *  -# Select the active channel using ADC_EnableChannel()
  *  -# Start the conversion with ADC_StartConversion()
  *  -# Wait the end of the conversion by polling status with ADC_GetStatus()
  *  -# Finally, get the converted data using ADC_GetConvertedData()
- * 
+ *
 */
 #ifndef ADC_H
 #define ADC_H
@@ -140,7 +140,7 @@ extern void ADC_Initialize (Adc *pAdc,
                      uint8_t trgEn,
                      uint8_t trgSel,
                      uint8_t sleepMode,
-                     uint8_t resolution,        
+                     uint8_t resolution,
                      uint32_t mckClock,
                      uint32_t adcClock,
                      uint32_t startupTime,
@@ -151,7 +151,7 @@ extern void ADC_SetCompareMode(Adc *pAdc, uint8_t mode);
 extern void ADC_SetComparisonWindow(Adc *pAdc, uint32_t hi_lo);
 extern uint32_t ADC_IsInterruptMasked(Adc *pAdc, uint32_t flag);
 extern uint32_t ADC_IsStatusSet(Adc *pAdc, uint32_t flag);
-extern uint8_t ADC_IsChannelInterruptStatusSet(uint32_t adc_sr, 
+extern uint8_t ADC_IsChannelInterruptStatusSet(uint32_t adc_sr,
                                               uint32_t channel);
 extern int8_t ADC_ReadBuffer(Adc *pADC,int16_t *pBuffer,int32_t size);
 

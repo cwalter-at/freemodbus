@@ -96,7 +96,7 @@ void FLASH_DWordWrite(u32 XtargetAdd, u32 Xdata0, u32 Xdata1)
 *******************************************************************************/
 void FLASH_SectorErase(u32 Xsectors)
 {
-  /* Wait until another operation going on is completed */  
+  /* Wait until another operation going on is completed */
   FLASH_WaitForLastTask();
   /* Set the Sector Erase flag 'SER' in the CRO reg */
   FLASHR->CR0 |= FLASH_SER_Mask;
@@ -159,8 +159,8 @@ u32 FLASH_WordRead(u32 FLASH_SourceAdd)
 * Function Name  : FLASH_FlagStatus
 * Description    : Returns the NewState of Flash flags
 * Input          : Xflag(FLASH_BSYA0,  FLASH_BSYA1, FLASH_LOCK, FLASH_INTP
-*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER, 
-*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF)  
+*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER,
+*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF)
 * Return         : FlagStatus (SET or RESET).
 *******************************************************************************/
 FlagStatus FLASH_FlagStatus(flashflags Xflag)
@@ -201,8 +201,8 @@ FlagStatus FLASH_FlagStatus(flashflags Xflag)
 * Function Name  : FLASH_FlagClear.
 * Description    : Clears a flash flag.
 * Input          : Xflag(FLASH_BSYA0,  FLASH_BSYA1, FLASH_LOCK, FLASH_INTP
-*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER, 
-*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF).  
+*                  FLASH_B0S, FLASH_B1S, FLASH_ERR, FLASH_ERER, FLASH_PGER,
+*                  FLASH_10ER, FLASH_SEQER, FLASH_RESER, FLASH_WPF).
 * Return         : None.
 *******************************************************************************/
 void FLASH_FlagClear(flashflags Xflag)
@@ -236,7 +236,7 @@ void FLASH_FlagClear(flashflags Xflag)
 
 /*******************************************************************************
 * Function Name  : FLASH_WritePrConfig
-* Description    : Enable Write protection or Disable temporarily Write 
+* Description    : Enable Write protection or Disable temporarily Write
 *                  protection of a flash sector.
 * Input 1        : Flash Sector.
 * Input 2        : Enable or disable Flash sector Write Protection.
@@ -244,8 +244,8 @@ void FLASH_FlagClear(flashflags Xflag)
 *******************************************************************************/
 void FLASH_WritePrConfig(u32 Xsectors, FunctionalState NewState)
 {
-  /* Wait until another operation going on is completed */  
-  FLASH_WaitForLastTask();  
+  /* Wait until another operation going on is completed */
+  FLASH_WaitForLastTask();
   /* Enable Xsectors write protection */
   if (NewState == ENABLE)
   {
@@ -258,7 +258,7 @@ void FLASH_WritePrConfig(u32 Xsectors, FunctionalState NewState)
     /* Set the WMS bit to Start the Sequence */
     FLASHR->CR0 |= FLASH_WMS_Mask;
   }
-  /* Unprotect temporarily Flash sector */ 
+  /* Unprotect temporarily Flash sector */
   else
   {
     /* Set the Set protection Bit */
@@ -285,9 +285,9 @@ void FLASH_PermanentDebugPrConfig(FunctionalState NewState)
   /* Enable permanent Debug protection */
   if (NewState == ENABLE)
   {
-    /* If this is the first time that the debug protection is enabled:Reset 
+    /* If this is the first time that the debug protection is enabled:Reset
        the DBGP bit in the NVAPR0 register */
-    if(!ProtectionLevel) 
+    if(!ProtectionLevel)
     {
       /* Set the Set protection Bit */
       FLASHR->CR0 |= FLASH_SPR_Mask;
@@ -298,9 +298,9 @@ void FLASH_PermanentDebugPrConfig(FunctionalState NewState)
       /* Set the WMS bit to start the sequence */
       FLASHR->CR0 |= FLASH_WMS_Mask;
     }
-    /* If this is not the first time that the debug protection is enabled: 
+    /* If this is not the first time that the debug protection is enabled:
        use of NVAPR1 register */
-    else 
+    else
     {
       /* Set the Set protection Bit */
       FLASHR->CR0 |= FLASH_SPR_Mask;
@@ -313,8 +313,8 @@ void FLASH_PermanentDebugPrConfig(FunctionalState NewState)
     }
 
   }
-   /* Permanent debug unprotection: use of NVAPR1 register */ 
-   else if(ProtectionLevel) 
+   /* Permanent debug unprotection: use of NVAPR1 register */
+   else if(ProtectionLevel)
    {
       /* Set the Set protection Bit */
       FLASHR->CR0 |= FLASH_SPR_Mask;
@@ -332,12 +332,12 @@ void FLASH_PermanentDebugPrConfig(FunctionalState NewState)
 * Function Name  : FLASH_ProtectionLevel
 * Description    : If the flash is Debug protected, up to 16 unprotection/
 *                  protection cycles are possible using the NVAPR1 register.
-*                  This routine returns the number of times of Debug unprotection. 
+*                  This routine returns the number of times of Debug unprotection.
 * Input          : None.
 * Return         : Number of times of Debug Protection/Unprotection(0..15)
-*                  Example: if 5 is returned, this means that the flash was debug 
-*                  unprotected 5 times(using PDS bits)and debug protected 5 times 
-*                  (1 time:using DBGP bit & 4 times: using PEN bits.   
+*                  Example: if 5 is returned, this means that the flash was debug
+*                  unprotected 5 times(using PDS bits)and debug protected 5 times
+*                  (1 time:using DBGP bit & 4 times: using PEN bits.
 *******************************************************************************/
 u16 FLASH_ProtectionLevel(void)
 {

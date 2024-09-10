@@ -30,14 +30,14 @@
 /** \addtogroup pwm_module Working with PWM
  * The PWM driver provides the interface to configure and use the PWM
  * peripheral.
- * 
+ *
  * The PWM macrocell controls square output waveforms of 4 channels.
- * Characteristics of output waveforms such as period, duty-cycle, 
+ * Characteristics of output waveforms such as period, duty-cycle,
  * dead-time can be configured.\n
- * Some of PWM channels can be linked together as synchronous channel and 
+ * Some of PWM channels can be linked together as synchronous channel and
  * duty-cycle of synchronous channels can be updated by PDC automaticly.
  *
- * Before enabling the channels, they must have been configured first. 
+ * Before enabling the channels, they must have been configured first.
  * The main settings include:
  * <ul>
  * <li>Configuration of the clock generator.</li>
@@ -45,7 +45,7 @@
  * <li>Configuration of output waveform characteristics, such as period, duty-cycle etc.</li>
  * <li>Configuration for synchronous channels if needed.</li>
  *    - Selection of the synchronous channels.
- *    - Selection of the moment when the WRDY flag and the corresponding PDC 
+ *    - Selection of the moment when the WRDY flag and the corresponding PDC
  *      transfer request are set (PTRM and PTRCS in the PWM_SCM register).
  *    - Configuration of the update mode (UPDM in the PWM_SCM register).
  *    - Configuration of the update period (UPR in the PWM_SCUP register).

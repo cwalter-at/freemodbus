@@ -2,8 +2,8 @@
  * File:	mcf523x_intc0.h
  * Purpose:	Register and bit definitions for the MCF523X
  *
- * Notes:	
- *	
+ * Notes:
+ *
  */
 
 #ifndef __MCF523X_INTC0_H__

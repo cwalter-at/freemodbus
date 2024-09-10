@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71/lwIP Port serial driver.
+ * FreeModbus Library: STR71/lwIP Port serial driver.
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -101,8 +101,8 @@ typedef struct
 } serdev_t;
 
 /* ----------------------- Prototypes ---------------------------------------*/
-void            sio_uart0_irq( void ) __attribute__ ( ( naked ) );
-void            sio_uart1_irq( void ) __attribute__ ( ( naked ) );
+void            sio_uart0_irq( void ) __attribute__( ( naked ) );
+void            sio_uart1_irq( void ) __attribute__( ( naked ) );
 
 /* ----------------------- Static functions ---------------------------------*/
 
@@ -116,7 +116,7 @@ static volatile serdev_t devices[UART_DEVICES_MAX];
 /* ----------------------- Start implementation -----------------------------*/
 
 err_t
-sio_open_low_level( u8_t devnr, serdev_t * dev )
+sio_open_low_level( u8_t devnr, serdev_t *dev )
 {
     err_t           error = ERR_OK;
 
@@ -160,7 +160,7 @@ sio_open_low_level( u8_t devnr, serdev_t * dev )
 }
 
 err_t
-sio_close_low_level( u8_t devnr, serdev_t * dev )
+sio_close_low_level( u8_t devnr, serdev_t *dev )
 {
     err_t           error = ERR_OK;
 
@@ -194,7 +194,7 @@ sio_close_low_level( u8_t devnr, serdev_t * dev )
 }
 
 err_t
-sio_close( serdev_t * dev )
+sio_close( serdev_t *dev )
 {
     int             i;
     err_t           error = ERR_VAL;
@@ -352,8 +352,7 @@ sio_open_new( u8_t devnr, u32_t baudrate, u8_t databits, sio_stop_t stopbits, si
 sio_fd_t
 sio_open( u8_t devnr )
 {
-    return sio_open_new( devnr, DEFAULT_BAUDRATE, DEFAULT_DATABITS,
-                         DEFAULT_STOPBITS, DEFAULT_PARITY );
+    return sio_open_new( devnr, DEFAULT_BAUDRATE, DEFAULT_DATABITS, DEFAULT_STOPBITS, DEFAULT_PARITY );
 }
 
 void
@@ -368,7 +367,7 @@ sio_send_noisr( u8_t data, sio_fd_t fd )
 }
 
 u32_t
-sio_write_noisr( sio_fd_t fd, u8_t * buf, u32_t size )
+sio_write_noisr( sio_fd_t fd, u8_t *buf, u32_t size )
 {
     u32_t           left = size;
     u8_t            send;
@@ -412,7 +411,7 @@ sio_recv( sio_fd_t fd )
 }
 
 u32_t
-sio_read( sio_fd_t fd, u8_t * buf, u32_t size )
+sio_read( sio_fd_t fd, u8_t *buf, u32_t size )
 {
     u32_t           ch_left = size;
     u32_t           ch_received = 0;
@@ -440,11 +439,10 @@ sio_read( sio_fd_t fd, u8_t * buf, u32_t size )
              */
             if( ch_left )
             {
-                if( xSemaphoreTake( dev->rx_sem, MS_TO_TICKS( DEFAULT_READTIMEOUT_MS ) ) ==
-                    pdFALSE )
+                if( xSemaphoreTake( dev->rx_sem, MS_TO_TICKS( DEFAULT_READTIMEOUT_MS ) ) == pdFALSE )
                 {
-                    /* A timeout. Abort the read and return the characters 
-                     * received so far. 
+                    /* A timeout. Abort the read and return the characters
+                     * received so far.
                      */
                     dev->abort = 1;
                 }
@@ -455,7 +453,7 @@ sio_read( sio_fd_t fd, u8_t * buf, u32_t size )
 }
 
 u32_t
-sio_write( sio_fd_t fd, u8_t * buf, u32_t size )
+sio_write( sio_fd_t fd, u8_t *buf, u32_t size )
 {
     u32_t           ch_left;
 
@@ -499,7 +497,7 @@ sio_read_abort( sio_fd_t fd )
 }
 
 void
-sio_serial_isr( UART_TypeDef * UARTx, u8_t * need_ctx_switch )
+sio_serial_isr( UART_TypeDef *UARTx, u8_t *need_ctx_switch )
 {
     int             i;
     u16             status;
@@ -520,7 +518,7 @@ sio_serial_isr( UART_TypeDef * UARTx, u8_t * need_ctx_switch )
     {
         status = UART_FlagStatus( dev->UARTx );
 
-        /* If there are characters in the UART fifo place them into the 
+        /* If there are characters in the UART fifo place them into the
          * ring buffer. In case the buffer is filled half or the requested
          * number of bytes has been read wakeup the receiver.
          */

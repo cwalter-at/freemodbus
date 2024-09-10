@@ -14,23 +14,23 @@ Target (Demo), 0x0005 // Tools: ''
 GRPOPT 1,(Demo),1,0,0
 GRPOPT 2,(FreeModbus),1,0,0
 
-OPTFFF 1,1,1,0,0,0,0,0,<.\demo.c><demo.c> 
-OPTFFF 1,2,1,0,0,0,0,0,<.\port\porttimer.c><porttimer.c> 
-OPTFFF 1,3,1,0,0,0,0,0,<.\port\port.c><port.c> 
-OPTFFF 1,4,1,0,0,0,0,0,<.\port\portevent.c><portevent.c> 
-OPTFFF 1,5,1,0,0,0,0,0,<.\port\portserial.c><portserial.c> 
-OPTFFF 1,6,2,855638016,0,0,0,0,<.\Startup.s><Startup.s> 
-OPTFFF 2,7,1,0,0,0,0,0,<..\..\modbus\mb.c><mb.c> 
-OPTFFF 2,8,1,0,0,0,0,0,<..\..\modbus\functions\mbutils.c><mbutils.c> 
-OPTFFF 2,9,1,0,0,0,0,0,<..\..\modbus\functions\mbfunccoils.c><mbfunccoils.c> 
-OPTFFF 2,10,1,369098752,0,0,0,0,<..\..\modbus\functions\mbfuncdiag.c><mbfuncdiag.c> 
-OPTFFF 2,11,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncdisc.c><mbfuncdisc.c> 
-OPTFFF 2,12,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncholding.c><mbfuncholding.c> 
-OPTFFF 2,13,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncinput.c><mbfuncinput.c> 
-OPTFFF 2,14,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncother.c><mbfuncother.c> 
-OPTFFF 2,15,1,0,0,0,0,0,<..\..\modbus\rtu\mbrtu.c><mbrtu.c> 
-OPTFFF 2,16,1,0,0,0,0,0,<..\..\modbus\rtu\mbcrc.c><mbcrc.c> 
-OPTFFF 2,17,1,0,0,0,0,0,<..\..\modbus\ascii\mbascii.c><mbascii.c> 
+OPTFFF 1,1,1,0,0,0,0,0,<.\demo.c><demo.c>
+OPTFFF 1,2,1,0,0,0,0,0,<.\port\porttimer.c><porttimer.c>
+OPTFFF 1,3,1,0,0,0,0,0,<.\port\port.c><port.c>
+OPTFFF 1,4,1,0,0,0,0,0,<.\port\portevent.c><portevent.c>
+OPTFFF 1,5,1,0,0,0,0,0,<.\port\portserial.c><portserial.c>
+OPTFFF 1,6,2,855638016,0,0,0,0,<.\Startup.s><Startup.s>
+OPTFFF 2,7,1,0,0,0,0,0,<..\..\modbus\mb.c><mb.c>
+OPTFFF 2,8,1,0,0,0,0,0,<..\..\modbus\functions\mbutils.c><mbutils.c>
+OPTFFF 2,9,1,0,0,0,0,0,<..\..\modbus\functions\mbfunccoils.c><mbfunccoils.c>
+OPTFFF 2,10,1,369098752,0,0,0,0,<..\..\modbus\functions\mbfuncdiag.c><mbfuncdiag.c>
+OPTFFF 2,11,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncdisc.c><mbfuncdisc.c>
+OPTFFF 2,12,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncholding.c><mbfuncholding.c>
+OPTFFF 2,13,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncinput.c><mbfuncinput.c>
+OPTFFF 2,14,1,0,0,0,0,0,<..\..\modbus\functions\mbfuncother.c><mbfuncother.c>
+OPTFFF 2,15,1,0,0,0,0,0,<..\..\modbus\rtu\mbrtu.c><mbrtu.c>
+OPTFFF 2,16,1,0,0,0,0,0,<..\..\modbus\rtu\mbcrc.c><mbcrc.c>
+OPTFFF 2,17,1,0,0,0,0,0,<..\..\modbus\ascii\mbascii.c><mbascii.c>
 
 
 TARGOPT 1, (Demo)

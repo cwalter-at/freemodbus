@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Library: BARE Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -26,8 +26,8 @@
 #include "mbport.h"
 
 /* ----------------------- static functions ---------------------------------*/
-static void prvvUARTTxReadyISR( void );
-static void prvvUARTRxISR( void );
+static void     prvvUARTTxReadyISR( void );
+static void     prvvUARTRxISR( void );
 
 /* ----------------------- Start implementation -----------------------------*/
 void
@@ -54,7 +54,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     /* Return the byte in the UARTs receive buffer. This function is called
      * by the protocol stack after pxMBFrameCBByteReceived( ) has been called.
@@ -65,10 +65,11 @@ xMBPortSerialGetByte( CHAR * pucByte )
 /* Create an interrupt handler for the transmit buffer empty interrupt
  * (or an equivalent) for your target processor. This function should then
  * call pxMBFrameCBTransmitterEmpty( ) which tells the protocol stack that
- * a new character can be sent. The protocol stack will then call 
+ * a new character can be sent. The protocol stack will then call
  * xMBPortSerialPutByte( ) to send the character.
  */
-static void prvvUARTTxReadyISR( void )
+static void
+prvvUARTTxReadyISR( void )
 {
     pxMBFrameCBTransmitterEmpty(  );
 }
@@ -78,7 +79,8 @@ static void prvvUARTTxReadyISR( void )
  * protocol stack will then call xMBPortSerialGetByte( ) to retrieve the
  * character.
  */
-static void prvvUARTRxISR( void )
+static void
+prvvUARTRxISR( void )
 {
     pxMBFrameCBByteReceived(  );
 }

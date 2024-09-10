@@ -31,7 +31,7 @@
     .section .vectors, "ax"
     .code 32
     .align 0
-  
+
 /*****************************************************************************
  * Exception vectors                                                         *
  *****************************************************************************/
@@ -67,7 +67,7 @@ RTC_Addr:               .word  _undef_IRQhandler
 WDG_Addr:               .word   vPortNonPreemptiveTick
 #else
 WDG_Addr:               .word   vPortPreemptiveTick
-#endif    
+#endif
 XTI_Addr:               .word  _undef_IRQhandler
 USBHP_Addr:             .word  _undef_IRQhandler
 I2C0ITERR_Addr:         .word  _undef_IRQhandler
@@ -101,7 +101,7 @@ _vectors_end:
  * If flash execution is used and the RAM is mapped at address 0 we also need
  * to place a copy of the interrupt vector address table in the RAM.
  ******************************************************************************/
- #ifdef __FLASH_BUILD  
+ #ifdef __FLASH_BUILD
     .section .vectors_ram, "ax"
     .code 32
     .align 0
@@ -117,7 +117,7 @@ _vectors_ram:
     .align 0
 
 _reset_handler:
-#ifdef __FLASH_BUILD    
+#ifdef __FLASH_BUILD
     ldr r0, =_vectors_start
     ldr r1, =_vectors_end
     sub r1, r1, r0          /* r2 = number of bytes to copy */
@@ -137,7 +137,7 @@ _vector_copy:
     ldr r0, =0xA0000000
     ldr r1, =0x1c2
     str r1, [r0, #0x50]     /* set up the internal RAM at 0x0 */
-    
+
     /* After setup the folling clock configuration will be active. Note
      * that the value of CK is dependent on the target oscillator.
      *
@@ -148,10 +148,10 @@ _vector_copy:
      * PCLK1 = RCLK/2
      * PCLK2 = RCLK/2
      */
-     
-    /* set RCLK to 16 * CLK2 / 1 = 32Mhz    
+
+    /* set RCLK to 16 * CLK2 / 1 = 32Mhz
      * (0x0071 = FREEN=1, FREF_RANGE=1, MX1:0=11b, DX2:0=000b) */
-    ldr r1, =0x00F0        
+    ldr r1, =0x00F0
     str r1, [r0, #0x18]
 
     /* (0x8009 = DIV2=1, CK2_16=1, CKU_CKSEL=1) */
@@ -162,7 +162,7 @@ _vector_copy:
     ldr r1, =0x0
     str r1, [r0, #0x40]
 
-    /* pclk1 = rclk/1 and pclk2 = rclk/1 = 32Mhz 
+    /* pclk1 = rclk/1 and pclk2 = rclk/1 = 32Mhz
      * (0x0101 = FACT2_9:8=01b, FACT1_1:0=01b) */
     ldr r1, =0x0000
     str r1, [r0, #0x44]
@@ -184,7 +184,7 @@ _dabort_handler:
 
 _irq_handler:
     ldr pc, =(EIC_BASE + EIC_IVR_OFF)
-    
+
 _fiq_handler:
     b   _fiq_handler
 

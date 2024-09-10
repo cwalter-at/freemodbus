@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Z8Encore Port for Z8F6422
+ * FreeModbus Library: Z8Encore Port for Z8F6422
  * Copyright (C) 2007 Tiago Prado Lone <tiago@maxwellbohr.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,24 +25,24 @@
 #include "mb.h"
 #include "mbport.h"
 
-#define PORTA_UART_RXD			0x10
-#define PORTA_UART_TXD			0x20
+#define PORTA_UART_RXD          0x10
+#define PORTA_UART_TXD          0x20
 
-#define RX_ENABLE				0x40
-#define TX_ENABLE				0x80
+#define RX_ENABLE               0x40
+#define TX_ENABLE               0x80
 
-#define UART0_RXD_INT_PENDING	0x10
-#define UART0_TXD_INT_PENDING	0x08
+#define UART0_RXD_INT_PENDING   0x10
+#define UART0_TXD_INT_PENDING   0x08
 
-#define UART0_RXD_INT_EN_H		0x10
-#define UART0_RXD_INT_EN_L		0x10
-#define UART0_TXD_INT_EN_H		0x08
-#define UART0_TXD_INT_EN_L		0x08
+#define UART0_RXD_INT_EN_H      0x10
+#define UART0_RXD_INT_EN_L      0x10
+#define UART0_TXD_INT_EN_H      0x08
+#define UART0_TXD_INT_EN_L      0x08
 
-#define UART_PARITY_ODD			0x18
-#define UART_PARITY_EVEN		0x10
+#define UART_PARITY_ODD         0x18
+#define UART_PARITY_EVEN        0x10
 
-#define UART_ERRORS				0x70
+#define UART_ERRORS             0x70
 
 
 /* ----------------------- static functions ---------------------------------*/
@@ -148,7 +148,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     /* Return the byte in the UARTs receive buffer. This function is called
      * by the protocol stack after pxMBFrameCBByteReceived( ) has been called.
@@ -166,12 +166,12 @@ xMBPortSerialGetByte( CHAR * pucByte )
  * Create an interrupt handler for the transmit buffer empty interrupt
  * (or an equivalent) for your target processor. This function should then
  * call pxMBFrameCBTransmitterEmpty( ) which tells the protocol stack that
- * a new character can be sent. The protocol stack will then call 
+ * a new character can be sent. The protocol stack will then call
  * xMBPortSerialPutByte( ) to send the character.
  */
 static unsigned int uiCnt = 0;
 
-static void interrupt
+static void     interrupt
 prvvUARTTxReadyISR( void )
 {
     pxMBFrameCBTransmitterEmpty(  );
@@ -186,7 +186,7 @@ prvvUARTTxReadyISR( void )
  * protocol stack will then call xMBPortSerialGetByte( ) to retrieve the
  * character.
  */
-static void interrupt
+static void     interrupt
 prvvUARTRxISR( void )
 {
     UCHAR           tmp;

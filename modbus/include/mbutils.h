@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -31,8 +31,11 @@
 #define _MB_UTILS_H
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 /*! \defgroup modbus_utils Utilities
  *
  * This module contains some utility functions which can be used by
@@ -40,9 +43,11 @@ PR_BEGIN_EXTERN_C
  * bitfields backed by a character array buffer.
  *
  */
+
 /*! \addtogroup modbus_utils
  *  @{
  */
+
 /*! \brief Function to set bits in a byte buffer.
  *
  * This function allows the efficient use of an array to implement bitfields.
@@ -74,8 +79,7 @@ PR_BEGIN_EXTERN_C
  * xMBUtilSetBits( ucBits, 8, 8, 0x5A);
  * \endcode
  */
-void            xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset,
-                                UCHAR ucNBits, UCHAR ucValues );
+void            xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits, UCHAR ucValues );
 
 /*! \brief Function to read bits in a byte buffer.
  *
@@ -96,12 +100,14 @@ void            xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset,
  * ucResult = xMBUtilGetBits( ucBits, 3, 8 );
  * \endcode
  */
-UCHAR           xMBUtilGetBits( UCHAR * ucByteBuf, USHORT usBitOffset,
-                                UCHAR ucNBits );
+UCHAR           xMBUtilGetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits );
 
 /*! @} */
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

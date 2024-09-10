@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -133,14 +133,14 @@ static inline void keySchedule(unsigned char k[KC][4], unsigned char W[ROUNDS+1]
     for(j=0; j < KC; j++) {
         ((int *) tk)[j] = ((int *) k)[j];
     }
-  
+
     t = 0;
     /* copy values into round key array */
     for(j=0; (j < KC) && (t < (ROUNDS+1)*BC); j++, t++) {
         ((int *) W[t / BC])[t%BC] = ((int *) tk)[j];
     }
-  
-    while (t < (ROUNDS+1)*BC) { 
+
+    while (t < (ROUNDS+1)*BC) {
 
         tk[0][0] ^= S[tk[KC-1][1]] ^ rcon[rconpointer++];
         tk[0][1] ^= S[tk[KC-1][2]];
@@ -179,16 +179,16 @@ static inline void keySchedule(unsigned char k[KC][4], unsigned char W[ROUNDS+1]
 /// \param Buffer to store expanded key schedule
 //------------------------------------------------------------------------------
 #if defined(ENCRYPTION_ECB) || defined(ENCRYPTION_CBC)
-static inline void invKeySchedule(unsigned char k[KC][4], 
-                                  unsigned char W[ROUNDS+1][BC][4]) 
+static inline void invKeySchedule(unsigned char k[KC][4],
+                                  unsigned char W[ROUNDS+1][BC][4])
 {
     unsigned int r;
     unsigned int j;
     unsigned char tmp[4];
-  
+
     // Expand key normally
     keySchedule(k, W);
-  
+
     // Apply invMixColumns to all rounds except first and last one
     for (r=1; r < ROUNDS; r++) {
         for (j=0; j < BC; j++) {
@@ -214,7 +214,7 @@ static inline void invKeySchedule(unsigned char k[KC][4],
 /// \param input to rotate
 /// \return Rotated word
 //------------------------------------------------------------------------------
-static inline unsigned int rotBytes(unsigned int input) 
+static inline unsigned int rotBytes(unsigned int input)
 {
     return ((input << 8) | (input >> 24));
 }
@@ -244,12 +244,12 @@ static inline void generateEncryptionLUTs(unsigned int * t0,
                 (box[a] << 8) |
                 (box[a] << 16) |
                 (mul(3, box[a]) << 24);
-        
+
         // Calc t1, t2, t3
         t1[a] = rotBytes(t0[a]);
         t2[a] = rotBytes(t1[a]);
         t3[a] = rotBytes(t2[a]);
-        
+
         // Calc tf
         tf[a] = box[a] | (box[a] << 8) | (box[a] << 16) | (box[a] << 24);
     }
@@ -276,18 +276,18 @@ static inline void generateDecryptionLUTs(unsigned int * t0,
     unsigned int a;
 
     for (a=0; a <= 255; a++) {
-   
+
         // Calc t0
         t0[a] = (mul(0x0E, box[a])) |
                 (mul(0x09, box[a]) << 8) |
                 (mul(0x0D, box[a]) << 16) |
                 (mul(0x0B, box[a]) << 24);
-        
+
         // Calc t1, t2, t3
         t1[a] = rotBytes(t0[a]);
         t2[a] = rotBytes(t1[a]);
         t3[a] = rotBytes(t2[a]);
-        
+
         // Calc tf
         tf[a] = box[a] | (box[a] << 8) | (box[a] << 16) | (box[a] << 24);
     }
@@ -302,7 +302,7 @@ static inline void generateDecryptionLUTs(unsigned int * t0,
 #if defined(ENCRYPTION_CTR)
 static void copyBlock(unsigned char input[BC][4], unsigned char output[BC][4])
 {
-    unsigned int j; 
+    unsigned int j;
 
     for (j=0; j < BC; j++) {
         ((int *) output)[j] = ((int *) input)[j];
@@ -327,26 +327,26 @@ static inline void encrypt(unsigned char a[BC][4],
                            unsigned int * t1,
                            unsigned int * t2,
                            unsigned int * t3,
-                           unsigned int * tf) 
+                           unsigned int * tf)
 {
     unsigned char b[BC][4];
     unsigned int r;
     unsigned int j;
-                            
+
     // First key addition
     addRoundKey(a, rk[0]);
 
     // ROUNDS-1 ordinary rounds
     for(r=1; r < ROUNDS; r++) {
         for (j=0; j < BC; j++) {
-     
+
             ((int *) b)[j] = t0[a[j][0]] ^
                            t1[a[(j+shifts[SC][0][1])%BC][1]] ^
                            t2[a[(j+shifts[SC][0][2])%BC][2]] ^
                            t3[a[(j+shifts[SC][0][3])%BC][3]] ^
                            ((int *) rk[r])[j];
         }
-        if ((++r) == ROUNDS) {          
+        if ((++r) == ROUNDS) {
             break;
         }
         for (j=0; j < BC; j++) {
@@ -357,7 +357,7 @@ static inline void encrypt(unsigned char a[BC][4],
                            ((int *) rk[r])[j];
         }
     }
-  
+
     // Last round (no MixColumns)
     for (j=0; j < BC; j++) {
         ((int *) a)[j] = (t0f[b[j][0]]) ^
@@ -391,7 +391,7 @@ static inline void decrypt(unsigned char a[BC][4],
     unsigned char b[BC][4];
     unsigned int r;
     unsigned int j;
-                            
+
     // First key addition
     addRoundKey(a, rk[ROUNDS]);
 
@@ -432,9 +432,9 @@ static inline void decrypt(unsigned char a[BC][4],
 /// \param Buffer to store binary value
 /// \param Size of value
 //------------------------------------------------------------------------------
-static void ASCII2RawHex(const unsigned char * ascii, 
-                         unsigned char * binary, 
-                         unsigned int length) 
+static void ASCII2RawHex(const unsigned char * ascii,
+                         unsigned char * binary,
+                         unsigned int length)
 {
     unsigned char * ptr;
     unsigned int i;
@@ -517,7 +517,7 @@ static unsigned int cbc_decrypt(const unsigned char * cipherText,
                                        unsigned int length,
                                        const unsigned char expandedKey[ROUNDS+1][BC][4],
                                        unsigned char IV[BC][4])
-{             
+{
     unsigned char block[BC][4];
     unsigned int i;
     unsigned int l;
@@ -631,7 +631,7 @@ void aes_ref_init(void)
     // Generate lookup tables
     generateEncryptionLUTs(T0, T1, T2, T3, TF, S);
 #endif
-  
+
 #if defined(ENCRYPTION_CBC) || defined(ENCRYPTION_CTR)
     // Initialize counter
     ASCII2RawHex((unsigned char*)ENCRYPTION_IV, (unsigned char*)IV, ENCRYPTION_BLOCK_LENGTH);

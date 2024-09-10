@@ -259,7 +259,7 @@ signed portBASE_TYPE xReturn;
 
 		+ xQueueReceiveFromISR().  As per xQueueSendFromISR().
 	*/
-		
+
 	/* If the queue is already full we may have to block. */
 	if( prvIsQueueFull( pxQueue ) )
 	{
@@ -270,11 +270,11 @@ signed portBASE_TYPE xReturn;
 			/* We are going to place ourselves on the xTasksWaitingToSend event
 			list, and will get woken should the delay expire, or space become
 			available on the queue.
-			
+
 			As detailed above we do not require mutual exclusion on the event
 			list as nothing else can modify it or the ready lists while we
 			have the scheduler suspended and queue locked.
-			
+
 			It is possible that an ISR has removed data from the queue since we
 			checked if any was available.  If this is the case then the data
 			will have been copied from the queue, and the queue variables
@@ -286,7 +286,7 @@ signed portBASE_TYPE xReturn;
 			this from within a critical section as the task we are
 			switching to has its own context.  When we return here (i.e. we
 			unblock) we will leave the critical section as normal.
-			
+
 			It is possible that an ISR has caused an event on an unrelated and
 			unlocked queue.  If this was the case then the event list for that
 			queue will have been updated but the ready lists left unchanged -
@@ -297,7 +297,7 @@ signed portBASE_TYPE xReturn;
 				/* We can safely unlock the queue and scheduler here as
 				interrupts are disabled.  We must not yield with anything
 				locked, but we can yield from within a critical section.
-				
+
 				Tasks that have been placed on the pending ready list cannot
 				be tasks that are waiting for events on this queue.  See
 				in comment xTaskRemoveFromEventList(). */
@@ -313,12 +313,12 @@ signed portBASE_TYPE xReturn;
 				/* Before leaving the critical section we have to ensure
 				exclusive access again. */
 				vTaskSuspendAll();
-				prvLockQueue( pxQueue );				
+				prvLockQueue( pxQueue );
 			}
 			taskEXIT_CRITICAL();
 		}
 	}
-		
+
 	/* When we are here it is possible that we unblocked as space became
 	available on the queue.  It is also possible that an ISR posted to the
 	queue since we left the critical section, so it may be that again there
@@ -328,8 +328,8 @@ signed portBASE_TYPE xReturn;
 	{
 		if( pxQueue->uxMessagesWaiting < pxQueue->uxLength )
 		{
-			/* There is room in the queue, copy the data into the queue. */			
-			prvCopyQueueData( pxQueue, pvItemToQueue );		
+			/* There is room in the queue, copy the data into the queue. */
+			prvCopyQueueData( pxQueue, pvItemToQueue );
 			xReturn = pdPASS;
 
 			/* Update the TxLock count so prvUnlockQueue knows to check for
@@ -385,7 +385,7 @@ signed portBASE_TYPE xQueueSendFromISR( xQueueHandle pxQueue, const void *pvItem
 		{
 			/* We only want to wake one task per ISR, so check that a task has
 			not already been woken. */
-			if( !xTaskPreviouslyWoken )		
+			if( !xTaskPreviouslyWoken )
 			{
 				if( !listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToReceive ) ) )
 				{
@@ -427,7 +427,7 @@ signed portBASE_TYPE xReturn;
 	if( prvIsQueueEmpty( pxQueue ) )
 	{
 		/* There are no messages in the queue, do we want to block or just
-		leave with nothing? */			
+		leave with nothing? */
 		if( xTicksToWait > ( portTickType ) 0 )
 		{
 			vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToReceive ), xTicksToWait );
@@ -591,7 +591,7 @@ signed portBASE_TYPE xYieldRequired = pdFALSE;
 					context	switch is required. */
 					xYieldRequired = pdTRUE;
 				}
-			}			
+			}
 		}
 	}
 	taskEXIT_CRITICAL();
@@ -611,7 +611,7 @@ signed portBASE_TYPE xYieldRequired = pdFALSE;
 				{
 					xYieldRequired = pdTRUE;
 				}
-			}			
+			}
 		}
 	}
 	taskEXIT_CRITICAL();

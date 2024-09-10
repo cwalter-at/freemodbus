@@ -160,13 +160,13 @@ mcf523x_sdram_init( void )
          */
         MCF_SDRAMC_DMR0 = ( 0 | MCF_SDRAMC_DMR_BAM_16M | MCF_SDRAMC_DMR0_V );
 
-        /*      
-         * Set IP (bit 3) in DACR 
+        /*
+         * Set IP (bit 3) in DACR
          */
         MCF_SDRAMC_DACR0 |= MCF_SDRAMC_DACR0_IP;
 
-        /* 
-         * Wait 30ns to allow banks to precharge 
+        /*
+         * Wait 30ns to allow banks to precharge
          */
         for( i = 0; i < 5; i++ )
         {
@@ -177,18 +177,18 @@ mcf523x_sdram_init( void )
 #endif
         }
 
-        /*      
-         * Write to this block to initiate precharge 
+        /*
+         * Write to this block to initiate precharge
          */
         *( uint32 * ) ( SDRAM_ADDRESS ) = 0xA5A59696;
 
-        /*      
-         * Set RE (bit 15) in DACR 
+        /*
+         * Set RE (bit 15) in DACR
          */
         MCF_SDRAMC_DACR0 |= MCF_SDRAMC_DACR0_RE;
 
-        /* 
-         * Wait for at least 8 auto refresh cycles to occur 
+        /*
+         * Wait for at least 8 auto refresh cycles to occur
          */
         for( i = 0; i < 2000; i++ )
         {
@@ -199,13 +199,13 @@ mcf523x_sdram_init( void )
 #endif
         }
 
-        /*      
-         * Finish the configuration by issuing the IMRS. 
+        /*
+         * Finish the configuration by issuing the IMRS.
          */
         MCF_SDRAMC_DACR0 |= MCF_SDRAMC_DACR0_MRS;
 
         /*
-         * Write to the SDRAM Mode Register 
+         * Write to the SDRAM Mode Register
          */
         *( uint32 * ) ( SDRAM_ADDRESS + 0x400 ) = 0xA5A59696;
     }
@@ -216,8 +216,8 @@ mcf523x_sdram_init( void )
 void
 mcf523x_cs_init( void )
 {
-    /* 
-     * ChipSelect 0 - External Flash 
+    /*
+     * ChipSelect 0 - External Flash
      */
     MCF_CS_CSAR0 = MCF_CS_CSAR_BA( EXT_FLASH_ADDRESS );
     MCF_CS_CSCR0 = ( 0 | MCF_CS_CSCR_IWS( 6 ) | MCF_CS_CSCR_AA | MCF_CS_CSCR_PS_16 );

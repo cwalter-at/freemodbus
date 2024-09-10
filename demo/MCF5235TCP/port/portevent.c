@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: lwIP Port
+ * FreeModbus Library: lwIP Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,6 +31,7 @@
 
 /* ----------------------- Defines ------------------------------------------*/
 #define MB_POLL_CYCLETIME       100     /* Poll cycle time is 100ms */
+
 /* ----------------------- Static variables ---------------------------------*/
 static sys_mbox_t xMailBox = SYS_MBOX_NULL;
 static eMBEventType eMailBoxEvent;
@@ -62,7 +63,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * eEvent )
+xMBPortEventGet( eMBEventType *eEvent )
 {
     void           *peMailBoxEvent;
     BOOL            xEventHappend = FALSE;

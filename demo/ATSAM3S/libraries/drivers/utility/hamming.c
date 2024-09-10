@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -96,9 +96,9 @@ static void Compute256(const unsigned char *data, unsigned char *code)
             // Parity groups are formed by forcing a particular index bit to 0
             // (even) or 1 (odd).
             // Example on one byte:
-            // 
-            // bits (dec)  7   6   5   4   3   2   1   0    
-            //      (bin) 111 110 101 100 011 010 001 000    
+            //
+            // bits (dec)  7   6   5   4   3   2   1   0
+            //      (bin) 111 110 101 100 011 010 001 000
             //                            '---'---'---'----------.
             //                                                   |
             // groups P4' ooooooooooooooo eeeeeeeeeeeeeee P4     |
@@ -115,12 +115,12 @@ static void Compute256(const unsigned char *data, unsigned char *code)
             //     ex: log2(4) = 2, bit2 of the index must be 0 (-> 0 1 2 3)
             // and on all odd Px' if the log2(x)nth bit of its index is 1
             //     ex: log2(2) = 1, bit1 of the index must be 1 (-> 0 1 4 5)
-            // 
+            //
             // As such, we calculate all the possible Px and Px' values at the
             // same time in two variables, evenLineCode and oddLineCode, such as
             //     evenLineCode bits: P128  P64  P32  P16  P8  P4  P2  P1
             //     oddLineCode  bits: P128' P64' P32' P16' P8' P4' P2' P1'
-            // 
+            //
             evenLineCode ^= (255 - i);
             oddLineCode ^= i;
         }
@@ -143,7 +143,7 @@ static void Compute256(const unsigned char *data, unsigned char *code)
     // Code[1] = Line2
     // Code[2] = Column
     // Line = Px' Px P(x-1)- P(x-1) ...
-    // Column = P4' P4 P2' P2 P1' P1 PadBit PadBit 
+    // Column = P4' P4 P2' P2 P1' P1 PadBit PadBit
     code[0] = 0;
     code[1] = 0;
     code[2] = 0;

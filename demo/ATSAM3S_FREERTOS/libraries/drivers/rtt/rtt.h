@@ -36,12 +36,12 @@
  *
  * \par Usage
  *
- * -# Changes the prescaler value of the given RTT and restarts it 
+ * -# Changes the prescaler value of the given RTT and restarts it
  *    using \ref RTT_SetPrescaler().
  * -# Get current value of the RTT using \ref RTT_GetTime().
  * -# Enables the specified RTT interrupt using \ref RTT_EnableIT().
  * -# Get the status register value of the given RTT using \ref RTT_GetStatus().
- * -# Configures the RTT to generate an alarm at the given time 
+ * -# Configures the RTT to generate an alarm at the given time
  *    using \ref RTT_SetAlarm().
  */
 

@@ -6,15 +6,15 @@ REQUIREMENTS
 ============
 
 This example contains a simple demo program for FreeMODBUS  for the AT91SAM3S
-Cortex M3 controllers on the SAM3S-EK [0] evaluation kit. It requires a wired 
+Cortex M3 controllers on the SAM3S-EK [0] evaluation kit. It requires a wired
 RS485  connection to a host processor and a  MODBUS master software on the PC
-side to  be useful. Demo  versions of MODBUS  master  stacks can be  found in 
+side to  be useful. Demo  versions of MODBUS  master  stacks can be  found in
 [1], [2] and [3]. Commercial MODBUS stacks are available from [4].
 
 INSTALLATION
 ============
 The SAM3S-EK evaluation board should be modified as following to enable RS485
-data transmission. 
+data transmission.
 
  - Place Jumpers JP11, JP10 and JP12
  - Place a solder drop accross R25
@@ -51,7 +51,7 @@ PROBLEMS
 ========
 
 In case you can get no communication working make sure that the RS485 line is
-biased correctly. The SAM3S-EK does not populate the RS485 bias resistors by 
+biased correctly. The SAM3S-EK does not populate the RS485 bias resistors by
 default and if you have a RS485 master which does not bias the lines either
 you will get wrong characters. For this R24 and R30 on the bottom side of the
 evaluation kit of the PCB should be populated.

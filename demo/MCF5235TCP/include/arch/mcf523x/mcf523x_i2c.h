@@ -2,8 +2,8 @@
  * File:	mcf523x_i2c.h
  * Purpose:	Register and bit definitions for the MCF523X
  *
- * Notes:	
- *	
+ * Notes:
+ *
  */
 
 #ifndef __MCF523X_I2C_H__

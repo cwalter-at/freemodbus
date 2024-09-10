@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -38,7 +38,7 @@
 /// \page "Hamming Code Errors"
 /// These are the possible errors when trying to verify a block of data encoded
 /// using a Hamming code:
-/// 
+///
 /// !Errors:
 ///  - Hamming_ERROR_SINGLEBIT
 ///  - Hamming_ERROR_ECC

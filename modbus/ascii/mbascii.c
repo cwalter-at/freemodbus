@@ -1,5 +1,5 @@
-/* 
- * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+/*
+ * FreeModbus Library: A portable Modbus implementation for Modbus ASCII/RTU.
  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
  * All rights reserved.
  *
@@ -107,8 +107,9 @@ eMBErrorCode
 eMBASCIIInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
+
     ( void )ucSlaveAddress;
-    
+
     ENTER_CRITICAL_SECTION(  );
     ucMBLFCharacter = MB_ASCII_DEFAULT_LF;
 
@@ -148,7 +149,7 @@ eMBASCIIStop( void )
 }
 
 eMBErrorCode
-eMBASCIIReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
+eMBASCIIReceive( UCHAR *pucRcvAddress, UCHAR **pucFrame, USHORT *pusLength )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
 
@@ -156,8 +157,7 @@ eMBASCIIReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
 
     /* Length and CRC check */
-    if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN )
-        && ( prvucMBLRC( ( UCHAR * ) ucASCIIBuf, usRcvBufferPos ) == 0 ) )
+    if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN ) && ( prvucMBLRC( ( UCHAR * ) ucASCIIBuf, usRcvBufferPos ) == 0 ) )
     {
         /* Save the address field. All frames are passed to the upper layed
          * and the decision if a frame is used is done there.
@@ -167,7 +167,7 @@ eMBASCIIReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
         /* Total length of Modbus-PDU is Modbus-Serial-Line-PDU minus
          * size of address field and CRC checksum.
          */
-        *pusLength = ( USHORT )( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_LRC );
+        *pusLength = ( USHORT ) ( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_LRC );
 
         /* Return the start of the Modbus PDU to the caller. */
         *pucFrame = ( UCHAR * ) & ucASCIIBuf[MB_SER_PDU_PDU_OFF];
@@ -181,7 +181,7 @@ eMBASCIIReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
 }
 
 eMBErrorCode
-eMBASCIISend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
+eMBASCIISend( UCHAR ucSlaveAddress, const UCHAR *pucFrame, USHORT usLength )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     UCHAR           usLRC;
@@ -257,7 +257,7 @@ xMBASCIIReceiveFSM( void )
             case BYTE_HIGH_NIBBLE:
                 if( usRcvBufferPos < MB_SER_PDU_SIZE_MAX )
                 {
-                    ucASCIIBuf[usRcvBufferPos] = ( UCHAR )( ucResult << 4 );
+                    ucASCIIBuf[usRcvBufferPos] = ( UCHAR ) ( ucResult << 4 );
                     eBytePos = BYTE_LOW_NIBBLE;
                     break;
                 }
@@ -316,7 +316,7 @@ xMBASCIIReceiveFSM( void )
             /* Enable timer for character timeout. */
             vMBPortTimersEnable(  );
             /* Reset the input buffers to store the frame. */
-            usRcvBufferPos = 0;;
+            usRcvBufferPos = 0;
             eBytePos = BYTE_HIGH_NIBBLE;
             eRcvState = STATE_RX_RCV;
         }
@@ -339,7 +339,7 @@ xMBASCIITransmitFSM( void )
          * the character ':'. */
     case STATE_TX_START:
         ucByte = ':';
-        xMBPortSerialPutByte( ( CHAR )ucByte );
+        xMBPortSerialPutByte( ( CHAR ) ucByte );
         eSndState = STATE_TX_DATA;
         eBytePos = BYTE_HIGH_NIBBLE;
         break;
@@ -354,14 +354,14 @@ xMBASCIITransmitFSM( void )
             switch ( eBytePos )
             {
             case BYTE_HIGH_NIBBLE:
-                ucByte = prvucMBBIN2CHAR( ( UCHAR )( *pucSndBufferCur >> 4 ) );
+                ucByte = prvucMBBIN2CHAR( ( UCHAR ) ( *pucSndBufferCur >> 4 ) );
                 xMBPortSerialPutByte( ( CHAR ) ucByte );
                 eBytePos = BYTE_LOW_NIBBLE;
                 break;
 
             case BYTE_LOW_NIBBLE:
-                ucByte = prvucMBBIN2CHAR( ( UCHAR )( *pucSndBufferCur & 0x0F ) );
-                xMBPortSerialPutByte( ( CHAR )ucByte );
+                ucByte = prvucMBBIN2CHAR( ( UCHAR ) ( *pucSndBufferCur & 0x0F ) );
+                xMBPortSerialPutByte( ( CHAR ) ucByte );
                 pucSndBufferCur++;
                 eBytePos = BYTE_HIGH_NIBBLE;
                 usSndBufferCount--;
@@ -377,7 +377,7 @@ xMBASCIITransmitFSM( void )
 
         /* Finish the frame by sending a LF character. */
     case STATE_TX_END:
-        xMBPortSerialPutByte( ( CHAR )ucMBLFCharacter );
+        xMBPortSerialPutByte( ( CHAR ) ucMBLFCharacter );
         /* We need another state to make sure that the CR character has
          * been sent. */
         eSndState = STATE_TX_NOTIFY;
@@ -435,11 +435,11 @@ prvucMBCHAR2BIN( UCHAR ucCharacter )
 {
     if( ( ucCharacter >= '0' ) && ( ucCharacter <= '9' ) )
     {
-        return ( UCHAR )( ucCharacter - '0' );
+        return ( UCHAR ) ( ucCharacter - '0' );
     }
     else if( ( ucCharacter >= 'A' ) && ( ucCharacter <= 'F' ) )
     {
-        return ( UCHAR )( ucCharacter - 'A' + 0x0A );
+        return ( UCHAR ) ( ucCharacter - 'A' + 0x0A );
     }
     else
     {
@@ -452,11 +452,11 @@ prvucMBBIN2CHAR( UCHAR ucByte )
 {
     if( ucByte <= 0x09 )
     {
-        return ( UCHAR )( '0' + ucByte );
+        return ( UCHAR ) ( '0' + ucByte );
     }
     else if( ( ucByte >= 0x0A ) && ( ucByte <= 0x0F ) )
     {
-        return ( UCHAR )( ucByte - 0x0A + 'A' );
+        return ( UCHAR ) ( ucByte - 0x0A + 'A' );
     }
     else
     {
@@ -468,7 +468,7 @@ prvucMBBIN2CHAR( UCHAR ucByte )
 
 
 static          UCHAR
-prvucMBLRC( UCHAR * pucFrame, USHORT usLen )
+prvucMBLRC( UCHAR *pucFrame, USHORT usLen )
 {
     UCHAR           ucLRC = 0;  /* LRC char initialized */
 

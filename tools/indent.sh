@@ -1,9 +1,6 @@
 #!/bin/sh
 
-MYDIR="/cygdrive/c/GnuWin32/bin/"
-
-$MYDIR/indent.exe --version
-$MYDIR/indent.exe \
+indent \
     --declaration-indentation16 \
     --procnames-start-lines \
     --blank-lines-after-procedures \
@@ -24,5 +21,3 @@ $MYDIR/indent.exe \
     --no-tabs \
     --line-length120 \
     $@
-   
-unix2dos $@

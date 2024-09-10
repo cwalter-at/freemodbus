@@ -23,12 +23,12 @@
 
 /*******************************************************************************
 * Function Name  : TIM_Init
-* Description    : This routine is used to Initialize the TIM peripheral 
+* Description    : This routine is used to Initialize the TIM peripheral
 *                  registers to their default values.
 * Input          : TIM Timer to Initialize(TIM0, TIM1, TIM2, TIM3).
 * Return         : None.
 *******************************************************************************/
-void TIM_Init( TIM_TypeDef *TIMx ) 
+void TIM_Init( TIM_TypeDef *TIMx )
 {
   TIMx->CR1 = 0x0000;
   TIMx->CR2 = 0x0000;
@@ -110,7 +110,7 @@ void TIM_OCMPModeConfig (  TIM_TypeDef  *TIMx,
 * Description    : This routine is used to configure the one pulse mode.
 * Input          : (1) TIM Timer(TIM0, TIM1, TIM2, TIM3).
 *                : (2) XpulseLength      : Length of the pulse.
-*                : (3) Level1  :Level during the pulse    (TIM_HIGH,TIM_LOW).    
+*                : (3) Level1  :Level during the pulse    (TIM_HIGH,TIM_LOW).
 *                : (4) Level2  :Level after the pulse     (TIM_HIGH,TIM_LOW).
 *                : (5) Activation Edge :High or Low on ICAP A (TIM_RISING,
 *                                                              TIM_FALLING).
@@ -144,9 +144,9 @@ void TIM_OPModeConfig ( TIM_TypeDef      *TIMx,
 * Function Name  : TIM_PWMOModeConfig
 * Description    : This routine is used to configure the PWM in output mode.
 * Input          : (1) TIM Timer(TIM0, TIM1, TIM2, TIM3).
-*                : (2) DutyCycle.   
+*                : (2) DutyCycle.
 *                : (3) Level 1 : During the Duty Cycle(TIM_HIGH,TIM_LOW).
-*                : (4) Full period 
+*                : (4) Full period
 *                : (5) Level 2 : After the pulse(TIM_HIGH,TIM_LOW).
 * Return         : None.
 *******************************************************************************/
@@ -210,7 +210,7 @@ PWMI_parameters TIM_PWMIValue (  TIM_TypeDef  *TIMx )
 
 /*******************************************************************************
 * Function Name  : TIM_CounterConfig
-* Description    : This routine is used to configure the Timer conuter. 
+* Description    : This routine is used to configure the Timer conuter.
 * Input          : (1) TIM Timer(TIM0, TIM1, TIM2, TIM3).
 *                : (2) Xoperation(TIM_START, TIM_STOP, TIM_CLEAR).
 * Return         : None.

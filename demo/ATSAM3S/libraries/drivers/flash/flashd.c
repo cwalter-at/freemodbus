@@ -28,9 +28,9 @@
  */
 
 /** \addtogroup flashd_module Flash Memory Interface
- * The flash driver manages the programming, erasing, locking and unlocking sequences 
+ * The flash driver manages the programming, erasing, locking and unlocking sequences
  * with dedicated commands.
- * 
+ *
  * To implement flash programing operation, the user has to follow these few steps :
  * <ul>
  * <li>Configue flash wait states to initializes the flash. </li>
@@ -43,13 +43,13 @@
  *
  * Writing 8-bit and 16-bit data is not allowed and may lead to unpredictable data corruption.
  * A check of this validity and padding for 32-bit alignment should be done in write algorithm.
- 
+
  * Lock/unlock range associated with the user address range is automatically translated.
  *
  * This security bit can be enabled through the command "Set General Purpose NVM Bit 0".
  *
- * A 128-bit factory programmed unique ID could be read to serve several purposes. 
- * 
+ * A 128-bit factory programmed unique ID could be read to serve several purposes.
+ *
  * The driver accesses the flash memory by calling the lowlevel module provided in \ref efc_module.
  * For more accurate information, please look at the EEFC section of the Datasheet.
  *
@@ -169,12 +169,12 @@ uint8_t FLASHD_Erase(uint32_t address)
     return error;
 }
 
-    
+
 static uint8_t pPageBuffer[AT91C_IFLASH_PAGE_SIZE];
 /**
  * \brief Writes a data buffer in the internal flash
  *
- * \note This function works in polling mode, and thus only returns when the 
+ * \note This function works in polling mode, and thus only returns when the
  * data has been effectively written.
  * \param address  Write address.
  * \param pBuffer  Data buffer.
@@ -195,9 +195,9 @@ uint8_t FLASHD_Write(
     uint8_t error;
 
     uint32_t sizeTmp;
-    uint32_t *pAlignedDestination; 
+    uint32_t *pAlignedDestination;
     uint32_t *pAlignedSource;
-    
+
     SANITY_CHECK(pBuffer);
     SANITY_CHECK(address >=AT91C_IFLASH);
     SANITY_CHECK((address + size) <= (AT91C_IFLASH + AT91C_IFLASH_SIZE));
@@ -222,17 +222,17 @@ uint8_t FLASHD_Write(
         memcpy(pPageBuffer + offset + writeSize, (void *) (pageAddress + offset + writeSize), padding);
 
         // Write page
-        // Writing 8-bit and 16-bit data is not allowed 
+        // Writing 8-bit and 16-bit data is not allowed
         // and may lead to unpredictable data corruption
         pAlignedDestination = (uint32_t*)pageAddress;
-        pAlignedSource = (uint32_t*)pPageBuffer;        
+        pAlignedSource = (uint32_t*)pPageBuffer;
         sizeTmp = AT91C_IFLASH_PAGE_SIZE;
         while (sizeTmp >= 4) {
 
             *pAlignedDestination++ = *pAlignedSource++;
             sizeTmp -= 4;
-        }        
-               
+        }
+
         // Send writing command
         error = EFC_PerformCommand(pEfc, EFC_FCMD_EWP, page);
         if (error) {
@@ -366,7 +366,7 @@ uint8_t FLASHD_IsLocked(uint32_t start, uint32_t end)
     uint32_t numLockedRegions = 0;
 
     SANITY_CHECK(end >= start);
-    SANITY_CHECK((start >=AT91C_IFLASH) && (end <= AT91C_IFLASH + AT91C_IFLASH_SIZE)); 
+    SANITY_CHECK((start >=AT91C_IFLASH) && (end <= AT91C_IFLASH + AT91C_IFLASH_SIZE));
 
     // Compute page numbers
     EFC_TranslateAddress(&pEfc, start, &startPage, 0);

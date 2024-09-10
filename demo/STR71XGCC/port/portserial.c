@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Port
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -50,7 +50,7 @@
 #define MB_IRQ_PRIORITY         ( 1 )
 
 /* ----------------------- Static functions ---------------------------------*/
-void            prvvMBSerialIRQHandler( void ) __attribute__ ( ( naked ) );
+void            prvvMBSerialIRQHandler( void ) __attribute__( ( naked ) );
 
 static BOOL     prvMBPortTXIsEnabled(  );
 
@@ -158,7 +158,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = MB_UART_DEV->RxBUFR;
     return TRUE;

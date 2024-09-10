@@ -5,8 +5,8 @@
 REQUIREMENTS
 ============
 
-This demo application  provides  a  port  for  the  Z8  Encore!®  family  of
- microcontrollers from Zilog[1]. The microcontroller used was the Z8F6422. 
+This demo application  provides  a  port  for  the  Z8  Encore!Â®  family  of
+ microcontrollers from Zilog[1]. The microcontroller used was the Z8F6422.
 
 It requires a wired serial port to a host  processor  and  a  Modbus  Master
 Software on the PC side to be  useful.   Demo  versions  of  Modbus  Masters
@@ -18,7 +18,7 @@ SOURCE
 If one wants to recompile the software, the ZDS  II  -  Z8  Encore!   4.10.1
 should be installed.  The ZDS II - Z8 Encore!  can be  found  at  [4].   The
 project is for  the  Z8F6422  microcontroller,  but  has  been  tested  with
-Z8F1622. 
+Z8F1622.
 
 * The ASCII mode was disabled so flash memory of Z8F1622 was enough.
 

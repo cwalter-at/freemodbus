@@ -42,7 +42,7 @@ define debug-sramtest
     wait
     if 0xAA55AA55 != *(unsigned long *)$i
       printf "  0x%08X = FAIL\n", $i
-    else 
+    else
       printf "  0x%08X = OK\n", $i
     end
     set $i = $i + 0x1000
@@ -59,7 +59,7 @@ define debug-sdramtest
     wait
     if 0xAA55AA55 != *(unsigned long *)$i
       printf "  0x%08X = FAIL\n", $i
-    else 
+    else
       printf "  0x%08X = OK\n", $i
     end
     set $i = $i + 0x10000

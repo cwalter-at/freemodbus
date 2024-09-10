@@ -68,8 +68,8 @@ typedef enum
 
 /*******************************************************************************
 * Function Name      : ADC12_Init
-* Description        : This routine is used to intialize the ADC12 registers to 
-*                      their reset values 
+* Description        : This routine is used to intialize the ADC12 registers to
+*                      their reset values
 * Input              : None.
 * Return             : None.
 *******************************************************************************/
@@ -123,7 +123,7 @@ void ADC12_PrescalerConfig(u32 Adc12_clk);
 
 /*******************************************************************************
 * Function Name      : ADC12_ChannelSelect
-* Description        : This routine is used to select the channel passed as 
+* Description        : This routine is used to select the channel passed as
 *                      parameter to be converted.
 * Input              : ADC12_Channel: channel selected to be converted it may be
 *                      ADC12_CHANNEL0 : select channel 0

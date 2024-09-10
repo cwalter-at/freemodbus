@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -44,7 +44,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * eEvent )
+xMBPortEventGet( eMBEventType *eEvent )
 {
     BOOL            xEventHappened = FALSE;
 
@@ -55,18 +55,18 @@ xMBPortEventGet( eMBEventType * eEvent )
         xEventHappened = TRUE;
     }
     else
-    {        
+    {
         /* Poll the serial device. The serial device timeouts if no
          * characters have been received within for t3.5 during an
          * active transmission or if nothing happens within a specified
          * amount of time. Both timeouts are configured from the timer
          * init functions.
          */
-        ( void )xMBPortSerialPoll(  );  
+        ( void )xMBPortSerialPoll(  );
 
         /* Check if any of the timers have expired. */
         vMBPortTimerPoll(  );
-     
+
     }
     return xEventHappened;
 }

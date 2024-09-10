@@ -1,24 +1,24 @@
- /*
-  * FreeModbus Libary: MCF5235 Demo Application
-  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
-  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
-  *
-  * This library is free software; you can redistribute it and/or
-  * modify it under the terms of the GNU Lesser General Public
-  * License as published by the Free Software Foundation; either
-  * version 2.1 of the License, or (at your option) any later version.
-  *
-  * This library is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  * Lesser General Public License for more details.
-  *
-  * You should have received a copy of the GNU Lesser General Public
-  * License along with this library; if not, write to the Free Software
-  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-  *
-  * File: $Id: vector.S,v 1.1 2006/05/14 21:59:16 wolti Exp $
-  */
+/*
+ * FreeModbus Library: MCF5235 Demo Application
+ * Copyright (C) 2006 Christian Walter <wolti@sil.at>
+ * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ * File: $Id: vector.S,v 1.1 2006/05/14 21:59:16 wolti Exp $
+ */
 
 
   .extern __stack
@@ -308,7 +308,7 @@ TrapDefault:
 IRQUart0:
   lea.l   (-16, %sp), %sp
   movem.l %d0-%d1/%a0-a1, (%sp)
-  jsr     prvvMBPortSerialISR; 
+  jsr     prvvMBPortSerialISR;
   movem.l (%sp),%d0-%d1/%a0-%a1
   lea.l   (16, %sp), %sp
   rte
@@ -316,7 +316,7 @@ IRQUart0:
 IRQPIT0:
   lea.l   (-16, %sp), %sp
   movem.l %d0-%d1/%a0-a1, (%sp)
-  jsr     prvvMBPortTimerISR; 
+  jsr     prvvMBPortTimerISR;
   movem.l (%sp),%d0-%d1/%a0-%a1
   lea.l   (16, %sp), %sp
   rte

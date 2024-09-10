@@ -32,7 +32,7 @@
  * peripheral.
  *
  * \usage
- * <ul>  
+ * <ul>
  * <li> Configures a TWI peripheral to operate in master mode, at the given
  * frequency (in Hz) using TWI_Configure(). </li>
  * <li> Sends a STOP condition on the TWI using TWI_Stop().</li>
@@ -56,7 +56,7 @@
  * TWI_GetStatus(). Get current status register of the given TWI peripheral, but
  * masking interrupt sources which are not currently enabled using
  * TWI_GetMaskedStatus().</li>
- * </ul>  
+ * </ul>
  * For more accurate information, please look at the TWI section of the
  * Datasheet.
  *
@@ -223,8 +223,8 @@ uint8_t TWI_ReadByte(Twi *pTwi)
 
 /**
  * \brief Sends a byte of data to one of the TWI slaves on the bus.
- * \note This function must be called once before TWI_StartWrite() with 
- * the first byte of data  to send, then it shall be called repeatedly 
+ * \note This function must be called once before TWI_StartWrite() with
+ * the first byte of data  to send, then it shall be called repeatedly
  * after that to send the remaining bytes.
  * \param pTwi  Pointer to an Twi instance.
  * \param byte  Byte to send.
@@ -332,7 +332,7 @@ void TWI_DisableIt(Twi *pTwi, uint32_t sources)
 
 /**
  * \brief Get the current status register of the given TWI peripheral.
- * \note This resets the internal value of the status register, so further 
+ * \note This resets the internal value of the status register, so further
  * read may yield different values.
  * \param pTwi  Pointer to an Twi instance.
  * \return  TWI status register.
@@ -347,7 +347,7 @@ uint32_t TWI_GetStatus(Twi *pTwi)
 /**
  * \brief Returns the current status register of the given TWI peripheral, but
  * masking interrupt sources which are not currently enabled.
- * \note This resets the internal value of the status register, so further 
+ * \note This resets the internal value of the status register, so further
  * read may yield different values.
  * \param pTwi  Pointer to an Twi instance.
  */

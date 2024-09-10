@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MCF5235 Port
+ * FreeModbus Library: MCF5235 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  * Parts of crt0.S Copyright (c) 1995, 1996, 1998 Cygnus Support
  *
@@ -31,10 +31,10 @@
 #include "mbport.h"
 
 /* ----------------------- Defines ----------------------------------------- */
-#define PIT_PRESCALER 				4096UL
+#define PIT_PRESCALER               4096UL
 #define PIT_TIMER_TICKS             ( FSYS_2 / PIT_PRESCALER )
-#define PIT_MODULUS_REGISTER(t50us)	\
-	( (t50us * PIT_TIMER_TICKS )/20000UL - 1UL)
+#define PIT_MODULUS_REGISTER(t50us) \
+    ( (t50us * PIT_TIMER_TICKS )/20000UL - 1UL)
 
 /* ----------------------- Static variables -------------------------------- */
 USHORT          usTimerModulus;
@@ -87,13 +87,15 @@ prvvMBPortTimerISRImpl( void )
 asm void
 prvvMBPortTimerISR( void )
 {
+    /* *INDENT-OFF* */
     move.w  #0x2700, sr;
     portSAVE_CONTEXT_IMPL(  );
-    jsr prvvMBPortTimerISRImpl;
+    jsr     prvvMBPortTimerISRImpl;
 
     cmp.l   #0, d0
     beq     exit
-     jsr vTaskSwitchContext;
+    jsr     vTaskSwitchContext;
 exit:
     portRESTORE_CONTEXT_IMPL(  );
+    /* *INDENT-ON* */
 }

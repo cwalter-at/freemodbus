@@ -56,7 +56,7 @@ typedef enum
 
 /*******************************************************************************
 * Function Name  : XTI_Init
-* Description    : This routine is used to initialize the XIT peripheral 
+* Description    : This routine is used to initialize the XIT peripheral
                    to reset state.
 * Input 1        : None
 * Output         : None

@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -31,12 +31,12 @@
 /// \unit
 ///
 /// !Purpose
-/// 
+///
 /// Firmware encryption using TDES hardware acceleration
-/// 
+///
 /// !Usage
-/// 
-/// -# tdes_hard_init: Initialize TDES hardware 
+///
+/// -# tdes_hard_init: Initialize TDES hardware
 /// -# tdes_hard_init_CBC: for the CBC mode
 /// -# tdes_hard_init_ECB: for the CTR mode
 /// -# tdes_hard_init_CTR: for the ECB mode

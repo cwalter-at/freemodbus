@@ -30,7 +30,7 @@ MB_RTU_SRC  = $(addprefix ../../modbus/rtu/, mbrtu.c mbcrc.c )
 MB_ASCII_SRC= $(addprefix ../../modbus/ascii/, mbascii.c )
 MB_FUNC_SRC = $(addprefix ../../modbus/functions/, mbfunccoils.c \
               mbfuncdiag.c mbfuncholding.c mbfuncinput.c mbfuncother.c \
-              mbfuncdisc.c mbutils.c) 
+              mbfuncdisc.c mbutils.c)
 PORT_SRC    = $(addprefix port/, portserial.c porttimer.c portevent.c )
 CSRC        = demo.c \
               $(MB_SRC) $(MB_RTU_SRC) $(MB_ASCII_SRC) $(MB_FUNC_SRC) \

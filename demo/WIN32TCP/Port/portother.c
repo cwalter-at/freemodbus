@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -44,8 +44,7 @@ prvMBTCPPortAddressToString( SOCKET xSocket, LPTSTR szAddr, USHORT usBufSize )
     {
         bOkay = FALSE;
     }
-    else if( WSAAddressToString( ( SOCKADDR * ) & xClientAddr, iAddrLen, NULL, szAddr,
-                                 &dwBufSize ) == SOCKET_ERROR )
+    else if( WSAAddressToString( ( SOCKADDR * ) & xClientAddr, iAddrLen, NULL, szAddr, &dwBufSize ) == SOCKET_ERROR )
     {
         bOkay = FALSE;
     }
@@ -57,7 +56,7 @@ prvMBTCPPortAddressToString( SOCKET xSocket, LPTSTR szAddr, USHORT usBufSize )
 }
 
 LPTSTR
-prvMBTCPPortFrameToString( UCHAR * pucFrame, USHORT usFrameLen )
+prvMBTCPPortFrameToString( UCHAR *pucFrame, USHORT usFrameLen )
 {
     LPTSTR          szBuf;
     int             i;
@@ -108,8 +107,7 @@ prvMBTCPPortFrameToString( UCHAR * pucFrame, USHORT usFrameLen )
             }
 
             /* Print the data. */
-            res = _sntprintf_s( &szBuf[szBufPos], szBufLength, _TRUNCATE, _T( "%02X" ),
-                                pucFrame[i] );
+            res = _sntprintf_s( &szBuf[szBufPos], szBufLength, _TRUNCATE, _T( "%02X" ), pucFrame[i] );
             if( res == -1 )
             {
                 break;
@@ -139,12 +137,9 @@ WsaError2String( DWORD dwError )
     LPTSTR          lpMsgBuf = NULL;
     DWORD           dwLength;
 
-    dwLength = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                              FORMAT_MESSAGE_FROM_SYSTEM,
-                              NULL,
-                              dwError,
-                              MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),
-                              ( LPTSTR ) & lpMsgBuf, 0, NULL );
+    dwLength =
+        FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwError,
+                       MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), ( LPTSTR ) & lpMsgBuf, 0, NULL );
     if( dwLength == 0 )
     {
         lpMsgBuf = _T( "internal error" );
@@ -157,11 +152,10 @@ WsaError2String( DWORD dwError )
 }
 
 void
-vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt, ... )
+vMBPortLog( eMBPortLogLevel eLevel, const TCHAR *szModule, const TCHAR *szFmt, ... )
 {
     va_list         args;
-    static const LPTSTR arszLevel2Str[] =
-        { _T( "DEBUG" ), _T( "INFO" ), _T( "WARN" ), _T( "ERROR" ) };
+    static const LPTSTR arszLevel2Str[] = { _T( "DEBUG" ), _T( "INFO" ), _T( "WARN" ), _T( "ERROR" ) };
 
     _ftprintf( stderr, _T( "%s: %s: " ), arszLevel2Str[eLevel], szModule );
 

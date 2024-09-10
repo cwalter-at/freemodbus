@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: MSP430 Port
+ * FreeModbus Library: MSP430 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -41,7 +41,7 @@
   { \
     DEBUG_PORT_DIR |= ( 1 << DEBUG_PIN_RX ) | ( 1 << DEBUG_PIN_TX ); \
     DEBUG_PORT_OUT &= ~( ( 1 << DEBUG_PIN_RX ) | ( 1 << DEBUG_PIN_TX ) ); \
-  } while( 0 ); 
+  } while( 0 );
 #define DEBUG_TOGGLE_RX( ) DEBUG_PORT_OUT ^= ( 1 << DEBUG_PIN_RX )
 #define DEBUG_TOGGLE_TX( ) DEBUG_PORT_OUT ^= ( 1 << DEBUG_PIN_TX )
 
@@ -134,7 +134,7 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 
         EXIT_CRITICAL_SECTION(  );
 
-        DEBUG_INIT( );
+        DEBUG_INIT(  );
     }
     return bInitialized;
 }
@@ -147,45 +147,48 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = RXBUF0;
     return TRUE;
 }
 
 #if defined (__GNUC__)
-interrupt (USART0RX_VECTOR) prvvMBSerialRXIRQHandler( void )
+interrupt( USART0RX_VECTOR ) prvvMBSerialRXIRQHandler( void )
 #else
 void
-prvvMBSerialRXIRQHandler( void ) __interrupt[USART0RX_VECTOR]
+prvvMBSerialRXIRQHandler( void )
+    __interrupt[USART0RX_VECTOR]
 #endif
 {
-    DEBUG_TOGGLE_RX( );
+    DEBUG_TOGGLE_RX(  );
     pxMBFrameCBByteReceived(  );
 }
 
 #if defined (__GNUC__)
-interrupt (USART0TX_VECTOR) prvvMBSerialTXIRQHandler( void )
+interrupt( USART0TX_VECTOR ) prvvMBSerialTXIRQHandler( void )
 #else
 void
-prvvMBSerialTXIRQHandler( void ) __interrupt[USART0TX_VECTOR]
+prvvMBSerialTXIRQHandler( void )
+    __interrupt[USART0TX_VECTOR]
 #endif
 {
-    DEBUG_TOGGLE_TX( );
+    DEBUG_TOGGLE_TX(  );
     pxMBFrameCBTransmitterEmpty(  );
 }
 
 void
 EnterCriticalSection( void )
 {
-    USHORT usOldSR;
+    USHORT          usOldSR;
+
     if( ucCriticalNesting == 0 )
     {
 #if defined (__GNUC__)
         usOldSR = READ_SR;
-        _DINT( );
+        _DINT(  );
 #else
-        usOldSR = _DINT( );
+        usOldSR = _DINT(  );
 #endif
         ucGIEWasEnabled = usOldSR & GIE ? TRUE : FALSE;
     }

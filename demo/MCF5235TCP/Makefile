@@ -15,7 +15,7 @@ SIZE	    = $(BASE)/m68k-elf-size
 INSIGHT     = $(BASE)/m68k-bdm-elf-insight
 BDMFLASH    = $(BASE)/bdmflash
 
-#CFLAGS	    = -MD -O2 -m528x -Wall 
+#CFLAGS	    = -MD -O2 -m528x -Wall
 MB_INC      = -Iport -I../../modbus/tcp -I../../modbus/include
 RTOS_INC    = -Ifreertos/include -I../Common/include
 LWIP_INC    = -Ilwip/src/include -Ilwip/src/include/ipv4 \
@@ -33,7 +33,7 @@ LDSCRIPT    = m5235-ram.ld
 LDFLAGS	    = -nostartfiles -m528x -Wl,--script=$(LDSCRIPT)
 
 TGT         = demo
-OTHER_CSRC  = 
+OTHER_CSRC  =
 OTHER_ASRC  = $(addprefix system/, crt0.S vector.S)
 MB_SRC      = $(addprefix ../../modbus/, mb.c tcp/mbtcp.c functions/mbfunccoils.c functions/mbfuncdiag.c functions/mbfuncholding.c functions/mbfuncinput.c functions/mbfuncother.c functions/mbfuncdisc.c functions/mbutils.c) \
               $(addprefix port/, porttcp.c portevent.c portother.c )
@@ -46,9 +46,9 @@ CSRC        = demo.c $(MB_SRC) \
               $(addprefix lwip/src/core/, tcp_out.c inet.c mem.c memp.c netif.c pbuf.c raw.c stats.c sys.c tcp.c tcp_in.c udp.c ipv4/ip.c ipv4/ip_addr.c ipv4/icmp.c ipv4/ip_frag.c) \
               $(addprefix lwip/src/api/, tcpip.c api_msg.c err.c api_lib.c ) \
               $(addprefix lwip/src/netif/, etharp.c ) \
-              $(addprefix lwip/contrib/port/FreeRTOS/MCF5235/, sys_arch.c netif/fec.c netif/nbuf.c) 
+              $(addprefix lwip/contrib/port/FreeRTOS/MCF5235/, sys_arch.c netif/fec.c netif/nbuf.c)
 
-ASRC        = $(addprefix system/, mcf5xxx.S ) 
+ASRC        = $(addprefix system/, mcf5xxx.S )
 OBJS        = $(CSRC:.c=.o) $(ASRC:.S=.o)
 NOLINK_OBJS = $(OTHER_CSRC:.c=.o) $(OTHER_ASRC:.S=.o)
 DEPS        = $(OBJS:.o=.d) $(NOLINK_OBJS:.o=.d)

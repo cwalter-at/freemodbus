@@ -1,5 +1,5 @@
 /*
-	FreeRTOS V4.1.0 - Copyright (C) 2003-2006 Richard Barry. 
+	FreeRTOS V4.1.0 - Copyright (C) 2003-2006 Richard Barry.
     Modification for STR71X/GCC -  Copyright (C) 2006 Christian Walter.
 
 	This file is part of the FreeRTOS distribution.
@@ -20,13 +20,13 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 	***************************************************************************
 */
@@ -56,14 +56,14 @@
 static void     prvSetupTimerInterrupt( void );
 
 /* Scheduler can only be started from ARM mode, so vPortISRStartFirstSTask()
- * is defined in portISR.c. 
+ * is defined in portISR.c.
  */
 extern void     vPortISRStartFirstTask( void );
 
 /* ----------------------- Start implementation -----------------------------*/
 
-/* 
- * Initialise the stack of a task to look exactly as if a call to 
+/*
+ * Initialise the stack of a task to look exactly as if a call to
  * portSAVE_CONTEXT had been called.
  */
 portSTACK_TYPE *
@@ -73,7 +73,7 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
 
     pxOriginalTOS = pxTopOfStack;
 
-    /* Setup the initial stack of the task.  The stack is set exactly as 
+    /* Setup the initial stack of the task.  The stack is set exactly as
        expected by the portRESTORE_CONTEXT() macro. */
 
     /* First on the stack is the return address - which in this case is the
@@ -129,7 +129,7 @@ pxPortInitialiseStack( portSTACK_TYPE * pxTopOfStack, pdTASK_CODE pxCode, void *
 
     pxTopOfStack--;
 
-    /* Some optimisation levels use the stack differently to others.  This 
+    /* Some optimisation levels use the stack differently to others.  This
        means the interrupt flags cannot always be stored on the stack and will
        instead be stored in a variable, which is then saved as part of the
        tasks context. */

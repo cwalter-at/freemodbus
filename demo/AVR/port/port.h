@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: AVR Port
+ * FreeModbus Library: AVR Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *   - Initial version + ATmega168 support
  * Modfications Copyright (C) 2006 Tran Minh Hoang:
@@ -32,9 +32,9 @@
 #include <avr/interrupt.h>
 
 /* ----------------------- Defines ------------------------------------------*/
-#define	INLINE                      inline
+#define INLINE                      inline
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
 #define ENTER_CRITICAL_SECTION( )   cli()
 #define EXIT_CRITICAL_SECTION( )    sei()

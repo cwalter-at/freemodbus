@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: lwIP Port
+ * FreeModbus Library: lwIP Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -43,8 +43,7 @@
 
 /* ----------------------- Prototypes ---------------------------------------*/
 void            vMBPortEventClose( void );
-void            vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule,
-                            const CHAR * szFmt, ... );
+void            vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... );
 
 /* ----------------------- Static variables ---------------------------------*/
 static struct tcp_pcb *pxPCBListen;
@@ -55,8 +54,7 @@ static USHORT   usTCPBufPos;
 
 /* ----------------------- Static functions ---------------------------------*/
 static err_t    prvxMBTCPPortAccept( void *pvArg, struct tcp_pcb *pxPCB, err_t xErr );
-static err_t    prvxMBTCPPortReceive( void *pvArg, struct tcp_pcb *pxPCB, struct pbuf *p,
-                                      err_t xErr );
+static err_t    prvxMBTCPPortReceive( void *pvArg, struct tcp_pcb *pxPCB, struct pbuf *p, err_t xErr );
 static void     prvvMBTCPPortError( void *pvArg, err_t xErr );
 
 /* ----------------------- Begin implementation -----------------------------*/
@@ -121,8 +119,7 @@ prvvMBPortReleaseClient( struct tcp_pcb *pxPCB )
         {
 #ifdef MB_TCP_DEBUG
             vMBPortLog( MB_LOG_DEBUG, "MBTCP-CLOSE", "Closed connection to %d.%d.%d.%d.\r\n",
-                        ip4_addr1( &( pxPCB->remote_ip ) ),
-                        ip4_addr2( &( pxPCB->remote_ip ) ),
+                        ip4_addr1( &( pxPCB->remote_ip ) ), ip4_addr2( &( pxPCB->remote_ip ) ),
                         ip4_addr3( &( pxPCB->remote_ip ) ), ip4_addr4( &( pxPCB->remote_ip ) ) );
 #endif
             pxPCBClient = NULL;
@@ -133,6 +130,7 @@ prvvMBPortReleaseClient( struct tcp_pcb *pxPCB )
         }
     }
 }
+
 void
 vMBTCPPortClose(  )
 {
@@ -184,8 +182,7 @@ prvxMBTCPPortAccept( void *pvArg, struct tcp_pcb *pxPCB, err_t xErr )
 
 #ifdef MB_TCP_DEBUG
         vMBPortLog( MB_LOG_DEBUG, "MBTCP-ACCEPT", "Accepted new client %d.%d.%d.%d\r\n",
-                    ip4_addr1( &( pxPCB->remote_ip ) ),
-                    ip4_addr2( &( pxPCB->remote_ip ) ),
+                    ip4_addr1( &( pxPCB->remote_ip ) ), ip4_addr2( &( pxPCB->remote_ip ) ),
                     ip4_addr3( &( pxPCB->remote_ip ) ), ip4_addr4( &( pxPCB->remote_ip ) ) );
 #endif
 
@@ -274,8 +271,7 @@ prvxMBTCPPortReceive( void *pvArg, struct tcp_pcb *pxPCB, struct pbuf *p, err_t 
             else
             {
 #ifdef MB_TCP_DEBUG
-                vMBPortLog( MB_LOG_DEBUG, "MBTCP-ERROR",
-                            "Received to many bytes! Droping client.\r\n" );
+                vMBPortLog( MB_LOG_DEBUG, "MBTCP-ERROR", "Received to many bytes! Droping client.\r\n" );
 #endif
                 /* This should not happen. We can't deal with such a client and
                  * drop the connection for security reasons.
@@ -289,7 +285,7 @@ prvxMBTCPPortReceive( void *pvArg, struct tcp_pcb *pxPCB, struct pbuf *p, err_t 
 }
 
 BOOL
-xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength )
+xMBTCPPortGetRequest( UCHAR **ppucMBTCPFrame, USHORT *usTCPLength )
 {
     *ppucMBTCPFrame = &aucTCPBuf[0];
     *usTCPLength = usTCPBufPos;
@@ -300,7 +296,7 @@ xMBTCPPortGetRequest( UCHAR ** ppucMBTCPFrame, USHORT * usTCPLength )
 }
 
 BOOL
-xMBTCPPortSendResponse( const UCHAR * pucMBTCPFrame, USHORT usTCPLength )
+xMBTCPPortSendResponse( const UCHAR *pucMBTCPFrame, USHORT usTCPLength )
 {
     BOOL            bFrameSent = FALSE;
 

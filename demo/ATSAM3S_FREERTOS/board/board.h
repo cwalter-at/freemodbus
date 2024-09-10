@@ -128,7 +128,7 @@
 // ADC
 //------------------------------------------------------------------------------
 
-/// Startup time max, return from Idle mode (in µs)
+/// Startup time max, return from Idle mode (in Âµs)
 #define ADC_STARTUP_TIME_MAX       15
 /// Track and hold Acquisition Time min (in ns)
 #define ADC_TRACK_HOLD_TIME_MIN  1200

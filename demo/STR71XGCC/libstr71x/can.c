@@ -50,7 +50,7 @@ void CAN_SetBitrate(u32 bitrate)
   CAN->BTR = CanTimings[bitrate];
 
   /* clear the Extended Baud Rate Prescaler */
-  CAN->BRPR = 0; 		
+  CAN->BRPR = 0;
 }
 
 /*******************************************************************************
@@ -120,8 +120,8 @@ static u32 CAN_GetFreeIF(void)
 
 /*******************************************************************************
 * Macro Name     : xxx_ID_MSK, xxx_ID_ARB
-* Description    : Form the Mask and Arbitration registers value to filter a 
-*                  range of identifiers or a fixed identifier, for standard 
+* Description    : Form the Mask and Arbitration registers value to filter a
+*                  range of identifiers or a fixed identifier, for standard
 *                  and extended IDs
 *******************************************************************************/
 #define RANGE_ID_MSK(range_start, range_end)	(~((range_end) - (range_start)))

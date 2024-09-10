@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Linux Port
+ * FreeModbus Library: Linux Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -50,13 +50,13 @@ vMBPortLogLevel( eMBPortLogLevel eNewLevelMax )
 }
 
 void
-vMBPortLogFile( FILE * fNewLogFile )
+vMBPortLogFile( FILE *fNewLogFile )
 {
     fLogFile = fNewLogFile;
 }
 
 void
-vMBPortLog( eMBPortLogLevel eLevel, const CHAR * szModule, const CHAR * szFmt, ... )
+vMBPortLog( eMBPortLogLevel eLevel, const CHAR *szModule, const CHAR *szFmt, ... )
 {
     CHAR            szBuf[512];
     int             i;

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Demo Application
+ * FreeModbus Library: Win32 Demo Application
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
  */
 
  /**********************************************************
- *	Linux TCP support.
- *	Based on Walter's project. 
- *	Modified by Steven Guo <gotop167@163.com>
+ *  Linux TCP support.
+ *  Based on Walter's project.
+ *  Modified by Steven Guo <gotop167@163.com>
  ***********************************************************/
 
 /* ----------------------- Standard C Libs includes --------------------------*/
@@ -63,14 +63,14 @@ static enum ThreadState
 static BOOL     bCreatePollingThread( void );
 static enum ThreadState eGetPollingThreadState( void );
 static void     eSetPollingThreadState( enum ThreadState eNewState );
-static void* pvPollingThread( void *pvParameter );
+static void    *pvPollingThread( void *pvParameter );
 
 /* ----------------------- Start implementation -----------------------------*/
 int
 main( int argc, char *argv[] )
 {
     int             iExitCode;
-    CHAR           cCh;
+    CHAR            cCh;
     BOOL            bDoExit;
 
     if( eMBTCPInit( MB_TCP_PORT_USE_DEFAULT ) != MB_ENOERR )
@@ -82,54 +82,54 @@ main( int argc, char *argv[] )
     {
         eSetPollingThreadState( STOPPED );
         /* CLI interface. */
-        printf(  "Type 'q' for quit or 'h' for help!\r\n"  );
+        printf( "Type 'q' for quit or 'h' for help!\r\n" );
         bDoExit = FALSE;
         do
         {
-            printf(  "> "  );
+            printf( "> " );
             cCh = getchar(  );
             switch ( cCh )
             {
-            case  'q' :
+            case 'q':
                 bDoExit = TRUE;
                 break;
-            case  'd' :
+            case 'd':
                 eSetPollingThreadState( SHUTDOWN );
                 break;
-            case  'e' :
+            case 'e':
                 if( bCreatePollingThread(  ) != TRUE )
                 {
-                    printf(  "Can't start protocol stack! Already running?\r\n"  );
+                    printf( "Can't start protocol stack! Already running?\r\n" );
                 }
                 break;
-            case  's' :
+            case 's':
                 switch ( eGetPollingThreadState(  ) )
                 {
                 case RUNNING:
-                    printf(  "Protocol stack is running.\r\n"  );
+                    printf( "Protocol stack is running.\r\n" );
                     break;
                 case STOPPED:
-                    printf(  "Protocol stack is stopped.\r\n"  );
+                    printf( "Protocol stack is stopped.\r\n" );
                     break;
                 case SHUTDOWN:
-                    printf(  "Protocol stack is shuting down.\r\n"  );
+                    printf( "Protocol stack is shuting down.\r\n" );
                     break;
                 }
                 break;
-            case  'h':
-                printf(  "FreeModbus demo application help:\r\n" );
-                printf(  "  'd' ... disable protocol stack.\r\n"  );
-                printf(  "  'e' ... enabled the protocol stack\r\n"  );
-                printf(  "  's' ... show current status\r\n"  );
-                printf(  "  'q' ... quit applicationr\r\n"  );
-                printf(  "  'h' ... this information\r\n"  );
-                printf(  "\r\n"  );
-                printf(  "Copyright 2007 Steven Guo <gotop167@163.com>\r\n"  );
+            case 'h':
+                printf( "FreeModbus demo application help:\r\n" );
+                printf( "  'd' ... disable protocol stack.\r\n" );
+                printf( "  'e' ... enabled the protocol stack\r\n" );
+                printf( "  's' ... show current status\r\n" );
+                printf( "  'q' ... quit applicationr\r\n" );
+                printf( "  'h' ... this information\r\n" );
+                printf( "\r\n" );
+                printf( "Copyright 2007 Steven Guo <gotop167@163.com>\r\n" );
                 break;
             default:
                 if( cCh != '\n' )
                 {
-                    printf(  "illegal command '%c'!\r\n" , cCh );
+                    printf( "illegal command '%c'!\r\n", cCh );
                 }
                 break;
             }
@@ -153,7 +153,8 @@ BOOL
 bCreatePollingThread( void )
 {
     BOOL            bResult;
-	pthread_t       xThread;
+    pthread_t       xThread;
+
     if( eGetPollingThreadState(  ) == STOPPED )
     {
         if( pthread_create( &xThread, NULL, pvPollingThread, NULL ) != 0 )
@@ -174,7 +175,8 @@ bCreatePollingThread( void )
     return bResult;
 }
 
-void* pvPollingThread( void *pvParameter )
+void           *
+pvPollingThread( void *pvParameter )
 {
     eSetPollingThreadState( RUNNING );
 
@@ -216,13 +218,12 @@ eSetPollingThreadState( enum ThreadState eNewState )
 }
 
 eMBErrorCode
-eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
+eMBRegInputCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     int             iRegIndex;
 
-    if( ( usAddress >= REG_INPUT_START )
-        && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
+    if( ( usAddress >= REG_INPUT_START ) && ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )
     {
         iRegIndex = ( int )( usAddress - usRegInputStart );
         while( usNRegs > 0 )
@@ -242,13 +243,12 @@ eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 }
 
 eMBErrorCode
-eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
+eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     int             iRegIndex;
 
-    if( ( usAddress >= REG_HOLDING_START ) &&
-        ( usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS ) )
+    if( ( usAddress >= REG_HOLDING_START ) && ( usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS ) )
     {
         iRegIndex = ( int )( usAddress - usRegHoldingStart );
         switch ( eMode )
@@ -285,14 +285,13 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 
 
 eMBErrorCode
-eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
+eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode )
 {
     return MB_ENOREG;
 }
 
 eMBErrorCode
-eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
+eMBRegDiscreteCB( UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete )
 {
     return MB_ENOREG;
 }
-

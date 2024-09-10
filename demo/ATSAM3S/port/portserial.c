@@ -1,8 +1,8 @@
 /*
- * FreeModbus Libary: Atmel AT91SAM3S Demo Application
+ * FreeModbus Library: Atmel AT91SAM3S Demo Application
  * Copyright (C) 2010 Christian Walter <cwalter@embedded-solutions.at>
  *
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -13,7 +13,7 @@
  *   documentation and/or other materials provided with the distribution.
  * 3. The name of the author may not be used to endorse or promote products
  *   derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * IF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -80,15 +80,14 @@ const struct xUSARTHWMappings_t
     uint32_t        xUSARTPinsCnt;
 
 
-} xUSARTHWMappings[] =
-{
+} xUSARTHWMappings[] = {
 #if USART0_ENABLED == 1
     {
-    USART0, ID_USART0, USART0_IRQn, NULL, NULL, &xUSART0Pins[0], PIO_LISTSIZE( xUSART0Pins )},
+     USART0, ID_USART0, USART0_IRQn, NULL, NULL, &xUSART0Pins[0], PIO_LISTSIZE( xUSART0Pins )},
 #endif
 #if USART1_ENABLED == 1
     {
-    USART1, ID_USART1, USART1_IRQn, &xUSART1NotREPin, &xUSART1DEPin, &xUSART1Pins[0], PIO_LISTSIZE( xUSART1Pins )},
+     USART1, ID_USART1, USART1_IRQn, &xUSART1NotREPin, &xUSART1DEPin, &xUSART1Pins[0], PIO_LISTSIZE( xUSART1Pins )},
 #endif
 };
 
@@ -135,6 +134,7 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 {
     BOOL            bStatus = FALSE;
     uint32_t        uiMode = US_MR_USART_MODE_NORMAL;
+
     if( ( ucPORT <= USART_IDX_LAST ) )
     {
         bStatus = TRUE;
@@ -169,9 +169,9 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         if( TRUE == bStatus )
         {
             ucUsedPort = ucPORT;
-            
+
             NVIC_DisableIRQ( xUSARTHWMappings[ucUsedPort].xUSARTIrq );
-    
+
             PIO_Configure( xUSARTHWMappings[ucUsedPort].xUSARTPins, xUSARTHWMappings[ucUsedPort].xUSARTPinsCnt );
             if( NULL != xUSARTHWMappings[ucUsedPort].USARTNotREPin )
             {
@@ -184,9 +184,9 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
             PMC_EnablePeripheral( xUSARTHWMappings[ucUsedPort].xUSARTID );
             USART_Configure( xUSARTHWMappings[ucUsedPort].pUsart, uiMode, ulBaudRate, BOARD_MCK );
 
-            NVIC_ClearPendingIRQ(  xUSARTHWMappings[ucUsedPort].xUSARTIrq );
-            NVIC_SetPriority(  xUSARTHWMappings[ucUsedPort].xUSARTIrq, 0xF << 4 );
-            NVIC_EnableIRQ(  xUSARTHWMappings[ucUsedPort].xUSARTIrq );                                   
+            NVIC_ClearPendingIRQ( xUSARTHWMappings[ucUsedPort].xUSARTIrq );
+            NVIC_SetPriority( xUSARTHWMappings[ucUsedPort].xUSARTIrq, 0xF << 4 );
+            NVIC_EnableIRQ( xUSARTHWMappings[ucUsedPort].xUSARTIrq );
         }
     }
 
@@ -209,7 +209,7 @@ vMBPortSerialClose( void )
             PIO_Clear( xUSARTHWMappings[ucUsedPort].USARTNotREPin );
         }
         ucUsedPort = USART_INVALID_PORT;
-    }            
+    }
 }
 
 BOOL
@@ -220,7 +220,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = USART1->US_RHR;
     return TRUE;
@@ -231,9 +231,11 @@ vUSARTHandler( void )
 {
     uint32_t        uiCSR;
     uint32_t        uiIMR;
+
     uiCSR = xUSARTHWMappings[ucUsedPort].pUsart->US_CSR;
     uiIMR = xUSARTHWMappings[ucUsedPort].pUsart->US_IMR;
     uint32_t        uiCSRMasked = uiCSR & uiIMR;
+
     if( uiCSRMasked & US_CSR_RXRDY )
     {
         pxMBFrameCBByteReceived(  );

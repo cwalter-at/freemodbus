@@ -163,7 +163,7 @@ INLINE FlagStatus ADC12_FlagStatus (ADC12_Flags flag)
 *******************************************************************************/
 INLINE u16 ADC12_ConversionValue( ADC12_Channels ADC12_Channel)
 {
-  // Clear the corespondent DA bit 
+  // Clear the corespondent DA bit
   ADC12->CSR &= ~(1<<(ADC12_Channel >> 4));
   // Only the 12 MSB of the DATAn Register are taken
   return *(u16 *)(ADC12_BASE + (ADC12_Channel >> 1)) >> 4;

@@ -19,20 +19,20 @@
 
 	A special exception to the GPL can be applied should you wish to distribute
 	a combined work that includes FreeRTOS, without being obliged to provide
-	the source code for any proprietary components.  See the licensing section 
+	the source code for any proprietary components.  See the licensing section
 	of http://www.FreeRTOS.org for full details of how and when the exception
 	can be applied.
 
 	***************************************************************************
-	See http://www.FreeRTOS.org for documentation, latest information, license 
-	and contact details.  Please ensure to read the configuration and relevant 
+	See http://www.FreeRTOS.org for documentation, latest information, license
+	and contact details.  Please ensure to read the configuration and relevant
 	port sections of the online documentation.
 	***************************************************************************
 */
 
 /*
 	Changes from V3.2.3
-	
+
 	+ Modified portENTER_SWITCHING_ISR() to allow use with GCC V4.0.1.
 */
 
@@ -40,7 +40,7 @@
 #define PORTMACRO_H
 
 /*-----------------------------------------------------------
- * Port specific definitions.  
+ * Port specific definitions.
  *
  * The settings in this file configure FreeRTOS correctly for the
  * given hardware and compiler.
@@ -65,13 +65,13 @@
 	typedef unsigned portLONG portTickType;
 	#define portMAX_DELAY ( portTickType ) 0xffffffff
 #endif
-/*-----------------------------------------------------------*/	
+/*-----------------------------------------------------------*/
 
 /* Architecture specifics. */
 #define portSTACK_GROWTH			( -1 )
-#define portTICK_RATE_MS			( ( portTickType ) 1000 / configTICK_RATE_HZ )		
+#define portTICK_RATE_MS			( ( portTickType ) 1000 / configTICK_RATE_HZ )
 #define portBYTE_ALIGNMENT			4
-/*-----------------------------------------------------------*/	
+/*-----------------------------------------------------------*/
 
 
 /* Scheduler utilities. */
@@ -187,7 +187,7 @@ extern volatile unsigned portLONG ulCriticalNesting;					\
 	/* priority that is ready to run. */								\
 	portRESTORE_CONTEXT();
 
-#define portYIELD()					asm volatile ( "SWI" );	
+#define portYIELD()					asm volatile ( "SWI" );
 /*-----------------------------------------------------------*/
 
 
@@ -195,8 +195,8 @@ extern volatile unsigned portLONG ulCriticalNesting;					\
 
 /*
  * The interrupt management utilities can only be called from ARM mode.  When
- * THUMB_INTERWORK is defined the utilities are defined as functions in 
- * portISR.c to ensure a switch to ARM mode.  When THUMB_INTERWORK is not 
+ * THUMB_INTERWORK is defined the utilities are defined as functions in
+ * portISR.c to ensure a switch to ARM mode.  When THUMB_INTERWORK is not
  * defined then the utilities are defined as macros here - as per other ports.
  */
 
@@ -207,7 +207,7 @@ extern volatile unsigned portLONG ulCriticalNesting;					\
 
 	#define portDISABLE_INTERRUPTS()	vPortDisableInterruptsFromThumb()
 	#define portENABLE_INTERRUPTS()		vPortEnableInterruptsFromThumb()
-	
+
 #else
 
 	#define portDISABLE_INTERRUPTS()																\
@@ -216,7 +216,7 @@ extern volatile unsigned portLONG ulCriticalNesting;					\
 		asm volatile ( "ORR		R0, R0, #0xC0" );	/* Disable IRQ, FIQ.						*/	\
 		asm volatile ( "MSR		CPSR, R0" );		/* Write back modified value.				*/	\
 		asm volatile ( "LDMIA	SP!, {R0}" )		/* Pop R0.									*/
-			
+
 	#define portENABLE_INTERRUPTS()																	\
 		asm volatile ( "STMDB	SP!, {R0}" );		/* Push R0.									*/	\
 		asm volatile ( "MRS		R0, CPSR" );		/* Get CPSR.								*/	\

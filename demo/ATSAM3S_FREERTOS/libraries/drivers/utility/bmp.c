@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -101,7 +101,7 @@ unsigned int BMP_GetFileSize(void *file)
 /// \param bmpRgb Type of BMP (YUV or RGB)
 /// \param nbByte_Pixels Number of byte per pixels
 //-----------------------------------------------------------------------------
-void WriteBMPheader(unsigned int* pAddressHeader, 
+void WriteBMPheader(unsigned int* pAddressHeader,
                     unsigned int  bmpHSize,
                     unsigned int  bmpVSize,
                     unsigned char bmpRgb,
@@ -237,13 +237,13 @@ unsigned char BMP_Decode(
                 r = image[((height - i - 1) * width + j) * 3 + 2];
                 g = image[((height - i - 1) * width + j) * 3 + 1];
                 b = image[((height - i - 1) * width + j) * 3];
-                
+
 #if defined(BOARD_LCD_RGB565)
                 // Interlacing
                 r = ((r << 1) & 0xF0) | ((g & 0x80) >> 4) | ((r & 0x80) >> 5);
                 g = (g << 1) & 0xF8;
                 b = b & 0xF8;
-                
+
                 buffer[(i * width + j) * 3] = b;
                 buffer[(i * width + j) * 3 + 1] = g;
                 buffer[(i * width + j) * 3 + 2] = r;
@@ -259,7 +259,7 @@ unsigned char BMP_Decode(
     else if (header->bits == 8) {
 
         // Decoding is ok
-        if (!buffer) return 0;    
+        if (!buffer) return 0;
 
         // Retrieve palette
         struct BMPPaletteEntry palette[256];

@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Z8Encore Port for Z8F6422
+ * FreeModbus Library: Z8Encore Port for Z8F6422
  * Copyright (C) 2007 Tiago Prado Lone <tiago@maxwellbohr.com.br>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,7 +44,7 @@ xMBPortEventPost( eMBEventType eEvent )
 }
 
 BOOL
-xMBPortEventGet( eMBEventType * eEvent )
+xMBPortEventGet( eMBEventType *eEvent )
 {
     BOOL            xEventHappened = FALSE;
 

@@ -51,8 +51,8 @@ static portTickType xCoRoutineTickCount = 0;
 #define corINITIAL_STATE	( 0 )
 
 /*
- * Place the co-routine represented by pxCRCB into the appropriate ready queue 
- * for the priority.  It is inserted at the end of the list.  
+ * Place the co-routine represented by pxCRCB into the appropriate ready queue
+ * for the priority.  It is inserted at the end of the list.
  *
  * This macro accesses the co-routine ready lists and therefore must not be
  * used from within an ISR.
@@ -64,7 +64,7 @@ static portTickType xCoRoutineTickCount = 0;
 		uxTopCoRoutineReadyPriority = pxCRCB->uxPriority;															\
 	}																												\
 	vListInsertEnd( ( xList * ) &( pxReadyCoRoutineLists[ pxCRCB->uxPriority ] ), &( pxCRCB->xGenericListItem ) );	\
-}	
+}
 
 /*
  * Utility to ready all the lists used by the scheduler.  This is called
@@ -81,11 +81,11 @@ static void prvInitialiseCoRoutineLists( void );
 static inline void prvCheckPendingReadyList( void );
 
 /*
- * Macro that looks at the list of co-routines that are currently delayed to 
+ * Macro that looks at the list of co-routines that are currently delayed to
  * see if any require waking.
  *
- * Co-routines are stored in the queue in the order of their wake time - 
- * meaning once one co-routine has been found whose timer has not expired 
+ * Co-routines are stored in the queue in the order of their wake time -
+ * meaning once one co-routine has been found whose timer has not expired
  * we need not look any further down the list.
  */
 static inline void prvCheckDelayedList( void );
@@ -125,15 +125,15 @@ corCRCB *pxCoRoutine;
 		vListInitialiseItem( &( pxCoRoutine->xGenericListItem ) );
 		vListInitialiseItem( &( pxCoRoutine->xEventListItem ) );
 
-		/* Set the co-routine control block as a link back from the xListItem.  
-		This is so we can get back to the containing CRCB from a generic item 
+		/* Set the co-routine control block as a link back from the xListItem.
+		This is so we can get back to the containing CRCB from a generic item
 		in a list. */
 		listSET_LIST_ITEM_OWNER( &( pxCoRoutine->xGenericListItem ), pxCoRoutine );
 		listSET_LIST_ITEM_OWNER( &( pxCoRoutine->xEventListItem ), pxCoRoutine );
-	
+
 		/* Event lists are always in priority order. */
 		listSET_LIST_ITEM_VALUE( &( pxCoRoutine->xEventListItem ), configMAX_PRIORITIES - ( portTickType ) uxPriority );
-		
+
 		/* Now the co-routine has been initialised it can be added to the ready
 		list at the correct priority. */
 		prvAddCoRoutineToReadyQueue( pxCoRoutine );
@@ -141,11 +141,11 @@ corCRCB *pxCoRoutine;
 		xReturn = pdPASS;
 	}
 	else
-	{		
+	{
 		xReturn = errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
 	}
-	
-	return xReturn;	
+
+	return xReturn;
 }
 /*-----------------------------------------------------------*/
 
@@ -190,7 +190,7 @@ portTickType xTimeToWake;
 static inline void prvCheckPendingReadyList( void )
 {
 	/* Are there any co-routines waiting to get moved to the ready list?  These
-	are co-routines that have been readied by an ISR.  The ISR cannot access 
+	are co-routines that have been readied by an ISR.  The ISR cannot access
 	the	ready lists itself. */
 	while( !listLIST_IS_EMPTY( &xPendingReadyList ) )
 	{
@@ -198,14 +198,14 @@ static inline void prvCheckPendingReadyList( void )
 
 		/* The pending ready list can be accessed by an ISR. */
 		portDISABLE_INTERRUPTS();
-		{	
-			pxUnblockedCRCB = ( corCRCB * ) listGET_OWNER_OF_HEAD_ENTRY( (&xPendingReadyList) );			
+		{
+			pxUnblockedCRCB = ( corCRCB * ) listGET_OWNER_OF_HEAD_ENTRY( (&xPendingReadyList) );
 			vListRemove( &( pxUnblockedCRCB->xEventListItem ) );
 		}
 		portENABLE_INTERRUPTS();
 
 		vListRemove( &( pxUnblockedCRCB->xGenericListItem ) );
-		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );	
+		prvAddCoRoutineToReadyQueue( pxUnblockedCRCB );
 	}
 }
 /*-----------------------------------------------------------*/
@@ -235,32 +235,32 @@ corCRCB *pxCRCB;
 
 		/* See if this tick has made a timeout expire. */
 		while( ( pxCRCB = ( corCRCB * ) listGET_OWNER_OF_HEAD_ENTRY( pxDelayedCoRoutineList ) ) != NULL )
-		{	
-			if( xCoRoutineTickCount < listGET_LIST_ITEM_VALUE( &( pxCRCB->xGenericListItem ) ) )				
-			{			
-				/* Timeout not yet expired. */																			
-				break;																				
-			}																						
+		{
+			if( xCoRoutineTickCount < listGET_LIST_ITEM_VALUE( &( pxCRCB->xGenericListItem ) ) )
+			{
+				/* Timeout not yet expired. */
+				break;
+			}
 
 			portDISABLE_INTERRUPTS();
 			{
-				/* The event could have occurred just before this critical 
+				/* The event could have occurred just before this critical
 				section.  If this is the case then the generic list item will
-				have been moved to the pending ready list and the following 
+				have been moved to the pending ready list and the following
 				line is still valid.  Also the pvContainer parameter will have
 				been set to NULL so the following lines are also valid. */
-				vListRemove( &( pxCRCB->xGenericListItem ) );											
+				vListRemove( &( pxCRCB->xGenericListItem ) );
 
-				/* Is the co-routine waiting on an event also? */												
-				if( pxCRCB->xEventListItem.pvContainer )													
-				{															
-					vListRemove( &( pxCRCB->xEventListItem ) );											
+				/* Is the co-routine waiting on an event also? */
+				if( pxCRCB->xEventListItem.pvContainer )
+				{
+					vListRemove( &( pxCRCB->xEventListItem ) );
 				}
 			}
 			portENABLE_INTERRUPTS();
 
-			prvAddCoRoutineToReadyQueue( pxCRCB );													
-		}																									
+			prvAddCoRoutineToReadyQueue( pxCRCB );
+		}
 	}
 
 	xLastTickCount = xCoRoutineTickCount;
@@ -310,7 +310,7 @@ unsigned portBASE_TYPE uxPriority;
 	vListInitialise( ( xList * ) &xDelayedCoRoutineList2 );
 	vListInitialise( ( xList * ) &xPendingReadyList );
 
-	/* Start with pxDelayedCoRoutineList using list1 and the 
+	/* Start with pxDelayedCoRoutineList using list1 and the
 	pxOverflowDelayedCoRoutineList using list2. */
 	pxDelayedCoRoutineList = &xDelayedCoRoutineList1;
 	pxOverflowDelayedCoRoutineList = &xDelayedCoRoutineList2;

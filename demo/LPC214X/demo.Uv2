@@ -6,23 +6,23 @@ Target (Demo), 0x0005 // Tools: ''
 Group (Demo)
 Group (FreeModbus)
 
-File 1,1,<.\demo.c><demo.c> 0x0 
-File 1,1,<.\port\porttimer.c><porttimer.c> 0x0 
-File 1,1,<.\port\port.c><port.c> 0x0 
-File 1,1,<.\port\portevent.c><portevent.c> 0x0 
-File 1,1,<.\port\portserial.c><portserial.c> 0x0 
-File 1,2,<.\Startup.s><Startup.s> 0x0 
-File 2,1,<..\..\modbus\mb.c><mb.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbutils.c><mbutils.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfunccoils.c><mbfunccoils.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfuncdiag.c><mbfuncdiag.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfuncdisc.c><mbfuncdisc.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfuncholding.c><mbfuncholding.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfuncinput.c><mbfuncinput.c> 0x0 
-File 2,1,<..\..\modbus\functions\mbfuncother.c><mbfuncother.c> 0x0 
-File 2,1,<..\..\modbus\rtu\mbrtu.c><mbrtu.c> 0x0 
-File 2,1,<..\..\modbus\rtu\mbcrc.c><mbcrc.c> 0x0 
-File 2,1,<..\..\modbus\ascii\mbascii.c><mbascii.c> 0x0 
+File 1,1,<.\demo.c><demo.c> 0x0
+File 1,1,<.\port\porttimer.c><porttimer.c> 0x0
+File 1,1,<.\port\port.c><port.c> 0x0
+File 1,1,<.\port\portevent.c><portevent.c> 0x0
+File 1,1,<.\port\portserial.c><portserial.c> 0x0
+File 1,2,<.\Startup.s><Startup.s> 0x0
+File 2,1,<..\..\modbus\mb.c><mb.c> 0x0
+File 2,1,<..\..\modbus\functions\mbutils.c><mbutils.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfunccoils.c><mbfunccoils.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfuncdiag.c><mbfuncdiag.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfuncdisc.c><mbfuncdisc.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfuncholding.c><mbfuncholding.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfuncinput.c><mbfuncinput.c> 0x0
+File 2,1,<..\..\modbus\functions\mbfuncother.c><mbfuncother.c> 0x0
+File 2,1,<..\..\modbus\rtu\mbrtu.c><mbrtu.c> 0x0
+File 2,1,<..\..\modbus\rtu\mbcrc.c><mbcrc.c> 0x0
+File 2,1,<..\..\modbus\ascii\mbascii.c><mbascii.c> 0x0
 
 
 Options 1,0,0  // Target 'Demo'

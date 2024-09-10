@@ -1,4 +1,4 @@
-/* 
+/*
  * MODBUS Slave Library: A portable MODBUS slave for MODBUS ASCII/RTU/TCP.
  * Copyright (c) 2007 Christian Walter <wolti@sil.at>
  * All rights reserved.

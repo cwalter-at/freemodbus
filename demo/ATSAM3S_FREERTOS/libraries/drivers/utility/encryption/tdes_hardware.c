@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -91,7 +91,7 @@ static inline void ASCII2Hex(const unsigned char * ascii, unsigned char * binary
 /// Initializes the TDES peripheral
 //------------------------------------------------------------------------------
 #ifdef ONLY_ONE_ENCRYPTION
-void tdes_hard_init(void) 
+void tdes_hard_init(void)
 {
     unsigned char key[ENCRYPTION_KEY_LENGTH];
 
@@ -107,7 +107,7 @@ void tdes_hard_init(void)
 #else
 #error AES/TDES undefined
 #endif
-  
+
     // Load mode
 #if (ENCRYPTION_KEY_LENGTH == 24)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | TDES_MODE
@@ -116,7 +116,7 @@ void tdes_hard_init(void)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | TDES_MODE | AT91C_TDES_KEYMOD
                              | AT91C_TDES_TDESMOD     | TDES_CIPHER;
 #endif
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)ENCRYPTION_KEY, key, ENCRYPTION_KEY_LENGTH);
 
@@ -166,7 +166,7 @@ void tdes_hard_init_CBC(void)
 #else
 #error AES undefined
 #endif
-  
+
     // Load mode
 #if (TDES_ENCRYPTION_KEY_LENGTH == 24)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_CBC
@@ -175,7 +175,7 @@ void tdes_hard_init_CBC(void)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_CBC | AT91C_TDES_KEYMOD
                              | AT91C_TDES_TDESMOD     | 0;
 #endif
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)TDES_ENCRYPTION_KEY, key, TDES_ENCRYPTION_KEY_LENGTH);
 
@@ -201,7 +201,7 @@ void tdes_hard_init_CBC(void)
 /// Initializes the DES peripheral for CTR mode
 //------------------------------------------------------------------------------
 #ifndef ONLY_ONE_ENCRYPTION
-void tdes_hard_init_CTR(void) 
+void tdes_hard_init_CTR(void)
 {
     unsigned char key[TDES_ENCRYPTION_KEY_LENGTH];
 
@@ -217,7 +217,7 @@ void tdes_hard_init_CTR(void)
 #else
 #error AES undefined
 #endif
-  
+
     // Load mode
 #if (TDES_ENCRYPTION_KEY_LENGTH == 24)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_ECB
@@ -226,7 +226,7 @@ void tdes_hard_init_CTR(void)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_ECB | AT91C_TDES_KEYMOD
                              | AT91C_TDES_TDESMOD     | AT91C_TDES_CIPHER;
 #endif
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)TDES_ENCRYPTION_KEY, key, TDES_ENCRYPTION_KEY_LENGTH);
 
@@ -265,7 +265,7 @@ void tdes_hard_init_ECB(void)
 #else
 #error AES undefined
 #endif
-  
+
     // Load mode
 #if (TDES_ENCRYPTION_KEY_LENGTH == 24)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_ECB
@@ -274,7 +274,7 @@ void tdes_hard_init_ECB(void)
     AT91C_BASE_TDES->TDES_MR = AT91C_TDES_SMOD_MANUAL | AT91C_TDES_OPMOD_ECB | AT91C_TDES_KEYMOD
                              | AT91C_TDES_TDESMOD     | 0;
 #endif
-  
+
     // Convert and load key
     ASCII2Hex((unsigned char*)TDES_ENCRYPTION_KEY, key, TDES_ENCRYPTION_KEY_LENGTH);
 
@@ -293,7 +293,7 @@ void tdes_hard_init_ECB(void)
 //------------------------------------------------------------------------------
 /// Cleans up the DES peripheral
 //------------------------------------------------------------------------------
-void tdes_hard_cleanup(void) 
+void tdes_hard_cleanup(void)
 {
     TRACE_DEBUG("TDES/HARD: Cleaning up ...\n\r");
     AT91C_BASE_TDES->TDES_MR = 0;
@@ -341,17 +341,17 @@ int tdes_hard_decrypt(const unsigned char * cipherText,
 
         l += ENCRYPTION_BLOCK_LENGTH;
     }
-  
+
 #elif defined(ENCRYPTION_CTR)
     unsigned int bytes;
     unsigned char block[ENCRYPTION_BLOCK_LENGTH];
     unsigned int e;
     unsigned int i;
     int k;
-  
+
     // Decrypt
     for (e=0; e < length;) {
-   
+
         // Load counter and encrypt it
         AT91C_BASE_TDES->TDES_IDATAxR[0] = ((int *) CTR)[0];
         AT91C_BASE_TDES->TDES_IDATAxR[1] = ((int *) CTR)[1];
@@ -369,7 +369,7 @@ int tdes_hard_decrypt(const unsigned char * cipherText,
         else {
             bytes = ENCRYPTION_BLOCK_LENGTH;
         }
-        
+
         for (i=0; i < bytes; i++) {
             plainText[e+i] = cipherText[e+i] ^ ((char *) block)[i];
         }
@@ -383,7 +383,7 @@ int tdes_hard_decrypt(const unsigned char * cipherText,
         e += bytes;
     }
 #endif // ENCRYPTION_CTR
-  
+
     return 1;
 }
 #endif
@@ -440,10 +440,10 @@ int tdes_hard_decrypt_CTR(const unsigned char * cipherText,
     int k;
 
     TRACE_DEBUG("tdes_hard_decrypt_CTR\n\r");
-  
+
     // Decrypt
     for (e=0; e < length;) {
-   
+
         // Load counter and encrypt it
         AT91C_BASE_TDES->TDES_IDATAxR[0] = ((int *) CTR)[0];
         AT91C_BASE_TDES->TDES_IDATAxR[1] = ((int *) CTR)[1];
@@ -461,7 +461,7 @@ int tdes_hard_decrypt_CTR(const unsigned char * cipherText,
         else {
             bytes = ENCRYPTION_BLOCK_LENGTH;
         }
-        
+
         for (i=0; i < bytes; i++) {
             plainText[e+i] = cipherText[e+i] ^ ((char *) block)[i];
         }
@@ -474,7 +474,7 @@ int tdes_hard_decrypt_CTR(const unsigned char * cipherText,
         }
         e += bytes;
     }
-  
+
     return 1;
 }
 #endif

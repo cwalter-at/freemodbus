@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -42,4 +42,4 @@
 #if !defined(NOTRACE) && (DYN_TRACES == 1)
     unsigned int traceLevel = TRACE_LEVEL;
 #endif
-  
+

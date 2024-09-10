@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: Win32 Port
+ * FreeModbus Library: Win32 Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -37,12 +37,9 @@ Error2String( DWORD dwError )
     LPTSTR          lpMsgBuf = NULL;
     DWORD           dwLength;
 
-    dwLength = FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                              FORMAT_MESSAGE_FROM_SYSTEM,
-                              NULL,
-                              dwError,
-                              MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),
-                              ( LPTSTR ) & lpMsgBuf, 0, NULL );
+    dwLength =
+        FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwError,
+                       MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), ( LPTSTR ) & lpMsgBuf, 0, NULL );
     if( dwLength == 0 )
     {
         lpMsgBuf = _T( "internal error" );
@@ -55,21 +52,19 @@ Error2String( DWORD dwError )
 }
 
 void
-vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt, ... )
+vMBPortLog( eMBPortLogLevel eLevel, const TCHAR *szModule, const TCHAR *szFmt, ... )
 {
-    TCHAR    szBuf[512];
-    int      i;
+    TCHAR           szBuf[512];
+    int             i;
     va_list         args;
-    static const LPTSTR arszLevel2Str[] =
-        { _T( "DEBUG" ), _T( "INFO" ), _T( "WARN" ), _T( "ERROR" ) };
+    static const LPTSTR arszLevel2Str[] = { _T( "DEBUG" ), _T( "INFO" ), _T( "WARN" ), _T( "ERROR" ) };
 
-    i = _sntprintf_s( szBuf, _countof(szBuf) , _TRUNCATE, _T( "%s: %s: " ), 
-                     arszLevel2Str[eLevel], szModule );
+    i = _sntprintf_s( szBuf, _countof( szBuf ), _TRUNCATE, _T( "%s: %s: " ), arszLevel2Str[eLevel], szModule );
 
     if( i != 0 )
     {
         va_start( args, szFmt );
-        i += _vsntprintf_s( &szBuf[i], _countof(szBuf) - i, _TRUNCATE, szFmt, args );
+        i += _vsntprintf_s( &szBuf[i], _countof( szBuf ) - i, _TRUNCATE, szFmt, args );
         va_end( args );
     }
 
@@ -84,5 +79,5 @@ vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt,
             _fputts( szBuf, stderr );
         }
     }
-    
+
 }

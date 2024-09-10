@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -65,7 +65,7 @@ unsigned char WAV_IsValid(const WavHeader *header)
 /// size).
 //------------------------------------------------------------------------------
 void WAV_DisplayInfo(const WavHeader *header)
-{   
+{
     printf( "Wave file header information\n\r");
     printf( "--------------------------------\n\r");
     printf( "  - Chunk ID        = 0x%08X\n\r", header->chunkID);

@@ -8,18 +8,18 @@
 /***********************************************************************/
 
 
-/* 
-//*** <<< Use Configuration Wizard in Context Menu >>> *** 
+/*
+//*** <<< Use Configuration Wizard in Context Menu >>> ***
 */
 
 
 /*
- *  The STARTUP.S code is executed after CPU Reset. This file may be 
- *  translated with the following SET symbols. In uVision these SET 
+ *  The STARTUP.S code is executed after CPU Reset. This file may be
+ *  translated with the following SET symbols. In uVision these SET
  *  symbols are entered under Options - ASM - Set.
  *
- *  REMAP: when set the startup code initializes the register MEMMAP 
- *  which overwrites the settings of the CPU configuration pins. The 
+ *  REMAP: when set the startup code initializes the register MEMMAP
+ *  which overwrites the settings of the CPU configuration pins. The
  *  startup and interrupt vectors are remapped from:
  *     0x00000000  default setting (not remapped)
  *     0x80000000  when EXTMEM_MODE is used
@@ -67,10 +67,10 @@
         USR_Stack_Size  EQU     0x00000400
 
 AREA   STACK, DATA, READWRITE, ALIGN=2
-        DS   (USR_Stack_Size+3)&~3  ; Stack for User/System Mode 
+        DS   (USR_Stack_Size+3)&~3  ; Stack for User/System Mode
         DS   (SVC_Stack_Size+3)&~3  ; Stack for Supervisor Mode
         DS   (IRQ_Stack_Size+3)&~3  ; Stack for Interrupt Mode
-        DS   (FIQ_Stack_Size+3)&~3  ; Stack for Fast Interrupt Mode 
+        DS   (FIQ_Stack_Size+3)&~3  ; Stack for Fast Interrupt Mode
         DS   (ABT_Stack_Size+3)&~3  ; Stack for Abort Mode
         DS   (UND_Stack_Size+3)&~3  ; Stack for Undefined Mode
 Top_Stack:
@@ -231,7 +231,7 @@ Top_Stack:
 
 // External Memory Pins definitions
         PINSEL2         EQU     0xE002C014  /* PINSEL2 Address */
-        PINSEL2_Val     EQU     0x0E6149E4  /* CS0..3, OE, WE, BLS0..3, 
+        PINSEL2_Val     EQU     0x0E6149E4  /* CS0..3, OE, WE, BLS0..3,
                                                D0..31, A2..23, JTAG Pins */
 
 
@@ -252,7 +252,7 @@ AREA   STARTUPCODE, CODE, AT CODE_BASE   // READONLY, ALIGN=4
 
 __startup       PROC    CODE32
 
-// Pre-defined interrupt handlers that may be directly 
+// Pre-defined interrupt handlers that may be directly
 // overwritten by C interrupt functions
 EXTERN CODE32 (Undef_Handler?A)
 EXTERN CODE32 (SWI_Handler?A)
@@ -265,7 +265,7 @@ EXTERN CODE32 (FIQ_Handler?A)
 // Mapped to Address 0.
 // Absolute addressing mode must be used.
 
-Vectors:        LDR     PC,Reset_Addr         
+Vectors:        LDR     PC,Reset_Addr
                 LDR     PC,Undef_Addr
                 LDR     PC,SWI_Addr
                 LDR     PC,PAbt_Addr
@@ -287,7 +287,7 @@ FIQ_Addr:       DD      FIQ_Handler?A
 
 // Reset Handler
 
-Reset_Handler:  
+Reset_Handler:
 
 
 $IF (EXTMEM_MODE)
@@ -337,7 +337,7 @@ IF (PLL_SETUP != 0)
 
 // Configure and Enable PLL
                 MOV     R3, #PLLCFG_Val
-                STR     R3, [R0, #PLLCFG_OFS] 
+                STR     R3, [R0, #PLLCFG_OFS]
                 MOV     R3, #PLLCON_PLLE
                 STR     R3, [R0, #PLLCON_OFS]
                 STR     R1, [R0, #PLLFEED_OFS]
@@ -359,9 +359,9 @@ ENDIF
 IF (MAM_SETUP != 0)
                 LDR     R0, =MAM_BASE
                 MOV     R1, #MAMTIM_Val
-                STR     R1, [R0, #MAMTIM_OFS] 
+                STR     R1, [R0, #MAMTIM_OFS]
                 MOV     R1, #MAMCR_Val
-                STR     R1, [R0, #MAMCR_OFS] 
+                STR     R1, [R0, #MAMCR_OFS]
 ENDIF
 
 
@@ -370,13 +370,13 @@ ENDIF
 
 $IF (REMAP)
                 LDR     R0, =MEMMAP
-$IF     (EXTMEM_MODE)                
+$IF     (EXTMEM_MODE)
                 MOV     R1, #3
-$ELSEIF (RAM_MODE)                
+$ELSEIF (RAM_MODE)
                 MOV     R1, #2
 $ELSE
                 MOV     R1, #1
-$ENDIF                
+$ENDIF
                 STR     R1, [R0]
 $ENDIF
 

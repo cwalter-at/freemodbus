@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: STR71x Port
+ * FreeModbus Library: STR71x Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -50,7 +50,7 @@
 #define MB_IRQ_PRIORITY         ( 1 )
 
 /* ----------------------- Static functions ---------------------------------*/
-void            prvvMBSerialIRQHandler( void ) __attribute__ ( ( naked ) );
+void            prvvMBSerialIRQHandler( void ) __attribute__( ( naked ) );
 
 static inline BOOL prvMBPortTXIsEnabled(  );
 
@@ -65,46 +65,46 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     UARTParity_TypeDef eUARTParity;
     UARTMode_TypeDef eUARTMode;
 
-    (void)ucPort;
+    ( void )ucPort;
 
     switch ( eParity )
     {
-        case MB_PAR_EVEN:
-            eUARTParity = UART_EVEN_PARITY;
-            break;
-        case MB_PAR_ODD:
-            eUARTParity = UART_ODD_PARITY;
-            break;
-        case MB_PAR_NONE:
-            eUARTParity = UART_NO_PARITY;
-            break;
+    case MB_PAR_EVEN:
+        eUARTParity = UART_EVEN_PARITY;
+        break;
+    case MB_PAR_ODD:
+        eUARTParity = UART_ODD_PARITY;
+        break;
+    case MB_PAR_NONE:
+        eUARTParity = UART_NO_PARITY;
+        break;
     }
 
     switch ( ucDataBits )
     {
-        case 7:
-            if( eParity == MB_PAR_NONE )
-            {
-                /* not supported by our hardware. */
-                xResult = FALSE;
-            }
-            else
-            {
-                eUARTMode = UARTM_7D_P;
-            }
-            break;
-        case 8:
-            if( eParity == MB_PAR_NONE )
-            {
-                eUARTMode = UARTM_8D;
-            }
-            else
-            {
-                eUARTMode = UARTM_8D_P;
-            }
-            break;
-        default:
+    case 7:
+        if( eParity == MB_PAR_NONE )
+        {
+            /* not supported by our hardware. */
             xResult = FALSE;
+        }
+        else
+        {
+            eUARTMode = UARTM_7D_P;
+        }
+        break;
+    case 8:
+        if( eParity == MB_PAR_NONE )
+        {
+            eUARTMode = UARTM_8D;
+        }
+        else
+        {
+            eUARTMode = UARTM_8D_P;
+        }
+        break;
+    default:
+        xResult = FALSE;
     }
 
     if( xResult != FALSE )
@@ -119,8 +119,7 @@ xMBPortSerialInit( UCHAR ucPort, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
         UART_FifoReset( MB_UART_DEV, UART_RxFIFO );
         UART_FifoReset( MB_UART_DEV, UART_TxFIFO );
         UART_LoopBackConfig( MB_UART_DEV, DISABLE );
-        UART_Config( MB_UART_DEV, ulBaudRate, eUARTParity, UART_1_StopBits,
-                     eUARTMode );
+        UART_Config( MB_UART_DEV, ulBaudRate, eUARTParity, UART_1_StopBits, eUARTMode );
         UART_RxConfig( UART0, ENABLE );
         vMBPortSerialEnable( FALSE, FALSE );
 
@@ -153,7 +152,7 @@ xMBPortSerialPutByte( CHAR ucByte )
 }
 
 BOOL
-xMBPortSerialGetByte( CHAR * pucByte )
+xMBPortSerialGetByte( CHAR *pucByte )
 {
     *pucByte = MB_UART_DEV->RxBUFR;
     return TRUE;
@@ -195,6 +194,5 @@ prvvMBSerialIRQHandler( void )
     /* End the interrupt in the EIC. */
     EIC->IPR |= 1 << EIC_CurrentIRQChannelValue(  );
 
-    portEXIT_SWITCHING_ISR( ( xTaskWokenReceive
-                              || xTaskWokenTransmit ) ? pdTRUE : pdFALSE );
+    portEXIT_SWITCHING_ISR( ( xTaskWokenReceive || xTaskWokenTransmit ) ? pdTRUE : pdFALSE );
 }

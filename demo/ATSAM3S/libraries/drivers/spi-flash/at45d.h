@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -48,7 +48,7 @@
  *        Global functions
  *----------------------------------------------------------------------------*/
 
-extern void AT45D_WaitReady(At45 *pAt45); 
+extern void AT45D_WaitReady(At45 *pAt45);
 
 extern uint8_t AT45D_GetStatus(At45 *pAt45);
 
@@ -56,13 +56,13 @@ extern void AT45D_Read(
     At45 *pAt45,
     uint8_t *pBuffer,
     uint32_t size,
-    uint32_t address); 
+    uint32_t address);
 
 extern void AT45D_Write(
     At45 *pAt45,
     uint8_t *pBuffer,
     uint32_t size,
-    uint32_t address); 
+    uint32_t address);
 
 extern void AT45D_Erase(At45 *pAt45, uint32_t address);
 

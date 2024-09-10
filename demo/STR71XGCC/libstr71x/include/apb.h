@@ -24,31 +24,31 @@
 
 #include "71x_map.h"
 
-/* APB1 Peripherals */ 
-#define I2C0_Periph  0x0000 
-#define I2C1_Periph  0x0002 
+/* APB1 Peripherals */
+#define I2C0_Periph  0x0000
+#define I2C1_Periph  0x0002
 #define UART0_Periph 0x0008
-#define UART1_Periph 0x0010 
-#define UART2_Periph 0x0020 
-#define UART3_Periph 0x0040 
-#define USB_Periph   0x0080 
-#define CAN_Periph   0x0100 
-#define BSPI0_Periph 0x0200 
-#define BSPI1_Periph 0x0400 
-#define HDLC_Periph  0x2000 
+#define UART1_Periph 0x0010
+#define UART2_Periph 0x0020
+#define UART3_Periph 0x0040
+#define USB_Periph   0x0080
+#define CAN_Periph   0x0100
+#define BSPI0_Periph 0x0200
+#define BSPI1_Periph 0x0400
+#define HDLC_Periph  0x2000
 
-/* APB2 Peripherals */ 
-#define XTI_Periph   0x0000 
-#define GPIO0_Periph 0x0004 
-#define GPIO1_Periph 0x0008 
-#define GPIO2_Periph 0x0010 
-#define ADC12_Periph 0x0040 
-#define CKOUT_Periph 0x0080 
-#define TIM0_Periph  0x0100 
-#define TIM1_Periph  0x0200 
-#define TIM2_Periph  0x0400 
-#define TIM3_Periph  0x0800 
-#define RTC_Periph   0x1000 
+/* APB2 Peripherals */
+#define XTI_Periph   0x0000
+#define GPIO0_Periph 0x0004
+#define GPIO1_Periph 0x0008
+#define GPIO2_Periph 0x0010
+#define ADC12_Periph 0x0040
+#define CKOUT_Periph 0x0080
+#define TIM0_Periph  0x0100
+#define TIM1_Periph  0x0200
+#define TIM2_Periph  0x0400
+#define TIM3_Periph  0x0800
+#define RTC_Periph   0x1000
 #define EIC_Periph   0x4000
 
 /*******************************************************************************

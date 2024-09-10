@@ -483,7 +483,7 @@ AT91F_DBGU_GetInterruptMaskStatus(      // \return DBGU Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_DBGU_IsInterruptMasked
-//* \brief Test if DBGU Interrupt is Masked 
+//* \brief Test if DBGU Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_DBGU_IsInterruptMasked( AT91PS_DBGU pDbgu,        // \arg  pointer to a DBGU controller
@@ -648,7 +648,7 @@ AT91F_PIO_ForceOutput( AT91PS_PIO pPio, // \arg  pointer to a PIO controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PIO_Enable( AT91PS_PIO pPio,      // \arg  pointer to a PIO controller
-                  unsigned int flag )   // \arg  pio to be enabled 
+                  unsigned int flag )   // \arg  pio to be enabled
 {
     pPio->PIO_PER = flag;
 }
@@ -659,7 +659,7 @@ AT91F_PIO_Enable( AT91PS_PIO pPio,      // \arg  pointer to a PIO controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PIO_Disable( AT91PS_PIO pPio,     // \arg  pointer to a PIO controller
-                   unsigned int flag )  // \arg  pio to be disabled 
+                   unsigned int flag )  // \arg  pio to be disabled
 {
     pPio->PIO_PDR = flag;
 }
@@ -776,10 +776,10 @@ AT91F_PIO_IsInputFilterSet( AT91PS_PIO pPio,    // \arg  pointer to a PIO contro
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PIO_GetOutputDataStatus
-//* \brief Return PIO Output Data Status 
+//* \brief Return PIO Output Data Status
 //*----------------------------------------------------------------------------
 static __inline unsigned int
-AT91F_PIO_GetOutputDataStatus(  // \return PIO Output Data Status 
+AT91F_PIO_GetOutputDataStatus(  // \return PIO Output Data Status
                                   AT91PS_PIO pPio )     // \arg  pointer to a PIO controller
 {
     return pPio->PIO_ODSR;
@@ -831,7 +831,7 @@ AT91F_PIO_GetInterruptStatus(   // \return PIO Interrupt Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PIO_IsInterruptMasked
-//* \brief Test if PIO Interrupt is Masked 
+//* \brief Test if PIO Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_PIO_IsInterruptMasked( AT91PS_PIO pPio,   // \arg  pointer to a PIO controller
@@ -897,7 +897,7 @@ AT91F_PIO_IsMultiDriverSet( AT91PS_PIO pPio,    // \arg  pointer to a PIO contro
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PIO_A_RegisterSelection
-//* \brief PIO A Register Selection 
+//* \brief PIO A Register Selection
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PIO_A_RegisterSelection( AT91PS_PIO pPio, // \arg  pointer to a PIO controller
@@ -908,11 +908,11 @@ AT91F_PIO_A_RegisterSelection( AT91PS_PIO pPio, // \arg  pointer to a PIO contro
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PIO_B_RegisterSelection
-//* \brief PIO B Register Selection 
+//* \brief PIO B Register Selection
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PIO_B_RegisterSelection( AT91PS_PIO pPio, // \arg  pointer to a PIO controller
-                               unsigned int flag )      // \arg  pio B register selection 
+                               unsigned int flag )      // \arg  pio B register selection
 {
     pPio->PIO_BSR = flag;
 }
@@ -988,7 +988,7 @@ AT91F_PIO_IsOutputWriteSet( AT91PS_PIO pPio,    // \arg  pointer to a PIO contro
 //* \brief Return PIO Configuration Pullup
 //*----------------------------------------------------------------------------
 static __inline unsigned int
-AT91F_PIO_GetCfgPullup(         // \return PIO Configuration Pullup 
+AT91F_PIO_GetCfgPullup(         // \return PIO Configuration Pullup
                            AT91PS_PIO pPio )    // \arg  pointer to a PIO controller
 {
     return pPio->PIO_PPUSR;
@@ -996,7 +996,7 @@ AT91F_PIO_GetCfgPullup(         // \return PIO Configuration Pullup
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PIO_IsOutputDataStatusSet
-//* \brief Test if PIO Output Data Status is Set 
+//* \brief Test if PIO Output Data Status is Set
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_PIO_IsOutputDataStatusSet( AT91PS_PIO pPio,       // \arg  pointer to a PIO controller
@@ -1510,7 +1510,7 @@ AT91F_RTTReadValue( AT91PS_RTTC pRTTC )
    ***************************************************************************** */
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PITInit
-//* \brief System timer init : period in µsecond, system clock freq in MHz
+//* \brief System timer init : period in Âµsecond, system clock freq in MHz
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PITInit( AT91PS_PITC pPITC, unsigned int period, unsigned int pit_frequency )
@@ -1521,7 +1521,7 @@ AT91F_PITInit( AT91PS_PITC pPITC, unsigned int period, unsigned int pit_frequenc
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_PITSetPIV
-//* \brief Set the PIT Periodic Interval Value 
+//* \brief Set the PIT Periodic Interval Value
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_PITSetPIV( AT91PS_PITC pPITC, unsigned int piv )
@@ -1666,7 +1666,7 @@ AT91F_VREG_Disable_LowPowerMode( AT91PS_VREG pVREG )
 //* \brief Make Remap
 //*----------------------------------------------------------------------------
 static __inline void
-AT91F_MC_Remap( void )          //  
+AT91F_MC_Remap( void )          //
 {
     AT91PS_MC       pMC = ( AT91PS_MC ) AT91C_BASE_MC;
 
@@ -1679,7 +1679,7 @@ AT91F_MC_Remap( void )          //
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_MC_EFC_CfgModeReg( AT91PS_MC pMC, // pointer to a MC controller
-                         unsigned int mode )    // mode register 
+                         unsigned int mode )    // mode register
 {
     // Write to the FMR register
     pMC->MC_FMR = mode;
@@ -1728,7 +1728,7 @@ AT91F_MC_EFC_GetStatus( AT91PS_MC pMC ) // pointer to a MC controller
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_MC_EFC_IsInterruptMasked
-//* \brief Test if EFC MC Interrupt is Masked 
+//* \brief Test if EFC MC Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline unsigned int
 AT91F_MC_EFC_IsInterruptMasked( AT91PS_MC pMC,  // \arg  pointer to a MC controller
@@ -1830,7 +1830,7 @@ AT91F_SPI_Disable( AT91PS_SPI pSPI      // pointer to a SPI controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_SPI_CfgMode( AT91PS_SPI pSPI,     // pointer to a SPI controller
-                   int mode )   // mode register 
+                   int mode )   // mode register
 {
     //* Write to the MR register
     pSPI->SPI_MR = mode;
@@ -1933,7 +1933,7 @@ AT91F_SPI_GetInterruptMaskStatus(       // \return SPI Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_SPI_IsInterruptMasked
-//* \brief Test if SPI Interrupt is Masked 
+//* \brief Test if SPI Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_SPI_IsInterruptMasked( AT91PS_SPI pSpi,   // \arg  pointer to a SPI controller
@@ -2464,7 +2464,7 @@ AT91F_SSC_GetInterruptMaskStatus(       // \return SSC Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_SSC_IsInterruptMasked
-//* \brief Test if SSC Interrupt is Masked 
+//* \brief Test if SSC Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_SSC_IsInterruptMasked( AT91PS_SSC pSsc,   // \arg  pointer to a SSC controller
@@ -2531,7 +2531,7 @@ AT91F_TWI_GetInterruptMaskStatus(       // \return TWI Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_TWI_IsInterruptMasked
-//* \brief Test if TWI Interrupt is Masked 
+//* \brief Test if TWI Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_TWI_IsInterruptMasked( AT91PS_TWI pTwi,   // \arg  pointer to a TWI controller
@@ -2847,7 +2847,7 @@ AT91F_UDP_GetInterruptMaskStatus( AT91PS_UDP pUdp )     // \arg  pointer to a UD
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_UDP_IsInterruptMasked
-//* \brief Test if UDP Interrupt is Masked 
+//* \brief Test if UDP Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_UDP_IsInterruptMasked( AT91PS_UDP pUdp,   // \arg  pointer to a UDP controller
@@ -2935,7 +2935,7 @@ AT91F_TC_GetInterruptMaskStatus(        // \return TC Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_TC_IsInterruptMasked
-//* \brief Test if TC Interrupt is Masked 
+//* \brief Test if TC Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline int
 AT91F_TC_IsInterruptMasked( AT91PS_TC pTc,      // \arg  pointer to a TC controller
@@ -2970,7 +2970,7 @@ AT91F_InitMailboxRegisters( AT91PS_CAN_MB CAN_Mailbox,
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_EnableCAN()
-//* \brief 
+//* \brief
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_EnableCAN( AT91PS_CAN pCAN )      // pointer to a CAN controller
@@ -2983,7 +2983,7 @@ AT91F_EnableCAN( AT91PS_CAN pCAN )      // pointer to a CAN controller
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_DisableCAN()
-//* \brief 
+//* \brief
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_DisableCAN( AT91PS_CAN pCAN )     // pointer to a CAN controller
@@ -3039,7 +3039,7 @@ AT91F_CAN_GetInterruptMaskStatus(       // \return CAN Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_CAN_IsInterruptMasked
-//* \brief Test if CAN Interrupt is Masked 
+//* \brief Test if CAN Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline unsigned int
 AT91F_CAN_IsInterruptMasked( AT91PS_CAN pCAN,   // \arg  pointer to a CAN controller
@@ -3065,7 +3065,7 @@ AT91F_CAN_IsStatusSet( AT91PS_CAN pCAN, // \arg  pointer to a CAN controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_CAN_CfgModeReg( AT91PS_CAN pCAN,  // pointer to a CAN controller
-                      unsigned int mode )       // mode register 
+                      unsigned int mode )       // mode register
 {
     //* Write to the MR register
     pCAN->CAN_MR = mode;
@@ -3184,7 +3184,7 @@ AT91F_CAN_GetMessageModeReg( AT91PS_CAN_MB CAN_Mailbox )        // pointer to a 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_CAN_CfgMessageIDReg
 //* \brief Program the Message ID Register
-//* \brief Version == 0 for Standard messsage, Version == 1 for Extended  
+//* \brief Version == 0 for Standard messsage, Version == 1 for Extended
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_CAN_CfgMessageIDReg( AT91PS_CAN_MB CAN_Mailbox,   // pointer to a CAN Mailbox
@@ -3351,7 +3351,7 @@ AT91F_ADC_GetInterruptMaskStatus(       // \return ADC Interrupt Mask Status
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_ADC_IsInterruptMasked
-//* \brief Test if ADC Interrupt is Masked 
+//* \brief Test if ADC Interrupt is Masked
 //*----------------------------------------------------------------------------
 static __inline unsigned int
 AT91F_ADC_IsInterruptMasked( AT91PS_ADC pADC,   // \arg  pointer to a ADC controller
@@ -3377,7 +3377,7 @@ AT91F_ADC_IsStatusSet( AT91PS_ADC pADC, // \arg  pointer to a ADC controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_ADC_CfgModeReg( AT91PS_ADC pADC,  // pointer to a ADC controller
-                      unsigned int mode )       // mode register 
+                      unsigned int mode )       // mode register
 {
     //* Write to the MR register
     pADC->ADC_MR = mode;
@@ -3400,10 +3400,10 @@ AT91F_ADC_GetModeReg( AT91PS_ADC pADC   // pointer to a ADC controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_ADC_CfgTimings( AT91PS_ADC pADC,  // pointer to a ADC controller
-                      unsigned int mck_clock,   // in MHz 
-                      unsigned int adc_clock,   // in MHz 
-                      unsigned int startup_time,        // in us 
-                      unsigned int sample_and_hold_time )       // in ns  
+                      unsigned int mck_clock,   // in MHz
+                      unsigned int adc_clock,   // in MHz
+                      unsigned int startup_time,        // in us
+                      unsigned int sample_and_hold_time )       // in ns
 {
     unsigned int    prescal, startup, shtim;
 
@@ -3423,7 +3423,7 @@ AT91F_ADC_CfgTimings( AT91PS_ADC pADC,  // pointer to a ADC controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_ADC_EnableChannel( AT91PS_ADC pADC,       // pointer to a ADC controller
-                         unsigned int channel ) // mode register 
+                         unsigned int channel ) // mode register
 {
     //* Write to the CHER register
     pADC->ADC_CHER = channel;
@@ -3435,7 +3435,7 @@ AT91F_ADC_EnableChannel( AT91PS_ADC pADC,       // pointer to a ADC controller
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_ADC_DisableChannel( AT91PS_ADC pADC,      // pointer to a ADC controller
-                          unsigned int channel )        // mode register 
+                          unsigned int channel )        // mode register
 {
     //* Write to the CHDR register
     pADC->ADC_CHDR = channel;
@@ -3454,7 +3454,7 @@ AT91F_ADC_GetChannelStatus( AT91PS_ADC pADC     // pointer to a ADC controller
 
 //*----------------------------------------------------------------------------
 //* \fn    AT91F_ADC_StartConversion
-//* \brief Software request for a analog to digital conversion 
+//* \brief Software request for a analog to digital conversion
 //*----------------------------------------------------------------------------
 static __inline void
 AT91F_ADC_StartConversion( AT91PS_ADC pADC      // pointer to a ADC controller

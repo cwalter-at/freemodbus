@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -109,14 +109,14 @@ typedef struct _KeyColRow {
       unsigned char col:3;
 } KeyColRow;
 
- 
+
 typedef struct _KeyDownEvent {
       bool press;//at least 1 pressed key detected, or 0
       unsigned char keyPressNum;//simultaneously pressed key number
       KeyColRow preKeyMatrix[4];//pressed key matrix
 } KeyDownEvent;
 
- 
+
 
 typedef struct _KeyUpEvent {
       bool release;//at least 1 released key  detected, or 0
@@ -124,7 +124,7 @@ typedef struct _KeyUpEvent {
       KeyColRow relKeyMatrix[4];//released key matrix
 } KeyUpEvent;
 
-      
+
 
 typedef struct _KeyEvent {
       KeyDownEvent kdEvent;
@@ -132,7 +132,7 @@ typedef struct _KeyEvent {
 } KeyEvent;
 
 //------------------------------------------------------------------------------
-//         Global Access Macros 
+//         Global Access Macros
 //------------------------------------------------------------------------------
 
 

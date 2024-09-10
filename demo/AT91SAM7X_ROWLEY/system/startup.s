@@ -4,8 +4,8 @@
   Copyright (c) 2004 Rowley Associates Limited.
 
   This file may be distributed under the terms of the License Agreement
-  provided with this software. 
- 
+  provided with this software.
+
   THIS FILE IS PROVIDED AS IS WITH NO WARRANTY OF ANY KIND, INCLUDING THE
   WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *****************************************************************************/
@@ -39,17 +39,17 @@
  *
  * MC_FMR_FMCN_VAL
  *
- *   Override the default Flash Mode Register FMCN value by defining 
+ *   Override the default Flash Mode Register FMCN value by defining
  *   MC_FMR_FMCN_VAL.
  *
  * MC_FMR_FWS_VAL
  *
- *   Override the default Flash Mode Register FWS value by defining 
+ *   Override the default Flash Mode Register FWS value by defining
  *   MC_FMR_FWS_VAL.
  *
  * CKGR_MOR_VAL
  *
- *   Override the default Main Oscillator Register value by defining 
+ *   Override the default Main Oscillator Register value by defining
  *   CKGR_MOR_VAL.
  *
  * CKGR_PLLR_VAL
@@ -66,7 +66,7 @@
  *   If defined, user reset will not be enabled.
  *
  * NO_PROTECTION_MODE
- *   
+ *
  *   If defined, AIC protection mode will not be enabled. AIC protection
  *   mode allows the AIC_IVR register to be accessed by the debugger (for
  *   example through the memory or register window). With protection mode
@@ -91,10 +91,10 @@
 
 #ifndef CKGR_PLLR_VAL
 #if OSCILLATOR_CLOCK_FREQUENCY==18432000
-/* MCK, UDPCK = 18.432MHz * 73 / 14 / 2 = 48.05486MHz */  
+/* MCK, UDPCK = 18.432MHz * 73 / 14 / 2 = 48.05486MHz */
 #define CKGR_PLLR_VAL (1 << CKGR_PLLR_USBDIV_BIT) | (72 << CKGR_PLLR_MUL_BIT) | (0 << CKGR_PLLR_OUT_BIT) | (63 << CKGR_PLLR_PLLCOUNT_BIT) | (14 << CKGR_PLLR_DIV_BIT)
 #else
-#error OSCILLATOR_CLOCK_FREQUENCY not supported 
+#error OSCILLATOR_CLOCK_FREQUENCY not supported
 #endif
 #endif
 
@@ -153,7 +153,7 @@ reset_handler:
   ldr r1, =WDT_BASE
   ldr r0, =WDT_MR_WDDIS
   str r0, [r1, #WDT_MR_OFFSET]
-  
+
 #ifndef NO_PROTECTION_MODE
   /* Enable protect mode */
   ldr r1, =AIC_BASE
@@ -165,7 +165,7 @@ reset_handler:
   ldr r1, =PMC_BASE
   ldr r0, =CKGR_MOR_VAL
   str r0, [r1, #CKGR_MOR_OFFSET]
-  
+
 1:/* Wait for main oscillator to stabilize */
   ldr r0, [r1, #PMC_SR_OFFSET]
   tst r0, #PMC_SR_MOSCS
@@ -174,7 +174,7 @@ reset_handler:
   /* Set up the PLL */
   ldr r0, =CKGR_PLLR_VAL
   str r0, [r1, #CKGR_PLLR_OFFSET]
-  
+
 1:/* Wait for PLL to lock */
   ldr r0, [r1, #PMC_SR_OFFSET]
   tst r0, #PMC_SR_LOCK
@@ -217,19 +217,19 @@ reset_handler:
  ******************************************************************************/
 undef_handler:
   b .  /* Endless loop */
-  
+
 swi_handler:
   b .  /* Endless loop */
-  
+
 pabort_handler:
   b .  /* Endless loop */
-  
+
 dabort_handler:
   b .  /* Endless loop */
-  
+
 irq_handler:
   b .  /* Endless loop */
-  
+
 fiq_handler:
   b .  /* Endless loop */
 

@@ -5,7 +5,7 @@
 REQUIREMENTS
 ============
 
-This example contains a simple demo program for FreeMODBUS for an ATMega168 
+This example contains a simple demo program for FreeMODBUS for an ATMega168
 processor. It requires a wired serial port to a host processor and a Modbus
 Master Software on the PC side to be useful. Demo versions of Modbus Masters
 can be found in [1] and [2].
@@ -60,7 +60,7 @@ be a good idea to download a simple serial test programm to test serial
 communication with the host. The fuse bits required for an ATMega168 with
 an 20Mhz crystal must be set to the following values:
 
- Fuse Low Byte: 1XXXXXX 
+ Fuse Low Byte: 1XXXXXX
                 |
                CKDIV8
 

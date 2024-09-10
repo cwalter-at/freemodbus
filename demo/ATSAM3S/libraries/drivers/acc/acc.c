@@ -96,7 +96,7 @@ void ACC_Configure(Acc *pAcc,
     /*  Write to the MR register */
     ACC_CfgModeReg( pAcc,
         ( selplus & ACC_MR_SELPLUS)
-        | (( selminus<<4) & ACC_MR_SELMINUS)			
+        | (( selminus<<4) & ACC_MR_SELMINUS)
         | ( ac_en & ACC_MR_ACEN)
         | ( edge & ACC_MR_EDGETYP)
         | ( invert & ACC_MR_INV) );

@@ -33,9 +33,9 @@
     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-    more details. You should have received a copy of the GNU General Public 
-    License and the FreeRTOS license exception along with FreeRTOS; if not it 
-    can be viewed here: http://www.freertos.org/a00114.html and also obtained 
+    more details. You should have received a copy of the GNU General Public
+    License and the FreeRTOS license exception along with FreeRTOS; if not it
+    can be viewed here: http://www.freertos.org/a00114.html and also obtained
     by writing to Richard Barry, contact details for whom are available on the
     FreeRTOS WEB site.
 
@@ -123,14 +123,14 @@ static void prvSetupTimerInterrupt( void ) PRIVILEGED_FUNCTION;
  */
 static void prvSetupMPU( void ) PRIVILEGED_FUNCTION;
 
-/* 
+/*
  * Return the smallest MPU region size that a given number of bytes will fit
  * into.  The region size is returned as the value that should be programmed
  * into the region attribute register for that region.
  */
 static unsigned long prvGetMPURegionSizeSetting( unsigned long ulActualSizeInBytes ) PRIVILEGED_FUNCTION;
 
-/* 
+/*
  * Checks to see if being called from the context of an unprivileged task, and
  * if so raises the privilege level and returns false - otherwise does nothing
  * other than return true.
@@ -189,7 +189,7 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
 void vPortSVCHandler( void )
 {
 	/* Assumes psp was in use. */
-	__asm volatile 
+	__asm volatile
 	(
 		#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
 			"	tst lr, #4						\n"
@@ -225,7 +225,7 @@ unsigned char ucSVCNumber;
 		case portSVC_YIELD				:	*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET;
 											break;
 
-		case portSVC_prvRaisePrivilege	:	__asm volatile 
+		case portSVC_prvRaisePrivilege	:	__asm volatile
 											(
 												"	mrs r1, control		\n" /* Obtain current control value. */
 												"	bic r1, #1			\n" /* Set privilege bit. */
@@ -242,7 +242,7 @@ unsigned char ucSVCNumber;
 
 static void prvRestoreContextOfFirstTask( void )
 {
-	__asm volatile 
+	__asm volatile
 	(
 		"	ldr r0, =0xE000ED08				\n" /* Use the NVIC offset register to locate the stack. */
 		"	ldr r0, [r0]					\n"
@@ -413,14 +413,14 @@ extern unsigned long __privileged_data_end__[];
 		/* First setup the entire flash for unprivileged read only access. */
         *portMPU_REGION_BASE_ADDRESS =	( ( unsigned long ) __FLASH_segment_start__ ) | /* Base address. */
 										( portMPU_REGION_VALID ) |
-										( portUNPRIVILEGED_FLASH_REGION ); 
+										( portUNPRIVILEGED_FLASH_REGION );
 
 		*portMPU_REGION_ATTRIBUTE =		( portMPU_REGION_READ_ONLY ) |
 										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 										( prvGetMPURegionSizeSetting( ( unsigned long ) __FLASH_segment_end__ - ( unsigned long ) __FLASH_segment_start__ ) ) |
 										( portMPU_REGION_ENABLE );
 
-		/* Setup the first 16K for privileged only access (even though less 
+		/* Setup the first 16K for privileged only access (even though less
 		than 10K is actually being used).  This is where the kernel code is
 		placed. */
         *portMPU_REGION_BASE_ADDRESS =	( ( unsigned long ) __FLASH_segment_start__ ) | /* Base address. */
@@ -428,8 +428,8 @@ extern unsigned long __privileged_data_end__[];
 										( portPRIVILEGED_FLASH_REGION );
 
 		*portMPU_REGION_ATTRIBUTE =		( portMPU_REGION_PRIVILEGED_READ_ONLY ) |
-										( portMPU_REGION_CACHEABLE_BUFFERABLE ) | 
-										( prvGetMPURegionSizeSetting( ( unsigned long ) __privileged_functions_end__ - ( unsigned long ) __FLASH_segment_start__ ) ) | 
+										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+										( prvGetMPURegionSizeSetting( ( unsigned long ) __privileged_functions_end__ - ( unsigned long ) __FLASH_segment_start__ ) ) |
 										( portMPU_REGION_ENABLE );
 
 		/* Setup the privileged data RAM region.  This is where the kernel data
@@ -447,7 +447,7 @@ extern unsigned long __privileged_data_end__[];
 		system peripherals and registers are protected. */
 		*portMPU_REGION_BASE_ADDRESS =	( portPERIPHERALS_START_ADDRESS ) |
 										( portMPU_REGION_VALID ) |
-										( portGENERAL_PERIPHERALS_REGION ); 
+										( portGENERAL_PERIPHERALS_REGION );
 
 		*portMPU_REGION_ATTRIBUTE =		( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
 										( prvGetMPURegionSizeSetting( portPERIPHERALS_END_ADDRESS - portPERIPHERALS_START_ADDRESS ) ) |
@@ -489,7 +489,7 @@ unsigned long ulRegionSize, ulReturnValue = 4;
 static portBASE_TYPE prvRaisePrivilege( void )
 {
 	__asm volatile
-	( 
+	(
 		"	mrs r0, control						\n"
 		"	tst r0, #1							\n" /* Is the task running privileged? */
 		"	itte ne								\n"
@@ -497,7 +497,7 @@ static portBASE_TYPE prvRaisePrivilege( void )
 		"	svcne %0							\n" /* Switch to privileged. */
 		"	moveq r0, #1						\n" /* CONTROL[0]==0, return true. */
 		"	bx lr								\n"
-		:: "i" (portSVC_prvRaisePrivilege) : "r0" 
+		:: "i" (portSVC_prvRaisePrivilege) : "r0"
 	);
 
 	return 0;
@@ -516,34 +516,34 @@ unsigned long ul;
 	if( xRegions == NULL )
 	{
 		/* No MPU regions are specified so allow access to all RAM. */
-        xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =	
+        xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
 				( ( unsigned long ) __SRAM_segment_start__ ) | /* Base address. */
 				( portMPU_REGION_VALID ) |
 				( portSTACK_REGION );
 
-		xMPUSettings->xRegion[ 0 ].ulRegionAttribute =	
-				( portMPU_REGION_READ_WRITE ) | 
+		xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
+				( portMPU_REGION_READ_WRITE ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 				( prvGetMPURegionSizeSetting( ( unsigned long ) __SRAM_segment_end__ - ( unsigned long ) __SRAM_segment_start__ ) ) |
 				( portMPU_REGION_ENABLE );
 
 		/* Re-instate the privileged only RAM region as xRegion[ 0 ] will have
 		just removed the privileged only parameters. */
-		xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =	
+		xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
 				( ( unsigned long ) __privileged_data_start__ ) | /* Base address. */
 				( portMPU_REGION_VALID ) |
 				( portSTACK_REGION + 1 );
 
-		xMPUSettings->xRegion[ 1 ].ulRegionAttribute =		
+		xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
 				( portMPU_REGION_PRIVILEGED_READ_WRITE ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 				prvGetMPURegionSizeSetting( ( unsigned long ) __privileged_data_end__ - ( unsigned long ) __privileged_data_start__ ) |
 				( portMPU_REGION_ENABLE );
-				
+
 		/* Invalidate all other regions. */
 		for( ul = 2; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
-		{ 
-			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;	
+		{
+			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
 			xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
 		}
 	}
@@ -556,12 +556,12 @@ unsigned long ul;
 		if( usStackDepth > 0 )
 		{
 			/* Define the region that allows access to the stack. */
-			xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =	
-					( ( unsigned long ) pxBottomOfStack ) | 
+			xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
+					( ( unsigned long ) pxBottomOfStack ) |
 					( portMPU_REGION_VALID ) |
 					( portSTACK_REGION ); /* Region number. */
 
-			xMPUSettings->xRegion[ 0 ].ulRegionAttribute =	
+			xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
 					( portMPU_REGION_READ_WRITE ) | /* Read and write. */
 					( prvGetMPURegionSizeSetting( ( unsigned long ) usStackDepth * ( unsigned long ) sizeof( portSTACK_TYPE ) ) ) |
 					( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
@@ -574,23 +574,23 @@ unsigned long ul;
 		{
 			if( ( xRegions[ lIndex ] ).ulLengthInBytes > 0UL )
 			{
-				/* Translate the generic region definition contained in 
-				xRegions into the CM3 specific MPU settings that are then 
+				/* Translate the generic region definition contained in
+				xRegions into the CM3 specific MPU settings that are then
 				stored in xMPUSettings. */
-				xMPUSettings->xRegion[ ul ].ulRegionBaseAddress =	
-						( ( unsigned long ) xRegions[ lIndex ].pvBaseAddress ) | 
+				xMPUSettings->xRegion[ ul ].ulRegionBaseAddress =
+						( ( unsigned long ) xRegions[ lIndex ].pvBaseAddress ) |
 						( portMPU_REGION_VALID ) |
 						( portSTACK_REGION + ul ); /* Region number. */
 
-				xMPUSettings->xRegion[ ul ].ulRegionAttribute =	
-						( prvGetMPURegionSizeSetting( xRegions[ lIndex ].ulLengthInBytes ) ) | 
-						( xRegions[ lIndex ].ulParameters ) | 
-						( portMPU_REGION_ENABLE ); 
+				xMPUSettings->xRegion[ ul ].ulRegionAttribute =
+						( prvGetMPURegionSizeSetting( xRegions[ lIndex ].ulLengthInBytes ) ) |
+						( xRegions[ lIndex ].ulParameters ) |
+						( portMPU_REGION_ENABLE );
 			}
 			else
 			{
 				/* Invalidate the region. */
-				xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;	
+				xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
 				xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
 			}
 
@@ -758,7 +758,7 @@ portBASE_TYPE xRunningPrivileged = prvRaisePrivilege();
 	void MPU_vTaskList( signed char *pcWriteBuffer )
 	{
 	portBASE_TYPE xRunningPrivileged = prvRaisePrivilege();
-	
+
 		vTaskList( pcWriteBuffer );
 		portRESET_PRIVILEGE( xRunningPrivileged );
 	}
@@ -1051,7 +1051,7 @@ portBASE_TYPE xRunningPrivileged = prvRaisePrivilege();
 	xReturn = xPortGetFreeHeapSize();
 
 	portRESET_PRIVILEGE( xRunningPrivileged );
-	
+
 	return xReturn;
 }
 

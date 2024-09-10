@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BSD Socket Library Port
+ * FreeModbus Library: BSD Socket Library Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -26,19 +26,20 @@
 #include <tchar.h>
 #include <assert.h>
 
-#define	INLINE
-#define PR_BEGIN_EXTERN_C			extern "C" {
-#define	PR_END_EXTERN_C				}
+#define INLINE
+#define PR_BEGIN_EXTERN_C           extern "C" {
+#define PR_END_EXTERN_C             }
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_BEGIN_EXTERN_C
+/* *INDENT-ON* */
 #endif
 
 /* ----------------------- Defines ------------------------------------------*/
-
 #define ENTER_CRITICAL_SECTION( )
 #define EXIT_CRITICAL_SECTION( )
-#define MB_PORT_HAS_CLOSE	1
+#define MB_PORT_HAS_CLOSE   1
 #ifndef TRUE
 #define TRUE            1
 #endif
@@ -47,7 +48,6 @@ PR_BEGIN_EXTERN_C
 #endif
 
 /* ----------------------- Type definitions ---------------------------------*/
-
 typedef enum
 {
     MB_LOG_DEBUG,
@@ -58,10 +58,12 @@ typedef enum
 
 /* ----------------------- Function prototypes ------------------------------*/
 
-void            vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, 
-                            const TCHAR * szFmt, ... );
+void            vMBPortLog( eMBPortLogLevel eLevel, const TCHAR * szModule, const TCHAR * szFmt, ... );
 
 #ifdef __cplusplus
+/* *INDENT-OFF* */
 PR_END_EXTERN_C
+/* *INDENT-ON* */
 #endif
+
 #endif

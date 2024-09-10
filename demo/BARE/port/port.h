@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Library: BARE Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,17 +25,17 @@
 #include <assert.h>
 #include <inttypes.h>
 
-#define	INLINE                      inline
+#define INLINE                      inline
 #define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
+#define PR_END_EXTERN_C             }
 
-#define ENTER_CRITICAL_SECTION( )   
-#define EXIT_CRITICAL_SECTION( )    
+#define ENTER_CRITICAL_SECTION( )
+#define EXIT_CRITICAL_SECTION( )
 
 typedef uint8_t BOOL;
 
 typedef unsigned char UCHAR;
-typedef char CHAR;
+typedef char    CHAR;
 
 typedef uint16_t USHORT;
 typedef int16_t SHORT;

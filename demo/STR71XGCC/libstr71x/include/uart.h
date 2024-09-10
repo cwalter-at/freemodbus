@@ -35,7 +35,7 @@ typedef enum
 {
   UART_EVEN_PARITY = 0x0000,
   UART_ODD_PARITY  = 0x0020,
-  UART_NO_PARITY  = 0x0000 
+  UART_NO_PARITY  = 0x0000
 } UARTParity_TypeDef;
 
 typedef enum
@@ -71,7 +71,7 @@ typedef enum
 
 /*******************************************************************************
 * Function Name  : UART_Init
-* Description    : This function initializes the selected UART registers to 
+* Description    : This function initializes the selected UART registers to
 *                  their reset values
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
 * Output         : None
@@ -88,7 +88,7 @@ void UART_Init(UART_TypeDef *UARTx);
 *                  UARTM_7D_P 	for 7-bit data + parity format
 *                  UART_9D 	for 9-bit data format
 *                  UART_8D_W	for 8-bit data + wake-up bit format
-*                  UART_8D_P	for 8-bit data + parity bit format 
+*                  UART_8D_P	for 8-bit data + parity bit format
 * Output         : None
 * Return         : None
 *******************************************************************************/
@@ -128,7 +128,7 @@ inline void UART_ParityConfig(UART_TypeDef *UARTx, UARTParity_TypeDef Parity)
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
 * Input 2        : The number of stop bits, it can be
 *                  UART_0_5_StopBits	for 0.5 stop bit
-*                  UART_1_StopBits	for 1 stop bit, 
+*                  UART_1_StopBits	for 1 stop bit,
 *                  UART_1_5_StopBits 	for 1.5 stop bits
 *	           UART_2_StopBits	for 2 stop bits
 * Output         : None
@@ -147,14 +147,14 @@ inline void UART_StopBitsConfig(UART_TypeDef *UARTx, UARTStopBits_TypeDef StopBi
 * Input 2        : u32 The baudrate value
 * Input 3        : The parity type, it can be UART_EVEN_PARITY, UART_ODD_PARITY
 *		   or UART_NO_PARITY
-* Input 4        : The number of stop bits UART_0_5_StopBits, UART_1_StopBits, 
+* Input 4        : The number of stop bits UART_0_5_StopBits, UART_1_StopBits,
 *                  UART_1_5_StopBits or UART_2_StopBits
 * Input 5        : The UART mode, it can be
 *                  UARTM_8D 	for 8-bit data format
 *                  UARTM_7D_P 	for 7-bit data + parity format
 *                  UART_9D 	for 9-bit data format
 *                  UART_8D_W	for 8-bit data + wake-up bit format
-*                  UART_8D_P	for 8-bit data + parity bit format   
+*                  UART_8D_P	for 8-bit data + parity bit format
 * Output         : None
 * Return         : None
 *******************************************************************************/
@@ -166,7 +166,7 @@ void UART_Config(UART_TypeDef *UARTx, u32 BaudRate, UARTParity_TypeDef Parity,
 * Description    : This function enables or disables one or several interrupt
 *                  sources of the selected UART.
 * Input 1        : UARTx (x can be 0,1, 2 or 3) the selected UART
-* Input 2        : The new interrupt flag or flags  
+* Input 2        : The new interrupt flag or flags
 * Input 3        : ENABLE or DISABLE
 * Output         : None
 * Return         : None

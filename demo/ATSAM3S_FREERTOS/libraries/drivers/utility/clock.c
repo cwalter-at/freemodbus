@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2008, Atmel Corporation
  *
@@ -184,7 +184,7 @@ void CLOCK_SetConfig(unsigned char configuration)
 {
     printf("Setting clock configuration #%d ... ", configuration);
     currentConfig = configuration;
-    
+
     // Switch to main oscillator in two operations
     PMC->PMC_MCKR = (PMC->PMC_MCKR & ~AT91C_PMC_CSS) | AT91C_PMC_CSS_MAIN_CLK;
     while ((PMC->PMC_SR & AT91C_PMC_MCKRDY) == 0);
@@ -244,10 +244,10 @@ unsigned short CLOCK_GetCurrPCK(void)
 void CLOCK_UserChangeConfig(void)
 {
     unsigned char key = 0;
-  
+
     while (1)
     {
-        CLOCK_DisplayMenu();      
+        CLOCK_DisplayMenu();
         key = DBGU_GetChar();
 
         if ((key >= '0') && (key <= ('0' + NB_CLOCK_CONFIGURATION - 1)))

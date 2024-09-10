@@ -5,9 +5,9 @@ REQUIREMENTS
 ============
 
 The FreeModbus/lwIP port requires are port of the lwIP TCP/IP stack for
-the target platform. This port includes a suitable Ethernet driver for 
+the target platform. This port includes a suitable Ethernet driver for
 lwIP as well as a FreeRTOS port.
-The FreeModbus part itself does NOT depend on FreeRTOS or the Coldfire 
+The FreeModbus part itself does NOT depend on FreeRTOS or the Coldfire
 ethernet controller and can therefore be used for creating other ports.
 
 The development environment used is  based  on  the  GNU  C  Compiler  for
@@ -42,7 +42,7 @@ By default the port using the following settings:
 
 COMMON PROBLEMS
 ===============
- 
+
 Most of the problems have  their  origin  in  the  startup  scripts.   The
 following list should serve as  a  checklist  where  each  point  must  be
 satisfied for the port to work.

@@ -67,7 +67,7 @@ FreeRTOS.org versions prior to V4.3.0 did not include this definition. */
 	#define configKERNEL_INTERRUPT_PRIORITY 0
 #endif
 
-	
+
 	RSEG    CODE:CODE(2)
 	thumb
 
@@ -90,14 +90,14 @@ FreeRTOS.org versions prior to V4.3.0 did not include this definition. */
 vSetMSP:
 	msr msp, r0
 	bx lr
-	
+
 /*-----------------------------------------------------------*/
 
 //xPortPendSVHandler:
 PendSV_Handler:
-	mrs r0, psp						
+	mrs r0, psp
 	ldr	r3, =pxCurrentTCB			/* Get the location of the current TCB. */
-	ldr	r2, [r3]						
+	ldr	r2, [r3]
 
 	stmdb r0!, {r4-r11}				/* Save the remaining registers. */
 	str r0, [r2]					/* Save the new top of stack into the first member of the TCB. */
@@ -105,16 +105,16 @@ PendSV_Handler:
 	stmdb sp!, {r3, r14}
 	mov r0, #configMAX_SYSCALL_INTERRUPT_PRIORITY
 	msr basepri, r0
-	bl vTaskSwitchContext			
+	bl vTaskSwitchContext
 	mov r0, #0
 	msr basepri, r0
 	ldmia sp!, {r3, r14}
 
-	ldr r1, [r3]					
+	ldr r1, [r3]
 	ldr r0, [r1]					/* The first item in pxCurrentTCB is the task top of stack. */
 	ldmia r0!, {r4-r11}				/* Pop the registers. */
-	msr psp, r0						
-	bx r14							
+	msr psp, r0
+	bx r14
 
 
 /*-----------------------------------------------------------*/
@@ -126,7 +126,7 @@ vPortSetInterruptMask:
 	pop { R0 }
 
 	bx r14
-	
+
 /*-----------------------------------------------------------*/
 
 vPortClearInterruptMask:
@@ -164,4 +164,4 @@ vPortStartFirstTask:
 	svc 0
 
 	END
-	
+

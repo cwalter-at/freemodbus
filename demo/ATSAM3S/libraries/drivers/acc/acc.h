@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- *         ATMEL Microcontroller Software Support 
+ *         ATMEL Microcontroller Software Support
  * ----------------------------------------------------------------------------
  * Copyright (c) 2009, Atmel Corporation
  *
@@ -29,20 +29,20 @@
 
 /**
  *  \unit
- * 
+ *
  *  !Purpose
- * 
+ *
  *  Interface for configuration the Analog-to-Digital Converter (ACC) peripheral.
- * 
+ *
  *  !Usage
- * 
+ *
  *  -# Configurate the pins for ACC
  *  -# Initialize the ACC with ACC_Initialize().
  *  -# Select the active channel using ACC_EnableChannel()
  *  -# Start the conversion with ACC_StartConversion()
  *  -# Wait the end of the conversion by polling status with ACC_GetStatus()
  *  -# Finally, get the converted data using ACC_GetConvertedData()
- * 
+ *
 */
 #ifndef ACC_H
 #define ACC_H
@@ -136,7 +136,7 @@ void ACC_Configure(Acc *pAcc,
                      uint8_t selplus,
                      uint8_t selminus,
                      uint16_t ac_en,
-                     uint16_t edge,        
+                     uint16_t edge,
                      uint16_t invert);
 
 extern uint8_t ACC_GetComparisionResult(Acc *pAcc,uint32_t status);

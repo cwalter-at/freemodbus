@@ -1,8 +1,8 @@
-# 
+#
 # FreeModbus STR71X GCC Makefile
 #
 # Copyright (C) 2006 Christian Walter <wolti@sil.at>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -45,7 +45,7 @@ INC       = -I. -Iport \
 			-Ilibstr71x/include \
 			-I../../modbus/include \
 			-I../../modbus/rtu \
-			-I../../modbus/ascii 
+			-I../../modbus/ascii
 SRC       = demo.c \
 			$(addprefix freertos/, list.c queue.c tasks.c ) \
 			$(addprefix freertos/portable/MemMang/, heap_2.c ) \
@@ -54,14 +54,14 @@ SRC       = demo.c \
 			$(addprefix ../../modbus/, mb.c ) \
 			$(addprefix ../../modbus/rtu/, mbrtu.c mbcrc.c ) \
 			$(addprefix ../../modbus/ascii/, mbascii.c ) \
-			$(addprefix ../../modbus/functions/, mbfunccoils.c mbfuncdiag.c mbfuncholding.c mbfuncinput.c mbfuncother.c mbfuncdisc.c mbutils.c ) 
+			$(addprefix ../../modbus/functions/, mbfunccoils.c mbfuncdiag.c mbfuncholding.c mbfuncinput.c mbfuncother.c mbfuncdisc.c mbutils.c )
 SRCARM    = $(addprefix freertos/portable/GCC/ARM7_STR71X/, portISR.c ) \
-			$(addprefix port/, portevent.c portserial.c porttimer.c ) 
-CPPSRC    = 
-CPPSRCARM = 
+			$(addprefix port/, portevent.c portserial.c porttimer.c )
+CPPSRC    =
+CPPSRCARM =
 
 AINC      = -I.
-ASRC      = 
+ASRC      =
 ASRCARM   = $(addprefix system/, startup.S vector.S )
 
 # --------------------------------------------------------------------------- #
@@ -78,14 +78,14 @@ CFLAGS    = $(CPPFLAGS) $(INC)
 CCXXFLAGS = $(CFLAGS)
 
 # Assembler flags.
-#ASFLAGS = --defsym $(RUN_MODE)=1 --defsym REMAP=2 --gdwarf-2 
+#ASFLAGS = --defsym $(RUN_MODE)=1 --defsym REMAP=2 --gdwarf-2
 ASFLAGS = -gdwarf-2 -D$(RUN_MODE)=1 -DREMAP=0 $(AINC)
 
 # Linker flags.
 LDFLAGS = -nostartfiles -Wl,-Map=$(TARGET).map,--cref -lc -lgcc
 ifeq ($(RUN_MODE),RAM_RUN)
 LDFLAGS +=-Tsupport/ram71x.ld
-else 
+else
 LDFLAGS +=-Tsupport/rom71x.ld
 endif
 
@@ -106,11 +106,11 @@ INSIGHT = $(PREFIX)/arm-elf-insight
 # Define all output files and dependencies based upon the specified
 # source files.
 # --------------------------------------------------------------------------- #
-COBJ        = $(SRC:.c=.o) 
+COBJ        = $(SRC:.c=.o)
 AOBJ        = $(ASRC:.S=.o)
 COBJARM     = $(SRCARM:.c=.o)
 AOBJARM     = $(ASRCARM:.S=.o)
-CPPOBJ      = $(CPPSRC:.cpp=.o) 
+CPPOBJ      = $(CPPSRC:.cpp=.o)
 CPPOBJARM   = $(CPPSRCARM:.cpp=.o)
 
 # Flags need to generate dependencies
@@ -135,31 +135,31 @@ flash: $(TARGET).hex $(TARGET).bin
 
 %.hex: %.elf
 	$(OBJCOPY) -O ihex $< $@
-	
+
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
 
 %.sym: %.elf
 	$(NM) -n $< > $@
 
-$(TARGET).elf:  $(AOBJARM) $(AOBJ) $(COBJARM) $(COBJ) $(CPPOBJ) $(CPPOBJARM) 
+$(TARGET).elf:  $(AOBJARM) $(AOBJ) $(COBJARM) $(COBJ) $(CPPOBJ) $(CPPOBJARM)
 	$(CC) $(THUMB) $(THUMB_IW) $(AOBJARM) $(AOBJ) $(COBJARM) $(COBJ) $(CPPOBJ) $(CPPOBJARM) --output $@ $(LDFLAGS)
 
 # Compile: create object files from C source files. ARM/Thumb
 $(COBJ) : %.o : %.c
-	$(CC) -c $(THUMB) $(ALL_CFLAGS) $(CONLYFLAGS) $< -o $@ 
+	$(CC) -c $(THUMB) $(ALL_CFLAGS) $(CONLYFLAGS) $< -o $@
 
 # Compile: create object files from C source files. ARM-only
 $(COBJARM) : %.o : %.c
-	$(CC) -c $(ALL_CFLAGS) $(CONLYFLAGS) $< -o $@ 
+	$(CC) -c $(ALL_CFLAGS) $(CONLYFLAGS) $< -o $@
 
 # Compile: create object files from C++ source files. ARM/Thumb
 $(CPPOBJ) : %.o : %.cpp
-	$(CPP) -c $(THUMB) $(ALL_CFLAGS) $(CPPFLAGS) $< -o $@ 
+	$(CPP) -c $(THUMB) $(ALL_CFLAGS) $(CPPFLAGS) $< -o $@
 
 # Compile: create object files from C++ source files. ARM-only
 $(CPPOBJARM) : %.o : %.cpp
-	$(CPP) -c $(ALL_CFLAGS) $(CPPFLAGS) $< -o $@ 
+	$(CPP) -c $(ALL_CFLAGS) $(CPPFLAGS) $< -o $@
 
 # Assemble: create object files from assembler source files. ARM/Thumb
 $(AOBJ) : %.o : %.S
@@ -169,10 +169,10 @@ $(AOBJ) : %.o : %.S
 # Assemble: create object files from assembler source files. ARM-only
 $(AOBJARM) : %.o : %.S
 	$(CC) -c $(ALL_ASFLAGS) $< -o $@
-#	$(AS) $(ALL_ASFLAGS) -o $@ $< 
+#	$(AS) $(ALL_ASFLAGS) -o $@ $<
 
 # Target: clean project.
-clean: 
+clean:
 	rm -f $(TARGET).hex $(TARGET).bin $(TARGET).obj $(TARGET).elf $(TARGET).map
 	rm -f $(TARGET).obj $(TARGET).sym $(TARGET).lss $(TARGET).lst
 	rm -f $(COBJ) $(CPPOBJ) $(AOBJ) $(COBJARM) $(CPPOBJARM) $(AOBJARM)

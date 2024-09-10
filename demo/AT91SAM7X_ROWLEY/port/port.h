@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: ARM7/AT91SAM7X Port
+ * FreeModbus Library: ARM7/AT91SAM7X Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@ extern          "C"
 #define STATIC                         static
 
 #define PR_BEGIN_EXTERN_C              extern "C" {
-#define	PR_END_EXTERN_C                }
+#define PR_END_EXTERN_C                }
 
 #define MB_PORT_HAS_CLOSE              1
 #define ENTER_CRITICAL_SECTION( )      vMBPPortEnterCritical( )
