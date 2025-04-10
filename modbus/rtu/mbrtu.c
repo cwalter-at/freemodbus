@@ -151,11 +151,39 @@ eMBErrorCode
 eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
+    USHORT          usCRC16Result = 0;
 
     ENTER_CRITICAL_SECTION(  );
     assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
 
     /* Length and CRC check */
+#ifdef STM32_CMAKE // work around nasty gcc compiler bug
+    {
+        volatile UCHAR* srcPtr;
+        
+        // Get the correct address of ucRTUBuf
+        __asm__ volatile ("ldr %0, =ucRTUBuf" : "=r" (srcPtr));
+        
+        // Calculate CRC using the correct buffer address
+        usCRC16Result = usMBCRC16( (UCHAR*)srcPtr, usRcvBufferPos );
+        
+        if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN ) && ( usCRC16Result == 0 ) )
+        {
+            // Save the address field
+            *pucRcvAddress = *srcPtr; // First byte is the address
+            
+            // Calculate length as before
+            *pusLength = ( USHORT )( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_CRC );
+            
+            // Set the frame pointer to point to the correct location
+            *pucFrame = ( UCHAR * )( srcPtr + MB_SER_PDU_PDU_OFF );
+        }
+        else
+        {
+            eStatus = MB_EIO;
+        }
+    }
+#else
     if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN )
         && ( usMBCRC16( ( UCHAR * ) ucRTUBuf, usRcvBufferPos ) == 0 ) )
     {
@@ -176,6 +204,7 @@ eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
     {
         eStatus = MB_EIO;
     }
+#endif
 
     EXIT_CRITICAL_SECTION(  );
     return eStatus;
@@ -205,8 +234,23 @@ eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
 
         /* Calculate CRC16 checksum for Modbus-Serial-Line-PDU. */
         usCRC16 = usMBCRC16( ( UCHAR * ) pucSndBufferCur, usSndBufferCount );
+        
+#ifdef STM32_CMAKE // work around nasty gcc compiler bug
+        volatile UCHAR* destPtr;
+        
+        // Get the correct address of ucRTUBuf
+        __asm__ volatile ("ldr %0, =ucRTUBuf" : "=r" (destPtr));
+        
+        // Store the CRC bytes at the correct positions
+        *(destPtr + usSndBufferCount) = ( UCHAR )( usCRC16 & 0xFF );
+        usSndBufferCount++;
+        
+        *(destPtr + usSndBufferCount) = ( UCHAR )( usCRC16 >> 8 );
+        usSndBufferCount++;
+#else
         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 & 0xFF );
         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+#endif
 
         /* Activate the transmitter. */
         eSndState = STATE_TX_XMIT;
@@ -253,7 +297,20 @@ xMBRTUReceiveFSM( void )
          */
     case STATE_RX_IDLE:
         usRcvBufferPos = 0;
+
+#ifdef STM32_CMAKE // work around nasty gcc compiler bug
+        volatile UCHAR* destPtr;
+
+        __asm__ volatile ("ldr %0, =ucRTUBuf" : "=r" (destPtr));
+
+        destPtr += usRcvBufferPos;
+
+        *destPtr = ucByte;
+
+        usRcvBufferPos++;
+#else
         ucRTUBuf[usRcvBufferPos++] = ucByte;
+#endif
         eRcvState = STATE_RX_RCV;
 
         /* Enable t3.5 timers. */
@@ -268,7 +325,19 @@ xMBRTUReceiveFSM( void )
     case STATE_RX_RCV:
         if( usRcvBufferPos < MB_SER_PDU_SIZE_MAX )
         {
+#ifdef STM32_CMAKE // work around nasty gcc compiler bug
+            volatile UCHAR* destPtr;
+    
+            __asm__ volatile ("ldr %0, =ucRTUBuf" : "=r" (destPtr));
+    
+            destPtr += usRcvBufferPos;
+    
+            *destPtr = ucByte;
+            
+            usRcvBufferPos++;
+#else
             ucRTUBuf[usRcvBufferPos++] = ucByte;
+#endif            
         }
         else
         {
