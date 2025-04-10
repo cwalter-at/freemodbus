@@ -1,0 +1,19 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools",         
+        "ms-vscode.cpptools-themes",  
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "ms-vscode.cpptools-extension-pack",
+        "dan-c-underwood.arm",
+        "zixuanwang.linkerscript",
+        "ms-vscode.hexeditor",
+        "trond-snekvik.gnu-mapfiles",
+        "jeff-hykin.better-cpp-syntax",
+        "marus25.cortex-debug",
+        "mcu-debug.debug-tracker-vscode",
+        "mcu-debug.memory-view",
+        "mcu-debug.peripheral-viewer",
+        "mcu-debug.rtos-views"
+    ]
+}

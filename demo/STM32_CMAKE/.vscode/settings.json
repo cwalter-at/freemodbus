@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "acim_vf_control.h": "c",
+        "pqd_motor_power_measurement.h": "c",
+        "type_traits": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
+    }
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+}
