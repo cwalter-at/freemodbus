@@ -86,6 +86,14 @@ PR_BEGIN_EXTERN_C
  */
 #ifndef MB_SUPPORT_IGNORE_BROADCAST
 #define MB_SUPPORT_IGNORE_BROADCAST             ( 0 )
+
+/*! \brief Timeout to wait in RTU prior to enabling transmitter.
+ *
+ * As per ASCII, this waits before replying, to help master devices
+ * that are too slow to switch to listen mode
+ */
+#ifndef MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS
+#define MB_RTU_TIMEOUT_WAIT_BEFORE_SEND_MS      ( 0 )
 #endif
 
 /*! \brief Maximum number of Modbus functions codes the protocol stack
@@ -108,34 +116,54 @@ PR_BEGIN_EXTERN_C
 #define MB_FUNC_OTHER_REP_SLAVEID_BUF           ( 32 )
 
 /*! \brief If the <em>Report Slave ID</em> function should be enabled. */
-#define MB_FUNC_OTHER_REP_SLAVEID_ENABLED       (  1 )
+#ifndef MB_FUNC_OTHER_REP_SLAVEID_ENABLED
+#define MB_FUNC_OTHER_REP_SLAVEID_ENABLED       ( 1 )
+#endif
 
 /*! \brief If the <em>Read Input Registers</em> function should be enabled. */
-#define MB_FUNC_READ_INPUT_ENABLED              (  1 )
+#ifndef MB_FUNC_READ_INPUT_ENABLED
+#define MB_FUNC_READ_INPUT_ENABLED              ( 1 )
+#endif
 
 /*! \brief If the <em>Read Holding Registers</em> function should be enabled. */
-#define MB_FUNC_READ_HOLDING_ENABLED            (  1 )
+#ifndef MB_FUNC_READ_HOLDING_ENABLED
+#define MB_FUNC_READ_HOLDING_ENABLED            ( 1 )
+#endif
 
 /*! \brief If the <em>Write Single Register</em> function should be enabled. */
-#define MB_FUNC_WRITE_HOLDING_ENABLED           (  1 )
+#ifndef MB_FUNC_WRITE_HOLDING_ENABLED
+#define MB_FUNC_WRITE_HOLDING_ENABLED           ( 1 )
+#endif
 
 /*! \brief If the <em>Write Multiple registers</em> function should be enabled. */
-#define MB_FUNC_WRITE_MULTIPLE_HOLDING_ENABLED  (  1 )
+#ifndef MB_FUNC_WRITE_MULTIPLE_HOLDING_ENABLED
+#define MB_FUNC_WRITE_MULTIPLE_HOLDING_ENABLED  ( 1 )
+#endif
 
 /*! \brief If the <em>Read Coils</em> function should be enabled. */
-#define MB_FUNC_READ_COILS_ENABLED              (  1 )
+#ifndef MB_FUNC_READ_COILS_ENABLED
+#define MB_FUNC_READ_COILS_ENABLED              ( 1 )
+#endif
 
 /*! \brief If the <em>Write Coils</em> function should be enabled. */
-#define MB_FUNC_WRITE_COIL_ENABLED              (  1 )
+#ifndef MB_FUNC_WRITE_COIL_ENABLED
+#define MB_FUNC_WRITE_COIL_ENABLED              ( 1 )
+#endif
 
 /*! \brief If the <em>Write Multiple Coils</em> function should be enabled. */
-#define MB_FUNC_WRITE_MULTIPLE_COILS_ENABLED    (  1 )
+#ifndef MB_FUNC_WRITE_MULTIPLE_COILS_ENABLED
+#define MB_FUNC_WRITE_MULTIPLE_COILS_ENABLED    ( 1 )
+#endif
 
 /*! \brief If the <em>Read Discrete Inputs</em> function should be enabled. */
-#define MB_FUNC_READ_DISCRETE_INPUTS_ENABLED    (  1 )
+#ifndef MB_FUNC_READ_DISCRETE_INPUTS_ENABLED
+#define MB_FUNC_READ_DISCRETE_INPUTS_ENABLED    ( 1 )
+#endif
 
 /*! \brief If the <em>Read/Write Multiple Registers</em> function should be enabled. */
-#define MB_FUNC_READWRITE_HOLDING_ENABLED       (  1 )
+#ifndef MB_FUNC_READWRITE_HOLDING_ENABLED
+#define MB_FUNC_READWRITE_HOLDING_ENABLED       ( 1 )
+#endif
 
 /*! @} */
 #ifdef __cplusplus

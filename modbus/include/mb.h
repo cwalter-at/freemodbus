@@ -138,6 +138,7 @@ typedef enum
  * \param ulBaudRate The baudrate. E.g. 19200. Supported baudrates depend
  *   on the porting layer.
  * \param eParity Parity used for serial transmission.
+ * \param ucStopBits Number of stop bits for serial transmission.
  *
  * \return If no error occurs the function returns eMBErrorCode::MB_ENOERR.
  *   The protocol is then in the disabled state and ready for activation
@@ -148,7 +149,8 @@ typedef enum
  *    - eMBErrorCode::MB_EPORTERR IF the porting layer returned an error.
  */
 eMBErrorCode    eMBInit( eMBMode eMode, UCHAR ucSlaveAddress,
-                         UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
+                         UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity,
+                         UCHAR ucStopBits );
 
 /*! \ingroup modbus
  * \brief Initialize the Modbus protocol stack for Modbus TCP.

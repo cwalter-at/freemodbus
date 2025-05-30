@@ -57,7 +57,7 @@ eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning,
     /* the first byte and second byte in the buffer is reserved for
      * the parameter ucSlaveID and the running flag. The rest of
      * the buffer is available for additional data. */
-    if( usAdditionalLen + 2 < MB_FUNC_OTHER_REP_SLAVEID_BUF )
+    if( usAdditionalLen + 2 <= MB_FUNC_OTHER_REP_SLAVEID_BUF )
     {
         usMBSlaveIDLen = 0;
         ucMBSlaveID[usMBSlaveIDLen++] = ucSlaveID;
