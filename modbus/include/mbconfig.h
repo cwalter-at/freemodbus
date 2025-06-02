@@ -153,6 +153,12 @@ PR_BEGIN_EXTERN_C
 #define MB_FUNC_READWRITE_HOLDING_ENABLED       ( 1 )
 #endif
 
+/*! \brief If the <em>Write File Record</em> function should be enabled. */
+#define MB_FUNC_WRITE_FILE_ENABLED              (  0 )
+
+/*! \brief If the <em>Read File Record</em> function should be enabled. */
+#define MB_FUNC_READ_FILE_ENABLED               (  0 )
+
 /*! @} */
 #ifdef __cplusplus
     PR_END_EXTERN_C
