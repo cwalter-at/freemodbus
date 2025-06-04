@@ -122,6 +122,12 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 #if MB_FUNC_READ_DISCRETE_INPUTS_ENABLED > 0
     {MB_FUNC_READ_DISCRETE_INPUTS, eMBFuncReadDiscreteInputs},
 #endif
+#if MB_FUNC_WRITE_FILE_ENABLED
+    {MB_FUNC_WRITE_FILE_RECORD, eMBFuncWriteFileRecord},
+#endif
+#if MB_FUNC_READ_FILE_ENABLED
+    {MB_FUNC_READ_FILE_RECORD, eMBFuncReadFileRecord},
+#endif
 };
 
 /* ----------------------- Start implementation -----------------------------*/
