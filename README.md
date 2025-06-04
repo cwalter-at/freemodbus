@@ -1,29 +1,14 @@
+This project sees little-to-no activity from the original creators, yet it seems it is still very popular. Let's try a more open and courageous way forward - everyone is welcomed to participate, create PRs, and contribute in any way. The PRs will be merged if properly justified and no pushback from community. It's understood that bugs and errors may enter the codebase with this approach, hence the last version 1.6.0 Christian Walter is the latest official release. You will therefore always have the option to decide to use either `master` or `1.6.0`
+
 # FreeModbus Library
 
 ## Introduction
 
-This is a fork of the FreeModbus protocol stack, extended with ports for:
-
-- ADuc702x processors
-- STM32 processors using CMake build system
-
 FreeModbus is a Modbus ASCII/RTU and Modbus TCP implementation for embedded systems. It provides an implementation of the Modbus Application Protocol v1.1a and supports both the RTU and ASCII transmission modes as defined in the Modbus over serial line specification 1.0.
-
-## STM32 CMake Port
-
-The STM32 CMake port is located in the `demo/STM32_CMAKE` directory and provides:
-
-- A generic implementation that can target multiple STM32 families
-- HAL-based peripheral access for portability
-- Integration with CMake build systems
-- Simple demo application
-- Support for the STM32G4 family (tested on Nucleo-G431RB)
 
 ## Documentation
 
 Complete documentation of the original FreeModbus implementation can be found in the `doc/html` directory.
-
-For information specific to the STM32 CMake port, refer to the `demo/STM32_CMAKE/README.md` file.
 
 ## License
 
