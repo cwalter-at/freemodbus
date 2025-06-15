@@ -46,13 +46,19 @@ PR_BEGIN_EXTERN_C
  *  @{
  */
 /*! \brief If Modbus ASCII support is enabled. */
+#ifndef MB_ASCII_ENABLED
 #define MB_ASCII_ENABLED                        (  1 )
+#endif
 
 /*! \brief If Modbus RTU support is enabled. */
+#ifndef MB_RTU_ENABLED
 #define MB_RTU_ENABLED                          (  1 )
+#endif
 
 /*! \brief If Modbus TCP support is enabled. */
+#ifndef MB_TCP_ENABLED
 #define MB_TCP_ENABLED                          (  0 )
+#endif
 
 /*! \brief The character timeout value for Modbus ASCII.
  *
