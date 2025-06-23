@@ -46,13 +46,20 @@ PR_BEGIN_EXTERN_C
  *  @{
  */
 /*! \brief If Modbus ASCII support is enabled. */
+#ifndef MB_ASCII_ENABLED
 #define MB_ASCII_ENABLED                        (  1 )
+#endif
 
 /*! \brief If Modbus RTU support is enabled. */
+#ifndef MB_RTU_ENABLED
 #define MB_RTU_ENABLED                          (  1 )
+#endif
 
 /*! \brief If Modbus TCP support is enabled. */
+#ifndef MB_TCP_ENABLED
 #define MB_TCP_ENABLED                          (  0 )
+#endif
+
 
 /*! \brief The character timeout value for Modbus ASCII.
  *
@@ -60,7 +67,9 @@ PR_BEGIN_EXTERN_C
  * a configuration option. It should be set to the maximum expected delay
  * time of the network.
  */
+#ifndef MB_ASCII_TIMEOUT_SEC
 #define MB_ASCII_TIMEOUT_SEC                    (  1 )
+#endif
 
 /*! \brief Timeout to wait in ASCII prior to enabling transmitter.
  *
@@ -91,7 +100,9 @@ PR_BEGIN_EXTERN_C
  * the sum of all enabled functions in this file and custom function
  * handlers. If set to small adding more functions will fail.
  */
+#ifndef MB_FUNC_HANDLERS_MAX
 #define MB_FUNC_HANDLERS_MAX                    ( 16 )
+#endif
 
 /*! \brief Number of bytes which should be allocated for the <em>Report Slave ID
  *    </em>command.
@@ -101,7 +112,9 @@ PR_BEGIN_EXTERN_C
  * how to set this value. It is only used if MB_FUNC_OTHER_REP_SLAVEID_ENABLED
  * is set to <code>1</code>.
  */
+#ifndef MB_FUNC_OTHER_REP_SLAVEID_BUF
 #define MB_FUNC_OTHER_REP_SLAVEID_BUF           ( 32 )
+#endif
 
 /*! \brief If the <em>Report Slave ID</em> function should be enabled. */
 #ifndef MB_FUNC_OTHER_REP_SLAVEID_ENABLED
@@ -154,10 +167,14 @@ PR_BEGIN_EXTERN_C
 #endif
 
 /*! \brief If the <em>Write File Record</em> function should be enabled. */
+#ifndef MB_FUNC_WRITE_FILE_ENABLED
 #define MB_FUNC_WRITE_FILE_ENABLED              (  0 )
+#endif
 
 /*! \brief If the <em>Read File Record</em> function should be enabled. */
+#ifndef MB_FUNC_READ_FILE_ENABLED
 #define MB_FUNC_READ_FILE_ENABLED               (  0 )
+#endif
 
 /*! @} */
 #ifdef __cplusplus
