@@ -188,6 +188,11 @@ xMBPortTCPPool( void )
     int             ret;
     USHORT          usLength;
 
+    BOOL waiting = TRUE;
+    time_t waiting_time = 0;
+    clock_t start_time;
+    time_t max_timout = 50;
+
     if( xClientSocket == INVALID_SOCKET )
     {
         /* Accept to client */
@@ -211,10 +216,28 @@ xMBPortTCPPool( void )
     {
         FD_ZERO( &fread );
         FD_SET( xClientSocket, &fread );
-        if( ( ( ret = select( xClientSocket + 1, &fread, NULL, NULL, &tval ) ) == SOCKET_ERROR )
-            || !ret )
+        ret = select(xClientSocket + 1, &fread, NULL, NULL, &tval);
+        
+        if (ret == SOCKET_ERROR)
         {
-            continue;
+            // Handle error
+            close(xClientSocket);
+            xClientSocket = INVALID_SOCKET;
+            return TRUE;
+        }
+        else if (ret == 0)
+        {
+            // Handle timeout situation
+            if (waiting == TRUE)
+            {
+                waiting_time = (clock() - start_time) * 1000 / CLOCKS_PER_SEC;
+                if(waiting_time > max_timout){
+                    close(xClientSocket);
+                    break;
+                }
+                return FALSE; 
+            }
+            continue; 
         }
         if( ret > 0 )
         {
@@ -241,11 +264,15 @@ xMBPortTCPPool( void )
                     if( usTCPBufPos < ( MB_TCP_UID + usLength ) )
                     {
                         usTCPFrameBytesLeft = usLength + MB_TCP_UID - usTCPBufPos;
+                        start_time = clock();
+                        waiting = TRUE;
                     }
                     /* The frame is complete. */
                     else if( usTCPBufPos == ( MB_TCP_UID + usLength ) )
                     {
                         ( void )xMBPortEventPost( EV_FRAME_RECEIVED );
+                        waiting_time = 0;
+                        waiting = FALSE;
                         return TRUE;
                     }
                     /* This can not happend because we always calculate the number of bytes
