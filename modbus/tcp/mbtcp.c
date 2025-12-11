@@ -30,6 +30,8 @@
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
 #include "string.h"
+#include "unistd.h"
+#include "stdio.h"
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
@@ -40,6 +42,8 @@
 #include "mbtcp.h"
 #include "mbframe.h"
 #include "mbport.h"
+
+extern SOCKET xClientSocket;
 
 #if MB_TCP_ENABLED > 0
 
@@ -73,6 +77,7 @@
 #define MB_TCP_FUNC         7
 
 #define MB_TCP_PROTOCOL_ID  0   /* 0 = Modbus Protocol */
+#define MB_TCP_UNIT_ID  0   /* 0 = UNIT Identifier */
 
 
 /* ----------------------- Start implementation -----------------------------*/
@@ -107,11 +112,20 @@ eMBTCPReceive( UCHAR * pucRcvAddress, UCHAR ** ppucFrame, USHORT * pusLength )
     UCHAR          *pucMBTCPFrame;
     USHORT          usLength;
     USHORT          usPID;
+    USHORT          usUID;
 
     if( xMBTCPPortGetRequest( &pucMBTCPFrame, &usLength ) != FALSE )
     {
         usPID = pucMBTCPFrame[MB_TCP_PID] << 8U;
         usPID |= pucMBTCPFrame[MB_TCP_PID + 1];
+
+        usUID = pucMBTCPFrame[MB_TCP_UID];
+
+        if (usUID != MB_TCP_UNIT_ID)
+        {
+            close(xClientSocket);
+            xClientSocket = INVALID_SOCKET;
+        }
 
         if( usPID == MB_TCP_PROTOCOL_ID )
         {
