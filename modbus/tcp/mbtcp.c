@@ -30,6 +30,8 @@
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
 #include "string.h"
+#include "unistd.h"
+#include "stdio.h"
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
@@ -40,6 +42,8 @@
 #include "mbtcp.h"
 #include "mbframe.h"
 #include "mbport.h"
+
+extern SOCKET xClientSocket;
 
 #if MB_TCP_ENABLED > 0
 
@@ -123,6 +127,12 @@ eMBTCPReceive( UCHAR * pucRcvAddress, UCHAR ** ppucFrame, USHORT * pusLength )
              * that the processing part deals with this frame.
              */
             *pucRcvAddress = MB_TCP_PSEUDO_ADDRESS;
+        }
+        else
+        {
+            // assert(usPID == MB_TCP_PROTOCOL_ID);
+            close(xClientSocket);
+            xClientSocket = INVALID_SOCKET;
         }
     }
     else
