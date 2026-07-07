@@ -77,7 +77,7 @@ eMBFuncReadInputRegister( UCHAR * pucFrame, USHORT * usLen )
          * return Modbus illegal data value exception. 
          */
         if( ( usRegCount >= 1 )
-            && ( usRegCount < MB_PDU_FUNC_READ_REGCNT_MAX ) )
+            && ( usRegCount <= MB_PDU_FUNC_READ_REGCNT_MAX ) )
         {
             /* Set the current PDU data pointer to the beginning. */
             pucFrameCur = &pucFrame[MB_PDU_FUNC_OFF];
