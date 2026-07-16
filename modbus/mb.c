@@ -435,10 +435,10 @@ eMBPoll( void )
             eException = MB_EX_ILLEGAL_FUNCTION;
             for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
             {
-                /* No more function handlers registered. Abort. */
+                /* Skip slots cleared by eMBRegisterCB. */
                 if( xFuncHandlers[i].ucFunctionCode == 0 )
                 {
-                    break;
+                    continue;
                 }
                 else if( xFuncHandlers[i].ucFunctionCode == ucFunctionCode )
                 {
