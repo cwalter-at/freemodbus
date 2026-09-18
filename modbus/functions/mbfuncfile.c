@@ -89,6 +89,7 @@ eMBFuncWriteFileRecord( UCHAR * pucFrame, USHORT * usLen )
         usFileRecLen = ( USHORT )( pucFrame[MB_PDU_FUNC_FILE_REC_LEN_OFF] << 8 );
         usFileRecLen |= ( USHORT )( pucFrame[MB_PDU_FUNC_FILE_REC_LEN_OFF + 1] );
 
+        (void)ucRefType;
         usFileByteLen = usFileRecLen * 2;
 
         /* TODO - allow multiple writes per request (as per spec) */
